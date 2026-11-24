@@ -1,0 +1,16 @@
+{
+  "fonte": "Ministerio da Saude - Relatorios Publicos da APS",
+  "painel": "https://relatorioaps.saude.gov.br/",
+  "url": "https://relatorioaps-prd.saude.gov.br/cobertura/aps?unidadeGeografica=MUNICIPIO&coUf=31&coMunicipio=313380&nuCompInicio=202501&nuCompFim=202607",
+  "consulta_utc": "2026-11-11T02:48:30.947316+00:00",
+  "parametros": {
+    "unidadeGeografica": "MUNICIPIO",
+    "coUf": 31,
+    "coMunicipio": 313380,
+    "nuCompInicio": 202501,
+    "nuCompFim": 202607
+  },
+  "registros": 19,
+  "sha256": "3106c4d17c375c8a9e5c15c65e600513b5f90941441dd7271f0e25abb67668c6",
+  "nota": "Indicador administrativo oficial; nao mede distancia de 3 km. Parametros oficiais nao substituem os 3000 hab/eSF do modelo."
+}

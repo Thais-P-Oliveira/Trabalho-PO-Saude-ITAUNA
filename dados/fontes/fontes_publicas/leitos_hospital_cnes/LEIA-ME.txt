@@ -1,0 +1,45 @@
+LEITOS SUS - HOSPITAL MANOEL GONCALVES, CNES 2105780
+
+Fonte: ficha oficial CNES/DATASUS, competencia julho/2026.
+Consulta em 17/11/2026. URL e SHA256 do HTML constam em fonte.json.
+
+CONTAGEM
+150 leitos existentes no cadastro; 98 destinados ao SUS.
+Destes 98: 79 de internacao e 19 complementares de UTI adulto tipo II.
+Observacao, repouso e camas de instalacoes ambulatoriais nao entram na contagem.
+leitos_sus_202607.csv preserva todas as 15 categorias, inclusive as sem leitos SUS.
+O asterisco do cadastro em 19* leitos SUS de UTI e preservado em sus_texto_original.
+
+CALCULO ADOTADO
+Capacidade bruta = 98 leitos SUS x 365 dias = 35.770 leitos-dia/ano.
+Carga fixa de nao residentes SUS = 10.860,73834093985 dias.
+Carga fixa de residentes nao eletivos = 18.772,91134137942 dias.
+Total de outros atendimentos = 29.633,64968231927 dias.
+Capacidade disponivel = 35.770 - 29.633,64968231927 = 6.136,350317680732 dias.
+
+A carga foi recalculada com as contagens SIH 2025 e os tempos medios de
+permanencia ja utilizados no consumo: media 5,1317309484 e alta 3,3263736264 dias.
+Eletivos locais por complexidade sao estimados pela proporcao eletiva municipal;
+nao existe cruzamento completo observado por prestador/residencia/carater na entrada.
+Nao residentes e residentes nao eletivos nao sao realocados pelo modelo.
+
+HIPOTESES DO PLANEJAMENTO
+O cadastro de julho/2026 e mantido por 365 dias como cenario de capacidade anual.
+Isso nao comprova ausencia de bloqueios ou disponibilidade efetiva diaria dos leitos.
+Usa-se teto hospitalar agregado de internacao e UTI, conforme a simplificacao por
+nivel. Nao e um dimensionamento clinico por tipo de leito ou especialidade.
+Uma restricao especifica de UTI nao esta representada.
+Nao se aplica outra taxa de ocupacao ao teto: a carga fixa ja e descontada.
+Os 29.633,65 dias sao carga estimada, nao censo diario de ocupacao hospitalar.
+
+ARQUIVOS E ATUALIZACAO
+codigos/capacidade_hospitalar.py calcula e documenta os componentes.
+Sem --coletar: usa a copia local da ficha, sem precisar de internet.
+Com --coletar: consulta novamente a mesma competencia publica.
+dados/preparados/capacidade_hospitalar_leitos.csv registra o calculo completo.
+codigos/preparar.py conecta esse valor ao parametro LEITO do modelo especializado.
+O arquivo carga_hospitalar_observada_2025.csv anterior permanece preservado como
+fonte das contagens e como referencia do metodo de producao usado antes.
+
+Nova execucao: resultados/plano_limites_fisicos_leitos_sus_20261117/.
+APS reutilizada: resultados/plano_limites_fisicos_20261117/.

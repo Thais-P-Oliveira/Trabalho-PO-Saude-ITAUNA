@@ -1,0 +1,159 @@
+CONSTRUCAO NO MODELO: investimento + 60 meses de operacao; folga de 2% so na operacao.
+Detalhes: documentacao/CONSTRUCAO_NO_MODELO_5_ANOS.txt. Resultados aguardam nova execucao.
+
+ATUALIZACAO 2026: veja documentacao/PROJECAO_POPULACIONAL_2026.txt.
+Populacao e demanda com anos de referencia separados; resultados antigos ainda nao recalculados.
+
+TRABALHO PO SAUDE - ITAUNA
+
+PARA RODAR TUDO E RENOVAR AS IMAGENS
+Clique duas vezes em RODAR_TUDO.cmd. Instrucoes em COMO_RODAR_TUDO.txt.
+O iniciador gera todos os novos resultados antes de substituir os anteriores.
+Depois da primeira execucao concluida por ele, a pasta corrente passa a ser
+resultados/atual/, com imagens em imagens/ e pagina ABRIR_RESULTADOS.html.
+As secoes abaixo registram ajustes e execucoes anteriores.
+
+AJUSTE MAIS RECENTE - MINIMO RURAL E RAIOS, AINDA SEM EXECUCAO
+Minimo rural de abertura agora 500 habitantes cobertos; urbano permanece 2.000.
+Raio base 3 km em ambas as zonas. --raio-rural permite testar 5 km so no rural.
+Analise extra reduzida: tres cenarios, todos com minimo rural 500 habitantes:
+3 km em todos, 3 km urbano e 5 km rural, e 5 km em todos.
+Analise principal mantida em 3 km nas duas zonas e folga de custo de 2%.
+Tres graficos extras preparados: custo operacional, cobertura urbana/rural e distancia media.
+Nenhum dos graficos principais e multiplicado pelos tres cenarios.
+Saida futura separada: resultados/sensibilidade_rural_500_raios/.
+Detalhes, justificativa e referencias em documentacao/MINIMO_RURAL_E_RAIOS.txt.
+Modelos e testes nao foram executados apos esses ajustes.
+Depois de rodar a comparacao, grafico_sensibilidade.py gera as tres figuras e
+analise_extra_raios.html na pasta de saida separada. Os arquivos ainda nao foram gerados.
+
+AJUSTE MAIS RECENTE - DEMANDA SEM FAIXA ETARIA
+O codigo agora distribui os totais municipais de demanda especializada apenas
+pela populacao de cada ponto, sem consultar perfis etarios territoriais.
+Demanda do ponto = total municipal do tipo/nivel x populacao do ponto / populacao total.
+A demanda de cada UBS acompanha a populacao vinculada a ela na APS.
+Sem crescimento populacional, isso equivale a total municipal x populacao da UBS / 97.669.
+Mantidos os totais anuais: ambulatorial secundaria 190.856 e terciaria 15.752;
+hospitalar secundaria 1.065 e terciaria 350, todos do recorte eletivo adotado.
+As tabelas SIA/SIH de origem possuem idade no nome/colunas, mas so a coluna
+Total e lida. Os perfis e as taxas etarias antigos permanecem como historico.
+Capacidades, proporcoes de encaminhamento, custos, distancias e limites de equipes mantidos.
+NAO FORAM EXECUTADOS OS MODELOS OU TESTES APOS ESTE AJUSTE, conforme solicitado.
+Dados preparados, resultados, imagens e artigo salvos ainda correspondem as
+execucoes anteriores; serao atualizados quando os respectivos comandos forem executados.
+Na proxima preparacao serao gerados totais_municipais_demanda.csv,
+validacoes_demanda.csv e demanda_por_ponto.csv com o rateio populacional.
+
+ULTIMA EXECUCAO SALVA - NOVAS UBS COM PORTES I A IV, 17/11/2026
+Novas UBS podem receber de uma a quatro eSF, com o porte associado ao numero de equipes.
+Os limites das existentes permanecem preservados: 23 eSF nas 22 unidades.
+Tabela padrao: dados/fontes/fontes_publicas/estrutura_ubs_cnes/limites_equipes_novas_ate4.csv.
+Resultado: 16 novas UBS (11 rurais e 5 urbanas), 42 eSF e 135 ACS; cobertura 99,86%.
+Portes novos: 14 de porte I, uma de porte II e uma de porte III; nenhuma de porte IV.
+As tres fases tiveram otimo confirmado dentro da tolerancia configurada.
+Pasta atual: resultados/plano_novas_portes_I_IV_20261117/.
+Mantida capacidade hospitalar por leitos SUS e os seis cenarios especializados.
+Construcao calculada separadamente, por porte, sem entrar na otimizacao.
+As secoes seguintes documentam as execucoes anteriores; os graficos antigos foram preservados.
+
+EXECUCAO ANTERIOR - ATUALIZACAO HOSPITALAR, 17/11/2026
+Capacidade hospitalar agora calculada pelos 98 leitos SUS cadastrados no CNES
+202607 (79 de internacao e 19 de UTI), assumidos disponiveis durante 365 dias.
+35.770 leitos-dia menos 29.633,65 dias estimados dos outros atendimentos:
+6.136,35 dias disponiveis para os eletivos residentes modelados.
+Teto agregado por nivel, sem restricao especifica de UTI ou especialidade.
+Fonte e memoria de calculo: dados/fontes/fontes_publicas/leitos_hospital_cnes/.
+Resultado atualizado: resultados/plano_limites_fisicos_leitos_sus_20261117/.
+Mantem a APS com 20 novas UBS, 43 eSF e 135 ACS; recalcula os encaminhamentos.
+As execucoes anteriores e seus resultados permanecem preservados.
+
+PARA APRESENTAR
+Abra ABRIR_RESULTADOS.html no navegador. A pagina reune 11 imagens/graficos e um comparador interativo,
+relatorios, planilha das UBS, mapa interativo e artigo. Nao exige Python.
+As imagens sao abertas diretamente dos arquivos de origem, sem copias.
+No comparador, selecione 25%, 50% ou 75% via secundaria para comparar as
+distancias ambulatoriais dos cenarios calculados. Funciona sem internet.
+O grafico de internacoes foi retirado da pagina; seus dados e a figura do
+artigo foram preservados.
+
+EXECUCAO ANTERIOR - NOVAS UBS LIMITADAS A UMA EQUIPE, 17/11/2026
+Esse cenario preserva as 23 eSF atuais e limita
+equipes adicionais pelas salas de clinicas basicas e enfermagem cadastradas.
+Central e Zona Rural mantem uma equipe cada; Parque Jardim mantem duas.
+Novas UBS: uma sala clinica e uma de enfermagem planejadas, ate uma eSF por UBS.
+ACS: ate 750 habitantes por agente, sem teto fixo de quatro por unidade.
+Tabela: dados/fontes/fontes_publicas/estrutura_ubs_cnes/limites_equipes_modelo.csv.
+Nova execucao: resultados/plano_limites_fisicos_20261117/.
+Resultado: 20 novas UBS (12 rurais e 8 urbanas), 43 eSF, 135 ACS e 99,86% de cobertura.
+A fase de custo encontrou solucao viavel, sem provar otimo em 600 segundos.
+Consultar LEIA-ME_RESULTADOS.txt nessa pasta antes de interpretar a quantidade como minima.
+Os graficos, o artigo e a sensibilidade anteriores permanecem associados ao
+plano de referencia abaixo; nao devem ser apresentados como a nova execucao.
+Para testar a regra anterior, use executar.py --sem-limites-fisicos --saida NOVA_PASTA.
+Para reutilizar um plano salvo, use --plano-aps PASTA; os limites desse plano sao mantidos.
+
+PLANO DE REFERENCIA ANTERIOR - custos revisados em 15/11/2026
+22 UBS existentes e 12 novas (11 rurais e 1 urbana); 43 eSF; 136 ACS.
+Cobertura em 3 km: 99,86%. Operacao: R$ 2.447.317,33/mes; R$ 29.367.808/ano.
+Construcao, calculada separadamente: R$ 23.856.000, fora da otimizacao.
+As tres fases da APS tem otimo confirmado nos certificados do plano salvo.
+
+O QUE TEM EM CADA PASTA
+imagens/       Graficos atualizados; INDICE.csv indica a sequencia completa.
+resultados/    Tabelas, relatorios, certificados, MOD/DAT e mapa interativo.
+modelos/       aps_base.py (localizacao) e rede_completa.mod (encaminhamentos).
+codigos/       Preparacao, integracao, diagnostico, custos e graficos.
+dados/         fontes/ guarda apenas entradas lidas; preparados/ guarda entradas derivadas.
+arquivo_compactado/  Consultas brutas, scripts de coleta e detalhes historicos em um ZIP.
+documentacao/  Artigo LaTeX e figuras, regras de construcao e referencia original.
+testes/        Verificacoes das regras do modelo e dos indicadores.
+
+CAMINHO DO MODELO
+Dados -> preparar.py -> aps_base.py -> plano APS fixo -> encaminhamentos.py
++ rede_completa.mod -> seis cenarios -> auditoria -> graficos e relatorios.
+Apenas UBS podem ser abertas. A rede especializada existente recebe os fluxos.
+
+RESULTADOS - ONDE ENCONTRAR
+resultados/plano_referencia_2pct/aps/relatorio_itauna.txt: resumo das UBS.
+resultados/plano_referencia_2pct/aps/resultado_itauna.xlsx: tabelas completas.
+resultados/plano_referencia_2pct/comparacao_completa.csv: seis cenarios especializados.
+resultados/plano_referencia_2pct/unico_via_25,50,75 e multiplo_via_25,50,75:
+  cada cenario possui fluxos, capacidades, dados .dat e registros de resolucao.
+resultados/diagnostico/: cobertura, acessibilidade e comparacao oficial.
+resultados/orcamento/: operacao estimada e orcamento municipal de 2026.
+resultados/investimento_construcao/: investimento por nova UBS.
+resultados/investimento_construcao_2anos/: exemplo ilustrativo de desembolso.
+resultados/sensibilidade/: curva cobertura x custo e variacao de parametros.
+documentacao/artigo/artigo.tex: texto atual; figuras/ contem os PDFs para compilar.
+
+COMANDOS - EXECUTAR NA PASTA PRINCIPAL
+Instalar dependencias: python -m pip install -r requirements.txt
+Instalar GLPK e disponibilizar glpsol no PATH.
+Verificar ambiente: python apresentar.py verificar
+Rodar testes: python apresentar.py testar
+Auditar uma copia temporaria: python apresentar.py auditar
+Repetir encaminhamentos com o plano fixo: python apresentar.py reproduzir
+Recalcular UBS e encaminhamentos: python apresentar.py novo
+Calcular investimento separado: python apresentar.py investimento
+Atualizar imagens e pagina, sem otimizar: python apresentar.py imagens
+Os comandos de demonstracao salvam novas execucoes, preservando a referencia.
+O ponto de entrada completo do modelo continua sendo executar.py.
+
+DOCUMENTOS E FORMATOS
+Os PNG sao para apresentar; os PDFs vetoriais sao usados pelo artigo.
+Os CSV de cada cenario e os .dat sao entradas/saidas necessarias para reproduzir
+os resultados, mesmo quando algum conteudo coincide entre cenarios.
+As fontes complementares e os scripts de coleta foram compactados.
+Nao e preciso extrair o ZIP para rodar o modelo ou apresentar os resultados.
+Para repetir a coleta historica, extraia arquivo_compactado/fontes_brutas_e_coleta.zip
+na pasta principal; os caminhos originais serao recriados.
+As 19 fontes realmente lidas e as entradas preparadas continuam acessiveis.
+O PDF antigo do artigo foi arquivado: compile artigo.tex para obter a versao atual.
+O artigo precisa da pasta figuras/ para compilar, por exemplo no Overleaf.
+
+HISTORICO E ORGANIZACAO
+APRESENTACAO foi consolidada na pasta principal. Seu apresentar.py foi preservado.
+A copia completa anterior, inclusive arquivos exclusivos e custos antigos, esta
+fora desta pasta, em ../historico_organizacao/. Nenhuma decisao do modelo foi alterada.
+A pagina e os graficos agora apresentam somente o plano atual de referencia.
+A reorganizacao e local; nao modifica automaticamente os arquivos no Drive.

@@ -1,0 +1,12 @@
+{
+  "nome": "curva_0990",
+  "grupo": "curva",
+  "alteracoes": "{\"folga_custo\": 0.0}",
+  "cobertura_min": 0.99,
+  "cache_id": "0b5c81b7a52a4583cae7c109259d25c3d15dba99515093b24a36f6713b21a323",
+  "raio_urbano_km": 3.0,
+  "raio_rural_km": 3.0,
+  "minimo_abertura_rural": 500.0,
+  "status": "Infeasible",
+  "segundos": 0.4
+}

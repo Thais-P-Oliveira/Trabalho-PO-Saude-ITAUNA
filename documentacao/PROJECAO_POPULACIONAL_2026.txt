@@ -1,0 +1,13 @@
+PROJECAO PARA 2026 - ALTERACAO AINDA SEM EXECUCAO DOS MODELOS
+Populacao territorial: 97.669 em 2022 -> 104.002 em 2026.
+Populacao municipal em 2025: 103.272. Fonte e parametros: dados/fontes/fontes_publicas/populacao_ibge/projecao.json.
+Populacao do ponto = populacao original x 104002 / 97669.
+Demanda do ponto = total municipal de atendimentos de 2025 / 103272 x populacao projetada do ponto.
+Nao aplica crescimento de 2022 aos atendimentos de 2025. Sem ajuste etario.
+Capacidades fixas. Crescimento territorial uniforme e utilizacao por habitante constante sao hipoteses.
+O integrador aplica por padrao o crescimento acumulado de 2022 a 2026 na APS.
+--growth e --growth-file explicitamente fornecidos substituem essa projecao e continuam relativos a base de 2022.
+As sensibilidades de mais 5% e 10% sao adicionais sobre 2026.
+Ao reutilizar plano APS antigo, sua populacao fica fixa; a demanda e recalculada pela taxa de utilizacao de 2025.
+Resultados e imagens anteriores nao foram recalculados. Auditoria antiga deve usar o codigo da sua execucao.
+Construcao permanece calculada separadamente; nao houve mudanca no objetivo ou na folga de custo.

@@ -1,0 +1,40 @@
+{
+  "data": "2026-11-15",
+  "plano": "12 novas UBS; 43 eSF; 136 ACS; cobertura 99,86%; folga 2%",
+  "copia_anterior": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\historico_organizacao\\Trabalho_PO_Saude_antes_organizacao_20261115_211616.zip",
+  "removidos_da_pasta_ativa": [
+    "APRESENTACAO",
+    "resultados/plano_referencia_2pct_custos_antigos",
+    "resultados/Imagens para apresentação",
+    "PDF antigo do artigo",
+    "graficos e diagnosticos duplicados",
+    "caches"
+  ],
+  "preservados": [
+    "Modelos e parametros de otimizacao",
+    "Plano salvo e seus arquivos certificados",
+    "Dados de origem e derivados",
+    "Artigo LaTeX atual e suas figuras",
+    "Roteiro apresentar.py, consolidado na raiz"
+  ],
+  "validacao": [
+    "10 testes aprovados",
+    "Auditoria APS e dos seis cenarios aprovada em copia temporaria",
+    "46 links locais da pagina inicial verificados",
+    "Integridade das tabelas do plano salvo conferida por SHA256"
+  ],
+  "repeticoes_necessarias": [
+    "ubs.csv em cada cenario: compoe a exportacao autonoma do cenario",
+    "perfil etario de origem e preparado: preserva rastreabilidade",
+    "tabela de construcao em cenarios de desembolso: gerada como saida de cada calculo",
+    "consultas SIH de mesmo conteudo: evidencias das consultas historicas"
+  ],
+  "nota": "PNG para apresentacao e PDF vetorial para LaTeX sao formatos distintos. Nao houve sincronizacao com o Drive nesta organizacao.",
+  "versao_enxuta": {
+    "arquivo": "arquivo_compactado/fontes_brutas_e_coleta.zip",
+    "fontes_abertas": 19,
+    "arquivos_compactados": 280,
+    "necessario_extrair_para_executar": false,
+    "coletores": "Scripts de coleta preservados dentro do ZIP, nos caminhos originais."
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "referencia": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\resultados\\atual\\plano\\plano_aps.json",
+  "parametros_base": {
+    "demanda": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\pontos_demanda_itauna.csv",
+    "ubs": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\unidades_existentes_itauna.csv",
+    "raio": 3.0,
+    "raio_rural": null,
+    "fator_rota": 1.0,
+    "hab_esf": 3000,
+    "hab_min_esf": 2000,
+    "esf_max": 4,
+    "limites_equipes": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\fontes_publicas\\estrutura_ubs_cnes\\limites_equipes_novas_ate4.csv",
+    "max_novas": null,
+    "hab_min_nova": 2000,
+    "hab_min_nova_rural": 500.0,
+    "dist_min_cand": 1.0,
+    "custo_km": 0.05,
+    "cobertura_min": null,
+    "growth": 6.484145429972665,
+    "growth_file": null,
+    "solver": "auto",
+    "time_limit": 600.0,
+    "gap": 0.0001,
+    "pareto": false,
+    "saida": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\resultados\\atual\\plano\\aps",
+    "quiet": true,
+    "horizonte_anos": 5,
+    "folga_custo": 0.02
+  },
+  "cenarios": [
+    [
+      "curva_0934",
+      "curva",
+      {
+        "folga_custo": 0.0
+      },
+      0.934
+    ],
+    [
+      "curva_0950",
+      "curva",
+      {
+        "folga_custo": 0.0
+      },
+      0.95
+    ],
+    [
+      "curva_0960",
+      "curva",
+      {
+        "folga_custo": 0.0
+      },
+      0.96
+    ],
+    [
+      "curva_0970",
+      "curva",
+      {
+        "folga_custo": 0.0
+      },
+      0.97
+    ],
+    [
+      "curva_0980",
+      "curva",
+      {
+        "folga_custo": 0.0
+      },
+      0.98
+    ],
+    [
+      "curva_0990",
+      "curva",
+      {
+        "folga_custo": 0.0
+      },
+      0.99
+    ],
+    [
+      "curva_0995",
+      "curva",
+      {
+        "folga_custo": 0.0
+      },
+      0.995
+    ],
+    [
+      "curva_max",
+      "curva",
+      {
+        "folga_custo": 0.0
+      },
+      null
+    ],
+    [
+      "raio_2km",
+      "raio",
+      {
+        "raio": 2.0
+      },
+      null
+    ],
+    [
+      "raio_5km",
+      "raio",
+      {
+        "raio": 5.0
+      },
+      null
+    ],
+    [
+      "folga_5pct",
+      "folga",
+      {
+        "folga_custo": 0.05
+      },
+      null
+    ],
+    [
+      "rural_min_0",
+      "minimo_rural",
+      {
+        "hab_min_nova_rural": 0.0
+      },
+      null
+    ],
+    [
+      "rural_min_1000",
+      "minimo_rural",
+      {
+        "hab_min_nova_rural": 1000.0
+      },
+      null
+    ],
+    [
+      "crescimento_5pct",
+      "crescimento",
+      {
+        "growth": 5.0
+      },
+      null
+    ],
+    [
+      "crescimento_10pct",
+      "crescimento",
+      {
+        "growth": 10.0
+      },
+      null
+    ],
+    [
+      "rural500_3km_todos",
+      "rural_raio",
+      {
+        "hab_min_nova_rural": 500.0,
+        "raio": 3.0,
+        "raio_rural": 3.0
+      },
+      null
+    ],
+    [
+      "rural500_3km_urbano_5km_rural",
+      "rural_raio",
+      {
+        "hab_min_nova_rural": 500.0,
+        "raio": 3.0,
+        "raio_rural": 5.0
+      },
+      null
+    ],
+    [
+      "rural500_5km_todos",
+      "rural_raio",
+      {
+        "hab_min_nova_rural": 500.0,
+        "raio": 5.0,
+        "raio_rural": 5.0
+      },
+      null
+    ]
+  ]
+}

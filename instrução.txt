@@ -1,0 +1,38 @@
+ATUALIZAR O PROJETO COM DOIS CLIQUES
+
+1. Mantenha a pasta inteira no computador, inclusive dados e ferramentas.
+2. Depois de salvar as alteracoes nos codigos, clique duas vezes em RODAR_TUDO.cmd.
+3. Aguarde a mensagem CONCLUIDO. Nao feche a janela durante o processamento.
+4. A pagina ABRIR_RESULTADOS.html abre ao terminar. As imagens ficam em imagens/.
+
+O computador precisa de Python 3.10 ou superior (python.org).
+Se faltarem bibliotecas, o iniciador tenta instala-las automaticamente; a primeira
+preparacao precisa de internet. O programa de otimizacao GLPK acompanha a pasta.
+
+O QUE ELE ATUALIZA
+Conferencias, modelo principal, seis cenarios de encaminhamento, auditoria,
+calculo separado de construcao, comparacao com o orcamento, sensibilidades,
+tres cenarios extras de raio, graficos, figuras do artigo e pagina de resultados.
+Os resultados numericos da ultima execucao ficam em resultados/atual/.
+O texto e as tabelas escritos manualmente no artigo.tex precisam ser revisados
+quando os resultados mudarem; as figuras sao atualizadas automaticamente.
+
+SUBSTITUICAO DAS IMAGENS
+Primeiro tudo e gerado em uma pasta temporaria. Somente depois de concluir e
+validar as etapas, os resultados atuais, a pasta imagens e as figuras do artigo
+sao substituidos. Imagens de execucoes antigas em resultados tambem sao removidas.
+Dados de origem, codigos e registros numericos antigos sao preservados.
+Se houver erro antes da publicacao, as imagens anteriores continuam disponiveis.
+Elas representam a execucao anterior, e nao as alteracoes que falharam.
+O registro de acompanhamento fica em ULTIMA_EXECUCAO.log.
+
+TEMPO DE EXECUCAO
+Pode demorar: sao varios modelos e analises. config_rodar_tudo.json permite
+ajustar os limites de tempo. tempo_modelo_segundos vale para as etapas do modelo;
+tempo_sensibilidade_segundos vale para cada resolucao de sensibilidade.
+Esses valores nao representam o tempo total do processo.
+
+PARA ENVIAR A OUTRA PESSOA
+Envie a pasta completa, e nao apenas o arquivo RODAR_TUDO.cmd.
+Descompacte antes de executar e mantenha os nomes e a estrutura das pastas.
+Nao execute duas atualizacoes simultaneas nem substitua codigo com o processo aberto.

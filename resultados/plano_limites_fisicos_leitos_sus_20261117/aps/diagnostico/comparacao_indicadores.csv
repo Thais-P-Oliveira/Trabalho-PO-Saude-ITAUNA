@@ -1,0 +1,3 @@
+﻿indicador;percentual;denominador;referencia;metodo;fonte
+Proximidade geografica das UBS atuais;93.40220540806192;97669.0;"Populacao local da base; coordenadas das 22 UBS";Populacao de pontos a ate 3 km de alguma UBS / populacao local;"pontos_demanda_itauna.csv; unidades_existentes_itauna.csv"
+Cobertura potencial estimada da APS (oficial);80.49;103272;"Competencia 07/2026; populacao IBGE 2025";"Indicador administrativo publicado pelo MS; nao aplica raio geografico";https://relatorioaps-prd.saude.gov.br/cobertura/aps?unidadeGeografica=MUNICIPIO&coUf=31&coMunicipio=313380&nuCompInicio=202501&nuCompFim=202607

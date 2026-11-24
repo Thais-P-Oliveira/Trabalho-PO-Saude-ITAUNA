@@ -1,0 +1,32 @@
+{
+  "proporcoes_via_secundaria": [
+    0.25,
+    0.5,
+    0.75
+  ],
+  "hab_por_esf": 3000,
+  "tmp2": 5.131730948388299,
+  "tmp3": 3.3263736263736265,
+  "leitos": "CNES 202607: leitos SUS de internacao e UTI x 365 dias menos carga estimada de nao residentes e residentes nao eletivos; disponibilidade anual e agregacao sao hipoteses",
+  "metodo_demanda": "taxa_utilizacao_2025_x_populacao_projetada_sem_idade",
+  "distribuicao_demanda": "total municipal eletivo x populacao do ponto / populacao total; demanda da UBS acompanha vinculacao populacional",
+  "ambulatorio_capacidade": "12 vezes pico mensal conjunto 2025 menos a producao eletiva anual de nao residentes no prestador; processamento, nao data de atendimento",
+  "deslocamento": "linha reta; trajetos organizacionais completos a partir do ponto; nao viagens observadas",
+  "fator_rota": 1.0,
+  "projecao_populacional": {
+    "municipio": "Itaúna",
+    "codigo_ibge": "3133808",
+    "ano_base_territorial": 2022,
+    "populacao_base_territorial": 97669,
+    "ano_atendimentos": 2025,
+    "populacao_ano_atendimentos": 103272,
+    "ano_planejamento": 2026,
+    "populacao_planejamento": 104002,
+    "fonte_2025": "https://ftp.ibge.gov.br/Estimativas_de_Populacao/Estimativas_2025/POP2025_20251031.pdf",
+    "pagina_pdf_2025": 59,
+    "fonte_2026": "https://ftp.ibge.gov.br/Estimativas_de_Populacao/Estimativas_2026/POP2026_20261029.pdf",
+    "pagina_pdf_2026": 56,
+    "consulta": "2026-11-17",
+    "metodo": "Participacoes territoriais constantes; utilizacao por habitante de 2025 constante. Valores municipais transcritos das tabelas oficiais do IBGE."
+  }
+}

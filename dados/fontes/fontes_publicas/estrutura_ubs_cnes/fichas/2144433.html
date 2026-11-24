@@ -1,0 +1,1077 @@
+<!--***************************************************************
+// Desenvolvido Por  - DATASUS/CNES - RIO
+// Equipe ...........: CNES 
+// Endereço .........: CNES.DATSUS.GOV.BR 
+// Descricao.........: FICHA REDUZIDA
+// Criado  por.......: WASHINGTON BELLOTI    
+//  ***************************************************************-->
+
+<!-- saved from url=(0022)http://internet.e-mail -->
+<table  colspan=2 lign=left border=0 width=780 cellspacing="0" cellpadding="0">
+ <tr>
+  <td>
+
+<!--***************************************************************
+// Desenvolvido Por  - DATASUS/CNES - RIO
+// Equipe ...........: CNES 
+// Endereço .........: CNES.DATSUS.GOV.BR 
+// Descricao.........: MENU PRINCIPAL  
+// Criado  por.......: WASHINGTON BELLOTI    
+//  ***************************************************************-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="pt-BR">
+
+<head>
+  <title>CnesWeb - Cadastro Nacional de Estabelecimentos de Saúde</title>
+
+<style TYPE="text/css">
+<!--
+A:link    {text-decoration: none; font-weight:normal; color:#333333; }
+A:visited {text-decoration: none; font-weight:normal; color:#333333; }
+A:active  {text-decoration: none; color: #333333; }
+A:hover	  {color: #000066; }
+A.ff      {text-decoration: none; color: #333333; }
+A.ff:visited {text-decoration: none; color: #333333; }
+A.ff:hover	 {text-decoration: none; color:#000066; }
+A.ff:active  {text-decoration: none; color: #333333; }
+-->
+</style>
+
+<SCRIPT LANGUAGE="JavaScript">
+
+function Abre_Janela2()
+{
+	window.open('Mod_Email.asp','Links','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=650,height=480, top=180, left=280');
+}
+
+// Recuperando a configuracao de Video
+
+Tela = screen.width;  
+
+if (Tela == '1024')
+  Posicao = '180'
+else
+  Posicao = '13'
+
+//document.FrmPosicao.Posicao.value = screen.width;    
+
+// -------------------- Funcão para mostrar data e Hora --------------------------- 
+
+ hoje = new Date()
+ dia = hoje.getDate()
+ dias = hoje.getDay()
+ mes = hoje.getMonth()
+ ano = hoje.getYear()
+ if (dia < 10)
+    dia = "0" + dia
+ if (ano < 2000)
+    ano = "19" + ano
+
+ function CriaArray (n) 
+ {
+  this.length = n 
+ }
+
+ NomeDia = new CriaArray(7)
+ NomeDia[0] = "Domingo"
+ NomeDia[1] = "Segunda-feira"
+ NomeDia[2] = "Ter&ccedil;a-feira"
+ NomeDia[3] = "Quarta-feira"
+ NomeDia[4] = "Quinta-feira"
+ NomeDia[5] = "Sexta-feira"
+ NomeDia[6] = "S&aacute;bado"
+
+ NomeMes = new CriaArray(12)
+ NomeMes[0] = "Janeiro"
+ NomeMes[1] = "Fevereiro"
+ NomeMes[2] = "Mar&ccedil;o"
+ NomeMes[3] = "Abril"
+ NomeMes[4] = "Maio"
+ NomeMes[5] = "Junho"
+ NomeMes[6] = "Julho"
+ NomeMes[7] = "Agosto"
+ NomeMes[8] = "Setembro"
+ NomeMes[9] = "Outubro"
+ NomeMes[10] = "Novembro"
+ NomeMes[11] = "Dezembro"
+
+ function EscreveData() 
+
+ {
+ document.write ("<center>" + NomeDia[dias] + ", " + dia + " de " + NomeMes[mes] + " de " + ano + "</center>")
+ }
+ 
+ function Data_Atualizacao() 
+ {
+ dia = hoje.getDate();
+ dia = parseInt(dia);
+ dia = dia - 2 
+ mes = hoje.getMonth()
+ mes = parseInt(mes)
+ mes = mes + 1
+ ano = hoje.getYear()
+ document.write (dia + "/" + mes + "/"  + ano)
+ }
+
+// ---------------------- Fim da Funçaõ Data Hora ----------------------------------
+ 
+  NS4 = (document.layers);
+  IE4 = (document.all);
+  ver4 = (NS4 || IE4);
+  isMac = (navigator.appVersion.indexOf("Mac") != -1);
+  isMenu = (NS4 || (IE4 && !isMac));
+  function popUp(){return};
+  function popDown(){return};
+  function startIt(){return};
+  if (!ver4) event = null;
+
+  if (isMenu)
+   {
+    menuVersion = 3;
+    menuWidth = 150;
+    borWid = 2;
+    borSty = "double";
+    borCol = "#003366";
+    separator = 1;
+    separatorCol = "#003366";
+    fntFam = "sans-serif";
+    fntBold = false;
+    fntItal = false;
+    fntSiz = 8;
+    fntCol = "#003366";
+    overFnt = "#000080";
+    itemPad = 3;
+    backCol = "#cccccc";
+    overCol = "#ADD8E6";
+    
+    imgSrc = "tri.gif";
+    imgSiz = 10;
+
+    childOffset = 6;
+    childOverlap = 60;
+    perCentOver = null;
+
+    clickStart = false;
+    clickKill = false;
+    secondsVisible = 0.5;
+
+    keepHilite = false;
+    NSfontOver = false;
+
+    isFrames = false;
+    navFrLoc = "top";
+    mainFrName = "main";
+  }
+
+</SCRIPT>
+</head>
+  <script type='text/javascript'>
+
+      function Go(){return}
+  </script>
+  <script type='text/javascript' src='exmplmenu_var.js'></script>
+  <script type='text/javascript' src='menu_com.js'></script>
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table  border=0 width=781 cellspacing="0" cellpadding="0">
+	<tr>
+ 		<td>
+  			<table  border="0" cellspacing="0" cellpadding="0">
+   				<tr>
+     				<!--<td width="781"><IMG  src="img/topo_novo4.jpg" alt="imagem do topo cnes" height=90 width=781 border=0></td>--> 
+     				<td width="781"><IMG  src="img/topo_novo_2014.jpg" alt="imagem do topo cnes" height=90 width=781 border=0></td> 
+     			</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<br><br>
+</body>
+
+
+<HTML>
+<head>
+<script>
+
+function pop(pop)
+{
+ window.open('Cabecalho_Reduzido_Impressao_Competencia.asp','Links','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=900,height=600,top=00, left=00')
+}
+
+function Enviar()
+{
+ VUnidade = document.frmComp.VUnidade.value
+ VComp = document.frmComp.cboCompetencia.options[document.frmComp.cboCompetencia.options.selectedIndex].value;
+ document.location = 'Cabecalho_Reduzido_Competencia.asp?VComp=' + VComp + '&VCod_Unidade=' + VUnidade   
+ document.frmComp.action; 
+}
+
+</script>
+</head>
+
+<Title>Cnes - Cadastro Nacional de Estabelecimentos de Sáude</title>
+
+
+
+<br>
+<br>
+<body  background="img/Fundo-28-01-2003.gif" link="white">
+
+<P align=center><a href="javascript:pop()"><img src="img/imprimir.gif" border=0></a></p>
+<br><br>
+<table border="1" align="center" cellpadding="1" cellspacing="0" width=740>
+   <TR>
+   <td colspan=3 ALIGN=CENTER width="90%">
+   
+     <HR>
+     <font size=2 face=verdan,arial color="#ffcc99">Identificação<BR><font color="yellow" face=verdana,arial size=1></font>
+   </td>
+   <form name="frmComp"> 
+   <td align="left"><font color="#ffcc99">Competência:</font></td>
+	<td align="left">
+   					<select name="cboCompetencia" id="cboCompetencia" onchange="Enviar()" style="color:#003366;background:#cccccc;">
+      					<option value="">Competência</option>      
+         				
+                 			   <option value=202610>102026</option>
+            				
+                 			   <option value=202609>092026</option>
+            				
+                 			   <option value=202608>082026</option>
+            				
+                 			   <option value=202607 selected>072026</option>
+                			
+                 			   <option value=202606>062026</option>
+            				
+                 			   <option value=202605>052026</option>
+            				
+                 			   <option value=202604>042026</option>
+            				
+                 			   <option value=202603>032026</option>
+            				
+                 			   <option value=202602>022026</option>
+            				
+                 			   <option value=202601>012026</option>
+            				
+                 			   <option value=202512>122025</option>
+            				
+                 			   <option value=202511>112025</option>
+            				
+                 			   <option value=202510>102025</option>
+            				
+                 			   <option value=202509>092025</option>
+            				
+                 			   <option value=202508>082025</option>
+            				
+                 			   <option value=202507>072025</option>
+            				
+                 			   <option value=202506>062025</option>
+            				
+                 			   <option value=202505>052025</option>
+            				
+                 			   <option value=202504>042025</option>
+            				
+                 			   <option value=202503>032025</option>
+            				
+                 			   <option value=202502>022025</option>
+            				
+                 			   <option value=202501>012025</option>
+            				
+                 			   <option value=202412>122024</option>
+            				
+                 			   <option value=202411>112024</option>
+            				
+                 			   <option value=202410>102024</option>
+            				
+                 			   <option value=202409>092024</option>
+            				
+                 			   <option value=202408>082024</option>
+            				
+                 			   <option value=202407>072024</option>
+            				
+                 			   <option value=202406>062024</option>
+            				
+                 			   <option value=202405>052024</option>
+            				
+                 			   <option value=202404>042024</option>
+            				
+                 			   <option value=202403>032024</option>
+            				
+                 			   <option value=202402>022024</option>
+            				
+                 			   <option value=202401>012024</option>
+            				
+                 			   <option value=202312>122023</option>
+            				
+                 			   <option value=202311>112023</option>
+            				
+                 			   <option value=202310>102023</option>
+            				
+                 			   <option value=202309>092023</option>
+            				
+                 			   <option value=202308>082023</option>
+            				
+                 			   <option value=202307>072023</option>
+            				
+                 			   <option value=202306>062023</option>
+            				
+                 			   <option value=202305>052023</option>
+            				
+                 			   <option value=202304>042023</option>
+            				
+                 			   <option value=202303>032023</option>
+            				
+                 			   <option value=202302>022023</option>
+            				
+                 			   <option value=202301>012023</option>
+            				
+                 			   <option value=202212>122022</option>
+            				
+                 			   <option value=202211>112022</option>
+            				
+                 			   <option value=202210>102022</option>
+            				
+                 			   <option value=202209>092022</option>
+            				
+                 			   <option value=202208>082022</option>
+            				
+                 			   <option value=202207>072022</option>
+            				
+                 			   <option value=202206>062022</option>
+            				
+                 			   <option value=202205>052022</option>
+            				
+                 			   <option value=202204>042022</option>
+            				
+                 			   <option value=202203>032022</option>
+            				
+                 			   <option value=202202>022022</option>
+            				
+                 			   <option value=202201>012022</option>
+            				
+                 			   <option value=202112>122021</option>
+            				
+                 			   <option value=202111>112021</option>
+            				
+                 			   <option value=202110>102021</option>
+            				
+                 			   <option value=202109>092021</option>
+            				
+                 			   <option value=202108>082021</option>
+            				
+                 			   <option value=202107>072021</option>
+            				
+                 			   <option value=202106>062021</option>
+            				
+                 			   <option value=202105>052021</option>
+            				
+                 			   <option value=202104>042021</option>
+            				
+                 			   <option value=202103>032021</option>
+            				
+                 			   <option value=202102>022021</option>
+            				
+                 			   <option value=202101>012021</option>
+            				
+                 			   <option value=202012>122020</option>
+            				
+                 			   <option value=202011>112020</option>
+            				
+                 			   <option value=202010>102020</option>
+            				
+                 			   <option value=202009>092020</option>
+            				
+                 			   <option value=202008>082020</option>
+            				
+                 			   <option value=202007>072020</option>
+            				
+                 			   <option value=202006>062020</option>
+            				
+                 			   <option value=202005>052020</option>
+            				
+                 			   <option value=202004>042020</option>
+            				
+                 			   <option value=202003>032020</option>
+            				
+                 			   <option value=202002>022020</option>
+            				
+                 			   <option value=202001>012020</option>
+            				
+                 			   <option value=201912>122019</option>
+            				
+                 			   <option value=201911>112019</option>
+            				
+                 			   <option value=201910>102019</option>
+            				
+                 			   <option value=201909>092019</option>
+            				
+                 			   <option value=201908>082019</option>
+            				
+                 			   <option value=201907>072019</option>
+            				
+                 			   <option value=201906>062019</option>
+            				
+                 			   <option value=201905>052019</option>
+            				
+                 			   <option value=201904>042019</option>
+            				
+                 			   <option value=201903>032019</option>
+            				
+                 			   <option value=201902>022019</option>
+            				
+                 			   <option value=201901>012019</option>
+            				
+                 			   <option value=201812>122018</option>
+            				
+                 			   <option value=201811>112018</option>
+            				
+                 			   <option value=201810>102018</option>
+            				
+                 			   <option value=201809>092018</option>
+            				
+                 			   <option value=201808>082018</option>
+            				
+                 			   <option value=201807>072018</option>
+            				
+                 			   <option value=201806>062018</option>
+            				
+                 			   <option value=201805>052018</option>
+            				
+                 			   <option value=201804>042018</option>
+            				
+                 			   <option value=201803>032018</option>
+            				
+                 			   <option value=201802>022018</option>
+            				
+                 			   <option value=201801>012018</option>
+            				
+                 			   <option value=201712>122017</option>
+            				
+                 			   <option value=201711>112017</option>
+            				
+                 			   <option value=201710>102017</option>
+            				
+                 			   <option value=201709>092017</option>
+            				
+                 			   <option value=201708>082017</option>
+            				
+                 			   <option value=201707>072017</option>
+            				
+                 			   <option value=201706>062017</option>
+            				
+                 			   <option value=201705>052017</option>
+            				
+                 			   <option value=201704>042017</option>
+            				
+                 			   <option value=201703>032017</option>
+            				
+                 			   <option value=201702>022017</option>
+            				
+                 			   <option value=201701>012017</option>
+            				
+                 			   <option value=201612>122016</option>
+            				
+                 			   <option value=201611>112016</option>
+            				
+                 			   <option value=201610>102016</option>
+            				
+                 			   <option value=201609>092016</option>
+            				
+                 			   <option value=201608>082016</option>
+            				
+                 			   <option value=201607>072016</option>
+            				
+                 			   <option value=201606>062016</option>
+            				
+                 			   <option value=201605>052016</option>
+            				
+                 			   <option value=201604>042016</option>
+            				
+                 			   <option value=201603>032016</option>
+            				
+                 			   <option value=201602>022016</option>
+            				
+                 			   <option value=201601>012016</option>
+            				
+                 			   <option value=201512>122015</option>
+            				
+                 			   <option value=201511>112015</option>
+            				
+                 			   <option value=201510>102015</option>
+            				
+                 			   <option value=201509>092015</option>
+            				
+                 			   <option value=201508>082015</option>
+            				
+                 			   <option value=201507>072015</option>
+            				
+                 			   <option value=201506>062015</option>
+            				
+                 			   <option value=201505>052015</option>
+            				
+                 			   <option value=201504>042015</option>
+            				
+                 			   <option value=201503>032015</option>
+            				
+                 			   <option value=201502>022015</option>
+            				
+                 			   <option value=201501>012015</option>
+            				
+                 			   <option value=201412>122014</option>
+            				
+                 			   <option value=201411>112014</option>
+            				
+                 			   <option value=201410>102014</option>
+            				
+                 			   <option value=201409>092014</option>
+            				
+                 			   <option value=201408>082014</option>
+            				
+                 			   <option value=201407>072014</option>
+            				
+                 			   <option value=201406>062014</option>
+            				
+                 			   <option value=201405>052014</option>
+            				
+                 			   <option value=201404>042014</option>
+            				
+                 			   <option value=201403>032014</option>
+            				
+                 			   <option value=201402>022014</option>
+            				
+                 			   <option value=201401>012014</option>
+            				
+                 			   <option value=201312>122013</option>
+            				
+                 			   <option value=201311>112013</option>
+            				
+                 			   <option value=201310>102013</option>
+            				
+                 			   <option value=201309>092013</option>
+            				
+                 			   <option value=201308>082013</option>
+            				
+                 			   <option value=201307>072013</option>
+            				
+                 			   <option value=201306>062013</option>
+            				
+                 			   <option value=201305>052013</option>
+            				
+                 			   <option value=201304>042013</option>
+            				
+                 			   <option value=201303>032013</option>
+            				
+                 			   <option value=201302>022013</option>
+            				
+                 			   <option value=201301>012013</option>
+            				
+                 			   <option value=201212>122012</option>
+            				
+                 			   <option value=201211>112012</option>
+            				
+                 			   <option value=201210>102012</option>
+            				
+                 			   <option value=201209>092012</option>
+            				
+                 			   <option value=201208>082012</option>
+            				
+                 			   <option value=201207>072012</option>
+            				
+                 			   <option value=201206>062012</option>
+            				
+                 			   <option value=201205>052012</option>
+            				
+                 			   <option value=201204>042012</option>
+            				
+                 			   <option value=201203>032012</option>
+            				
+                 			   <option value=201202>022012</option>
+            				
+                 			   <option value=201201>012012</option>
+            				
+                 			   <option value=201112>122011</option>
+            				
+                 			   <option value=201111>112011</option>
+            				
+                 			   <option value=201110>102011</option>
+            				
+                 			   <option value=201109>092011</option>
+            				
+                 			   <option value=201108>082011</option>
+            				
+                 			   <option value=201107>072011</option>
+            				
+                 			   <option value=201106>062011</option>
+            				
+                 			   <option value=201105>052011</option>
+            				
+                 			   <option value=201104>042011</option>
+            				
+                 			   <option value=201103>032011</option>
+            				
+                 			   <option value=201102>022011</option>
+            				
+                 			   <option value=201101>012011</option>
+            				
+                 			   <option value=201012>122010</option>
+            				
+                 			   <option value=201011>112010</option>
+            				
+                 			   <option value=201010>102010</option>
+            				
+                 			   <option value=201009>092010</option>
+            				
+                 			   <option value=201008>082010</option>
+            				
+                 			   <option value=201007>072010</option>
+            				
+                 			   <option value=201006>062010</option>
+            				
+                 			   <option value=201005>052010</option>
+            				
+                 			   <option value=201004>042010</option>
+            				
+                 			   <option value=201003>032010</option>
+            				
+                 			   <option value=201002>022010</option>
+            				
+                 			   <option value=201001>012010</option>
+            				
+                 			   <option value=200912>122009</option>
+            				
+                 			   <option value=200911>112009</option>
+            				
+                 			   <option value=200910>102009</option>
+            				
+                 			   <option value=200909>092009</option>
+            				
+                 			   <option value=200908>082009</option>
+            				
+                 			   <option value=200907>072009</option>
+            				
+                 			   <option value=200906>062009</option>
+            				
+                 			   <option value=200905>052009</option>
+            				
+                 			   <option value=200904>042009</option>
+            				
+                 			   <option value=200903>032009</option>
+            				
+                 			   <option value=200902>022009</option>
+            				
+                 			   <option value=200901>012009</option>
+            				
+                 			   <option value=200812>122008</option>
+            				
+                 			   <option value=200811>112008</option>
+            				
+                 			   <option value=200810>102008</option>
+            				
+                 			   <option value=200809>092008</option>
+            				
+                 			   <option value=200808>082008</option>
+            				
+                 			   <option value=200807>072008</option>
+            				
+                 			   <option value=200806>062008</option>
+            				
+                 			   <option value=200805>052008</option>
+            				
+                 			   <option value=200804>042008</option>
+            				
+                 			   <option value=200803>032008</option>
+            				
+                 			   <option value=200802>022008</option>
+            				
+                 			   <option value=200801>012008</option>
+            				
+                 			   <option value=200712>122007</option>
+            				
+                 			   <option value=200711>112007</option>
+            				
+                 			   <option value=200710>102007</option>
+            				
+                 			   <option value=200709>092007</option>
+            				
+                 			   <option value=200708>082007</option>
+            				
+                 			   <option value=200707>072007</option>
+            				
+				  </select>
+ 				</td> 
+	<tr>
+   
+   <input type="hidden" name="VUnidade" value="3133802144433">
+   </form>
+   
+</table>
+<table bgcolor="white" border="0" align="center" cellpadding=1 cellspacing=0 width=740>
+   <tr>
+     <td bgcolor="#cccccc" colspan=3><font size=1 face=Verdana,arial color=#003366><b>Nome:</b></font></td>
+              
+     <td bgcolor="#cccccc"><font size=1 face=Verdana,arial color=#003366><b>CNES:</b></font></td>
+     <td bgcolor="#cccccc" colspan=3><font size=1 face=Verdana,arial color=#003366><b>CNPJ:</b></font></td>
+   </tr>
+   <tr>
+    <td colspan=3><font size=1 face=Verdana,arial color=#003366>UBS ZONA RURAL</font></td>
+    <!--<td><font size=1 face=Verdana,arial color=#003366>2144433</td>-->
+    <td><font size=1 face=Verdana,arial color=red>2144433</td>               
+   <td colspan=3><font size=1 face=Verdana,arial color=#003366> </td>           
+ </tr>
+ <tr>
+    <td bgcolor="#cccccc" colspan=3><font size=1 face=Verdana,arial color=#003366><b>Nome Empresarial:</b></font></td>
+    <td bgcolor="#cccccc"><font size=1 face=Verdana,arial color=#003366><b>CPF:</b></font></td>
+    <td bgcolor="#cccccc" colspan=2><font size=1 face=Verdana,arial color=#003366><b>Personalidade:</b></font></td>
+ <tr>
+    <td colspan=3><font size=1 face=Verdana,arial color=#003366>UBS ZONA RURAL</font></td>          
+    
+     
+    <td><font size=1 face=Verdana,arial color=#003366>--</font></td>
+     
+    <td colspan=2>   
+     
+      <font size=1 face=Verdana,arial color=#003366>JURÍDICA</font> 
+     
+    </td>  
+ </tr>
+ <!--------------------------------------------->
+ <tr>
+   <td bgcolor="#cccccc" colspan=4><font size=1 face=Verdana,arial color=#003366><b>Logradouro:</b></font></td>
+   <td bgcolor="#cccccc" colspan=2><font size=1 face=Verdana,arial color=#003366><b>Número:</b></font></td>
+ </tr>
+ <tr>
+   <td colspan=4><font size=1 face=Verdana,arial color=#003366>AV MANOEL DA CUSTODIA</font></td> 
+   <td colspan=2><font size=1 face=Verdana,arial color=#003366>1111</font></td>
+ </tr>
+ 
+ <tr height=10>
+   
+   <td bgcolor="#cccccc"><font size=1 face=Verdana,arial color=#003366><b>Complemento:</b></font></td>
+   <td bgcolor="#cccccc"><font size=1 face=Verdana,arial color=#003366><b>Bairro:</b></font></td>
+   <td bgcolor="#cccccc"><font size=1 face=Verdana,arial color=#003366><b>CEP:</b></font></td>
+   <td bgcolor="#cccccc"><font size=1 face=Verdana,arial color=#003366><b>IBGE:</b></font></td></td>
+   <td bgcolor="#cccccc"><font size=1 face=Verdana,arial color=#003366><b>Município:</b></font></td></td>
+   <td bgcolor="#cccccc"><font size=1 face=Verdana,arial color=#003366><b>UF:</b></font></td></td>
+ 
+ </tr>
+ <tr height=10>
+    
+  <td><font size=1 face=Verdana,arial color=#003366>POLICLINICA</font></td>
+  <td><font size=1 face=Verdana,arial color=#003366>SAO GERALDO</font></td>
+  <td><font size=1 face=Verdana,arial color=#003366>35684899</font></td>
+  
+  
+  
+  <td><font size=1 face=Verdana,arial color=#003366>313380</font></td>
+  <td><font size=1 face=Verdana,arial color=#003366>ITAUNA</font></td>
+  <td><font size=1 face=Verdana,arial color=#003366>MG</font></td>
+ 
+ </tr>
+   
+ <!--------------------------------------------->
+  <tr>
+    <td colspan=1 bgcolor="#cccccc"><font size=1 face=Verdana,arial color=#003366><b>Tipo Unidade:</b></font></td>
+    <td colspan=1 bgcolor="#cccccc"><font size=1 face=Verdana,arial color=#003366><b>Sub Tipo Unidade:</b></font></td>
+    <td colspan=1 bgcolor="#cccccc"><font size=1 face=Verdana,arial color=#003366><b>Gestão:</b></font></td>
+    <td colspan=3 bgcolor="#cccccc"><font size=1 face=Verdana,arial color=#003366><b>Dependência:</b></font></td>
+  </tr> 
+  
+  <tr>
+    <td colspan=1><font size=1 face=Verdana,arial color=#003366>CENTRO DE SAUDE/UNIDADE BASICA</font></td>
+    <td colspan=1><font size=1 face=Verdana,arial color=#003366>sem sub tipo</font></td>    
+     
+    <td colspan=1><font size=1 face=Verdana,arial color=red>MUNICIPAL</font></td>    
+    <td colspan=3>
+      
+          <font size=1 face=Verdana,arial color=#003366>MANTIDA</font>
+                 
+    </td>
+    
+    
+  </tr>
+
+ 
+<tr>
+   <td colspan=2 width="252" bgcolor="#cccccc"><font size="1" face=Verdana,arial color=#003366><b>Atividade Ensino/Pesquisa:</b></font></td>
+   <td colspan=4 bgcolor ="#cccccc"><font size="1" face=Verdana,arial color=#003366><b>Codigo/Natureza Jurídica:</b></font></td>
+	
+   </tr>
+<tr>
+   <td colspan=2 ><font size="1" face=Verdana,arial color=#003366>UNIDADE SEM ATIVIDADE DE ENSINO</font></td>
+   
+    <td colspan=4><font size="1" face=Verdana,arial color=#003366>1244&nbsp;&nbsp;MUNICIPIO</font></td>
+   
+    </tr>
+
+ </table>
+  
+ 
+
+            
+
+<! ------------------ Inicio div do cabeçalho / Cooperativas ---------------------->
+    
+ <table align=center border=0 width=740 cellpadding=1 cellspacing=0>
+    <tr>
+        <td bgcolor="#cccccc" width="30%"><font size=1 face=verdana,arial color="#003366"><b>Nivel de Atenção:</b></font></td> 
+       <td bgcolor="#cccccc" width="40%"><font size=1 face=verdana,arial color="#003366"><b>Atividade:</b></font></td> 
+       <td bgcolor="#cccccc" width="30%"><font size=1 face=verdana,arial color="#003366"><b>Gestão:</b></font></td>
+    </tr>
+ </table>
+        
+ <!------------------------- Vinculo Cooperativas ------------------------------>
+    
+ <table align=center border=0 width=740 cellpadding=1 cellspacing=0><TR bgcolor=#ffffff><td width='30%'><font size=1 face=verdana,arial color='#003366'>AMBULATORIAL</font></td><td width='40%'><font size=1 face=verdana,arial color='#003366'>ATENCAO BASICA</font></td><td width='30%'><font size=1 face=verdana,arial color='#003366'>MUNICIPAL</font></td></tr></table><P align=center><font size=2 color=white face=verdana,arial>Estabelecimento não possui informações de Diálise</font></p><p align=center><br><font size=2 color=white face=verdana,arial>Estabelecimento não possui informações de Radioterapia/Químioterapia</font></p><p align=center><br><font size=2 color=white face=verdana,arial>Estabelecimento não possui informações de Hemoterapia</font></p>
+<!------------------------------------------ Profissionais ----------------------------------------> 
+</a></font>
+<br>
+<table align=center  border="1" align="center" cellpadding=1 cellspacing=0 width=740>
+  <table align=center border=1 width=740 cellpadding=1 cellspacing=0>
+    <tr height=10>
+     <td>
+       <font size=1 face=verdana,arial size=2 color="yellow">PROFISSIONAIS SUS</font> 
+     </td>
+    </tr>
+  </table>
+  <Table align=center  border="0" align="center" cellpadding=1 cellspacing=0 width=740>  
+  <tr> 
+    <td bgcolor="#cccccc" width="55%"><font size=1 face=verdana,arial color="#003366"><b>Médicos</b></font></td>
+    <td bgcolor="#cccccc" width="15%"><font size=1 face=verdana,arial color="#003366"><b>2</b></font></td>
+  </tr>
+  <tr> 
+    <td bgcolor="white" width="55%"><font size=1 face=verdana,arial color="#003366"><b>Outros</b></font></td>
+    <td bgcolor="white" width="15%"><font size=1 face=verdana,arial color="#003366"><b>21</b></font></td>
+  </tr>
+</table>
+<table align=center  border="1" align="center" cellpadding=1 cellspacing=0 width=740>
+  <table align=center border=1 width=740 cellpadding=1 cellspacing=0>
+    <tr height=10>
+     <td>
+       <font size=1 face=verdana,arial size=2 color="yellow">&nbsp;</font> 
+     </td>
+    </tr>
+  </table>
+
+<!---------------------------- Fim Profissionais SUS----------------------------------->
+<!---------------------------- Profissionais Não SUS----------------------------------->
+
+
+
+<br>
+<table align=center  border="1" align="center" cellpadding=1 cellspacing=0 width=740>
+  <table align=center border=1 width=740 cellpadding=1 cellspacing=0>
+    <tr height=10>
+     <td>
+       <font size=1 face=verdana,arial size=2 color="yellow">PROFISSIONAIS NÃO SUS</font> 
+     </td>
+    </tr>
+  </table>
+  <Table align=center  border="0" align="center" cellpadding=1 cellspacing=0 width=740>  
+  <tr> 
+    <td bgcolor="white" width="55%"><font size=1 face=verdana,arial color="#003366"><b>Total</b></font></td>
+    <td bgcolor="white" width="15%"><font size=1 face=verdana,arial color="#003366"><b>0</b></font></td>
+  </tr>
+</table>
+<!---------------------------- Fim Profissionais Nao SUS----------------------------------->
+<!------------------------------  Atendimento Prestado ------------------------------------>
+<br>
+<table border="1" align="center" cellpadding="1" cellspacing="0" width=740>
+   <tr>
+     <td width="90%"><font size=2 face=Verdana,arial color="yellow">Atendimento Prestado</td>
+   </tr>    
+</table>
+
+
+<! ------------------ Inicio div do cabeçalho / Cooperativas ---------------------->
+        
+<table align=center border=0 width=740 cellpadding=1 cellspacing=0>
+    <tr> 
+       <td bgcolor="#cccccc" width="40%"><font size=1 face=verdana,arial color="#003366"><b>Tipo de Atendimento:</b></font></td>
+       <td bgcolor="#cccccc" width="30%"><font size=1 face=verdana,arial color="#003366"><b>Convênio:</b></font></td>
+    </tr>
+   
+<TR bgcolor=#cccccc><td width='40%'><font size=1 face=verdana,arial color='#003366'>AMBULATORIAL</font></td><td width='30%'><font size=1 face=verdana,arial color='#003366'>SUS</font></td></tr></table>
+ 
+<table border="0" align="center" width=740 cellpadding="1" cellspacing="0">
+   <tr>
+      <td width=30% bgcolor="#ffffff" width="40%"><font size=1 face=verdana,arial color="#003366"><b>Fluxo de Clientela:</b></font></td>
+   </tr>
+   <tr>
+     <td width=40% bgcolor=#cccccc><font size=1 face=verdana,arial color="#003366"></font></td>
+   </tr>  
+</table>  
+
+<br>
+<table align=center border=1 width=740 cellpadding=1 cellspacing=0>
+   <tr height=10>
+    <td>
+      <font size=2 face=verdana,arial color="yellow">Leitos</font> 
+    </td>
+   </tr>
+</table>   
+<p align=center><font size=2 color=white face=verdana,arial>Estabelecimento não possui Leitos Cadastrados</font>
+
+<!------------------------------- fim leitos ---------------------------------------> 
+
+<!------------------------------- Equipamnetos ------------------------------------->
+
+<br>
+<table border="1" align="center" cellpadding="1" cellspacing="0" width=740>
+   <tr>
+     <td width="90%"><font size=2 face=Verdana,arial color="yellow">Equipamentos</td>
+   </tr>    
+</table>
+
+</a><p align=center><br><font size=2 color=white face=verdana,arial>Estabelecimento não possui Equipamentos Cadastrados</font></p>
+
+<! --------------------------- fim equipamentos ----------------------------------->
+
+<! ------------------------------------------------------------------------------->
+
+
+<br>        
+<table align=center  border="1" align="center" cellpadding=1 cellspacing=0 width=740>
+
+<!------------------------------ Informaçoes Fisicas ---------------------------->
+   
+  <tr>
+     <td colspan=7><font size=2 face=verdana,arial color='yellow'>Instalações Físicas para Assistência</font></td>
+  </tr>
+  
+</table>
+
+<!--------------------------------- Instalações Fisicas --------------------------------------->
+
+
+    
+<!-------------------  Tabela que diz  Tipo de Equipamento ---------------------->
+    
+  <table align=center border=1 width=740 cellpadding=1 cellspacing=0>
+    <tr>
+     <td colspan=7>
+       <font size=1 face=verdana,arial color=#ffcc99>AMBULATORIAL</font> 
+     </td>
+    </tr>
+  </table>
+    
+<!-----------------------  Fim Tabela de Int.Fisicas Assistencia ----------------->
+    
+<!-----------------------------  Tabela de Cabeçalho ----------------------------->
+    
+    <table align=center border=0 width=740 cellpadding=1 cellspacing=0> 
+    <tr> 
+      <td bgcolor ="#cccccc" width="45%"><font size=1 face=verdana,arial color="#003366"><b>Instalação:</b></font></td>
+      <td bgcolor ="#cccccc" width="15%"><font size=1 face=verdana,arial color="#003366"><b>Qtde./Consultório:</b></font></td>
+      <td bgcolor ="#cccccc" width="15%"><font size=1 face=verdana,arial color="#003366"><b>Leitos/Equipos:</b></font></td>
+    </tr>
+    
+    
+<!-------------------------------   Fim  Cabeçalho ------------------------------->
+
+<TR bgcolor=#ffffff><td width='45%'><font size=1 face=verdana,arial color='#003366'>CLINICAS BASICAS</font></td><td width='15%'><font size=1 face=verdana,arial color='#003366'>1</font></td><td width='15%'><font size=1 face=verdana,arial color='#003366'>0</font></td></tr><TR bgcolor=#cccccc><td width='45%'><font size=1 face=verdana,arial color='#003366'>SALA DE CURATIVO</font></td><td width='15%'><font size=1 face=verdana,arial color='#003366'>1</font></td><td width='15%'><font size=1 face=verdana,arial color='#003366'>0</font></td></tr><TR bgcolor=#ffffff><td width='45%'><font size=1 face=verdana,arial color='#003366'>SALA DE IMUNIZACAO</font></td><td width='15%'><font size=1 face=verdana,arial color='#003366'>1</font></td><td width='15%'><font size=1 face=verdana,arial color='#003366'>0</font></td></tr>
+</table>
+
+<!---------------------------- Fim do Novo Novo -------------------------------->
+
+<table align=center  border="1" align="center" cellpadding=1 cellspacing=0 width=740>
+
+<tr>
+    <td colspan=7><font size=2 face=verdana,arial color='#ffcc99'>Serviços de Apoio</font></font></td>
+</tr>
+</table>
+     
+  <!----------------------- Inicio div do cabeçalho/Serviços Apoio ---------------->
+    
+  <table align=center border=0 width=740 bgcolor='white'cellpadding=1 cellspacing=0>
+   <tr> 
+       <td bgcolor ="#cccccc" width="5%"><font size=1 face=verdana,arial color="#003366"><b>cod.:</b></font></td>
+       <td bgcolor ="#cccccc" width="70%"><font size=1 face=verdana,arial color="#003366"><b>Serviço:</b></font></td>
+       <td bgcolor ="#cccccc" width="25%"><font size=1 face=verdana,arial color="#003366"><b>Característica:</b></font></td>
+   </tr>
+  </table>
+    
+  <!-------------------------- Fim da div Serviços Apoio ------------------------->
+  
+  <table border=0 align=center width=740 bgcolor='white' cellpadding=1 cellspacing=0>
+    
+  <TR bgcolor=#ffffff><td width='5%'><font size=1 face=verdana,arial color='#003366'>04</font></td><td width='70%'><font size=1 face=verdana,arial color='#003366'>CENTRAL DE ESTERILIZACAO DE MATERIAIS</font></td><td width='25%'><font size=1 face=verdana,arial color='#003366'>PROPRIO</font></td></tr><TR bgcolor=#cccccc><td width='5%'><font size=1 face=verdana,arial color='#003366'>03</font></td><td width='70%'><font size=1 face=verdana,arial color='#003366'>FARMACIA</font></td><td width='25%'><font size=1 face=verdana,arial color='#003366'>PROPRIO</font></td></tr><TR bgcolor=#ffffff><td width='5%'><font size=1 face=verdana,arial color='#003366'>08</font></td><td width='70%'><font size=1 face=verdana,arial color='#003366'>LAVANDERIA</font></td><td width='25%'><font size=1 face=verdana,arial color='#003366'>TERCEIRIZADO</font></td></tr><TR bgcolor=#cccccc><td width='5%'><font size=1 face=verdana,arial color='#003366'>01</font></td><td width='70%'><font size=1 face=verdana,arial color='#003366'>S.A.M.E. OU S.P.P.(SERVIÇO DE PRONTUARIO DE PACIENTE)</font></td><td width='25%'><font size=1 face=verdana,arial color='#003366'>PROPRIO</font></td></tr><TR bgcolor=#ffffff><td width='5%'><font size=1 face=verdana,arial color='#003366'>09</font></td><td width='70%'><font size=1 face=verdana,arial color='#003366'>SERVICO DE MANUTENCAO DE EQUIPAMENTOS</font></td><td width='25%'><font size=1 face=verdana,arial color='#003366'>TERCEIRIZADO</font></td></tr><TR bgcolor=#cccccc><td width='5%'><font size=1 face=verdana,arial color='#003366'>02</font></td><td width='70%'><font size=1 face=verdana,arial color='#003366'>SERVICO SOCIAL</font></td><td width='25%'><font size=1 face=verdana,arial color='#003366'>PROPRIO</font></td></tr>
+    </table>    
+    
+<!-------------------------------------------------------------------------------->
+<br>
+
+      
+<!--      <td width="5%"><font size=1 face=verdana,arial color="#003366"></font></td>
+      <td width="5%"><font size=1 face=verdana,arial color="#003366"></font></td>
+      <td width="5%"><font size=1 face=verdana,arial color="#003366"></font></td>
+      <td width="5%"><font size=1 face=verdana,arial color="#003366"></font></td>
+ -->     
+
+<!---------------------------------------------------------------------------------->
+
+<table align=center  border="1" align="center" cellpadding=1 cellspacing=0 width=740>
+<tr>
+     <td colspan=7><font size=2 face=verdana,arial color='#ffcc99'>Serviços Especializados</font></font></td>
+</tr>
+
+            
+  <!-------------------- Inicio div do cabeçalho / serviço apoio--------------->
+    
+  <table align=center border=0 width=735 bgcolor='white' cellpadding=1 cellspacing=0>
+    <tr> 
+       <td bgcolor ="#cccccc" width="5%"><font size=1 face=verdana,arial color="#003366"><b></b></font></td>
+       <td bgcolor ="#cccccc" width="40%"><font size=1 face=verdana,arial color="#003366"><b></b></font></td>
+       <td bgcolor ="#cccccc" width="20%"><font size=1 face=verdana,arial color="#003366"><b></b></font></td>
+       <td colspan="2" bgcolor ="#cccccc" width="5%" align="center"><font size=1 face=verdana,arial color="#003366"><b>Ambulatorial:</b> </font></td>
+       <td colspan="2" bgcolor ="#cccccc" width="10%" align="center"><font size=1 face=verdana,arial color="#003366"><b>Hospitalar:</b></font></td>
+    </tr>
+    <tr> 
+       <td  bgcolor ="#cccccc" width="5%"><font size=1 face=verdana,arial color="#003366"><b>Cod.:</b></font></td>
+       <td bgcolor ="#cccccc" width="40%"><font size=1 face=verdana,arial color="#003366"><b>Serviço:</b></font></td>
+       <td bgcolor ="#cccccc" width="20%"><font size=1 face=verdana,arial color="#003366"><b>Característica:</b></font></td>
+       <td bgcolor ="#cccccc" width="5%" align="left" ><font size=1 face=verdana,arial color="#003366"><b>SUS:</b> </font></td>
+       <td bgcolor ="#cccccc" width="10%" align="right"><font size=1 face=verdana,arial color="#003366"><b>não SUS:</b></font></td>
+       <td bgcolor ="#cccccc" width="10%" align="center"><font size=1 face=verdana,arial color="#003366"><b>SUS:</b></font></td>
+       <td bgcolor ="#cccccc" width="10%" align="center"><font size=1 face=verdana,arial color="#003366"><b>não SUS:</b></font></td>
+    </tr>
+  </table>
+       
+ <!-------------------------------- Fim da div cabeçalho -------------------------------------->
+            
+ <table align=center border=0 width=735 bgcolor='white' cellpadding=1 cellspacing=0>
+ <TR bgcolor=#ffffff><td width='5%'><font size=1 face=verdana,arial color='#003366'>159</font></td><td width='40%'><font size=1 face=verdana,arial color='#003366'>ATENCAO PRIMARIA</font></td><td width='20%'><font size=1 face=verdana,arial color='#003366'>PROPRIO</font></td><td width='10%' align='left'><font size=1 face=verdana,arial color='#003366'>SIM</font></td><td width='5%' align='left'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%' align='center'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%' align='center'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td></tr><TR bgcolor=#cccccc><td width='5%'><font size=1 face=verdana,arial color='#003366'>174</font></td><td width='40%'><font size=1 face=verdana,arial color='#003366'>IMUNIZACAO</font></td><td width='20%'><font size=1 face=verdana,arial color='#003366'>PROPRIO</font></td><td width='10%' align='left'><font size=1 face=verdana,arial color='#003366'>SIM</font></td><td width='5%' align='left'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%' align='center'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%' align='center'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td></tr><TR bgcolor=#ffffff><td width='5%'><font size=1 face=verdana,arial color='#003366'>112</font></td><td width='40%'><font size=1 face=verdana,arial color='#003366'>SERVICO DE ATENCAO AO PRE-NATAL, PARTO E NASCIMENTO</font></td><td width='20%'><font size=1 face=verdana,arial color='#003366'>PROPRIO</font></td><td width='10%' align='left'><font size=1 face=verdana,arial color='#003366'>SIM</font></td><td width='5%' align='left'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%' align='center'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%' align='center'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td></tr><TR bgcolor=#cccccc><td width='5%'><font size=1 face=verdana,arial color='#003366'>119</font></td><td width='40%'><font size=1 face=verdana,arial color='#003366'>SERVICO DE CONTROLE DE TABAGISMO</font></td><td width='20%'><font size=1 face=verdana,arial color='#003366'>PROPRIO</font></td><td width='10%' align='left'><font size=1 face=verdana,arial color='#003366'>SIM</font></td><td width='5%' align='left'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%' align='center'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%' align='center'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td></tr><TR bgcolor=#ffffff><td width='5%'><font size=1 face=verdana,arial color='#003366'>120</font></td><td width='40%'><font size=1 face=verdana,arial color='#003366'>SERVICO DE DIAGNOSTICO POR ANATOMIA PATOLOGICA EOU CITOPATO</font></td><td width='20%'><font size=1 face=verdana,arial color='#003366'>TERCEIRIZADO</font></td><td width='10%' align='left'><font size=1 face=verdana,arial color='#003366'>SIM</font></td><td width='5%' align='left'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%' align='center'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%' align='center'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td></tr><TR bgcolor=#cccccc><td width='5%'><font size=1 face=verdana,arial color='#003366'>134</font></td><td width='40%'><font size=1 face=verdana,arial color='#003366'>SERVICO DE PRATICAS INTEGRATIVAS E COMPLEMENTARES</font></td><td width='20%'><font size=1 face=verdana,arial color='#003366'>PROPRIO</font></td><td width='10%' align='left'><font size=1 face=verdana,arial color='#003366'>SIM</font></td><td width='5%' align='left'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%' align='center'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%' align='center'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td></tr><TR bgcolor=#ffffff><td width='5%'><font size=1 face=verdana,arial color='#003366'>141</font></td><td width='40%'><font size=1 face=verdana,arial color='#003366'>SERVICO DE VIGILANCIA EM SAUDE</font></td><td width='20%'><font size=1 face=verdana,arial color='#003366'>PROPRIO</font></td><td width='10%' align='left'><font size=1 face=verdana,arial color='#003366'>SIM</font></td><td width='5%' align='left'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%' align='center'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%' align='center'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td></tr></table>
+
+<table align=center  border="1" align="center" cellpadding=1 cellspacing=0 width="735">
+
+<!------------------------ Serviços Classificaçâo ------------------------------->     
+
+<tr>
+     <td colspan=7><font size=2 face=verdana,arial color='#ffcc99'>Serviços e Classificação</font></td>
+</tr>
+
+            
+  <!-------------------- Inicio div do cabeçalho / Classificação --------------->
+
+  <table align=center border=0 width=735 bgcolor='white' cellpadding=1 cellspacing=0 >
+   <tr>
+     <td width="10%"><font size=1 face=verdana,arial color="#003366"><b>Codigo:</b></font></td> 
+     <td width="35%"><font size=1 face=verdana,arial color="#003366"><b>Serviço:</b></font></td>
+     <td width="35%"><font size=1 face=verdana,arial color="#003366"><b>Classificação:</b></font></td>
+     <td width="10%"><font size=1 face=verdana,arial color="#003366"><b>Terceiro:</b></font></td>
+     <td width="10%"><font size=1 face=verdana,arial color="#003366"><b>CNES:</b></font></td>
+   </tr>
+  </table>
+    
+   <!------------------------- Fim da div classificaçao ------------------------->
+  
+  <table align=center  border="1" align="center" cellpadding=1 cellspacing=0 width="735">
+  <table align=center border=0 width=735 bgcolor='white' cellpadding=1 cellspacing=0><TR bgcolor=#ffffff><td width='10%'><font size=1 face=verdana,arial color='#003366'>159 - 004</font></td><td width='35%'><font size=1 face=verdana,arial color='#003366'>ATENCAO PRIMARIA</font></td><td width='35%'><font size=1 face=verdana,arial color='#003366'>ESTRATEGIA DE SAUDE DA FAMILIA</font></td><td width='10%'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%'><font size=1 face=verdana,arial color='#003366'><a href='Exibe_Ficha_Estabelecimento.asp?VCpf=NAO INFORMADO'>NAO INFORMADO</a></font></td></tr><TR bgcolor=#cccccc><td width='10%'><font size=1 face=verdana,arial color='#003366'>174 - 001</font></td><td width='35%'><font size=1 face=verdana,arial color='#003366'>IMUNIZACAO</font></td><td width='35%'><font size=1 face=verdana,arial color='#003366'>INDIVIDUOS EM GERAL</font></td><td width='10%'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%'><font size=1 face=verdana,arial color='#003366'><a href='Exibe_Ficha_Estabelecimento.asp?VCpf=NAO INFORMADO'>NAO INFORMADO</a></font></td></tr><TR bgcolor=#ffffff><td width='10%'><font size=1 face=verdana,arial color='#003366'>112 - 001</font></td><td width='35%'><font size=1 face=verdana,arial color='#003366'>SERVICO DE ATENCAO AO PRE-NATAL, PARTO E NASCIMENTO</font></td><td width='35%'><font size=1 face=verdana,arial color='#003366'>ACOMPANHAMENTO DO PRE-NATAL</font></td><td width='10%'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%'><font size=1 face=verdana,arial color='#003366'><a href='Exibe_Ficha_Estabelecimento.asp?VCpf=NAO INFORMADO'>NAO INFORMADO</a></font></td></tr><TR bgcolor=#cccccc><td width='10%'><font size=1 face=verdana,arial color='#003366'>112 - 002</font></td><td width='35%'><font size=1 face=verdana,arial color='#003366'>SERVICO DE ATENCAO AO PRE-NATAL, PARTO E NASCIMENTO</font></td><td width='35%'><font size=1 face=verdana,arial color='#003366'>ACOMPANHAMENTO DO PRE-NATAL DE ALTO RISCO</font></td><td width='10%'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%'><font size=1 face=verdana,arial color='#003366'><a href='Exibe_Ficha_Estabelecimento.asp?VCpf=NAO INFORMADO'>NAO INFORMADO</a></font></td></tr><TR bgcolor=#ffffff><td width='10%'><font size=1 face=verdana,arial color='#003366'>119 - 001</font></td><td width='35%'><font size=1 face=verdana,arial color='#003366'>SERVICO DE CONTROLE DE TABAGISMO</font></td><td width='35%'><font size=1 face=verdana,arial color='#003366'>ABORDAGEM E TRATAMENTO  DO FUMANTE</font></td><td width='10%'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%'><font size=1 face=verdana,arial color='#003366'><a href='Exibe_Ficha_Estabelecimento.asp?VCpf=NAO INFORMADO'>NAO INFORMADO</a></font></td></tr><TR bgcolor=#cccccc><td width='10%'><font size=1 face=verdana,arial color='#003366'>120 - 002</font></td><td width='35%'><font size=1 face=verdana,arial color='#003366'>SERVICO DE DIAGNOSTICO POR ANATOMIA PATOLOGICA EOU CITOPATO</font></td><td width='35%'><font size=1 face=verdana,arial color='#003366'>EXAMES CITOPATOLOGICOS</font></td><td width='10%'><font size=1 face=verdana,arial color='#003366'>SIM</font></td><td width='10%'><font size=1 face=verdana,arial color='#003366'><a href='Exibe_Ficha_Estabelecimento.asp?VCpf=5029570'>5029570</a></font></td></tr><TR bgcolor=#ffffff><td width='10%'><font size=1 face=verdana,arial color='#003366'>134 - 003</font></td><td width='35%'><font size=1 face=verdana,arial color='#003366'>SERVICO DE PRATICAS INTEGRATIVAS E COMPLEMENTARES</font></td><td width='35%'><font size=1 face=verdana,arial color='#003366'>OUTRAS PRATICAS EM MEDICINA TRADICIONAL CHINESA</font></td><td width='10%'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%'><font size=1 face=verdana,arial color='#003366'><a href='Exibe_Ficha_Estabelecimento.asp?VCpf=NAO INFORMADO'>NAO INFORMADO</a></font></td></tr><TR bgcolor=#cccccc><td width='10%'><font size=1 face=verdana,arial color='#003366'>141 - 002</font></td><td width='35%'><font size=1 face=verdana,arial color='#003366'>SERVICO DE VIGILANCIA EM SAUDE</font></td><td width='35%'><font size=1 face=verdana,arial color='#003366'>VIGILANCIA SANITARIA</font></td><td width='10%'><font size=1 face=verdana,arial color='#003366'>NÃO</font></td><td width='10%'><font size=1 face=verdana,arial color='#003366'><a href='Exibe_Ficha_Estabelecimento.asp?VCpf=NAO INFORMADO'>NAO INFORMADO</a></font></td></tr></table>
+</table>
+</form>
+
+<!------------------------------------------------------------------------------------------------->  
+
+<!-------------------------------------------------------------------------------->
+</body>
+</HTML>

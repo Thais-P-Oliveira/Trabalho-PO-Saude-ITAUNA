@@ -1,0 +1,9 @@
+GLPK PARA WINDOWS
+
+glpsol.exe e glpk_4_65.dll foram copiados da instalacao C:\Solvers deste computador.
+Versao GLPK 4.65. Estes arquivos permitem usar o iniciador sem instalar GLPK
+separadamente. Nao os remova ao compartilhar a pasta.
+
+Licenca: GNU General Public License. Consulte o arquivo COPYING incluido.
+Projeto e informacoes sobre o codigo-fonte: https://www.gnu.org/software/glpk/
+Codigo-fonte da versao 4.65: https://ftp.gnu.org/gnu/glpk/glpk-4.65.tar.gz

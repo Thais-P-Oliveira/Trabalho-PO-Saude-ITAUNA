@@ -1,0 +1,15 @@
+DADOS PREPARADOS - AJUSTE PARA DEMANDA SEM FAIXA ETARIA
+
+O codigo foi alterado, mas a preparacao e os modelos ainda nao foram executados
+apos essa alteracao. Os CSV/JSON existentes nesta pasta sao da execucao anterior.
+
+Na proxima preparacao:
+demanda_por_ponto.csv sera recalculado pelo rateio da populacao, sem idade;
+totais_municipais_demanda.csv registrara os quatro totais anuais preservados;
+validacoes_demanda.csv conferira a soma dos pontos contra os totais municipais;
+configuracao.json registrara metodo_demanda = proporcional_populacao_sem_idade.
+
+taxas_etarias.csv, perfis_etarios_usados.csv e validacoes_etarias.csv sao historicos
+da versao anterior e nao sao lidos nem atualizados pelo novo calculo.
+As fontes originais foram preservadas. Nos arquivos SIA/SIH com idade no nome,
+o novo codigo usa somente os totais; nao utiliza as colunas de faixa etaria.

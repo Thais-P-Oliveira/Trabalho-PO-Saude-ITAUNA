@@ -1,0 +1,42 @@
+ATUALIZACAO: regra final da projecao 2026 em PROJECAO_POPULACIONAL_2026.txt.
+Os totais abaixo sao observados de 2025; na integracao aplica-se utilizacao de 2025 por habitante a populacao projetada.
+
+DISTRIBUICAO POPULACIONAL DA DEMANDA ESPECIALIZADA
+
+REGRA ATUAL DO CODIGO
+Para cada tipo (ambulatorial ou hospitalar) e nivel (secundario ou terciario):
+demanda do ponto = total municipal x populacao do ponto / populacao municipal da base.
+O fluxo que parte de uma UBS soma a demanda dos pontos multiplicada pela fracao
+de moradores de cada ponto vinculada a ela. Sem crescimento, essa conta equivale
+a total municipal x populacao vinculada a UBS / 97.669 habitantes.
+
+TOTAIS PRESERVADOS, ANO 2025
+Ambulatorial secundario: 190.856 procedimentos.
+Ambulatorial terciario: 15.752 procedimentos.
+Hospitalar secundario: 1.065 internacoes.
+Hospitalar terciario: 350 internacoes.
+Mantido o recorte eletivo e a selecao de procedimentos usados no projeto.
+No SIA a coluna Total dos procedimentos selecionados fornece os totais por nivel.
+No SIH sao mantidos os totais municipais por complexidade ja levantados; a coluna
+Total da tabela de morbidade confere as 1.415 internacoes, sem usar idade.
+
+INTERPRETACAO
+A hipotese territorial agora e utilizacao media igual por habitante em todos os
+pontos, sem diferenciar idade. Nao identifica pacientes ou encaminhamentos reais.
+Os volumes continuam representando utilizacao registrada adotada como demanda.
+Os cenarios 25%, 50% e 75% via secundaria, as capacidades, as distancias e os
+modelos matematicos permanecem os mesmos.
+O crescimento opcional mantem os volumes de referencia por habitante; a oferta
+especializada nao cresce automaticamente com a populacao.
+
+ARQUIVOS AJUSTADOS
+codigos/preparar.py: leitura dos totais e distribuicao proporcional a populacao.
+codigos/planejar.py: comentarios e registro da hipotese sem idade; guarda a
+configuracao especializada e identifica as fontes utilizadas na nova execucao.
+testes/testar_demanda_populacional.py: verificacoes preparadas para rateio,
+conservacao dos totais e independencia de perfis e colunas etarias.
+
+SITUACAO
+Somente os ajustes foram realizados. Modelos e testes nao foram executados,
+conforme solicitado. Resultados, dados preparados e artigo anteriores nao foram
+recalculados. As fontes e execucoes anteriores permanecem preservadas.

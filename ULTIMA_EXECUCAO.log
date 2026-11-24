@@ -1,0 +1,383 @@
+Nova execucao completa. Nao feche esta janela.
+As imagens atuais so serao substituidas depois da validacao de tudo.
+Pasta de trabalho: C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270
+
+>>> Conferencias automaticas
+Comando: C:\Users\luana.ottoni_chammas\AppData\Local\Programs\Python\Python314\python.exe -B executar.py --testar
+test_abertura_rural_pequena_preserva_minimo_urbano (testar_aps_completa.APSCompleta.test_abertura_rural_pequena_preserva_minimo_urbano) ...   etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+ok
+test_equipes_atuais_preservadas_e_novas_limitadas (testar_aps_completa.APSCompleta.test_equipes_atuais_preservadas_e_novas_limitadas) ...   etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+ok
+test_fluxo_original_com_crescimento_e_pareto (testar_aps_completa.APSCompleta.test_fluxo_original_com_crescimento_e_pareto) ... Carregando dados ...
+  2 pontos de demanda (6.600 hab) | 1 UBS existentes | 1 candidatas
+  solver: HiGHS
+Otimizando ...
+  etapa 1/2: maximizando a populacao coberta ...
+    cobertura maxima: 6.600 hab (100.00%)
+  etapa 2/2: minimizando o custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+Curva cobertura x custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+==================================================================================================
+PLANO MUNICIPAL DE SAUDE DE ITAUNA - MG: LOCALIZACAO-ALOCACAO DA ATENCAO PRIMARIA
+==================================================================================================
+Solver: HiGHS | raio de cobertura: 3 km | 3.000 hab/eSF | max. 4 eSF/UBS | limite de novas UBS: 1
+Populacao base: 6.000 hab | cenario: 6.600 hab (+10.0% de crescimento)
+Fase 1: otimo confirmado.
+Fase 2: otimo confirmado.
+Fase 3: otimo confirmado.
+1. RESUMO EXECUTIVO
+--------------------------------------------------------------------------------------------------
+ - UBS existentes mantidas: 1 | novas UBS recomendadas: 1
+ - Populacao coberta pelo criterio 3 km: 6.600 hab (100.0%)  [base, so UBS existentes: 50.0%]
+ - Equipes de Saude da Familia (eSF): 4 | ACS: 10
+ - Custo operacional mensal estimado: R$ 200.940  (R$ 30,45 por habitante/mes)
+   Das novas UBS, o impacto: +50.0 p.p. de cobertura
+2. ACESSO GEOGRAFICO (distancia em linha reta ponderada pela populacao)
+--------------------------------------------------------------------------------------------------
+Indicador                           Base (so existentes)        Plano proposto
+Distancia media (km)                                5,56                  0,00
+Distancia p90 (km)                                 11,12                  0,00
+Distancia maxima (km)                              11,12                  0,00
+% pop. a ate 1 km                                 50.0%                100.0%
+% pop. a ate 2 km                                 50.0%                100.0%
+% pop. no raio da zona                            50.0%                100.0%
+3. CUSTOS MENSAIS ESTIMADOS (R$)
+Horizonte: 5 anos; construcao: R$ 2.542.000,00; construcao + operacao: R$ 14.598.400,00.
+Obra paga uma vez; operacao constante; sem desconto ou reajuste. Folga configurada somente na operacao, com teto de investimento da fase 2.
+--------------------------------------------------------------------------------------------------
+ - Custo fixo UBS existentes:               12.000
+ - Custo fixo UBS novas:                    15.000
+ - Equipes eSF (4):                       127.111   (medico + enfermeiro + tecnico = R$ 31.778/eSF)
+ - Agentes comunitarios (10):              46.829
+ - TOTAL OPERACIONAL:                      200.940
+ (o termo de deslocamento R$ 0.05/hab.km e um proxy usado so na otimizacao: R$ 0)
+4. NOVAS UBS RECOMENDADAS
+--------------------------------------------------------------------------------------------------
+Local                                           Pop.  Pop.<=R  eSF  ACS  Coordenadas
+NOVA UBS (B)                                   3.300    3.300    2    5  (0.0000, 0.1000)
+5. REDE DE UBS (carga e dimensionamento)
+--------------------------------------------------------------------------------------------------
+ID       UBS                             Status        Pop. eSF  Ocup.  hab/eSF  Situacao
+NOVA_2   Nova (B)                        NOVA         3.300   2    55%    1.650  Subutilizada
+UBS1     A                               EXISTENTE    3.300   2    55%    1.650  Subutilizada
+ Alertas: 2 UBS subutilizadas (< 2.000 hab/eSF) e 0 lotadas (>= 95% da capacidade).
+6. TERRITORIOS FORA DO RAIO DE COBERTURA
+--------------------------------------------------------------------------------------------------
+ Toda a populacao atende ao criterio 3 km de uma UBS.
+7. TROCA ENTRE COBERTURA E CUSTO (meta de cobertura -> plano)
+--------------------------------------------------------------------------------------------------
+    Meta  Cobertura  Novas UBS  eSF   Custo (R$/mes)
+   50.0%      50.0%          0    3          149.479
+   62.5%      95.5%          1    3          164.479
+   75.0%      95.5%          1    3          164.479
+   87.5%      95.5%          1    3          164.479
+  100.0%     100.0%          1    4          200.940
+NOTAS METODOLOGICAS
+--------------------------------------------------------------------------------------------------
+ * Distancias: Haversine x fator de rota 1. Cobertura conforme zona dos moradores: 3 km.
+ * Capacidade: 3.000 hab por eSF; ACS: 1 por 750 hab, sem teto fixo por UBS.
+ * Limite uniforme de 4 eSF por UBS (cenario sem tabela de limites fisicos).
+ * Minimo por nova UBS: urbana 2.000 hab; rural 500 hab dentro do raio. Rural identificado por (rural) no nome do ponto. Existentes permanecem abertas (>= 1 eSF).
+ * Otimizacao lexicografica: (1) max. cobertura; (2) min. construcao + operacao no horizonte; (3) min. distancia (folga so na operacao; obra limitada pela fase 2).
+ * Alocacao fracionada permitida (um bairro pode dividir populacao entre UBS vizinhas).
+==================================================================================================
+Gerando mapas e graficos ...
+Arquivos salvos em 'C:\Users\LUANA~1.OTT\AppData\Local\Temp\projeto_pos_cache\testes_sinteticos\aps_completa\saida/'.
+ok
+test_limites_reais_22_ubs_e_excecoes (testar_aps_completa.APSCompleta.test_limites_reais_22_ubs_e_excecoes) ... ok
+test_regras_e_opcoes_originais_preservadas (testar_aps_completa.APSCompleta.test_regras_e_opcoes_originais_preservadas) ... ok
+test_sem_teto_permite_mais_de_cinco_novas (testar_aps_completa.APSCompleta.test_sem_teto_permite_mais_de_cinco_novas) ...   etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+ok
+test_calculo_real_e_fonte_ativa (testar_capacidade_hospitalar.CapacidadeHospitalar.test_calculo_real_e_fonte_ativa) ... ok
+test_contagem_oficial_por_categoria (testar_capacidade_hospitalar.CapacidadeHospitalar.test_contagem_oficial_por_categoria) ... ok
+test_leitos_dias_e_reserva (testar_capacidade_hospitalar.CapacidadeHospitalar.test_leitos_dias_e_reserva) ... ok
+test_entradas_invalidas (testar_demanda_populacional.DemandaPopulacional.test_entradas_invalidas) ... ok
+test_preparacao_sem_ler_idades (testar_demanda_populacional.DemandaPopulacional.test_preparacao_sem_ler_idades) ... ok
+test_rateio_calculavel_a_mao (testar_demanda_populacional.DemandaPopulacional.test_rateio_calculavel_a_mao) ... ok
+test_exemplo_calculavel_a_mao (testar_diagnostico.DiagnosticoTeste.test_exemplo_calculavel_a_mao) ... ok
+test_fora_do_raio (testar_diagnostico.DiagnosticoTeste.test_fora_do_raio) ... ok
+test_limite_da_capacidade (testar_diagnostico.DiagnosticoTeste.test_limite_da_capacidade) ... ok
+test_parametros_invalidos (testar_diagnostico.DiagnosticoTeste.test_parametros_invalidos) ... ok
+test_pontos_coincidentes_e_conservacao_da_oferta (testar_diagnostico.DiagnosticoTeste.test_pontos_coincidentes_e_conservacao_da_oferta) ... ok
+test_realocacao_entre_unidades (testar_diagnostico.DiagnosticoTeste.test_realocacao_entre_unidades) ... ok
+test_raio_invalido (testar_raios_por_zona.RaiosPorZona.test_raio_invalido) ... ok
+test_raio_misto_preserva_limite_urbano (testar_raios_por_zona.RaiosPorZona.test_raio_misto_preserva_limite_urbano) ...   etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+ok
+----------------------------------------------------------------------
+Ran 20 tests in 3.268s
+OK
+
+>>> Modelo principal e seis cenarios de encaminhamento
+Comando: C:\Users\luana.ottoni_chammas\AppData\Local\Programs\Python\Python314\python.exe -B executar.py --time-limit 600 --quiet --saida "C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\plano"
+Carregando dados ...
+  91 pontos de demanda (104.002 hab) | 22 UBS existentes | 34 candidatas
+  solver: HiGHS
+Otimizando ...
+  etapa 1/2: maximizando a populacao coberta ...
+    cobertura maxima: 101.617 hab (97.71%)
+  etapa 2/2: minimizando o custo ...
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (30 s).
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (60 s).
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (90 s).
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (121 s).
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (151 s).
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (181 s).
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (211 s).
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (242 s).
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (272 s).
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (302 s).
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (332 s).
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (363 s).
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (393 s).
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (423 s).
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (454 s).
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (484 s).
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (514 s).
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (545 s).
+==================================================================================================
+PLANO MUNICIPAL DE SAUDE DE ITAUNA - MG: LOCALIZACAO-ALOCACAO DA ATENCAO PRIMARIA
+==================================================================================================
+Solver: HiGHS | raio de cobertura: 3 km | 3.000 hab/eSF | limites por unidade; equipes atuais preservadas | limite de novas UBS: sem teto adicional
+Populacao base: 97.669 hab | cenario: 104.002 hab (+6.5% de crescimento)
+Fase 1: otimo confirmado.
+Fase 2: otimo confirmado.
+Fase 3: otimo confirmado.
+1. RESUMO EXECUTIVO
+--------------------------------------------------------------------------------------------------
+ - UBS existentes mantidas: 22 | novas UBS recomendadas: 9
+ - Populacao coberta pelo criterio 3 km: 101.616 hab (97.7%)  [base, so UBS existentes: 93.4%]
+ - Equipes de Saude da Familia (eSF): 39 | ACS: 143
+ - Custo operacional mensal estimado: R$ 2.307.986  (R$ 22,19 por habitante/mes)
+   Das novas UBS, o impacto: +4.3 p.p. de cobertura
+2. ACESSO GEOGRAFICO (distancia em linha reta ponderada pela populacao)
+--------------------------------------------------------------------------------------------------
+Indicador                           Base (so existentes)        Plano proposto
+Distancia media (km)                                0,85                  0,98
+Distancia p90 (km)                                  0,96                  2,16
+Distancia maxima (km)                              10,42                  6,98
+% pop. a ate 1 km                                 90.7%                 65.5%
+% pop. a ate 2 km                                 92.9%                 88.5%
+% pop. no raio da zona                            93.4%                 97.7%
+3. CUSTOS MENSAIS ESTIMADOS (R$)
+Horizonte: 5 anos; construcao: R$ 22.848.000,00; construcao + operacao: R$ 161.327.186,67.
+Obra paga uma vez; operacao constante; sem desconto ou reajuste. Folga configurada somente na operacao, com teto de investimento da fase 2.
+--------------------------------------------------------------------------------------------------
+ - Custo fixo UBS existentes:              264.000
+ - Custo fixo UBS novas:                   135.000
+ - Equipes eSF (39):                     1.239.333   (medico + enfermeiro + tecnico = R$ 31.778/eSF)
+ - Agentes comunitarios (143):             669.653
+ - TOTAL OPERACIONAL:                    2.307.986
+ (o termo de deslocamento R$ 0.05/hab.km e um proxy usado so na otimizacao: R$ 5.112)
+4. NOVAS UBS RECOMENDADAS
+--------------------------------------------------------------------------------------------------
+Local                                           Pop.  Pop.<=R  eSF  ACS  Coordenadas
+NOVA UBS (Residencial Victor Gonçalves de S   12.000   12.000    4   16  (-20.0661, -44.5966)
+NOVA UBS (Setor 313380805000191 (urbana))      9.000    9.000    3   12  (-20.1178, -44.6002)
+NOVA UBS (Setor 313380805000177 (urbana))      7.559    7.140    3   11  (-20.0554, -44.5361)
+NOVA UBS (Setor 313380805000267 (rural))       1.553    1.099    1    3  (-20.1416, -44.5530)
+NOVA UBS (Setor 313380805000115 (rural))       1.297      836    1    2  (-20.0188, -44.6647)
+NOVA UBS (Setor 313380805000197 (rural))       1.267      677    1    2  (-20.0440, -44.6826)
+NOVA UBS (Setor 313380805000174 (rural))         985      524    1    2  (-20.0114, -44.5511)
+NOVA UBS (Setor 313380805000188 (rural))         821      821    1    2  (-20.1524, -44.5986)
+NOVA UBS (Setor 313380805000185 (rural))         520      520    1    1  (-20.1894, -44.5698)
+5. REDE DE UBS (carga e dimensionamento)
+--------------------------------------------------------------------------------------------------
+ID       UBS                             Status        Pop. eSF  Ocup.  hab/eSF  Situacao
+NOVA_33  Nova (Residencial Victor Gonça… NOVA        12.000   4   100%    3.000  Lotada (>=95%)
+NOVA_77  Nova (Setor 313380805000191 (U… NOVA         9.000   3   100%    3.000  Lotada (>=95%)
+NOVA_64  Nova (Setor 313380805000177 (U… NOVA         7.559   3    84%    2.520  Adequada
+UBS27    Parque Jardim Santanense Resid… EXISTENTE    6.000   2   100%    3.000  Lotada (>=95%)
+UBS16    Garcias                         EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS13    Alto Do Rosario                 EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS14    Central                         EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS15    Cidade Nova                     EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS17    Gracas                          EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS23    Morada Nova Ii                  EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS22    Morada Nova                     EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS21    Lourdes                         EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS20    Jadir Marinho                   EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS19    Itaunense                       EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS18    Irmaos Auler                    EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS26    Padre Eustaquio                 EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS28    Piedade                         EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS29    Pio Xii                         EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS30    Santanense                      EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS31    Sao Geraldo                     EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS32    Varzea Da Olaria                EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS24    Morro Do Engenho                EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS25    Nogueira Machado                EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS33    Vila Tavares                    EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS34    Zona Rural                      EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+NOVA_90  Nova (Setor 313380805000267 (R… NOVA         1.553   1    52%    1.553  Subutilizada
+NOVA_55  Nova (Setor 313380805000115 (R… NOVA         1.297   1    43%    1.297  Subutilizada
+NOVA_83  Nova (Setor 313380805000197 (R… NOVA         1.267   1    42%    1.267  Subutilizada
+NOVA_61  Nova (Setor 313380805000174 (R… NOVA           985   1    33%      985  Subutilizada
+NOVA_74  Nova (Setor 313380805000188 (R… NOVA           821   1    27%      821  Subutilizada
+NOVA_71  Nova (Setor 313380805000185 (R… NOVA           520   1    17%      520  Subutilizada
+ Alertas: 6 UBS subutilizadas (< 2.000 hab/eSF) e 24 lotadas (>= 95% da capacidade).
+6. TERRITORIOS FORA DO RAIO DE COBERTURA
+--------------------------------------------------------------------------------------------------
+ 2.386 hab em 8 alocacoes fora do criterio 3 km (2.3% da populacao). Maiores casos:
+Ponto                               Tipo       Pop. Dist. (km)  UBS mais proxima
+Setor 313380805000192 (Rural)       setor       498        7.0  Itaunense
+Setor 313380805000199 (Rural)       setor       461        3.8  Nova (Setor 313380805000115 (…
+Setor 313380805000118 (Rural)       setor       461        6.8  Nova (Setor 313380805000174 (…
+Setor 313380805000176 (Rural)       setor       420        4.1  Nova (Setor 313380805000177 (…
+Setor 313380805000178 (Rural)       setor       398        6.2  Nova (Setor 313380805000267 (…
+Setor 313380805000193 (Urbana)      setor        92        3.7  Nova (Setor 313380805000197 (…
+Setor 313380805000179 (Urbana)      setor        55        3.4  Nova (Setor 313380805000267 (…
+Setor 313380805000182 (Urbana)      setor         0        3.4  Nova (Setor 313380805000191 (…
+ Sugestao: avaliar equipe itinerante/unidade movel, ou pontos de apoio com ACS, para esses territorios
+ (uma UBS fixa nao atinge a viabilidade minima de populacao nessas areas).
+NOTAS METODOLOGICAS
+--------------------------------------------------------------------------------------------------
+ * Distancias: Haversine x fator de rota 1. Cobertura conforme zona dos moradores: 3 km.
+ * Capacidade: 3.000 hab por eSF; ACS: 1 por 750 hab, sem teto fixo por UBS.
+ * Equipes atuais preservadas. Expansao limitada pelas salas de cada UBS; Central e Zona Rural mantem uma equipe. Novas UBS: estrutura planejada conforme tabela de limites.
+ * Minimo por nova UBS: urbana 2.000 hab; rural 500 hab dentro do raio. Rural identificado por (rural) no nome do ponto. Existentes permanecem abertas (>= 1 eSF).
+ * Otimizacao lexicografica: (1) max. cobertura; (2) min. construcao + operacao no horizonte; (3) min. distancia (folga so na operacao; obra limitada pela fase 2).
+ * Alocacao fracionada permitida (um bairro pode dividir populacao entre UBS vizinhas).
+==================================================================================================
+Gerando mapas e graficos ...
+Arquivos salvos em 'C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\plano\aps/'.
+Diagnostico salvo: C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\plano\aps\diagnostico; cobertura atual 93.40%
+Plano completo: unico 25 validado.
+Plano completo: unico 50 validado.
+  Ainda em processamento: Modelo principal e seis cenarios de encaminhamento (576 s).
+Plano completo: unico 75 validado.
+Plano completo: multiplo 25 validado.
+Plano completo: multiplo 50 validado.
+Plano completo: multiplo 75 validado.
+Concluido: C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\plano\comparacao_completa.csv
+
+>>> Auditoria do novo plano
+Comando: C:\Users\luana.ottoni_chammas\AppData\Local\Programs\Python\Python314\python.exe -B executar.py --auditar --saida "C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\plano"
+PASSOU: regras APS, vinculacao fixa, seis cenarios, capacidades, exportacoes e originais.
+
+>>> Construcao por porte
+Comando: C:\Users\luana.ottoni_chammas\AppData\Local\Programs\Python\Python314\python.exe -B executar.py --investimento --plano "C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\plano" --saida "C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\investimento"
+INVESTIMENTO EM CONSTRUCAO - CALCULO SEPARADO DO MODELO
+Plano mantido: C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\plano
+Novas UBS: 9; eSF: 16.
+Investimento total em construcao: R$ 22.848.000,00.
+Operacao anual da rede completa implantada (separada): R$ 27.695.837,33.
+Construcao incluida no objetivo de cinco anos; folga somente operacional.
+Nao foi definido prazo contratual de pagamento nem atribuido o total a um ano especifico.
+Porte associado ao numero de eSF da nova UBS.
+Valores nominais de 2025, sem juros ou reajuste.
+Nao inclui terrenos, equipamentos ou mobiliario.
+Nao presume aprovacao ou repasse federal para as unidades propostas.
+Operacao anual refere-se a rede completa implantada; nao e gasto durante a obra.
+
+>>> Comparacao com o orcamento
+Comando: C:\Users\luana.ottoni_chammas\AppData\Local\Programs\Python\Python314\python.exe -B executar.py --orcamento --plano "C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\plano" --saida "C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\orcamento"
+COMPARACAO ORCAMENTARIA - ITAUNA
+DETALHAMENTO DO FUNCIONAMENTO - TODA A REDE
+UBS existentes (22): R$ 1.425.714,67/mes; R$ 17.108.576,00/ano.
+UBS novas (9): R$ 882.271,78/mes; R$ 10.587.261,33/ano.
+Total mensal da rede: R$ 2.307.986,44.
+Total anual de funcionamento: R$ 27.695.837,33.
+Construcao das novas UBS, uma unica vez: R$ 22.848.000,00.
+Saúde DOTAÇÃO INICIAL R$ 173.696.487,13 15.94%
+Saúde DOTAÇÃO ATUALIZADA (a) R$ 199.805.384,26 13.86%
+Atenção Básica DOTAÇÃO INICIAL R$ 49.885.322,78 55.52%
+Atenção Básica DOTAÇÃO ATUALIZADA (a) R$ 50.894.556,87 54.42%
+Arquivos salvos: C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\orcamento
+
+>>> Analises de sensibilidade e tres cenarios extras de raio
+Comando: C:\Users\luana.ottoni_chammas\AppData\Local\Programs\Python\Python314\python.exe -B codigos/rodar_sensibilidade.py --referencia "C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\plano\plano_aps.json" --saida "C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\sensibilidade" --processos 2 --time-limit 300
+0 execucoes reaproveitadas; 18 a calcular.
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (30 s).
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (60 s).
+curva_0934: Optimal em 65.0 s
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+curva_0960: Optimal em 23.2 s
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (90 s).
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (121 s).
+curva_0970: Optimal em 38.1 s
+curva_0980: Infeasible em 0.4 s
+curva_0990: Infeasible em 0.4 s
+curva_0995: Infeasible em 0.6 s
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+curva_0950: Optimal em 148.7 s
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (152 s).
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+raio_2km: Optimal em 23.9 s
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (183 s).
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+raio_5km: Optimal em 30.5 s
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (213 s).
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (244 s).
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (274 s).
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (304 s).
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (334 s).
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (365 s).
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (395 s).
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (425 s).
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+curva_max: Optimal em 317.9 s
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (456 s).
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (486 s).
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (517 s).
+folga_5pct: Optimal em 315.9 s
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (547 s).
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+rural_min_1000: Optimal em 39.6 s
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (578 s).
+crescimento_5pct: Optimal em 27.2 s
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (608 s).
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (638 s).
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (669 s).
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (699 s).
+rural_min_0: Optimal em 272.1 s
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (730 s).
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (760 s).
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (790 s).
+crescimento_10pct: Optimal em 207.2 s
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (821 s).
+rural500_3km_urbano_5km_rural: Optimal em 42.1 s
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (852 s).
+rural500_5km_todos: Optimal em 31.0 s
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (882 s).
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (913 s).
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (943 s).
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (973 s).
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (1003 s).
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  Ainda em processamento: Analises de sensibilidade e tres cenarios extras de raio (1034 s).
+rural500_3km_todos: Optimal em 314.9 s
+Resumo: C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\sensibilidade\resumo.csv
+
+>>> Graficos de sensibilidade
+Comando: C:\Users\luana.ottoni_chammas\AppData\Local\Programs\Python\Python314\python.exe -B codigos/grafico_sensibilidade.py --saida "C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\sensibilidade"
+Grafico salvo em C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\sensibilidade
+
+>>> Imagens e figuras do artigo
+Comando: C:\Users\luana.ottoni_chammas\AppData\Local\Programs\Python\Python314\python.exe -B codigos/figuras_artigo.py --plano "C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\plano" --figuras "C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\figuras_artigo" --imagens "C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\imagens"
+Figuras salvas em C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\figuras_artigo
+
+>>> Pagina de apresentacao e imagens finais
+Comando: C:\Users\luana.ottoni_chammas\AppData\Local\Programs\Python\Python314\python.exe -B codigos/organizar_resultados.py --resultado "C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270" --imagens "C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\imagens" --html "C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\ABRIR_RESULTADOS.html"
+Imagens e página da nova execução geradas: C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\ABRIR_RESULTADOS.html
+Validacao concluida. Substituindo resultados e imagens...
+Figuras antigas removidas de pastas de resultados: 0.
+
+CONCLUIDO. Resultados atuais: resultados/atual. Imagens: imagens/.

@@ -1,0 +1,14 @@
+INVESTIMENTO EM CONSTRUCAO - CALCULO SEPARADO DO MODELO
+
+Plano mantido: resultados/plano_referencia_2pct
+Novas UBS: 12; eSF: 12.
+Investimento total em construcao: R$ 23.856.000,00.
+Operacao anual da rede completa implantada (separada): R$ 29.367.808,00.
+A construcao nao entra na funcao objetivo nem na folga de 2%.
+Nao foi definido prazo contratual de pagamento nem atribuido o total a um ano especifico.
+
+Porte associado ao numero de eSF da nova UBS.
+Valores nominais de 2025, sem juros ou reajuste.
+Nao inclui terrenos, equipamentos ou mobiliario.
+Nao presume aprovacao ou repasse federal para as unidades propostas.
+Operacao anual refere-se a rede completa implantada; nao e gasto durante a obra.

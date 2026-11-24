@@ -1,0 +1,75 @@
+{
+  "status": "plano_completo_validado",
+  "originais_preservados": true,
+  "cenarios": 6,
+  "etapas": [
+    "APS: cobertura, custo e distancia conforme original",
+    "hierarquia: menor falta e deslocamento no plano APS fixado"
+  ],
+  "otimizacao_conjunta": false,
+  "plano_aps_fixo": true,
+  "otimalidade_aps_confirmada": false,
+  "origem_plano": "lexicografia_desta_execucao",
+  "certificados_solver_aps": [
+    {
+      "status": "Optimal",
+      "sol_status": "Optimal Solution Found"
+    },
+    {
+      "status": "Optimal",
+      "sol_status": "Solution Found"
+    },
+    {
+      "status": "Optimal",
+      "sol_status": "Optimal Solution Found"
+    }
+  ],
+  "parametros_aps": {
+    "demanda": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\pontos_demanda_itauna.csv",
+    "ubs": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\unidades_existentes_itauna.csv",
+    "raio": 3.0,
+    "fator_rota": 1.0,
+    "hab_esf": 3000,
+    "hab_min_esf": 2000,
+    "esf_max": 4,
+    "limites_equipes": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\fontes_publicas\\estrutura_ubs_cnes\\limites_equipes_modelo.csv",
+    "max_novas": null,
+    "hab_min_nova": 2000,
+    "hab_min_nova_rural": 0,
+    "dist_min_cand": 1.0,
+    "custo_km": 0.05,
+    "cobertura_min": null,
+    "growth": null,
+    "growth_file": null,
+    "solver": "auto",
+    "time_limit": 600.0,
+    "gap": 0.0001,
+    "pareto": false,
+    "saida": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\resultados\\plano_limites_fisicos_20261117\\aps",
+    "quiet": true,
+    "folga_custo": 0.02
+  },
+  "sha256": {
+    "modelos\\aps_base.py": "1531b477399259c6a95b778f6caa423f19c4cc97618362e4a241199ab4b83a95",
+    "codigos\\planejar.py": "ff8a18f03bd409e16fe42c739160a44f18481c1f7078a10610dabc7ffaa8e0b0",
+    "modelos\\rede_completa.mod": "26dd87b9d062a7f9b35ede678a6c6bf8ab4aa8dc08022a2cf6e58dda11caa15f",
+    "codigos\\preparar.py": "047e624970ba6159f96a1d66e4216fc58fa3d861aec733b9c2229db30b5c039a",
+    "dados\\fontes\\fontes_publicas\\estrutura_ubs_cnes\\limites_equipes_modelo.csv": "e3779f8b7aaafb4ee91dd871ad00fc839d68e7d48710534d3f2b69a3a28348bb"
+  },
+  "auditoria_integracao": "PASSOU",
+  "sha256_codigo_na_execucao": {
+    "modelos\\aps_base.py": "b26d98f57f5f696b3dba8cd4b63b94e099c964ada29ad047917cca31d8cc4810",
+    "codigos\\planejar.py": "ff8a18f03bd409e16fe42c739160a44f18481c1f7078a10610dabc7ffaa8e0b0",
+    "modelos\\rede_completa.mod": "26dd87b9d062a7f9b35ede678a6c6bf8ab4aa8dc08022a2cf6e58dda11caa15f",
+    "codigos\\preparar.py": "047e624970ba6159f96a1d66e4216fc58fa3d861aec733b9c2229db30b5c039a",
+    "dados\\fontes\\fontes_publicas\\estrutura_ubs_cnes\\limites_equipes_modelo.csv": "e3779f8b7aaafb4ee91dd871ad00fc839d68e7d48710534d3f2b69a3a28348bb"
+  },
+  "fontes_execucao": {
+    "modelos\\aps_base.py": "resultados\\plano_limites_fisicos_20261117\\fontes_execucao\\modelos\\aps_base.py",
+    "codigos\\planejar.py": "resultados\\plano_limites_fisicos_20261117\\fontes_execucao\\codigos\\planejar.py",
+    "modelos\\rede_completa.mod": "resultados\\plano_limites_fisicos_20261117\\fontes_execucao\\modelos\\rede_completa.mod",
+    "codigos\\preparar.py": "resultados\\plano_limites_fisicos_20261117\\fontes_execucao\\codigos\\preparar.py",
+    "dados\\fontes\\fontes_publicas\\estrutura_ubs_cnes\\limites_equipes_modelo.csv": "resultados\\plano_limites_fisicos_20261117\\fontes_execucao\\dados\\fontes\\fontes_publicas\\estrutura_ubs_cnes\\limites_equipes_modelo.csv"
+  },
+  "ajuste_apos_execucao": "Somente cabecalho e avisos do relatorio; formulacao e solucao preservadas. Fontes executadas arquivadas."
+}

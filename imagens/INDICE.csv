@@ -1,0 +1,16 @@
+﻿ordem;titulo;arquivo
+1;Visão geral das UBS;painel_resultados.png
+2;Mapa do município;mapa_itauna_ubs.png
+3;Detalhe urbano;mapa_itauna_zoom_urbano.png
+4;Cobertura;cobertura.png
+5;Acessibilidade;acessibilidade.png
+6;Encaminhamentos: distâncias;distancias.png
+7;Percursos;percursos.png
+8;Capacidade ambulatorial;capacidades.png
+9;Funcionamento mensal;funcionamento_mensal.png
+10;Custo e orçamento;orcamento.png
+11;Construção;construcao.png
+12;Sensibilidade: cobertura e custo;curva_cobertura_custo.png
+extra;Custo operacional;extra_raios_01_custo.png
+extra;Cobertura total, urbana e rural;extra_raios_02_cobertura.png
+extra;Distância média;extra_raios_03_distancia.png

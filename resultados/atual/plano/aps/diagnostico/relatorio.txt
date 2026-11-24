@@ -1,0 +1,54 @@
+DIAGNOSTICO DE COBERTURA E ACESSIBILIDADE - ITAUNA
+
+Rede atual: 22 UBS, 23 eSF; CNES 202607.
+Populacao da base: 104,002; raios: 3 km urbano / 3 km rural; fator de rota: 1.
+
+COBERTURA GEOGRAFICA (sem restricao de capacidade)
+atual_cnes_202607 / total: 93.40% da populacao; 67/91 pontos; media 0.848 km.
+atual_cnes_202607 / urbana: 97.94% da populacao; 67/78 pontos; media 0.538 km.
+atual_cnes_202607 / rural: 0.00% da populacao; 0/13 pontos; media 7.219 km.
+plano_salvo / total: 97.71% da populacao; 84/91 pontos; media 0.530 km.
+plano_salvo / urbana: 99.85% da populacao; 76/78 pontos; media 0.431 km.
+plano_salvo / rural: 53.51% da populacao; 8/13 pontos; media 2.570 km.
+
+DIAGNOSTICO COM CAPACIDADE ATUAL FIXA (hipotese de capacidade)
+esf: maximo de 66.34% conforme 3 km urbano / 3 km rural.
+esf_e_acs: maximo de 65.62% conforme 3 km urbano / 3 km rural.
+
+INDICADOR OFICIAL
+APS: 80.49% em 07/2026; populacao oficial 103272; capacidade administrativa 83125.
+Fonte: https://relatorioaps-prd.saude.gov.br/cobertura/aps?unidadeGeografica=MUNICIPIO&coUf=31&coMunicipio=313380&nuCompInicio=202501&nuCompFim=202607
+A oferta administrativa publicada e diferente de eSF * 3000: o MS utiliza parametros proprios e inclui outras modalidades de equipe.
+A cobertura oficial nao usa o raio de 3 km e nao e diretamente equivalente ao nosso indicador.
+ACESSIBILIDADE ESPACIAL (Aula 8, paginas PDF 29 a 31)
+V_j = soma_k P_k / max(d_kj, d_min)^beta
+A_i = soma_j S_j / (max(d_ij, d_min)^beta * V_j)
+S_j = eSF_j * 3000; d_min = 0.1 km; beta = [1, 2].
+Beta e d_min sao hipoteses configuraveis, nao parametros calibrados de Itauna.
+A formula considera todas as UBS; nao aplica corte de 3 km.
+Maior A_i indica mais oferta potencial por habitante, considerando distancia e concorrencia.
+A_i nao e probabilidade nem porcentagem. Nao multiplicar por 100 para chamar de cobertura.
+A media ponderada de A_i e oferta total/populacao; beta muda a distribuicao territorial.
+Acessibilidade relativa divide A_i pela media municipal; 1 significa a media, nao cobertura plena.
+Oferta atual considera eSF; nao soma eAP, atendimentos especializados ou cadastros oficiais.
+Nao inclui demanda de outros municipios nem tempos de viagem.
+
+Zero de cobertura rural significa centroides rurais alem do raio, nao ausencia de atendimento rural.
+
+PLANO: cobertura geometrica usa UBS mais proxima, podendo diferir da cobertura por vinculacao.
+Folga de custo registrada no plano: 2%. Resultado antigo nao e recalculado ao mudar o padrao.
+Os dados e fluxos de secundaria/terciaria continuam no modelo hierarquico existente.
+
+ACESSIBILIDADE MEDIA POR ZONA (indice, nao percentual)
+atual_cnes_202607 / beta 1 / total: A_i medio 0.663449; relativo a media municipal 1.000000.
+atual_cnes_202607 / beta 1 / urbana: A_i medio 0.689399; relativo a media municipal 1.039115.
+atual_cnes_202607 / beta 1 / rural: A_i medio 0.128779; relativo a media municipal 0.194106.
+atual_cnes_202607 / beta 2 / total: A_i medio 0.663449; relativo a media municipal 1.000000.
+atual_cnes_202607 / beta 2 / urbana: A_i medio 0.695035; relativo a media municipal 1.047610.
+atual_cnes_202607 / beta 2 / rural: A_i medio 0.012656; relativo a media municipal 0.019077.
+plano_salvo / beta 1 / total: A_i medio 1.124978; relativo a media municipal 1.000000.
+plano_salvo / beta 1 / urbana: A_i medio 1.119271; relativo a media municipal 0.994927.
+plano_salvo / beta 1 / rural: A_i medio 1.242572; relativo a media municipal 1.104530.
+plano_salvo / beta 2 / total: A_i medio 1.124978; relativo a media municipal 1.000000.
+plano_salvo / beta 2 / urbana: A_i medio 1.005655; relativo a media municipal 0.893932.
+plano_salvo / beta 2 / rural: A_i medio 3.583453; relativo a media municipal 3.185353.

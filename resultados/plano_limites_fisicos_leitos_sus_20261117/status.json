@@ -1,0 +1,79 @@
+{
+  "status": "plano_completo_validado",
+  "originais_preservados": true,
+  "cenarios": 6,
+  "etapas": [
+    "APS: cobertura, custo e distancia conforme original",
+    "hierarquia: menor falta e deslocamento no plano APS fixado"
+  ],
+  "otimizacao_conjunta": false,
+  "plano_aps_fixo": true,
+  "otimalidade_aps_confirmada": false,
+  "origem_plano": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\resultados\\plano_limites_fisicos_20261117",
+  "certificados_solver_aps": [
+    {
+      "status": "Optimal",
+      "sol_status": "Optimal Solution Found"
+    },
+    {
+      "status": "Optimal",
+      "sol_status": "Solution Found"
+    },
+    {
+      "status": "Optimal",
+      "sol_status": "Optimal Solution Found"
+    }
+  ],
+  "parametros_aps": {
+    "demanda": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\pontos_demanda_itauna.csv",
+    "ubs": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\unidades_existentes_itauna.csv",
+    "raio": 3.0,
+    "fator_rota": 1.0,
+    "hab_esf": 3000,
+    "hab_min_esf": 2000,
+    "esf_max": 4,
+    "limites_equipes": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\fontes_publicas\\estrutura_ubs_cnes\\limites_equipes_modelo.csv",
+    "max_novas": null,
+    "hab_min_nova": 2000,
+    "hab_min_nova_rural": 0,
+    "dist_min_cand": 1.0,
+    "custo_km": 0.05,
+    "cobertura_min": null,
+    "growth": null,
+    "growth_file": null,
+    "solver": "auto",
+    "time_limit": 600.0,
+    "gap": 0.0001,
+    "pareto": false,
+    "saida": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\resultados\\plano_limites_fisicos_leitos_sus_20261117\\aps",
+    "quiet": true,
+    "folga_custo": 0.02
+  },
+  "sha256": {
+    "modelos\\aps_base.py": "1531b477399259c6a95b778f6caa423f19c4cc97618362e4a241199ab4b83a95",
+    "codigos\\planejar.py": "f2b3218041399de5e8f7becae5fc53dc2520a1854957cd8920c41ec0de7c087b",
+    "modelos\\rede_completa.mod": "26dd87b9d062a7f9b35ede678a6c6bf8ab4aa8dc08022a2cf6e58dda11caa15f",
+    "codigos\\preparar.py": "339754d35e80c4306cf84edfaa1ec83c64c910914ec29572b954b2a6fed25d73",
+    "codigos\\capacidade_hospitalar.py": "3373091b09fac3b8b135f140eec2ee6ee3ad9c094a887f2635e85a27ca0f9d66",
+    "codigos\\encaminhamentos.py": "748afd58dfca37190c7e2f69ac3f568dffcf6faaa950c97a9b63e611c49f17f4",
+    "dados\\fontes\\fontes_publicas\\leitos_hospital_cnes\\leitos_sus_202607.csv": "e2f61a15480f6eee502c53b9943c7ab1f0df204ba7c3d67116d70f506809d64d",
+    "dados\\fontes\\fontes_publicas\\leitos_hospital_cnes\\fonte.json": "4630249d4bb0558b880f1dc3ac460256c762c5909dc85efab017ece8a44ae064",
+    "dados\\fontes\\cenarios_niveis\\demanda_integrada\\parametros_sus_2015\\carga_hospitalar_observada_2025.csv": "398a31123b9c3f58989ab65113aabd5aae5aee5391586a68142c7e9f3959e76e",
+    "dados\\fontes\\cenarios_niveis\\demanda_integrada\\parametros_sus_2015\\configuracao.json": "f11c18b3d0742d5e6ed74181b9b95b5fdd8c56ba1535644970ff6016559d782b",
+    "dados\\fontes\\fontes_publicas\\estrutura_ubs_cnes\\limites_equipes_modelo.csv": "e3779f8b7aaafb4ee91dd871ad00fc839d68e7d48710534d3f2b69a3a28348bb"
+  },
+  "auditoria_integracao": "PASSOU",
+  "fontes_execucao": {
+    "modelos\\aps_base.py": "resultados\\plano_limites_fisicos_leitos_sus_20261117\\fontes_execucao\\modelos\\aps_base.py",
+    "codigos\\planejar.py": "resultados\\plano_limites_fisicos_leitos_sus_20261117\\fontes_execucao\\codigos\\planejar.py",
+    "modelos\\rede_completa.mod": "resultados\\plano_limites_fisicos_leitos_sus_20261117\\fontes_execucao\\modelos\\rede_completa.mod",
+    "codigos\\preparar.py": "resultados\\plano_limites_fisicos_leitos_sus_20261117\\fontes_execucao\\codigos\\preparar.py",
+    "codigos\\capacidade_hospitalar.py": "resultados\\plano_limites_fisicos_leitos_sus_20261117\\fontes_execucao\\codigos\\capacidade_hospitalar.py",
+    "codigos\\encaminhamentos.py": "resultados\\plano_limites_fisicos_leitos_sus_20261117\\fontes_execucao\\codigos\\encaminhamentos.py",
+    "dados\\fontes\\fontes_publicas\\leitos_hospital_cnes\\leitos_sus_202607.csv": "resultados\\plano_limites_fisicos_leitos_sus_20261117\\fontes_execucao\\dados\\fontes\\fontes_publicas\\leitos_hospital_cnes\\leitos_sus_202607.csv",
+    "dados\\fontes\\fontes_publicas\\leitos_hospital_cnes\\fonte.json": "resultados\\plano_limites_fisicos_leitos_sus_20261117\\fontes_execucao\\dados\\fontes\\fontes_publicas\\leitos_hospital_cnes\\fonte.json",
+    "dados\\fontes\\cenarios_niveis\\demanda_integrada\\parametros_sus_2015\\carga_hospitalar_observada_2025.csv": "resultados\\plano_limites_fisicos_leitos_sus_20261117\\fontes_execucao\\dados\\fontes\\cenarios_niveis\\demanda_integrada\\parametros_sus_2015\\carga_hospitalar_observada_2025.csv",
+    "dados\\fontes\\cenarios_niveis\\demanda_integrada\\parametros_sus_2015\\configuracao.json": "resultados\\plano_limites_fisicos_leitos_sus_20261117\\fontes_execucao\\dados\\fontes\\cenarios_niveis\\demanda_integrada\\parametros_sus_2015\\configuracao.json",
+    "dados\\fontes\\fontes_publicas\\estrutura_ubs_cnes\\limites_equipes_modelo.csv": "resultados\\plano_limites_fisicos_leitos_sus_20261117\\fontes_execucao\\dados\\fontes\\fontes_publicas\\estrutura_ubs_cnes\\limites_equipes_modelo.csv"
+  }
+}

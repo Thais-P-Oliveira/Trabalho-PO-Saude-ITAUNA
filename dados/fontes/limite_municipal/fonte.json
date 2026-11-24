@@ -1,0 +1,16 @@
+{
+  "municipio": "Itaúna/MG",
+  "codigo_ibge": "3133808",
+  "arquivo": "itauna_3133808.geojson",
+  "sha256": "022799deb98cecd0fcd0e1edb752a4cb364f24c561ede39f07ddf530194ad960",
+  "crs_arquivo": "EPSG:4326 (WGS84/SIRGAS2000, equivalentes na escala do mapa)",
+  "crs_calculo": "EPSG:31983 (SIRGAS 2000 / UTM 23S)",
+  "origem": "Geometria municipal derivada da malha municipal do IBGE, obtida do espelho https://raw.githubusercontent.com/tbrugz/geodata-br/master/geojson/geojs-31-mun.json",
+  "limitacao": "O servico servicodados.ibge.gov.br nao estava acessivel no ambiente de processamento; o espelho tem baixa resolucao (92 vertices). Para a versao final do TCC, substituir por BR_Municipios (IBGE) via geobr/FTP e reexecutar.",
+  "area_calculada_km2": 495.74,
+  "area_ibge_km2": {
+    "2022 (Area da Unidade Territorial)": 495.769,
+    "2025 (Cidades e Estados)": 494.559
+  },
+  "pontos_demanda_dentro_do_limite": "91/91"
+}

@@ -1,0 +1,47 @@
+CUSTO ATUAL DAS EQUIPES DA ATENCAO PRIMARIA - ITAUNA/MG
+
+ORCAMENTO DA ATENCAO PRIMARIA (subfuncao 301)
+SIOPS 2025 - dotacao inicial: R$ 42.592.500,00; atualizada: R$ 43.524.305,24.
+SIOPS 2025 - empenhada: R$ 38.333.975,52; liquidada: R$ 38.030.634,78; paga: R$ 37.726.256,57.
+RREO 2026 (b4, jan-ago) - dotacao inicial: R$ 49.885.322,78; atualizada: R$ 50.894.556,87; empenhada ate agosto: R$ 27.388.729,48; liquidada: R$ 22.992.934,46.
+
+PESSOAL E ENCARGOS DA AB EM 2025 (SIOPS) - TETO, nao e o custo isolado das equipes
+  Dotação Inicial: R$ 39.997.000,00
+  Dotação Atualizada: R$ 35.022.648,78
+  Despesas Empenhadas: R$ 32.546.981,79
+  Despesas Liquidadas: R$ 32.546.981,79
+  Despesas Pagas: R$ 32.341.760,29
+
+PERCENTUAL DO ORCAMENTO COMPROMETIDO
+  [A. Teto observado (SIOPS 2025): pessoal e encargos da AB] Despesas Empenhadas R$ 32.546.981,79 / Dotação atualizada AB 2025 (SIOPS) R$ 43.524.305,24 = 74.78%
+  [A. Teto observado (SIOPS 2025): pessoal e encargos da AB] Despesas Empenhadas R$ 32.546.981,79 / Despesas Empenhadas total da AB 2025 (SIOPS) R$ 38.333.975,52 = 84.90%
+  [A. Teto observado (SIOPS 2025): pessoal e encargos da AB] Despesas Liquidadas R$ 32.546.981,79 / Dotação atualizada AB 2025 (SIOPS) R$ 43.524.305,24 = 74.78%
+  [A. Teto observado (SIOPS 2025): pessoal e encargos da AB] Despesas Liquidadas R$ 32.546.981,79 / Despesas Liquidadas total da AB 2025 (SIOPS) R$ 38.030.634,78 = 85.58%
+  [A. Teto observado (SIOPS 2025): pessoal e encargos da AB] Despesas Pagas R$ 32.341.760,29 / Dotação atualizada AB 2025 (SIOPS) R$ 43.524.305,24 = 74.31%
+  [A. Teto observado (SIOPS 2025): pessoal e encargos da AB] Despesas Pagas R$ 32.341.760,29 / Despesas Pagas total da AB 2025 (SIOPS) R$ 37.726.256,57 = 85.73%
+  [B. Estimativa ascendente (modelo, CNES 07/2026): eSF + ACS] Custo anualizado (12 meses) R$ 16.637.920,00 / Dotação atualizada AB 2026 (RREO b4) R$ 50.894.556,87 = 32.69%
+  [B. Estimativa ascendente (modelo, CNES 07/2026): eSF + ACS] Custo anualizado (12 meses) R$ 16.637.920,00 / Dotação inicial AB 2026 (RREO b4) R$ 49.885.322,78 = 33.35%
+  [B. Estimativa ascendente (modelo, CNES 07/2026): eSF + ACS] Custo anualizado (12 meses) R$ 16.637.920,00 / Dotação atualizada AB 2025 (SIOPS) — comparação entre anos, apenas indicativa R$ 43.524.305,24 = 38.23%
+  [B. Estimativa ascendente (modelo, CNES 07/2026): eSF + ACS + custo fixo das 22 UBS] Custo anualizado (12 meses) R$ 19.805.920,00 / Dotação atualizada AB 2026 (RREO b4) R$ 50.894.556,87 = 38.92%
+  [B. Estimativa ascendente (modelo, CNES 07/2026): eSF + ACS + custo fixo das 22 UBS] Custo anualizado (12 meses) R$ 19.805.920,00 / Dotação inicial AB 2026 (RREO b4) R$ 49.885.322,78 = 39.70%
+  [B. Estimativa ascendente (modelo, CNES 07/2026): eSF + ACS + custo fixo das 22 UBS] Custo anualizado (12 meses) R$ 19.805.920,00 / Dotação atualizada AB 2025 (SIOPS) — comparação entre anos, apenas indicativa R$ 43.524.305,24 = 45.51%
+
+ESTIMATIVA ASCENDENTE (CNES 07/2026 x custos unitarios do modelo)
+  23 eSF x R$ 31.777,78/mes x 12 = R$ 8.770.666,67
+  140 ACS (vinculos CNES) x R$ 4.682,89/mes x 12 = R$ 7.867.253,33
+  Custo anual das equipes (eSF + ACS) = R$ 16.637.920,00
+  Custo fixo das 22 UBS (R$ 12.000,00/mes cada) = R$ 3.168.000,00
+  Nao incluidos (sem dado de custo): 6 eSB, 1 eAP, NASF/eMulti, incentivos do FNS.
+
+COMPROMISSO PARA O MODELO (item 7)
+  Orcamento AP anual (RREO 2026, dotacao atualizada): R$ 50.894.556,87
+  Custo anual comprometido (eSF + ACS + custo fixo das UBS existentes): R$ 19.805.920,00
+  Disponivel para expansao: R$ 31.088.636,87
+
+LIMITACOES
+  - O SIOPS informa despesa por subfunção/natureza, não por equipe: não há como isolar eSF, ACS, eSB ou apoio. A medida A é um teto, não o custo das equipes.
+  - A medida B usa salários e encargos HIPOTÉTICOS do modelo (preços 2026); não são folha de pagamento do município. Não inclui eSB, eAP, NASF/eMulti, vigilância, vacinas, medicamentos.
+  - Incentivos e transferências do FNS (Previne Brasil/ custeio de equipes) não estão no arquivo SIOPS fornecido; os recursos federais entram apenas como fonte de financiamento das despesas, sem separar o incentivo por equipe.
+  - Não há dado de remuneração efetiva (Portal da Transparência de Itaúna) neste projeto: custo de pessoal por categoria não foi levantado e não foi inventado.
+  - Despesas empenhadas, liquidadas e pagas foram mantidas separadas. RREO 2026 cobre apenas jan–ago (4º bimestre): não comparar execução parcial com orçamento anual.
+  - Pessoal temporário (3.1.90.04) e "A classificar" (3.1.90.99) estão dentro do total de pessoal; parte pode não ser de equipes.

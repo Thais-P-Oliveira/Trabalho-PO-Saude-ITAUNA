@@ -1,0 +1,15 @@
+{
+  "proporcoes_via_secundaria": [
+    0.25,
+    0.5,
+    0.75
+  ],
+  "hab_por_esf": 3000,
+  "tmp2": 5.131730948388299,
+  "tmp3": 3.3263736263736265,
+  "leitos": "CNES 202607: leitos SUS de internacao e UTI x 365 dias menos carga estimada de nao residentes e residentes nao eletivos; disponibilidade anual e agregacao sao hipoteses",
+  "metodo_demanda": "proporcional_populacao_sem_idade",
+  "distribuicao_demanda": "total municipal eletivo x populacao do ponto / populacao total; demanda da UBS acompanha vinculacao populacional",
+  "ambulatorio_capacidade": "12 vezes pico mensal conjunto 2025 menos a producao eletiva anual de nao residentes no prestador; processamento, nao data de atendimento",
+  "deslocamento": "linha reta; trajetos organizacionais completos a partir do ponto; nao viagens observadas"
+}

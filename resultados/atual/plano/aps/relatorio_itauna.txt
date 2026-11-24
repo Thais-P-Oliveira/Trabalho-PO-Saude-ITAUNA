@@ -1,0 +1,111 @@
+==================================================================================================
+PLANO MUNICIPAL DE SAUDE DE ITAUNA - MG: LOCALIZACAO-ALOCACAO DA ATENCAO PRIMARIA
+==================================================================================================
+Solver: HiGHS | raio de cobertura: 3 km | 3.000 hab/eSF | limites por unidade; equipes atuais preservadas | limite de novas UBS: sem teto adicional
+Populacao base: 97.669 hab | cenario: 104.002 hab (+6.5% de crescimento)
+Fase 1: otimo confirmado.
+Fase 2: otimo confirmado.
+Fase 3: otimo confirmado.
+
+1. RESUMO EXECUTIVO
+--------------------------------------------------------------------------------------------------
+ - UBS existentes mantidas: 22 | novas UBS recomendadas: 9
+ - Populacao coberta pelo criterio 3 km: 101.616 hab (97.7%)  [base, so UBS existentes: 93.4%]
+ - Equipes de Saude da Familia (eSF): 39 | ACS: 143
+ - Custo operacional mensal estimado: R$ 2.307.986  (R$ 22,19 por habitante/mes)
+   Das novas UBS, o impacto: +4.3 p.p. de cobertura
+
+2. ACESSO GEOGRAFICO (distancia em linha reta ponderada pela populacao)
+--------------------------------------------------------------------------------------------------
+Indicador                           Base (so existentes)        Plano proposto
+Distancia media (km)                                0,85                  0,98
+Distancia p90 (km)                                  0,96                  2,16
+Distancia maxima (km)                              10,42                  6,98
+% pop. a ate 1 km                                 90.7%                 65.5%
+% pop. a ate 2 km                                 92.9%                 88.5%
+% pop. no raio da zona                            93.4%                 97.7%
+
+3. CUSTOS MENSAIS ESTIMADOS (R$)
+Horizonte: 5 anos; construcao: R$ 22.848.000,00; construcao + operacao: R$ 161.327.186,67.
+Obra paga uma vez; operacao constante; sem desconto ou reajuste. Folga configurada somente na operacao, com teto de investimento da fase 2.
+--------------------------------------------------------------------------------------------------
+ - Custo fixo UBS existentes:              264.000
+ - Custo fixo UBS novas:                   135.000
+ - Equipes eSF (39):                     1.239.333   (medico + enfermeiro + tecnico = R$ 31.778/eSF)
+ - Agentes comunitarios (143):             669.653
+ - TOTAL OPERACIONAL:                    2.307.986
+ (o termo de deslocamento R$ 0.05/hab.km e um proxy usado so na otimizacao: R$ 5.112)
+
+4. NOVAS UBS RECOMENDADAS
+--------------------------------------------------------------------------------------------------
+Local                                           Pop.  Pop.<=R  eSF  ACS  Coordenadas
+NOVA UBS (Residencial Victor Gonçalves de S   12.000   12.000    4   16  (-20.0661, -44.5966)
+NOVA UBS (Setor 313380805000191 (urbana))      9.000    9.000    3   12  (-20.1178, -44.6002)
+NOVA UBS (Setor 313380805000177 (urbana))      7.559    7.140    3   11  (-20.0554, -44.5361)
+NOVA UBS (Setor 313380805000267 (rural))       1.553    1.099    1    3  (-20.1416, -44.5530)
+NOVA UBS (Setor 313380805000115 (rural))       1.297      836    1    2  (-20.0188, -44.6647)
+NOVA UBS (Setor 313380805000197 (rural))       1.267      677    1    2  (-20.0440, -44.6826)
+NOVA UBS (Setor 313380805000174 (rural))         985      524    1    2  (-20.0114, -44.5511)
+NOVA UBS (Setor 313380805000188 (rural))         821      821    1    2  (-20.1524, -44.5986)
+NOVA UBS (Setor 313380805000185 (rural))         520      520    1    1  (-20.1894, -44.5698)
+
+5. REDE DE UBS (carga e dimensionamento)
+--------------------------------------------------------------------------------------------------
+ID       UBS                             Status        Pop. eSF  Ocup.  hab/eSF  Situacao
+NOVA_33  Nova (Residencial Victor Gonça… NOVA        12.000   4   100%    3.000  Lotada (>=95%)
+NOVA_77  Nova (Setor 313380805000191 (U… NOVA         9.000   3   100%    3.000  Lotada (>=95%)
+NOVA_64  Nova (Setor 313380805000177 (U… NOVA         7.559   3    84%    2.520  Adequada
+UBS27    Parque Jardim Santanense Resid… EXISTENTE    6.000   2   100%    3.000  Lotada (>=95%)
+UBS16    Garcias                         EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS13    Alto Do Rosario                 EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS14    Central                         EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS15    Cidade Nova                     EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS17    Gracas                          EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS23    Morada Nova Ii                  EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS22    Morada Nova                     EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS21    Lourdes                         EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS20    Jadir Marinho                   EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS19    Itaunense                       EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS18    Irmaos Auler                    EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS26    Padre Eustaquio                 EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS28    Piedade                         EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS29    Pio Xii                         EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS30    Santanense                      EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS31    Sao Geraldo                     EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS32    Varzea Da Olaria                EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS24    Morro Do Engenho                EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS25    Nogueira Machado                EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS33    Vila Tavares                    EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+UBS34    Zona Rural                      EXISTENTE    3.000   1   100%    3.000  Lotada (>=95%)
+NOVA_90  Nova (Setor 313380805000267 (R… NOVA         1.553   1    52%    1.553  Subutilizada
+NOVA_55  Nova (Setor 313380805000115 (R… NOVA         1.297   1    43%    1.297  Subutilizada
+NOVA_83  Nova (Setor 313380805000197 (R… NOVA         1.267   1    42%    1.267  Subutilizada
+NOVA_61  Nova (Setor 313380805000174 (R… NOVA           985   1    33%      985  Subutilizada
+NOVA_74  Nova (Setor 313380805000188 (R… NOVA           821   1    27%      821  Subutilizada
+NOVA_71  Nova (Setor 313380805000185 (R… NOVA           520   1    17%      520  Subutilizada
+ Alertas: 6 UBS subutilizadas (< 2.000 hab/eSF) e 24 lotadas (>= 95% da capacidade).
+
+6. TERRITORIOS FORA DO RAIO DE COBERTURA
+--------------------------------------------------------------------------------------------------
+ 2.386 hab em 8 alocacoes fora do criterio 3 km (2.3% da populacao). Maiores casos:
+Ponto                               Tipo       Pop. Dist. (km)  UBS mais proxima
+Setor 313380805000192 (Rural)       setor       498        7.0  Itaunense
+Setor 313380805000199 (Rural)       setor       461        3.8  Nova (Setor 313380805000115 (…
+Setor 313380805000118 (Rural)       setor       461        6.8  Nova (Setor 313380805000174 (…
+Setor 313380805000176 (Rural)       setor       420        4.1  Nova (Setor 313380805000177 (…
+Setor 313380805000178 (Rural)       setor       398        6.2  Nova (Setor 313380805000267 (…
+Setor 313380805000193 (Urbana)      setor        92        3.7  Nova (Setor 313380805000197 (…
+Setor 313380805000179 (Urbana)      setor        55        3.4  Nova (Setor 313380805000267 (…
+Setor 313380805000182 (Urbana)      setor         0        3.4  Nova (Setor 313380805000191 (…
+ Sugestao: avaliar equipe itinerante/unidade movel, ou pontos de apoio com ACS, para esses territorios
+ (uma UBS fixa nao atinge a viabilidade minima de populacao nessas areas).
+
+NOTAS METODOLOGICAS
+--------------------------------------------------------------------------------------------------
+ * Distancias: Haversine x fator de rota 1. Cobertura conforme zona dos moradores: 3 km.
+ * Capacidade: 3.000 hab por eSF; ACS: 1 por 750 hab, sem teto fixo por UBS.
+ * Equipes atuais preservadas. Expansao limitada pelas salas de cada UBS; Central e Zona Rural mantem uma equipe. Novas UBS: estrutura planejada conforme tabela de limites.
+ * Minimo por nova UBS: urbana 2.000 hab; rural 500 hab dentro do raio. Rural identificado por (rural) no nome do ponto. Existentes permanecem abertas (>= 1 eSF).
+ * Otimizacao lexicografica: (1) max. cobertura; (2) min. construcao + operacao no horizonte; (3) min. distancia (folga so na operacao; obra limitada pela fase 2).
+ * Alocacao fracionada permitida (um bairro pode dividir populacao entre UBS vizinhas).
+==================================================================================================

@@ -1,0 +1,178 @@
+{
+  "plano": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\resultados\\atual\\plano\\plano_aps.json",
+  "folga_custo": 0.02,
+  "custo_aps_mensal": "2307986.444444445",
+  "custo_aps_anual": "27695837.333333340",
+  "operacao_por_grupo": [
+    {
+      "grupo": "UBS existentes",
+      "unidades": 22,
+      "fixo_mensal": "264000.0",
+      "equipes_mensal": "730888.8888888889871794871798",
+      "acs_mensal": "430825.7777777778349650349657",
+      "total_mensal": "1425714.666666666822144522146",
+      "total_anual": "17108576.00000000186573426575"
+    },
+    {
+      "grupo": "UBS novas",
+      "unidades": 9,
+      "fixo_mensal": "135000.0",
+      "equipes_mensal": "508444.4444444445128205128205",
+      "acs_mensal": "238827.3333333333650349650351",
+      "total_mensal": "882271.7777777778778554778556",
+      "total_anual": "10587261.33333333453426573427"
+    }
+  ],
+  "investimento_construcao": "22848000",
+  "total_ano_implantacao": "50543837.333333340",
+  "hipotese_ano_implantacao": "100% das obras e 12 meses de operacao da rede inteira no mesmo exercicio; cenario de comparacao, nao cronograma contratual",
+  "horizonte_otimizacao_anos": 5,
+  "objetivo_com_proxy_anual": "27757183.8894958644",
+  "referencia_oficial": "RREO 2026, 4o bimestre (janeiro a agosto), Anexo 02",
+  "fonte_rreo": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2026&nr_periodo=4&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+02&id_ente=3133808",
+  "fonte_loa": "https://sapl.itauna.mg.leg.br/media/sapl/public/normajuridica/2025/11182/lei_6273-2026_-_loa_2026.pdf",
+  "dados_oficiais": [
+    {
+      "conta": "Saúde",
+      "coluna": "DOTAÇÃO INICIAL",
+      "exceto_intra": "170603787.13",
+      "intra": "3092700",
+      "total": "173696487.13"
+    },
+    {
+      "conta": "Saúde",
+      "coluna": "DOTAÇÃO ATUALIZADA (a)",
+      "exceto_intra": "196939664.71",
+      "intra": "2865719.55",
+      "total": "199805384.26"
+    },
+    {
+      "conta": "Saúde",
+      "coluna": "DESPESAS EMPENHADAS ATÉ O BIMESTRE (b)",
+      "exceto_intra": "141101026.7",
+      "intra": "1833615.69",
+      "total": "142934642.39"
+    },
+    {
+      "conta": "Saúde",
+      "coluna": "DESPESAS LIQUIDADAS ATÉ O BIMESTRE (d)",
+      "exceto_intra": "107890878.99",
+      "intra": "1728567.53",
+      "total": "109619446.52"
+    },
+    {
+      "conta": "Atenção Básica",
+      "coluna": "DOTAÇÃO INICIAL",
+      "exceto_intra": "49852322.78",
+      "intra": "33000",
+      "total": "49885322.78"
+    },
+    {
+      "conta": "Atenção Básica",
+      "coluna": "DOTAÇÃO ATUALIZADA (a)",
+      "exceto_intra": "50833556.53",
+      "intra": "61000.34",
+      "total": "50894556.87"
+    },
+    {
+      "conta": "Atenção Básica",
+      "coluna": "DESPESAS EMPENHADAS ATÉ O BIMESTRE (b)",
+      "exceto_intra": "27330729.48",
+      "intra": "58000",
+      "total": "27388729.48"
+    },
+    {
+      "conta": "Atenção Básica",
+      "coluna": "DESPESAS LIQUIDADAS ATÉ O BIMESTRE (d)",
+      "exceto_intra": "22960771.36",
+      "intra": "32163.1",
+      "total": "22992934.46"
+    },
+    {
+      "conta": "Assistência Hospitalar e Ambulatorial",
+      "coluna": "DOTAÇÃO INICIAL",
+      "exceto_intra": "101805944.35",
+      "intra": "222000",
+      "total": "102027944.35"
+    },
+    {
+      "conta": "Assistência Hospitalar e Ambulatorial",
+      "coluna": "DOTAÇÃO ATUALIZADA (a)",
+      "exceto_intra": "119828344.78",
+      "intra": "170400",
+      "total": "119998744.78"
+    },
+    {
+      "conta": "Assistência Hospitalar e Ambulatorial",
+      "coluna": "DESPESAS EMPENHADAS ATÉ O BIMESTRE (b)",
+      "exceto_intra": "97553860.48",
+      "intra": "100000",
+      "total": "97653860.48"
+    },
+    {
+      "conta": "Assistência Hospitalar e Ambulatorial",
+      "coluna": "DESPESAS LIQUIDADAS ATÉ O BIMESTRE (d)",
+      "exceto_intra": "71340469.51",
+      "intra": "44872.22",
+      "total": "71385341.73"
+    }
+  ],
+  "comparacoes": [
+    {
+      "conta": "Saúde",
+      "referencia": "DOTAÇÃO INICIAL",
+      "orcamento_anual": "173696487.13",
+      "custo_modelo_aps_anual": "27695837.333333340",
+      "proporcao_modelo_pct": "15.94496111634364289057455966",
+      "investimento_construcao": "22848000",
+      "total_ano_implantacao": "50543837.333333340",
+      "proporcao_implantacao_pct": "29.09894043827421646716638466"
+    },
+    {
+      "conta": "Saúde",
+      "referencia": "DOTAÇÃO ATUALIZADA (a)",
+      "orcamento_anual": "199805384.26",
+      "custo_modelo_aps_anual": "27695837.333333340",
+      "proporcao_modelo_pct": "13.86140690647939799417695632",
+      "investimento_construcao": "22848000",
+      "total_ano_implantacao": "50543837.333333340",
+      "proporcao_implantacao_pct": "25.29653418526617436810809194"
+    },
+    {
+      "conta": "Atenção Básica",
+      "referencia": "DOTAÇÃO INICIAL",
+      "orcamento_anual": "49885322.78",
+      "custo_modelo_aps_anual": "27695837.333333340",
+      "proporcao_modelo_pct": "55.51900998110238147285372742",
+      "investimento_construcao": "22848000",
+      "total_ano_implantacao": "50543837.333333340",
+      "proporcao_implantacao_pct": "101.3200567153538622447698633"
+    },
+    {
+      "conta": "Atenção Básica",
+      "referencia": "DOTAÇÃO ATUALIZADA (a)",
+      "orcamento_anual": "50894556.87",
+      "custo_modelo_aps_anual": "27695837.333333340",
+      "proporcao_modelo_pct": "54.41807343774862893309635766",
+      "investimento_construcao": "22848000",
+      "total_ano_implantacao": "50543837.333333340",
+      "proporcao_implantacao_pct": "99.31088989032264659935922142"
+    }
+  ],
+  "sha256": {
+    "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\fontes_publicas\\orcamento\\siconfi_rreo_2026_b4_anexo02.json": "9282a0b4b028b3947235d6691c3f6fdf57c47806cd237937ea5a014854ffd376",
+    "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\fontes_publicas\\orcamento\\loa_2026_aprovada.pdf": "f87a60adbb1904a091409dfd883e1c0d26266aa754863c12b6eed65dee0dcdd4",
+    "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\resultados\\atual\\plano\\plano_aps.json": "b00c8e1812e6262ba2558b5ed6c3a1a589728b728672c865371fda0fb0d0fee8",
+    "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\custos_construcao_ubs_2025.csv": "a6456db1c0451c2b7f77f8e687c46b3f5a98f366ae989143b23ea88006951b97",
+    "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\resultados\\atual\\plano\\aps\\ubs_completas.csv": "a5629929e0ab4e8c34000001241167fb722696f5900b20fb12cf9250360122b9"
+  },
+  "limites": [
+    "Operacao e investimento da APS separados; valores estimados, nao despesas executadas.",
+    "Custos unitarios do modelo sao premissas, sem atualizacao monetaria para 2026.",
+    "Construcao incluida no cenario de implantacao; terrenos, equipamentos e outros servicos da atencao basica nao estao integralmente orcados.",
+    "Nao inclui custo operacional da secundaria e terciaria.",
+    "Dotacao atualizada nao e saldo livre nem garantia de disponibilidade financeira.",
+    "Diferenca nao demonstra economia ou viabilidade financeira da implantacao.",
+    "A comparacao e descritiva; nao foi criada restricao de orcamento no modelo."
+  ]
+}

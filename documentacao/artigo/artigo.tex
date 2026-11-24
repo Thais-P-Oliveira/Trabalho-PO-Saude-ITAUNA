@@ -1,0 +1,1501 @@
+% Artigo completo do projeto de Itauna.
+% Formatação baseada EXCLUSIVAMENTE no exemplo fornecido pela usuária.
+% Compilar com pdfLaTeX (duas vezes) ou com Tectonic.
+% Todas as equações estão em LaTeX nativo, sem imagens de equações.
+\documentclass[11pt]{report}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{enumitem,booktabs,array}
+\usepackage[a4paper,top=3cm,left=3cm,bottom=2cm,right=2cm]{geometry}
+\usepackage{graphicx,longtable}
+\usepackage{microtype}
+\usepackage{caption}
+\usepackage{placeins,needspace}
+\usepackage[authoryear,round]{natbib}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+
+\allowdisplaybreaks
+\setlength{\emergencystretch}{2em}
+\captionsetup{font=small,labelfont=bf}
+\setlist[description]{leftmargin=1.7cm,style=nextline,itemsep=3pt}
+\renewcommand{\bibname}{Referências bibliográficas}
+\renewcommand{\arraystretch}{1.12}
+\numberwithin{equation}{chapter}
+
+\title{Planejamento da rede de atenção à saúde de Itaúna\\[6pt]
+\large Localização de UBS e alocação hierárquica de encaminhamentos em uma abordagem sequencial}
+\author{}
+\date{}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+\maketitle
+\clearpage
+\hypersetup{pageanchor=true}
+
+\section*{Resumo}
+Este estudo aplica modelos de Pesquisa Operacional ao planejamento da rede de saúde de Itaúna, Minas Gerais.
+A base contém 91 pontos de demanda e 22 UBS, com 97.669 habitantes no Censo 2022 e projeção proporcional para 104.002 habitantes em 2026. Na primeira etapa, são definidas novas UBS,
+equipes de Saúde da Família e agentes comunitários, priorizando cobertura, custo e distância. Adota-se
+folga de custo de 2\% na fase de redução dos deslocamentos. O plano inclui 12 novas UBS, 11 delas rurais,
+43 equipes e 136 agentes, com 99,86\% da população vinculada a unidades a até 3 km e ótimo confirmado nas
+três fases. Na segunda etapa, seis cenários comparam os encaminhamentos à rede especializada, variando a
+oferta de níveis por estabelecimento e os percentuais de passagem pela secundária antes da terciária. As
+capacidades partem da produção observada em 2025, descontada a parcela ocupada por pacientes de outros
+municípios e, no hospital, por urgências. Toda a demanda ambulatorial é alocada, e a oferta de múltiplos
+níveis no mesmo local reduz as distâncias médias entre 10,0\% e 12,1\%. No hospital, os leitos disponíveis
+comportam toda a alta complexidade eletiva e cerca de 71\% da média. O diagnóstico identifica maior
+dificuldade de acesso rural. Com encargos e o piso dos agentes comunitários, o custo anual estimado da APS
+é de R\$ 29,37 milhões, ou 58,87\% do orçamento inicial da atenção básica de 2026. A construção das 12 novas
+UBS, calculada à parte da otimização, é estimada em R\$ 23,86 milhões. A curva de cobertura e custo mostra
+que, acima de 96\%, cada habitante adicional custa entre R\$ 96 e R\$ 146 por mês, e a análise de
+sensibilidade aponta o mínimo populacional rural como o parâmetro de maior influência.
+Os resultados apoiam a comparação de alternativas para organizar a rede e seus recursos.
+
+\noindent\textbf{Palavras-chave:} localização de unidades de saúde; atenção primária; rede hierárquica; acessibilidade; otimização lexicográfica.
+
+\FloatBarrier
+\chapter{Introdução}
+
+O planejamento da rede de saúde envolve a localização das unidades e a organização dos atendimentos.
+Uma Unidade Básica de Saúde (UBS) próxima da residência facilita o primeiro contato com a rede. Consultas
+especializadas, procedimentos e internações podem exigir atendimento em outros locais. Por isso, o
+planejamento deve considerar a população, a oferta dos serviços e os encaminhamentos entre os níveis de atenção.
+
+A utilização corresponde aos atendimentos realizados. O acesso envolve também as condições para receber
+esses atendimentos, como localização, capacidade e organização dos serviços \citep{aday1974,santana2023}.
+Os registros de produção mostram o uso da rede, enquanto a análise do acesso ajuda a identificar condições
+que facilitam ou dificultam o atendimento.
+
+Em Itaúna, a base territorial reúne bairros e setores censitários com populações de tamanhos diferentes.
+Um mínimo populacional igual para todas as novas UBS pode dificultar a cobertura rural. Além disso, alguns
+estabelecimentos oferecem serviços de mais de um nível de atenção. O estudo considera essas características
+ao definir regras de abertura de UBS e comparar formas de classificação da rede especializada.
+
+O objetivo é propor um plano de expansão da atenção primária e avaliar os encaminhamentos para a rede
+secundária e terciária existente. São definidas novas UBS, equipes e agentes comunitários, com avaliação de
+cobertura, custos e distâncias. A demanda especializada é distribuída pelo território conforme a idade da população.
+
+O estudo adota uma abordagem sequencial. Na primeira etapa, são definidas a localização das novas UBS e a
+quantidade de equipes e agentes comunitários. Na segunda, o plano de atenção primária orienta a distribuição
+dos encaminhamentos entre os estabelecimentos especializados existentes. Os serviços são agrupados por nível
+de atenção, com procedimentos ambulatoriais e internações analisados separadamente.
+
+\FloatBarrier
+\chapter{Revisão bibliográfica}
+
+\Needspace{12\baselineskip}
+\section{Acessibilidade e utilização dos serviços}
+
+O acesso à saúde depende das características da população e da organização dos serviços.
+\citet{aday1974} relacionam esses fatores à utilização da rede e à satisfação dos usuários. A existência
+de uma unidade, a procura pelo atendimento e a continuidade do cuidado fazem parte dessa análise.
+
+\citet{santana2023} distinguem necessidade, demanda e oferta. A necessidade corresponde ao cuidado
+requerido pela população; a demanda, à procura por serviços; e a oferta, aos recursos disponíveis.
+Parte das necessidades pode não resultar em procura ou atendimento. Por isso, os registros de produção
+devem ser analisados junto com a oferta e as condições de acesso.
+
+\citet{shengelia2005} integram acesso, utilização, qualidade e cobertura efetiva. A cobertura efetiva
+considera o benefício em saúde recebido pela população que necessita de uma intervenção. Essa abordagem
+amplia a análise da cobertura para além da presença de serviços e do número de atendimentos, incorporando
+os resultados do cuidado.
+
+A acessibilidade espacial descreve a relação geográfica entre população e serviços.
+\citet{guagliardo2004} discute medidas de distância, de oferta por habitante e modelos gravitacionais.
+Esses modelos combinam distância e oferta e podem considerar a população que concorre pelos mesmos recursos.
+A medida escolhida depende do objetivo da análise e dos dados disponíveis.
+
+\Needspace{12\baselineskip}
+\section{Localização, cobertura e capacidade}
+
+Os modelos de localização definem onde instalar serviços e como distribuir a demanda entre eles.
+\citet{ahmadi2017} revisam aplicações em saúde emergencial e não emergencial. Os modelos podem combinar
+decisões de localização, alocação e dimensionamento dos recursos, conforme os objetivos e as restrições do problema.
+
+Maximizar a cobertura significa ampliar a população atendida dentro de uma distância estabelecida.
+Minimizar o deslocamento significa reduzir as distâncias, considerando a demanda de cada trajeto. As
+restrições de capacidade limitam a quantidade atendida em cada unidade, e os custos permitem avaliar a
+dimensão financeira das alternativas.
+
+A otimização lexicográfica organiza os objetivos por prioridade. Primeiro, resolve-se o objetivo mais
+importante; depois, os demais são avaliados respeitando os limites definidos nas etapas anteriores.
+Essa ordem permite estabelecer prioridades entre cobertura, custo e distância.
+
+Os parâmetros assistenciais orientam a estimativa de necessidades e o dimensionamento dos serviços.
+A Portaria nº 1.631/2015 apresenta critérios para o planejamento no SUS e prevê sua adaptação às condições
+regionais \citep{brasil2015a}. Seu documento de apoio inclui referências para recursos hospitalares
+\citep{brasil2015b}. A escolha do parâmetro deve considerar o serviço e a unidade de medida utilizada.
+
+\Needspace{12\baselineskip}
+\section{Redes hierárquicas de serviços}
+
+As redes hierárquicas reúnem estabelecimentos com diferentes funções e níveis de serviço.
+\citet{sahin2007} organizam os modelos conforme os caminhos entre os níveis, os serviços oferecidos e as
+decisões de localização. A estrutura pode exigir a passagem por níveis intermediários ou permitir o
+acesso direto a níveis superiores. Também pode reunir serviços de diferentes níveis no mesmo local.
+
+Em uma rede hierárquica, a localização e a capacidade de cada estabelecimento influenciam os percursos
+possíveis. O planejamento considera a oferta das unidades e as ligações entre os níveis de serviço
+\citep{sahin2007,ahmadi2017}.
+
+\FloatBarrier
+\chapter{Metodologia}
+
+\FloatBarrier
+\Needspace{12\baselineskip}
+\section{Delineamento e fontes de dados}
+
+Este é um estudo quantitativo de localização e alocação, baseado em dados públicos e cenários com valores
+fixos. A base territorial contém 91 pontos de demanda e 97.669 habitantes no Censo 2022, projetados para 104.002 habitantes em 2026. Foram combinados dados do Censo 2022, produção assistencial processada em 2025 e cadastro CNES
+de julho de 2026. A população e a demanda são compatibilizadas para 2026, mantendo constantes as participações territoriais e a utilização por habitante de 2025.
+
+\FloatBarrier
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.24812\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.35338\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.39850\linewidth-2\tabcolsep\relax}@{}}
+\caption{Fontes e utilização dos dados}\label{tab:1}\\
+\toprule
+\textbf{Fonte e referência} & \textbf{Conteúdo utilizado} & \textbf{Cuidados de interpretação} \\
+\midrule
+\endfirsthead
+\multicolumn{3}{l}{\footnotesize\tablename~\thetable\ -- continuação}\\
+\toprule
+\textbf{Fonte e referência} & \textbf{Conteúdo utilizado} & \textbf{Cuidados de interpretação} \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+IBGE Censo 2022 & População territorial de referência & Pontos agregados; atualização proporcional para 2026 \\
+CSV territorial do projeto & 91 pontos e 97.669 habitantes; coordenadas & Representação pontual, sem endereços individuais ou terrenos \\
+CNES competência 202607 & Estabelecimentos, equipes e leitos & Cadastro de recursos não equivale à agenda disponível \\
+SIA SUS produção 2025 & Procedimentos eletivos de residentes por idade & Procedimentos não equivalem a pessoas ou viagens únicas \\
+SIH SUS produção 2025 & Internações eletivas de residentes, perfil etário e produção total do hospital & Perfil etário geral aplicado a ambas as complexidades; urgências de residentes no hospital estimadas \\
+Microdados SIA por CNES 2025 & Pico mensal eletivo ambulatorial e produção de não residentes & Produção de não residentes descontada da capacidade; efeitos do processamento \\
+Parâmetros SUS 2015 & Referência agregada de ocupação hospitalar & Usada apenas para comparação com a produção observada \\
+Decreto do salário mínimo e EC 120/2022 & Piso salarial dos ACS em 2026 & Encargos estimados para contratação pela CLT \\
+Relatórios Públicos da APS, julho de 2026 & Cobertura potencial estimada da APS & Indicador administrativo com população de referência própria \\
+LOA 2026 e RREO do quarto bimestre & Orçamento inicial, atualizado e execução por função e subfunção & Valores anuais autorizados e execução acumulada até agosto \\
+Manual Novo PAC Saúde 2025 & Valor de referência de construção de UBS por porte, região Sudeste & Valores nominais de 2025; sem terreno, equipamentos ou cotação local \\
+\end{longtable}
+\noindent\footnotesize Fonte: elaboração própria a partir dos dados e resultados do estudo.
+\endgroup
+
+Os dados são provenientes do IBGE e dos sistemas do Ministério da Saúde
+\citep{ibge2022,cnes2026,datasus2026}. A análise inclui também a cobertura oficial da APS e as informações
+orçamentárias da Prefeitura e do Tesouro Nacional \citep{aps2026,itauna2025,tesouro2026}. O investimento
+de construção utiliza os valores de referência do Novo PAC Saúde \citep{novopac2025}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.96\linewidth,height=.38\textheight,keepaspectratio]{figuras/fluxo_metodo.pdf}
+\caption{Fluxo da abordagem sequencial}
+\label{fig:1}
+\par\smallskip\footnotesize Fonte: elaboração própria. Etapas do planejamento da atenção primária e dos encaminhamentos.
+\end{figure}
+
+\FloatBarrier
+\Needspace{12\baselineskip}
+\section{Preparação da demanda e das capacidades}
+
+Na atenção primária, a demanda é medida em habitantes. Na especializada, são usados procedimentos
+ambulatoriais (AMB) e internações (HOSP), registrados separadamente. Para representar a rede por nível,
+a média complexidade é associada à secundária e a alta complexidade à terciária.
+
+\subsection*{Definição da demanda e recortes}
+
+A demanda especializada corresponde à utilização registrada pelos residentes de Itaúna em 2025, segundo o
+município de residência do paciente e o ano de processamento. Trata-se de demanda realizada: filas,
+atendimentos não obtidos e necessidades não percebidas não estão incluídos. Os registros contam eventos,
+e não pessoas distintas, pois uma pessoa pode realizar vários procedimentos ou internações.
+
+No ambulatório, foram selecionados 753 procedimentos de média e alta complexidade dos grupos 02 a 05 da
+tabela do SUS: procedimentos com finalidade diagnóstica, clínicos, cirúrgicos e transplantes. Ficaram fora
+as ações de promoção e prevenção (grupo 01), os medicamentos (grupo 06), as órteses, próteses e materiais
+(grupo 07), as ações complementares (grupo 08) e os procedimentos de atenção básica, tratados no plano
+primário. Medicamentos, por exemplo, são contados por unidade dispensada e não representam atendimentos.
+Nas internações, foram consideradas todas as internações de residentes registradas no SIH.
+
+O recorte seguinte usa o caráter do atendimento, informado em cada registro. Entram na demanda apenas os
+atendimentos eletivos, isto é, programados, que correspondem aos encaminhamentos que a rede pode organizar.
+Os atendimentos de urgência ficam fora da demanda, pois o paciente procura o serviço de urgência disponível,
+sem passar pela distribuição planejada. No hospital, porém, as urgências continuam ocupando leitos e, por
+isso, são descontadas da capacidade, como descrito adiante. A Tabela~\ref{tab:2} mostra o efeito desse
+recorte.
+
+\FloatBarrier
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.34\linewidth}>{\raggedright\arraybackslash}p{0.13\linewidth}>{\raggedright\arraybackslash}p{0.22\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}@{}}
+\caption{Demanda especializada dos residentes em 2025: total registrado e parcela considerada}\label{tab:2}\\
+\toprule
+\textbf{Tipo de evento} & \textbf{Total} & \textbf{Eletivo (demanda do modelo)} & \textbf{Urgência (fora da demanda)} \\
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\footnotesize\tablename~\thetable\ -- continuação}\\
+\toprule
+\textbf{Tipo de evento} & \textbf{Total} & \textbf{Eletivo (demanda do modelo)} & \textbf{Urgência (fora da demanda)} \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Procedimentos ambulatoriais de média complexidade (secundária) & 241.093 & 190.856 (79\%) & 50.237 (21\%) \\
+Procedimentos ambulatoriais de alta complexidade (terciária) & 22.275 & 15.752 (71\%) & 6.523 (29\%) \\
+Internações de média complexidade (secundária) & 5.367 & 1.065 (20\%) & 4.302 (80\%) \\
+Internações de alta complexidade (terciária) & 910 & 350 (38\%) & 560 (62\%) \\
+\end{longtable}
+\noindent\footnotesize Fonte: elaboração própria a partir do SIA e do SIH de 2025, por município de residência. Procedimentos ambulatoriais restritos aos 753 códigos selecionados.
+\endgroup
+
+A base ambulatorial por residência tem uma limitação de cobertura. A residência do paciente é registrada
+no BPA individualizado, na APAC e no RAAS, mas não no BPA consolidado, que registra a produção de forma
+agregada, sem identificar o paciente. Essa produção não pode ser atribuída aos residentes e, por isso, a
+demanda ambulatorial do modelo tende a ser menor que a utilização real. O volume é expressivo: nos
+estabelecimentos de Itaúna, dentro dos mesmos 753 procedimentos, foram registrados em 2025 cerca de
+199 mil procedimentos eletivos, 56 mil de urgência e 376 mil sem caráter identificado, todos estes de média
+complexidade e sem residência em Itaúna registrada, o que é compatível com o registro consolidado. Os registros sem caráter não entram na demanda nem na capacidade, que também é
+medida apenas com a produção eletiva. A comparação entre demanda e capacidade é, portanto, coerente, mas
+representa somente a parte eletiva identificada da atividade desses serviços.
+
+Os totais foram conferidos com as tabulações do TABNET por procedimento, por mês e por caráter. Os
+microdados do SIA, usados para as capacidades e para separar residentes e não residentes, reproduzem
+exatamente esses totais. A distribuição pelos 91 pontos conserva os totais municipais de cada procedimento.
+Na tabulação hospitalar por estabelecimento, 12 das 6.277 internações de residentes não têm destino
+discriminado e não foram atribuídas a nenhum hospital.
+
+A população territorial de 2022 é atualizada proporcionalmente para o total municipal
+estimado pelo IBGE em 2026. Cada ponto mantém sua participação na população do município:
+\begin{quote}
+População do ponto em 2026 = população do ponto em 2022 $\times$ 104.002 / 97.669.
+\end{quote}
+O ajuste acumulado é de aproximadamente 6,4841\%. A distribuição espacial do crescimento é
+uma hipótese uniforme; não representa uma estimativa oficial por bairro.
+
+Os atendimentos possuem referência em 2025. Para cada tipo e nível, a quantidade anual de
+2025 é dividida pela população municipal estimada naquele ano (103.272 habitantes). A taxa
+obtida é aplicada à população projetada de cada ponto:
+\begin{quote}
+Demanda do ponto em 2026 = atendimentos municipais de 2025 / 103.272 $\times$ população do ponto em 2026.
+\end{quote}
+Assim, o total municipal de atendimentos aumenta em aproximadamente 0,7069\%, correspondente
+a 104.002 / 103.272. Não se aplica aos procedimentos o crescimento acumulado desde 2022.
+O cálculo não utiliza faixas etárias e mantém a taxa de utilização por habitante de 2025.
+A demanda de cada UBS acompanha as parcelas da população vinculadas a ela. As capacidades
+permanecem fixas, permitindo avaliar sua suficiência diante da demanda projetada.
+
+As referências populacionais são as tabelas oficiais do IBGE, com data de referência em
+1º de julho de cada ano: \url{https://ftp.ibge.gov.br/Estimativas_de_Populacao/Estimativas_2025/POP2025_20251031.pdf}
+e \url{https://ftp.ibge.gov.br/Estimativas_de_Populacao/Estimativas_2026/POP2026_20261029.pdf}.
+Os totais projetados são aproximadamente 192.205,11 procedimentos ambulatoriais secundários,
+15.863,35 terciários, 1.072,53 internações secundárias e 352,47 terciárias por ano.
+Os resultados numéricos apresentados nas seções seguintes pertencem à execução anterior;
+a aplicação desta projeção exige nova execução e atualização das tabelas e figuras.
+
+Para estimar a capacidade ambulatorial de cada estabelecimento, foi escolhido o mês de 2025 com a maior
+quantidade registrada de procedimentos eletivos de média e alta complexidade, somados no mesmo mês.
+Esse total foi multiplicado por 12, adotando o melhor desempenho mensal observado como referência para o ano.
+
+A produção dos estabelecimentos de Itaúna inclui pacientes de outros municípios, enquanto a demanda do
+modelo considera apenas os residentes. Esses atendimentos continuam ocupando a capacidade e, por isso, são
+mantidos como uma carga fixa. Com os microdados do SIA de 2025, a produção eletiva de cada estabelecimento
+foi separada pelo município de residência do paciente, e a produção anual de não residentes foi descontada
+da capacidade:
+
+\begin{equation}
+\begin{gathered}
+\text{Capacidade ambulatorial para a demanda do modelo}\\[3pt]
+=12\times\text{Maior produção mensal conjunta dos níveis 2 e 3}\\[3pt]
+-\ \text{Produção eletiva anual de não residentes no estabelecimento}
+\end{gathered}
+\label{eq:2}
+\end{equation}
+
+A capacidade obtida é representada por $A_a$ no modelo. Por exemplo, um pico de 1.000 procedimentos em um
+mês corresponde a 12.000 procedimentos por ano; se 2.000 deles forem de não residentes, restam 10.000 para
+a demanda do modelo. Quando o estabelecimento atende os dois níveis, ambos utilizam esse mesmo limite.
+
+A capacidade hospitalar é calculada em dias de leito: um leito ocupado por um dia corresponde a um dia de
+leito. Cada internação consome dias de leito conforme a permanência média: 5,1317 dias na média
+complexidade e 3,3264 na alta. Essas médias utilizam os registros hospitalares dos residentes, de todos os
+caracteres de atendimento. A permanência menor na alta complexidade é um resultado dos registros, e não
+uma hipótese do modelo: a complexidade do SIH segue o procedimento principal, e procedimentos de alta
+complexidade podem ter internações mais curtas que as clínicas de média complexidade.
+
+Seguindo o mesmo critério do ambulatório, a capacidade hospitalar parte da produção observada. Em 2025, o
+Hospital Manoel Gonçalves registrou 5.943 internações de média e 1.253 de alta complexidade, o equivalente a
+34.666 dias de leito. Esse valor supera os 23.140 dias obtidos com 79 leitos gerais SUS e a ocupação de
+80,25\% do Quadro 43 dos Parâmetros SUS \citep[p.~84]{brasil2015b}, o que indica que o hospital opera
+acima dessa referência. A demanda do modelo inclui apenas internações eletivas de residentes. As demais
+internações do hospital são mantidas como carga fixa: 2.382 de não residentes e as internações de urgência
+de residentes. Como o SIH coletado não cruza estabelecimento e caráter, a parcela eletiva dos residentes no
+hospital foi estimada pela proporção eletiva dos residentes em cada complexidade (19,8\% na média e 38,5\% na
+alta), resultando em 856 internações eletivas de média e 192 de alta complexidade. A carga fixa corresponde
+a 29.634 dias de leito, e o limite $B_a$ é a diferença:
+
+\begin{equation}
+\begin{gathered}
+B_a=\text{Dias de leito observados}-\text{Carga fixa de não residentes e urgências}\\[3pt]
+=34\,666-29\,634=5\,032\ \text{dias de leito por ano}
+\end{gathered}
+\label{eq:3}
+\end{equation}
+
+Os dois níveis compartilham esse limite anual. A demanda eletiva de residentes requer 6.630 dias de leito
+quando toda ela é atendida no município.
+
+\FloatBarrier
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.31579\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.27068\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.41353\linewidth-2\tabcolsep\relax}@{}}
+\caption{Principais parâmetros e hipóteses do planejamento}\label{tab:3}\\
+\toprule
+\textbf{Parâmetro} & \textbf{Valor adotado} & \textbf{Natureza} \\
+\midrule
+\endfirsthead
+\multicolumn{3}{l}{\footnotesize\tablename~\thetable\ -- continuação}\\
+\toprule
+\textbf{Parâmetro} & \textbf{Valor adotado} & \textbf{Natureza} \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Raio de cobertura primária & 3 km & Hipótese; indicador, não proibição de alocar além do raio \\
+Capacidade por equipe e por ACS & 3.000 e 750 habitantes & Referências assumidas no modelo \\
+Equipes por UBS & Até 4; mínimo 1 nas abertas & Restrição de dimensionamento \\
+Mínimo para abrir UBS urbana & 2.000 habitantes dentro do raio & Hipótese de viabilidade \\
+Mínimo para abrir UBS rural & Sem mínimo populacional & Exceção do cenário; equipe mínima mantida \\
+Teto de novas UBS & Não imposto & Número limitado aos locais candidatos \\
+Distância mínima à UBS existente & Mais de 1 km para criar candidata & Regra de geração de locais \\
+Fator de rota e crescimento & 1 e 0\% & Distâncias em linha reta; população constante \\
+Parcela terciária via secundária & 25\%, 50\% e 75\% & Cenários sobre eventos, não pessoas \\
+Folga de custo da terceira fase & 2\% & Troca explícita entre custo e distância \\
+\end{longtable}
+\noindent\footnotesize Fonte: elaboração própria a partir dos dados e resultados do estudo.
+\endgroup
+
+\FloatBarrier
+\Needspace{12\baselineskip}
+
+\FloatBarrier
+\Needspace{12\baselineskip}
+\section{Diagnóstico de cobertura e acessibilidade}
+
+O diagnóstico considera as 22 UBS e os 91 pontos de demanda. A cobertura geográfica é a proporção de
+habitantes a até 3 km de alguma UBS. A distância média até a unidade mais próxima dá maior peso aos pontos
+mais populosos. Os indicadores são calculados para o município e para as zonas urbana e rural.
+
+A cobertura efetiva combina o acesso geográfico (até 3 km) com a capacidade das equipes: cada UBS atende,
+no máximo, o menor valor entre 3.000 habitantes por eSF e 750 habitantes por ACS, e a população de cada ponto
+é alocada uma única vez (fluxo máximo, sem dupla contagem). O indicador administrativo do Ministério da Saúde
+não é utilizado, pois não aplica o raio de 3 km.
+
+Para avaliar conjuntamente oferta, distância e concorrência pelos serviços, foi aplicado o índice
+gravitacional ajustado pela demanda discutido por \citet{guagliardo2004}. O cálculo é realizado em três
+etapas:
+
+\begin{enumerate}[leftmargin=*,itemsep=5pt]
+\item \textbf{Calcular o peso da distância.} Para cada ligação entre um ponto de demanda e uma UBS,
+calcula-se o inverso da distância elevada ao coeficiente $\beta$. Assim, unidades mais próximas recebem
+maior peso. Distâncias inferiores a 0,1 km são substituídas por esse valor apenas para o cálculo do índice.
+\item \textbf{Estimar a concorrência pela UBS.} Multiplica-se a população de cada ponto pelo peso de sua
+distância até a unidade. A soma desses valores representa a população ponderada que concorre pelos
+recursos daquela UBS.
+\item \textbf{Calcular a acessibilidade do ponto.} Para cada UBS, multiplica-se sua capacidade pelo peso
+da distância até o ponto e divide-se o resultado pela concorrência estimada na etapa anterior. A soma
+das contribuições de todas as UBS fornece o índice de acessibilidade do ponto, representado por $A_i$.
+\end{enumerate}
+
+A oferta de cada UBS é calculada com 3.000 habitantes por eSF. O diagnóstico atual utiliza 23 equipes;
+o plano proposto utiliza as equipes dimensionadas pelo modelo. O coeficiente $\beta$ define o peso da
+distância: quanto maior seu valor, maior a influência das unidades próximas. São comparados $\beta=1$ e
+$\beta=2$. O piso de 0,1 km evita divisão por zero em coordenadas coincidentes. O índice considera todas
+as UBS; o raio de 3 km é utilizado no cálculo separado da cobertura.
+
+Quanto maior o índice $A_i$, maior a oferta potencial por habitante no ponto. Para comparar áreas,
+divide-se cada índice pela média municipal ponderada pela população. O resultado é a acessibilidade
+relativa: valores acima de 1 ficam acima da média; valores abaixo de 1 ficam abaixo dela. Trata-se de
+um índice de comparação, não de um percentual de cobertura.
+
+Também é calculada a maior população que as equipes atuais conseguem receber dentro de 3 km.
+Um problema de fluxo máximo distribui a população entre as UBS sem ultrapassar suas capacidades. São
+avaliados dois casos: capacidade das eSF e capacidade conjunta das eSF e dos ACS. Ambos mantêm a rede
+atual, sem novas unidades ou equipes.
+
+\FloatBarrier
+\Needspace{12\baselineskip}
+\section{Comparação orçamentária}
+
+A comparação financeira utiliza a LOA 2026, aprovada pela Lei Municipal nº 6.273/2025, e o RREO do
+quarto bimestre de 2026, Anexo 02 \citep{itauna2025,tesouro2026}. A função 10 reúne as despesas de saúde;
+a subfunção 301 corresponde à atenção básica; e a 302, à assistência hospitalar e ambulatorial. Esta última
+situa a rede especializada no orçamento municipal e inclui outros serviços além dos representados no modelo.
+
+A dotação inicial é o orçamento aprovado para o início do ano. A dotação atualizada inclui as alterações
+registradas até agosto. As despesas empenhadas e liquidadas mostram a execução acumulada no período. Em cada
+função ou subfunção, somam-se as despesas exceto intraorçamentárias e as intraorçamentárias. O total da saúde
+é apresentado separadamente de suas subfunções.
+
+O custo mensal de operação da APS é multiplicado por 12 e comparado ao orçamento anual da atenção
+básica. Ele reúne UBS existentes e novas, eSF e ACS. O valor usado para ponderar os deslocamentos fica
+apenas na otimização. A comparação orçamentária avalia o custo operacional, sem impor um teto de gastos ao modelo.
+
+\section{Formulação da localização e do dimensionamento das UBS}
+
+\subsection*{Conjuntos e parâmetros da atenção primária}
+\begin{description}
+\item[$I$] Pontos de demanda.
+\item[$E$] UBS existentes.
+\item[$C$] Locais candidatos a novas UBS.
+\item[$J=E\cup C$] Conjunto de locais primários existentes e candidatos.
+\item[$P_i$] População do ponto $i$, em habitantes.
+\item[$d_{ij}$] Distância entre o ponto $i$ e a UBS $j$, em quilômetros.
+\item[$H_{ij}$] Indicador de distância de no máximo $3$ km.
+\item[$m_j$] Mínimo populacional para abrir a candidata $j$: $2000$ no urbano e $0$ no rural.
+\end{description}
+
+Os conjuntos $I$, $E$, $C$ e $J$ representam os pontos de demanda, as UBS existentes, as candidatas e
+todos os locais primários. As candidatas ficam nos pontos de demanda a mais de 1 km da UBS existente mais próxima.
+Sua implantação depende de avaliação posterior dos terrenos e edificações. A distância $d_{ij}$ usa
+latitude e longitude pela fórmula de Haversine, com fator de rota igual a 1. O indicador $H_{ij}$ vale 1
+para distâncias de até 3 km e 0 para distâncias maiores. As variáveis e restrições são apresentadas a seguir.
+
+\FloatBarrier
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.11278\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.63910\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.24812\linewidth-2\tabcolsep\relax}@{}}
+\caption{Notação das decisões primárias}\label{tab:4}\\
+\toprule
+\textbf{Símbolo} & \textbf{Definição} & \textbf{Domínio} \\
+\midrule
+\endfirsthead
+\multicolumn{3}{l}{\footnotesize\tablename~\thetable\ -- continuação}\\
+\toprule
+\textbf{Símbolo} & \textbf{Definição} & \textbf{Domínio} \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+$q_{ij}$ & Habitantes do ponto i alocados à UBS j & Real não negativo \\
+$y_j$ & UBS j aberta; existentes fixadas em 1 & Binário \\
+$n_j$ & Total de equipes planejadas na UBS j & Inteiro não negativo \\
+$a_j$ & Total de ACS planejados na UBS j & Inteiro não negativo \\
+\end{longtable}
+\noindent\footnotesize Fonte: elaboração própria a partir dos dados e resultados do estudo.
+\endgroup
+
+A população de cada ponto deve ser distribuída entre as UBS. A quantidade recebida por uma unidade não pode
+superar a capacidade de suas equipes de Saúde da Família (eSF) e de seus agentes comunitários de saúde (ACS):
+
+\begin{equation}
+\sum_{j\in J}q_{ij}=P_i\quad\forall i\in I
+\label{eq:4}
+\end{equation}
+
+\begin{equation}
+\sum_{i\in I}q_{ij}\leq3000n_j,\qquad\sum_{i\in I}q_{ij}\leq750a_j\quad\forall j\in J
+\label{eq:5}
+\end{equation}
+
+Cada UBS aberta deve ter de uma a quatro equipes. As UBS existentes permanecem abertas:
+
+\begin{equation}
+y_j\leq n_j\leq4y_j\quad\forall j\in J,\qquad y_j=1\quad\forall j\in E
+\label{eq:6}
+\end{equation}
+
+O número mínimo de moradores para abertura é exigido apenas nas candidatas. Nas urbanas, pelo menos 2.000
+habitantes devem ser alocados à nova UBS dentro dos 3 km. Nas rurais, não há mínimo populacional, mas continua
+sendo necessária pelo menos uma equipe. A identificação rural segue a informação registrada no nome do ponto:
+
+\begin{equation}
+\sum_{i\in I}H_{ij}q_{ij}\geq m_jy_j\quad\forall j\in C
+\label{eq:7}
+\end{equation}
+
+O modelo escolhe entre as candidatas disponíveis, sem um teto adicional de novas UBS. A decisão de
+abertura depende da cobertura, das capacidades e dos custos. A população atendida dentro do raio é
+representada por $G$, e os custos são calculados a seguir:
+
+\begin{equation}
+G=\sum_{i\in I}\sum_{j\in J}H_{ij}q_{ij}
+\label{eq:8}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}C_{op}={}&12000|E|+15000\sum_{j\in C}y_j\\&+c_{eSF}\sum_{j\in J}n_j+c_{ACS}\sum_{j\in J}a_j.\end{aligned}
+\label{eq:9}
+\end{equation}
+
+\begin{equation}
+C_{des}=\kappa\sum_{i\in I}\sum_{j\in J}d_{ij}q_{ij},\qquad C_{tot}=C_{op}+C_{des}
+\label{eq:10}
+\end{equation}
+
+Os custos fixos mensais são R\$ 12.000 por UBS existente e R\$ 15.000 por nova UBS. A equipe reúne médico,
+enfermeiro e técnico, com salários mensais de R\$ 14.000, R\$ 5.000 e R\$ 3.000. O salário do ACS é o piso
+nacional de dois salários mínimos (Emenda Constitucional nº 120/2022), de R\$ 3.242 em 2026, com salário
+mínimo de R\$ 1.621 \citep{brasil2022,brasil2025sm}. Sobre os salários incidem encargos e provisões,
+admitindo contratação pelo regime da CLT: 13º salário e um terço de férias, que elevam a remuneração anual
+para 13,33 salários, e, sobre esse total, contribuição patronal ao INSS de 20\%, RAT de 2\% e FGTS de 8\%.
+O fator resultante é $(13{,}33/12)\times1{,}30=1{,}4444$. Assim, $c_{eSF}=$ R\$ 31.777,78 e
+$c_{ACS}=$ R\$ 4.682,89 por mês. Em regime estatutário, os encargos dependem do regime próprio de previdência
+do município. O coeficiente $\kappa=0{,}05$ pondera o deslocamento em reais por habitante-quilômetro.
+Esses valores são estimativas de operação. A construção entra uma única vez na segunda fase,
+somada a 60 meses de operação. O horizonte de cinco anos é uma hipótese de avaliação econômica,
+não um parcelamento da obra. Consideram-se a rede implantada em funcionamento por cinco anos,
+custos constantes e ausência de desconto financeiro, reajuste e valor residual.
+
+Para cada candidata $j$, a variável binária $z_{jp}$ seleciona o porte $p$, de uma a quatro equipes.
+Se $b_p$ é o custo de construção do porte, o investimento é $B=\sum_{j,p}b_pz_{jp}$.
+As restrições $\sum_p z_{jp}=y_j$ e $e_j=\sum_p pz_{jp}$ associam abertura, equipes e investimento.
+O custo operacional mensal é $O=C_{tot}-C_{des}$; o custo no horizonte é $B+60O$.
+O termo de deslocamento permanece como critério da terceira fase e não compõe o desembolso operacional.
+
+A primeira fase encontra a maior cobertura $G^*$. A segunda minimiza o custo de construção e operação em cinco anos, $B+60O$, mantendo essa
+cobertura com uma pequena tolerância numérica: $\varepsilon_G$ é o maior valor entre 0,5 habitante e um
+milionésimo da população total. A terceira reduz o custo associado ao deslocamento, $C_{des}$, sem reduzir a
+cobertura abaixo desse limite, limitando a operação a 102\% de seu valor na segunda fase e o investimento ao valor daquela fase:
+
+\begin{equation}
+\mathrm{Fase\ 1}:\quad\max G\quad\longrightarrow\quad G^*
+\label{eq:11}
+\end{equation}
+
+\begin{equation}
+\mathrm{Fase\ 2}:\quad\min (B+60O)\quad\mathrm{s.a.}\quad G\geq G^*-\varepsilon_G
+\label{eq:12}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}\text{Fase 3:}\quad&\min C_{des}\\\text{sujeito a:}\quad&G\geq G^*-\varepsilon_G,\\&O\leq1{,}02\widehat O_2,\\&B\leq\widehat B_2.\end{aligned}
+\label{eq:13}
+\end{equation}
+
+Os valores de operação e investimento da segunda fase são $\widehat O_2$ e $\widehat B_2$. Na terceira, a folga de 2\% incide somente na operação; a construção não amplia essa margem. O indicador de subutilização considera menos de 2.000 habitantes por
+equipe. Já a regra de abertura urbana exige ao menos 2.000 habitantes atendidos pela nova UBS dentro do raio.
+
+\FloatBarrier
+\Needspace{12\baselineskip}
+\subsection*{Apresentação financeira e comparação com o orçamento anual}
+O funcionamento é apresentado separadamente para as UBS existentes e novas. Em cada grupo,
+somam-se as parcelas fixas, as equipes e os ACS. A soma dos grupos corresponde ao custo mensal
+da rede completa; sua multiplicação por 12 fornece o custo anual de operação. O investimento
+em construção das novas unidades é apresentado em linha própria e ocorre uma única vez.
+
+Para a comparação anual, considera-se um cenário de implantação com desembolso integral das
+obras e 12 meses de funcionamento da rede completa no mesmo exercício. Nesse cenário,
+o total é a soma da operação anual e da construção. Essa hipótese serve para comparar
+magnitudes e não representa um cronograma contratual ou a previsão de abertura simultânea.
+Se os pagamentos atravessarem exercícios, o investimento deve ser distribuído pelo cronograma
+físico-financeiro. O horizonte de cinco anos utilizado na otimização permanece distinto desta
+comparação de um ano.
+
+A referência principal é a dotação da subfunção Atenção Básica, com dotação inicial e atualizada
+identificadas separadamente. O orçamento total da Saúde é apresentado como contexto, e a
+Assistência Hospitalar e Ambulatorial permanece separada da comparação dos custos das UBS.
+Atenção Básica e atenção primária correspondem aqui ao mesmo âmbito de comparação; não são
+dois orçamentos a somar. O orçamento da subfunção contempla outras despesas além dos componentes
+estimados pelo modelo. A operação das unidades existentes integra o total da rede e não deve
+ser novamente somada ao gasto municipal observado. O proxy de deslocamento é excluído dos
+desembolsos apresentados.
+
+\section{Fixação do plano primário e cenários especializados}
+
+A atenção primária constitui a referência inicial para a população vinculada às UBS. O atendimento pode
+ser resolvido nesse nível ou exigir encaminhamento para a rede especializada. O planejamento representa
+a primária em habitantes e a utilização especializada em volumes de procedimentos e internações. Por isso,
+a população vinculada e os eventos especializados são analisados em suas respectivas unidades de medida.
+
+Para os atendimentos que exigem encaminhamento, são representados três percursos: primária--secundária,
+com término na secundária; primária--terciária, com acesso direto; e primária--secundária--terciária. A
+passagem pelos dois níveis no mesmo estabelecimento utiliza a capacidade de ambos, com distância nula
+no trecho interno entre eles.
+
+A fração $\alpha_{iu}=q_{iu}/P_i$ indica a parcela da população do ponto $i$ vinculada à UBS $u$.
+Essa mesma fração distribui a demanda especializada do ponto entre as UBS. Nos seis cenários, mantêm-se
+os locais, as equipes, os ACS e as vinculações do plano com 22 UBS existentes e 12 novas.
+
+Os conjuntos $U$, $S$ e $T$ representam as UBS ativas e os estabelecimentos de atenção secundária e
+terciária. O conjunto $F$ reúne $S$ e $T$, e $K$ distingue ambulatório e internações. Na classificação
+única, cada local oferece apenas seu nível principal. Na múltipla, pode atender mais de um nível.
+Essa classificação do estudo considera a produção eletiva de média e alta complexidade em pelo menos seis
+meses de 2025, entre outras evidências. O centro de especialidades e o hospital podem atuar nos dois níveis,
+com capacidade compartilhada.
+
+Para cada ponto $i$ e tipo de atendimento $k$, os volumes anuais da secundária e da terciária são $D^2_{ik}$ e
+$D^3_{ik}$. O parâmetro $R$ indica a parte da demanda terciária que passa antes pela secundária. São testados
+os valores de 25\%, 50\% e 75\%. A demanda é dividida nos três caminhos abaixo:
+
+\begin{equation}
+\begin{gathered}
+\text{Demanda terciária via secundária}=R\times\text{Demanda terciária}\\[7pt]
+\text{Demanda terciária direta}=(1-R)\times\text{Demanda terciária}\\[7pt]
+\text{Demanda que termina na secundária}\\[3pt]
+=\text{Demanda secundária total}-\text{Demanda terciária via secundária}
+\end{gathered}
+\label{eq:14}
+\end{equation}
+
+Os volumes $A_{ik}$, $L_{ik}$ e $V_{ik}$ representam, respectivamente, o término na secundária, o acesso
+direto à terciária e a passagem pelos dois níveis. A passagem utiliza capacidade em ambos os níveis e já
+está incluída nos totais de demanda. Para manter o volume que termina na secundária não negativo, exige-se
+$D^2_{ik}\geq RD^3_{ik}$ para cada ponto $i$ e tipo $k$. Os percentuais representam cenários de planejamento. Procedimentos e internações são
+distribuídos separadamente.
+
+\FloatBarrier
+\Needspace{12\baselineskip}
+\section{Formulação do encaminhamento hierárquico}
+
+\FloatBarrier
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.23308\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.76692\linewidth-2\tabcolsep\relax}@{}}
+\caption{Notação das decisões de encaminhamento}\label{tab:5}\\
+\toprule
+\textbf{Símbolo} & \textbf{Significado} \\
+\midrule
+\endfirsthead
+\multicolumn{2}{l}{\footnotesize\tablename~\thetable\ -- continuação}\\
+\toprule
+\textbf{Símbolo} & \textbf{Significado} \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+$f_{iuks}$ & Volume que parte de i via UBS u e termina no secundário s \\
+$g_{iukt}$ & Volume que parte de i via UBS u e segue diretamente ao terciário t \\
+$v_{iukst}$ & Volume que recebe atendimento em s e segue para t \\
+$\ell^f_{iuk},\;\ell^g_{iuk},\;\ell^v_{iuk}$ & Volumes não alocados de cada caminho \\
+$A_a\text{ e }B_a$ & Limites ambulatorial e de dias de leito do estabelecimento a \\
+\end{longtable}
+\noindent\footnotesize Fonte: elaboração própria a partir dos dados e resultados do estudo.
+\endgroup
+
+Os fluxos e as quantidades não atendidas podem assumir valores reais não negativos. Para cada ponto, UBS e
+tipo de atendimento, as equações garantem que a soma do volume alocado e do não alocado seja igual à demanda
+prevista. A distribuição entre as UBS segue a fração fixa $\alpha_{iu}$:
+
+\begin{equation}
+\sum_{s\in S}f_{iuks}+\ell^f_{iuk}=A_{ik}\alpha_{iu}
+\label{eq:15}
+\end{equation}
+
+\begin{equation}
+\sum_{t\in T}g_{iukt}+\ell^g_{iuk}=L_{ik}\alpha_{iu}
+\label{eq:16}
+\end{equation}
+
+\begin{equation}
+\sum_{s\in S}\sum_{t\in T}v_{iukst}+\ell^v_{iuk}=V_{ik}\alpha_{iu}
+\label{eq:17}
+\end{equation}
+
+As quantidades $Q^2_{ak}$ e $Q^3_{ak}$ somam os atendimentos recebidos pelo estabelecimento $a$ na secundária
+e na terciária. Cada soma inclui todas as origens e UBS:
+
+\begin{equation}
+Q^2_{ak}=\sum_{i,u}f_{iuka}+\sum_{i,u,t}v_{iukat}\quad(a\in S)
+\label{eq:18}
+\end{equation}
+
+\begin{equation}
+Q^3_{ak}=\sum_{i,u}g_{iuka}+\sum_{i,u,s}v_{iuksa}\quad(a\in T)
+\label{eq:19}
+\end{equation}
+
+Quando um estabelecimento não oferece determinado nível, sua quantidade naquele nível é zero. Se oferece os
+dois, os atendimentos compartilham os limites ambulatorial e hospitalar do mesmo CNES. Os parâmetros
+$\tau_2$ e $\tau_3$ representam as permanências médias, em dias, da média e da alta complexidade:
+
+\begin{equation}
+Q^2_{a,AMB}+Q^3_{a,AMB}\leq A_a\quad\forall a\in F
+\label{eq:20}
+\end{equation}
+
+\begin{equation}
+\tau_2Q^2_{a,HOSP}+\tau_3Q^3_{a,HOSP}\leq B_a\quad\forall a\in F
+\label{eq:21}
+\end{equation}
+
+Somente estabelecimentos com leitos podem receber internações. Uma passagem pelos dois níveis no mesmo
+local tem distância interna nula, mas utiliza capacidade em ambos. No ambulatório, são contabilizados dois
+procedimentos; no hospital, somam-se os dias de permanência das duas etapas. O percurso só é alocado quando
+há capacidade para completá-lo.
+
+O primeiro objetivo da etapa especializada reduz a demanda não atendida. O indicador $\Phi$ divide os volumes
+não alocados pelas demandas totais $N^2_k=\sum_{i\in I}D^2_{ik}$ e
+$N^3_k=\sum_{i\in I}D^3_{ik}$. Dessa forma, procedimentos
+e internações são avaliados em termos relativos, sem somar diretamente unidades diferentes. Um percurso via
+não realizado deixa um atendimento sem alocação em cada nível e, por isso, aparece nas duas parcelas:
+
+\begin{equation}
+\Phi=\sum_{i,u,k}\frac{\ell^f_{iuk}+\ell^v_{iuk}}{N^2_k}+\sum_{i,u,k}\frac{\ell^g_{iuk}+\ell^v_{iuk}}{N^3_k}
+\label{eq:22}
+\end{equation}
+
+Depois de encontrar a menor falta, o modelo reduz o indicador de deslocamento $Z$. A falta pode aumentar
+apenas pela tolerância numérica de $10^{-9}$. As distâncias $d_{iu}$, $d_{us}$, $d_{ut}$ e $d_{st}$
+correspondem aos trechos entre origem, UBS, secundária e terciária. A população total é $N_P$. O indicador é
+dividido nos componentes abaixo:
+
+\begin{equation}
+Z=Z_0+Z_f+Z_g+Z_v
+\label{eq:23}
+\end{equation}
+
+\begin{equation}
+Z_0=\frac{\sum_{i,u}P_i d_{iu}\alpha_{iu}}{N_P}
+\label{eq:24}
+\end{equation}
+
+\begin{equation}
+Z_f=\sum_{i,u,k,s}\frac{(d_{iu}+d_{us})f_{iuks}}{N^2_k}
+\label{eq:25}
+\end{equation}
+
+\begin{equation}
+Z_g=\sum_{i,u,k,t}\frac{(d_{iu}+d_{ut})g_{iukt}}{N^3_k}
+\label{eq:26}
+\end{equation}
+
+\begin{equation}
+Z_v=\sum_{i,u,k,s,t}\left[\frac{d_{iu}+d_{us}}{N^2_k}+\frac{d_{st}}{N^3_k}\right]v_{iukst}
+\label{eq:27}
+\end{equation}
+
+Como a vinculação às UBS está fixa, $Z_0$ é constante. Os outros componentes dividem os deslocamentos
+pela demanda de cada grupo. Esse indicador orienta a otimização. Os resultados também apresentam a distância
+média dos percursos completos, ponderada pelo volume alocado.
+
+\begin{equation}
+\begin{aligned}\min\Phi&\ \longrightarrow\ \Phi^*,\\\min Z\quad&\text{sujeito a}\quad\Phi\leq\Phi^*+10^{-9}.\end{aligned}
+\label{eq:28}
+\end{equation}
+
+\FloatBarrier
+\Needspace{12\baselineskip}
+\section{Implementação e validação}
+
+A APS foi programada em Python com PuLP e resolvida pelo HiGHS \citep{huangfu2018}. Os encaminhamentos
+foram formulados em GNU MathProg e resolvidos pelo GLPK como problemas de programação linear. O limite foi
+de 300 segundos por fase na APS, com tolerância relativa de $10^{-4}$, e de 120 segundos por resolução na
+hierarquia. No plano de referência, as três fases da APS terminaram com ótimo confirmado dentro dessa
+tolerância. Nos cenários de sensibilidade, a análise distingue as soluções viáveis das que tiveram ótimo
+confirmado; o ponto de 98\% da curva utilizou limite de 900 segundos.
+
+Para a curva de cobertura e custo, a primeira fase da APS é substituída por metas mínimas de cobertura,
+com folga de custo zero. Na análise de sensibilidade, variam-se, um de cada vez, o raio (2 e 5 km), a folga
+de custo (0\% e 5\%), o mínimo populacional rural (500 e 1.000 habitantes) e o crescimento uniforme da
+população (5\% e 10\%). Esses cenários avaliam apenas a atenção primária, sem alterar o plano de referência
+nem os encaminhamentos especializados.
+
+A verificação computacional considerou a conservação da população e da demanda, o respeito às capacidades,
+as regras de abertura e a manutenção do plano primário nos seis cenários de encaminhamento. Também foram
+conferidos o dimensionamento de equipes e ACS, os custos e o compartilhamento dos recursos entre níveis.
+Os subproblemas de encaminhamento apresentaram soluções ótimas de programação linear.
+
+\FloatBarrier
+\chapter{Resultados e discussões}
+
+\FloatBarrier
+\Needspace{12\baselineskip}
+
+\FloatBarrier
+\Needspace{12\baselineskip}
+\section{Cobertura atual e acessibilidade territorial}
+
+Na rede atual, 91.225 habitantes estão a até 3 km de uma UBS, correspondendo a 93,40\% da população.
+A cobertura urbana é de 97,94\%, enquanto os 13 pontos rurais ficam além do raio. A distância média até a
+UBS mais próxima é de 0,54 km na zona urbana e 7,22 km na rural. Esses resultados mostram a diferença de
+proximidade entre as duas áreas.
+
+\FloatBarrier
+\begingroup
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.19\linewidth}>{\raggedright\arraybackslash}p{0.21\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}@{}}
+\caption{Cobertura geográfica da rede atual e do plano proposto}\label{tab:diagnostico}\\
+\toprule
+\textbf{Zona} & \textbf{População} & \textbf{Rede atual} & \textbf{Plano proposto} \\
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\footnotesize\tablename~\thetable\ -- continuação}\\
+\toprule
+\textbf{Zona} & \textbf{População} & \textbf{Rede atual} & \textbf{Plano proposto} \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Urbana & 93.148 & 97,94\% & 99,85\% \\
+Rural & 4.521 & 0,00\% & 100,00\% \\
+Total & 97.669 & 93,40\% & 99,86\% \\
+\end{longtable}
+\noindent\footnotesize Fonte: elaboração própria. População a até 3 km da UBS mais próxima; distâncias em linha reta.
+\endgroup
+
+Com as novas UBS, a distância média até a unidade mais próxima cai de 0,85 para 0,43 km. A média dos
+trajetos escolhidos pelo modelo é de 0,49 km, pois a distribuição também respeita as capacidades. Assim,
+a unidade que recebe a população pode ser diferente da mais próxima.
+
+Com as 23 eSF e os 140 ACS atuais, e a população do cenário (104.002 habitantes), a cobertura geográfica é de
+93,40\% e a cobertura efetiva é de 65,62\%: 27,8 pontos percentuais da população têm UBS a menos de 3 km, mas
+excedem a capacidade das equipes. Os 6,60\% restantes (6.862 habitantes) não têm UBS a 3 km e são
+atendidos por equipes móveis, dimensionadas à parte (Seção de equipes móveis do relatório técnico).
+
+\FloatBarrier
+\begingroup
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.22\linewidth}>{\raggedright\arraybackslash}p{0.17\linewidth}>{\raggedright\arraybackslash}p{0.17\linewidth}>{\raggedright\arraybackslash}p{0.17\linewidth}>{\raggedright\arraybackslash}p{0.17\linewidth}@{}}
+\caption{Acessibilidade relativa média por zona e coeficiente de distância}\label{tab:acessibilidade}\\
+\toprule
+\textbf{Zona e cenário} & \textbf{Atual: $\beta=1$} & \textbf{Plano: $\beta=1$} & \textbf{Atual: $\beta=2$} & \textbf{Plano: $\beta=2$} \\
+\midrule
+\endfirsthead
+\multicolumn{5}{l}{\footnotesize\tablename~\thetable\ -- continuação}\\
+\toprule
+\textbf{Zona e cenário} & \textbf{Atual: $\beta=1$} & \textbf{Plano: $\beta=1$} & \textbf{Atual: $\beta=2$} & \textbf{Plano: $\beta=2$} \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Urbana & 1,039 & 0,964 & 1,048 & 0,790 \\
+Rural & 0,194 & 1,749 & 0,019 & 5,325 \\
+Média municipal & 1,000 & 1,000 & 1,000 & 1,000 \\
+\end{longtable}
+\noindent\footnotesize Fonte: elaboração própria. Médias ponderadas pela população e divididas pela média da respectiva rede.
+\endgroup
+
+Na rede atual, a acessibilidade rural fica abaixo da média municipal nos dois valores de $\beta$.
+As novas UBS elevam esse índice, principalmente com $\beta=2$, que dá mais peso à proximidade. Como as
+candidatas ficam nos pontos de demanda, o resultado é sensível ao piso de distância. Os índices relativos
+comparam cada área à média de sua própria rede. Por isso, uma redução relativa urbana deve ser analisada
+junto com os índices absolutos e as distâncias.
+
+A média absoluta da acessibilidade passa de 0,706 para 1,321 com o aumento de 23 para 43 eSF.
+Enquanto a cobertura mostra quem está perto de uma UBS, a acessibilidade também considera a oferta e a
+população que concorre por ela.
+
+\section{Plano da atenção primária}
+
+\FloatBarrier
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.52632\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.47368\linewidth-2\tabcolsep\relax}@{}}
+\caption{Síntese do plano primário}\label{tab:6}\\
+\toprule
+\textbf{Indicador} & \textbf{Resultado} \\
+\midrule
+\endfirsthead
+\multicolumn{2}{l}{\footnotesize\tablename~\thetable\ -- continuação}\\
+\toprule
+\textbf{Indicador} & \textbf{Resultado} \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Pontos de demanda e população & 91 pontos e 97.669 habitantes \\
+UBS existentes e novas & 22 mantidas e 12 novas; total de 34 \\
+Equipes e ACS planejados & 43 equipes e 136 ACS \\
+População alocada a até 3 km & 97.531 habitantes; 99,86\% \\
+População além de 3 km & 138 habitantes; 0,14\% \\
+Custo operacional estimado & R\$ 2.447.317,33 por mês \\
+Proxy de deslocamento primário & R\$ 2.374,78 na referência mensal \\
+Soma dos termos de custo & R\$ 2.449.692,12 \\
+Certificação das três fases & Ótimo confirmado (tolerância de $10^{-4}$) \\
+\end{longtable}
+\noindent\footnotesize Fonte: elaboração própria a partir dos dados e resultados do estudo.
+\endgroup
+
+O plano mantém 22 UBS e acrescenta 12: 11 em pontos rurais e uma no setor urbano 313380805000177,
+que recebe exatamente o mínimo de 2.000 habitantes. A regra permite abrir unidades rurais com menos de
+2.000 habitantes, desde que tenham ao menos uma equipe. Essas unidades atendem populações pequenas e
+reduzem distâncias. Sua avaliação deve considerar tanto a utilização das equipes quanto a cobertura das
+comunidades: com os custos adotados, as 11 UBS rurais custam cerca de R\$ 90 por habitante atendido por mês,
+frente a R\$ 25 na média do plano.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth,height=.69\textheight,keepaspectratio]{figuras/mapa.pdf}
+\caption{Distribuição dos pontos de demanda e das UBS do plano}
+\label{fig:2}
+\par\smallskip\footnotesize Fonte: elaboração própria a partir das coordenadas dos pontos de demanda e das UBS.
+\end{figure}
+
+\FloatBarrier
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.16541\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.27820\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.19549\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.19549\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.16541\linewidth-2\tabcolsep\relax}@{}}
+\caption{Novas UBS selecionadas}\label{tab:7}\\
+\toprule
+\textbf{ID} & \textbf{Setor censitário} & \textbf{População alocada} & \textbf{Dentro de 3 km} & \textbf{eSF ACS} \\
+\midrule
+\endfirsthead
+\multicolumn{5}{l}{\footnotesize\tablename~\thetable\ -- continuação}\\
+\toprule
+\textbf{ID} & \textbf{Setor censitário} & \textbf{População alocada} & \textbf{Dentro de 3 km} & \textbf{eSF ACS} \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+NOVA\_64 & 313380805000177 (urbano) & 2.000 & 2.000 & 1 / 3 \\
+NOVA\_90 & 313380805000267 & 1.084 & 1.032 & 1 / 2 \\
+NOVA\_55 & 313380805000115 & 785 & 785 & 1 / 2 \\
+NOVA\_74 & 313380805000188 & 771 & 771 & 1 / 2 \\
+NOVA\_83 & 313380805000197 & 636 & 636 & 1 / 1 \\
+NOVA\_78 & 313380805000192 & 554 & 468 & 1 / 1 \\
+NOVA\_61 & 313380805000174 & 492 & 492 & 1 / 1 \\
+NOVA\_71 & 313380805000185 & 488 & 488 & 1 / 1 \\
+NOVA\_57 & 313380805000118 & 433 & 433 & 1 / 1 \\
+NOVA\_85 & 313380805000199 & 433 & 433 & 1 / 1 \\
+NOVA\_63 & 313380805000176 & 394 & 394 & 1 / 1 \\
+NOVA\_65 & 313380805000178 & 374 & 374 & 1 / 1 \\
+\end{longtable}
+\noindent\footnotesize Fonte: elaboração própria a partir dos dados e resultados do estudo.
+\endgroup
+
+Cada nova UBS rural recebe de 374 a 1.084 habitantes. Algumas também atendem pontos urbanos próximos, pois
+a regra rural depende do local de abertura. Os pontos escolhidos indicam áreas para implantação, sujeitas à
+verificação de terrenos, acesso e edificações.
+
+A cobertura dentro de 3 km aumenta cerca de 6,5 pontos percentuais, de 93,4\% para 99,86\%.
+A distância máxima passa de 10,42 para 3,43 km. O diagnóstico inicial considera a UBS existente mais próxima;
+o plano considera os destinos escolhidos sob as restrições de capacidade.
+
+Os 86 habitantes do setor urbano 313380805000193 e os 52 do setor 313380805000179 ficam além do raio,
+com distâncias aproximadas de 3,3 e 3,4 km. Esses 138 habitantes estão vinculados a UBS, mas exigem alternativas
+de acesso para atingir a meta de proximidade, como pontos de apoio ou transporte.
+
+As três fases tiveram ótimo confirmado dentro da tolerância adotada. A UBS urbana resulta da terceira
+fase: sem ela, o plano com as 11 UBS rurais custaria R\$ 2.446.366 por mês, valor praticamente igual, e a
+folga de 2\% permite abrir a unidade urbana para reduzir os deslocamentos.
+
+\FloatBarrier
+\Needspace{12\baselineskip}
+
+\FloatBarrier
+\Needspace{12\baselineskip}
+\section{Curva de cobertura e custo e análise de sensibilidade}
+
+Para avaliar o custo de cada nível de cobertura, o modelo da atenção primária foi resolvido novamente com
+metas mínimas de cobertura entre 93,4\% e o máximo de 99,86\%. Nesses casos, a fase de cobertura é substituída
+pela meta, e a folga de custo é zero, para que o resultado represente o menor custo encontrado para cada meta.
+Os demais parâmetros são os do plano de referência.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.96\linewidth,height=.38\textheight,keepaspectratio]{figuras/curva_cobertura_custo.pdf}
+\caption{Custo operacional mensal da atenção primária segundo a meta de cobertura}
+\label{fig:curva}
+\par\smallskip\footnotesize Fonte: elaboração própria. Folga de custo zero nos pontos da curva; o losango indica o plano de referência, com folga de 2\%.
+\end{figure}
+
+\FloatBarrier
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.14\linewidth}>{\raggedright\arraybackslash}p{0.13\linewidth}>{\raggedright\arraybackslash}p{0.09\linewidth}>{\raggedright\arraybackslash}p{0.19\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.14\linewidth}@{}}
+\caption{Curva de cobertura e custo da atenção primária}\label{tab:curva}\\
+\toprule
+\textbf{Cobertura} & \textbf{Novas UBS} & \textbf{eSF} & \textbf{Custo mensal (R\$)} & \textbf{Custo por habitante adicional (R\$/mês)} & \textbf{Mínimo comprovado} \\
+\midrule
+\endfirsthead
+\multicolumn{6}{l}{\footnotesize\tablename~\thetable\ -- continuação}\\
+\toprule
+\textbf{Cobertura} & \textbf{Novas UBS} & \textbf{eSF} & \textbf{Custo mensal (R\$)} & \textbf{Custo por habitante adicional (R\$/mês)} & \textbf{Mínimo comprovado} \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+93,40\% & 0 & 33 & 1.926.125 & -- & Sim \\
+95,26\% & 2 & 33 & 1.956.125 & 17 & Não \\
+96,00\% & 4 & 33 & 1.986.125 & 42 & Sim \\
+97,00\% & 6 & 35 & 2.079.681 & 96 & Não \\
+98,04\% & 7 & 38 & 2.190.014 & 108 & Não \\
+99,00\% & 9 & 40 & 2.288.252 & 105 & Sim \\
+99,54\% & 11 & 41 & 2.354.713 & 126 & Sim \\
+99,86\% & 11 & 42 & 2.400.540 & 146 & Sim \\
+\end{longtable}
+\noindent\footnotesize Fonte: elaboração própria. O custo por habitante adicional compara cada ponto ao anterior. Sem prova de mínimo, o custo é um limite superior do mínimo.
+\endgroup
+
+Mesmo sem novas UBS, a rede necessita de 33 equipes para comportar a população de 97.669 habitantes com
+3.000 habitantes por eSF, frente às 23 equipes cadastradas. Esse dimensionamento define o piso de
+R\$ 1,93 milhão por mês. Até 96\% de cobertura, cada habitante adicional custa entre R\$ 17 e R\$ 42 por mês.
+Acima desse patamar, o custo passa de R\$ 95 e chega a cerca de R\$ 146 por habitante adicional. Os últimos
+1,8 ponto percentual, de 98,04\% a 99,86\%, correspondem a cerca de 1.800 habitantes e exigem R\$ 211 mil
+mensais e quatro UBS a mais, com construção estimada em cerca de R\$ 8 milhões.
+
+Com folga de custo zero, a cobertura máxima é obtida com as 11 UBS rurais, 42 equipes e 136 ACS, a
+R\$ 2.400.540 por mês. A folga de 2\% acrescenta R\$ 46.777 mensais, inclui a UBS urbana e reduz a distância
+média ponderada de 0,505 para 0,486 km.
+
+A sensibilidade do plano foi avaliada alterando um parâmetro por vez, com os demais iguais aos da referência.
+
+\FloatBarrier
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.27\linewidth}>{\raggedright\arraybackslash}p{0.13\linewidth}>{\raggedright\arraybackslash}p{0.15\linewidth}>{\raggedright\arraybackslash}p{0.08\linewidth}>{\raggedright\arraybackslash}p{0.17\linewidth}>{\raggedright\arraybackslash}p{0.12\linewidth}@{}}
+\caption{Sensibilidade do plano primário}\label{tab:sensibilidade}\\
+\toprule
+\textbf{Cenário} & \textbf{Cobertura} & \textbf{Novas UBS (rurais)} & \textbf{eSF} & \textbf{Custo mensal (R\$)} & \textbf{Distância média (km)} \\
+\midrule
+\endfirsthead
+\multicolumn{6}{l}{\footnotesize\tablename~\thetable\ -- continuação}\\
+\toprule
+\textbf{Cenário} & \textbf{Cobertura} & \textbf{Novas UBS (rurais)} & \textbf{eSF} & \textbf{Custo mensal (R\$)} & \textbf{Distância média (km)} \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Referência & 99,86\% & 12 (11) & 43 & 2.447.317 & 0,486 \\
+Raio de 2 km & 98,57\% & 14 (12) & 44 & 2.518.461 & 0,517 \\
+Raio de 5 km & 100,00\% & 8 (7) & 38 & 2.214.380 & 0,593 \\
+Folga de custo de 0\% & 99,86\% & 11 (11) & 42 & 2.400.540 & 0,505 \\
+Folga de custo de 5\% & 99,86\% & 12 (11) & 45 & 2.520.239 & 0,467 \\
+Mínimo rural de 500 hab. & 96,70\% & 4 (4) & 36 & 2.090.824 & 0,656 \\
+Mínimo rural de 1.000 hab. & 94,81\% & 4 (1) & 33 & 1.986.125 & 0,818 \\
+Crescimento de 5\% & 99,86\% & 12 (11) & 44 & 2.507.192 & 0,485 \\
+Crescimento de 10\% & 99,86\% & 12 (11) & 46 & 2.598.845 & 0,479 \\
+\end{longtable}
+\noindent\footnotesize Fonte: elaboração própria. Cobertura medida no raio de cada cenário. Mínimo de custo comprovado em todos os cenários, exceto no mínimo rural de 500 habitantes.
+\endgroup
+
+O mínimo populacional rural é o parâmetro que mais altera o plano. Com exigência de 500 habitantes, são
+abertas 4 novas UBS, a cobertura é de 96,70\% e o custo mensal é R\$ 356.493 menor que o da referência.
+Com 1.000 habitantes, são abertas 4 novas UBS, apenas uma rural, e a cobertura é de 94,81\%. A regra sem
+mínimo rural é, portanto, a principal responsável pelas 11 aberturas rurais e deve ser comparada a
+alternativas como equipes itinerantes, unidades móveis e pontos de apoio com agentes comunitários.
+
+Com crescimento uniforme de 5\% e 10\% da população, o modelo mantém as mesmas 12 novas UBS, com mínimo de
+custo comprovado, e acrescenta equipes e ACS. A escolha dos locais é, assim, estável diante desse
+crescimento, que também aproxima a população do modelo da referência de 103.272 habitantes usada pelo
+Ministério da Saúde. O raio altera a própria definição de cobertura: com 5 km, 8 novas UBS alcançam toda a
+população; com 2 km, são abertas 14, e a cobertura máxima é de 98,57\%. A folga troca custo por distância
+de forma gradual: em relação à folga zero, 2\% e 5\% elevam o custo em 1,9\% e 5,0\% e reduzem a distância
+média em 4\% e 8\%.
+
+\FloatBarrier
+\Needspace{12\baselineskip}
+\section{Custo do plano e orçamento municipal}
+
+A LOA 2026 fixa R\$ 173,70 milhões para a função saúde. O demonstrativo do Tesouro apresenta dotação
+inicial de R\$ 49,89 milhões para atenção básica e R\$ 102,03 milhões para assistência hospitalar e
+ambulatorial. Até agosto de 2026, as dotações atualizadas alcançam R\$ 199,81 milhões para saúde,
+R\$ 50,89 milhões para atenção básica e R\$ 120,00 milhões para assistência hospitalar e ambulatorial
+\citep{itauna2025,tesouro2026}.
+
+\FloatBarrier
+\begingroup
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.36\linewidth}>{\raggedright\arraybackslash}p{0.27\linewidth}>{\raggedright\arraybackslash}p{0.27\linewidth}@{}}
+\caption{Orçamento de saúde de Itaúna e custo operacional do plano}\label{tab:orcamento}\\
+\toprule
+\textbf{Destinação} & \textbf{Inicial de 2026 (R\$ milhões)} & \textbf{Atualizado até agosto (R\$ milhões)} \\
+\midrule
+\endfirsthead
+\multicolumn{3}{l}{\footnotesize\tablename~\thetable\ -- continuação}\\
+\toprule
+\textbf{Destinação} & \textbf{Inicial de 2026 (R\$ milhões)} & \textbf{Atualizado até agosto (R\$ milhões)} \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Saúde total & 173,70 & 199,81 \\
+Atenção básica & 49,89 & 50,89 \\
+Assistência hospitalar e ambulatorial & 102,03 & 120,00 \\
+Custo anual estimado da APS do modelo & \multicolumn{2}{l}{29,37} \\
+Construção das 12 novas UBS (investimento único) & \multicolumn{2}{l}{23,86} \\
+\end{longtable}
+\noindent\footnotesize Fonte: elaboração própria a partir da LOA 2026, RREO do quarto bimestre, Manual Novo PAC Saúde 2025 e plano com folga de custo de 2\%.
+\endgroup
+
+O custo estimado é de R\$ 2.447.317,33 por mês, ou R\$ 29.367.808,00 por ano. Esse valor corresponde a
+58,87\% do orçamento inicial da atenção básica e a 57,70\% do atualizado até agosto. Em relação ao orçamento
+inicial de toda a saúde, representa 16,91\%. Os encargos e o piso dos ACS respondem pela maior parte desse
+valor: com salários sem encargos e ACS a R\$ 2.800, como em uma versão anterior do estudo, o custo anual
+seria de cerca de R\$ 21 milhões, ou 42\% do orçamento inicial da atenção básica.
+
+O custo do plano é inferior ao orçamento da atenção básica, mas cobre apenas parte de suas despesas
+e utiliza valores estimados. Construção, terrenos e outros serviços exigem cálculo adicional. A
+comparação orienta a avaliação financeira das alternativas, sem quantificar uma economia efetiva.
+
+O investimento de construção é calculado à parte, sem alterar o plano. As 12 novas UBS têm uma eSF cada
+e correspondem ao porte I do Novo PAC Saúde, com valor de referência de R\$ 1.988.000,00 por unidade na
+região Sudeste \citep[p.~10--11]{novopac2025}. O total estimado é de R\$ 23.856.000,00, em valores
+nominais de 2025, sem terrenos, equipamentos, mobiliário ou cotação local. Esse valor é um investimento
+único, e não uma despesa anual; por isso, não é somado ao custo operacional para a comparação com o
+orçamento de um ano.
+
+O repasse federal do Novo PAC para obras de UBS ocorre em parcela única, mas o pagamento da obra segue a
+execução e a medição das etapas previstas em contrato. A distribuição do desembolso entre anos depende do
+cronograma físico-financeiro de cada obra. O estudo não presume a aprovação de repasse federal para as
+12 unidades, de modo que a fonte de financiamento precisa ser definida no planejamento municipal.
+
+No quadro de recursos próprios, a LOA apresenta R\$ 29,56 milhões para atenção básica e R\$ 48,72
+milhões para assistência hospitalar e ambulatorial. A comparação principal utiliza os totais das subfunções,
+que incluem também outras fontes de financiamento.
+
+O orçamento da assistência hospitalar e ambulatorial situa a rede especializada na análise financeira.
+O modelo otimiza seus encaminhamentos, enquanto o cálculo completo de seu custeio depende de informações
+sobre serviços, contratos e pessoal.
+
+\section{Comparação dos encaminhamentos ambulatoriais}
+
+\FloatBarrier
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.18797\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.16541\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.23308\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.23308\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.18045\linewidth-2\tabcolsep\relax}@{}}
+\caption{Resultados ambulatoriais dos seis cenários}\label{tab:8}\\
+\toprule
+\textbf{Classificação} & \textbf{Via secundária} & \textbf{Atendido nível 2} & \textbf{Atendido nível 3} & \textbf{Média km} \\
+\midrule
+\endfirsthead
+\multicolumn{5}{l}{\footnotesize\tablename~\thetable\ -- continuação}\\
+\toprule
+\textbf{Classificação} & \textbf{Via secundária} & \textbf{Atendido nível 2} & \textbf{Atendido nível 3} & \textbf{Média km} \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Única & 25\% & 190.856 & 15.752 & 3,216 \\
+Única & 50\% & 190.856 & 15.752 & 3,252 \\
+Única & 75\% & 190.856 & 15.752 & 3,277 \\
+Múltipla & 25\% & 190.856 & 15.752 & 2,893 \\
+Múltipla & 50\% & 190.856 & 15.752 & 2,887 \\
+Múltipla & 75\% & 190.856 & 15.752 & 2,882 \\
+\end{longtable}
+\noindent\footnotesize Fonte: elaboração própria a partir dos dados e resultados do estudo.
+\endgroup
+
+Todos os seis cenários alocam os 190.856 procedimentos secundários e os 15.752 terciários, mesmo após o
+desconto da produção de não residentes. Com múltiplos níveis no mesmo estabelecimento, a distância média
+cai de 3,216 para 2,893 km no cenário de 25\%, de 3,252 para 2,887 km no de 50\% e de 3,277 para 2,882 km
+no de 75\%. As reduções são de aproximadamente 10,0\%, 11,2\% e 12,1\%, respectivamente. Sem o desconto
+dos não residentes, as reduções seriam maiores, porque o hospital, que concentra a oferta nos dois níveis,
+teria quase o dobro da capacidade ambulatorial disponível para os residentes.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.96\linewidth,height=.38\textheight,keepaspectratio]{figuras/distancias.pdf}
+\caption{Distância média dos percursos ambulatoriais por cenário}
+\label{fig:3}
+\par\smallskip\footnotesize Fonte: elaboração própria. Distâncias em linha reta, ponderadas pelo volume de percursos atendidos.
+\end{figure}
+
+Nos cenários múltiplos, as duas etapas dos percursos via secundária ocorrem no mesmo estabelecimento.
+Na classificação única, exigem locais diferentes. Essa diferença explica a redução das distâncias. Como os
+serviços são agrupados por nível, a aplicação dos destinos por especialidade exige avaliação específica.
+
+A comparação mais direta usa o mesmo percentual de encaminhamento e muda apenas a classificação dos
+estabelecimentos. Alterar $R$ também muda a quantidade de percursos, pois uma passagem pelos dois níveis
+reúne dois atendimentos. Com toda a demanda alocada, o número de percursos é $D^2+D^3-RD^3$.
+
+\clearpage
+\section{Encaminhamentos hospitalares}
+
+\FloatBarrier
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.15789\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.09023\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.18797\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.18797\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.18797\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.18797\linewidth-2\tabcolsep\relax}@{}}
+\caption{Alocação hospitalar segundo a classificação dos estabelecimentos}\label{tab:9}\\
+\toprule
+\textbf{Classificação} & \textbf{Via} & \textbf{Nível 2 atendido} & \textbf{Nível 3 atendido} & \textbf{Falta nível 2} & \textbf{Falta nível 3} \\
+\midrule
+\endfirsthead
+\multicolumn{6}{l}{\footnotesize\tablename~\thetable\ -- continuação}\\
+\toprule
+\textbf{Classificação} & \textbf{Via} & \textbf{Nível 2 atendido} & \textbf{Nível 3 atendido} & \textbf{Falta nível 2} & \textbf{Falta nível 3} \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Única & 25\% & 0,0 & 262,5 & 1.065,0 & 87,5 \\
+Única & 50\% & 0,0 & 175,0 & 1.065,0 & 175,0 \\
+Única & 75\% & 0,0 & 87,5 & 1.065,0 & 262,5 \\
+Múltipla & 25\% & 753,7 & 350,0 & 311,3 & 0,0 \\
+Múltipla & 50\% & 753,7 & 350,0 & 311,3 & 0,0 \\
+Múltipla & 75\% & 753,7 & 350,0 & 311,3 & 0,0 \\
+\end{longtable}
+\noindent\footnotesize Fonte: elaboração própria a partir dos dados e resultados do estudo.
+\endgroup
+
+Na classificação única, o hospital oferece apenas atenção terciária, e os locais secundários ficam sem
+oferta de leitos. Assim, as 1.065 internações secundárias e as terciárias que passam por esse nível ficam
+sem alocação. As faltas terciárias são de 87,5, 175 e 262,5 nos cenários de 25\%, 50\% e 75\%.
+Os valores fracionários decorrem da divisão dos volumes anuais por percentuais.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.96\linewidth,height=.38\textheight,keepaspectratio]{figuras/internacoes.pdf}
+\caption{Internações atendidas e não alocadas nos cenários}
+\label{fig:4}
+\par\smallskip\footnotesize Fonte: elaboração própria. Volumes anuais de internações estimados para cada cenário.
+\end{figure}
+
+Na classificação múltipla, o hospital recebe as 350 internações terciárias e 753,7 das 1.065 secundárias
+em todos os cenários. Esses atendimentos ocupam os 5.032 dias de leito que restam após a carga fixa de não
+residentes e urgências, ou seja, toda a capacidade disponível para a demanda do modelo. As 311,3
+internações secundárias restantes, cerca de 29\% da média complexidade eletiva, não encontram leito em
+Itaúna. O resultado é coerente com a situação observada: em 2025, cerca de 23\% das internações dos
+residentes ocorreram em hospitais de outros municípios, como Belo Horizonte, Divinópolis e Formiga. O total
+permanece igual nos três percentuais porque $R$ altera os percursos, mas preserva a demanda de cada nível.
+A distância média é de aproximadamente 3,65 km, pois o destino hospitalar é o mesmo.
+
+O modelo prioriza a alta complexidade porque o indicador de falta divide cada nível por sua demanda total.
+Uma internação terciária não alocada representa 1/350 da demanda terciária, e uma secundária, 1/1.065 da
+secundária. A falta na classificação única decorre, além disso, da regra que restringe o hospital ao
+nível terciário. Sem descontar a carga de não residentes e urgências, o hospital pareceria utilizar apenas
+29\% de sua capacidade, o que superestimaria a disponibilidade de leitos.
+
+\clearpage
+\section{Percursos e utilização da capacidade no cenário de referência}
+
+O cenário múltiplo de 50\% é utilizado para detalhar os fluxos. No ambulatório, 182.980 percursos
+terminam na secundária, 7.876 seguem diretamente à terciária e 7.876 passam pelos dois níveis. Esses últimos
+consomem 15.752 atendimentos, um por nível, já incluídos nos totais de demanda.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.96\linewidth,height=.38\textheight,keepaspectratio]{figuras/percursos.pdf}
+\caption{Composição dos percursos ambulatoriais no cenário múltiplo de 50\%}
+\label{fig:5}
+\par\smallskip\footnotesize Fonte: elaboração própria. Distribuição estimada dos percursos ambulatoriais.
+\end{figure}
+
+\FloatBarrier
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.15\linewidth}>{\raggedright\arraybackslash}p{0.15\linewidth}>{\raggedright\arraybackslash}p{0.15\linewidth}>{\raggedright\arraybackslash}p{0.13\linewidth}>{\raggedright\arraybackslash}p{0.12\linewidth}@{}}
+\caption{Utilização ambulatorial no cenário múltiplo de 50\%}\label{tab:10}\\
+\toprule
+\textbf{Estabelecimento} & \textbf{Capacidade total} & \textbf{Não residentes} & \textbf{Limite para residentes} & \textbf{Carga do modelo} & \textbf{Utilização} \\
+\midrule
+\endfirsthead
+\multicolumn{6}{l}{\footnotesize\tablename~\thetable\ -- continuação}\\
+\toprule
+\textbf{Estabelecimento} & \textbf{Capacidade total} & \textbf{Não residentes} & \textbf{Limite para residentes} & \textbf{Carga do modelo} & \textbf{Utilização} \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+APAE & 39.744 & 2.020 & 37.724 & 25.563 & 67,8\% \\
+CAPS 2 & 51.960 & 855 & 51.105 & 49.360 & 96,6\% \\
+CAPS AD & 7.428 & 124 & 7.304 & 7.304 & 100,0\% \\
+Centro de especialidades & 135.036 & 2.272 & 132.764 & 92.950 & 70,0\% \\
+CEO II & 492 & 77 & 415 & 415 & 100,0\% \\
+Hospital & 58.044 & 27.028 & 31.016 & 31.016 & 100,0\% \\
+\end{longtable}
+\noindent\footnotesize Fonte: elaboração própria a partir dos microdados do SIA 2025 e dos resultados do estudo. Capacidade total pelo pico mensal de 2025 multiplicado por 12; não residentes pela produção eletiva anual de pacientes de outros municípios.
+\endgroup
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.96\linewidth,height=.38\textheight,keepaspectratio]{figuras/capacidades.pdf}
+\caption{Utilização do limite ambulatorial disponível para residentes por estabelecimento}
+\label{fig:6}
+\par\smallskip\footnotesize Fonte: elaboração própria. Limite igual ao pico mensal de produção de 2025 multiplicado por 12, menos a produção eletiva de não residentes.
+\end{figure}
+
+O hospital é o estabelecimento mais afetado pelo desconto: 56,5\% de sua produção ambulatorial eletiva em
+2025 foi de pacientes de outros municípios, o que reduz o limite para os residentes de 58.044 para 31.016
+procedimentos por ano. Nos demais, a parcela de não residentes fica entre 2\% e 7\%, exceto no CEO II,
+com 23,5\%. Hospital, CAPS AD e CEO II atingem o limite disponível, e o CAPS 2 chega a 96,6\%. O centro de
+especialidades recebe cerca de 93,0 mil atendimentos e mantém 30\% de folga. A demanda total é alocada,
+mas a utilização varia entre as unidades, conforme suas capacidades e os destinos permitidos.
+
+AVACCI e o centro de convivência ficam sem fluxo porque não foi identificado pico de produção no
+recorte adotado, resultando em capacidade zero no cenário. O agrupamento por nível facilita a análise da
+rede; o detalhamento por especialidade é uma etapa necessária para aplicar os encaminhamentos aos serviços.
+
+Como a demanda secundária não é separada por especialidade, qualquer estabelecimento secundário pode
+receber qualquer procedimento de média complexidade. Assim, serviços especializados em públicos ou áreas
+específicas, como CAPS AD, CEO II e APAE, recebem cargas que preenchem seus limites com demanda geral.
+Essas cargas indicam a capacidade disponível no agregado, e não o encaminhamento esperado para cada serviço.
+
+\FloatBarrier
+\Needspace{12\baselineskip}
+\section{Limitações e implicações do estudo}
+
+A demanda representa os atendimentos eletivos registrados, distribuídos pelo território, e não a
+necessidade de saúde nem o número de pessoas. Ficam fora as urgências, os procedimentos não incluídos
+entre os 753 selecionados, como medicamentos e órteses, e a produção ambulatorial sem identificação do paciente, que
+não pode ser atribuída aos residentes. Esse último recorte tende a subestimar a demanda ambulatorial, e os
+cerca de 376 mil registros sem caráter nos estabelecimentos de Itaúna indicam que o modelo representa
+apenas a parte eletiva identificada da atividade desses serviços. O perfil etário hospitalar comum aos
+dois níveis, as aproximações locais e os diferentes anos das bases também delimitam a interpretação dos
+resultados.
+
+O estudo usa distâncias em linha reta, capacidade ambulatorial pelo pico mensal e capacidade hospitalar
+pela produção observada e pela permanência média. A produção de não residentes e as urgências são mantidas
+como carga fixa, igual à de 2025. No hospital, as urgências dos residentes foram estimadas pela proporção
+eletiva por complexidade, pois os dados coletados não cruzam estabelecimento e caráter. No ambulatório,
+apenas a produção eletiva foi descontada; registros sem caráter identificado não foram atribuídos a
+residentes nem a não residentes. As internações sem leito em Itaúna representam demanda a ser referenciada
+a outros municípios, cujos fluxos regionais não foram modelados. A inclusão da malha viária e o
+detalhamento por especialidade podem melhorar a representação dos trajetos e dos recursos compartilhados.
+
+A análise financeira depende dos custos unitários adotados. Os encargos supõem contratação pelo regime da
+CLT; em regime estatutário, dependem do regime próprio de previdência do município. Os salários de médico,
+enfermeiro e técnico são referências do estudo, e sua aplicação requer valores locais de remuneração,
+investimento e contratação especializada. As equipes calculadas representam o total por UBS,
+e não apenas novas contratações. As 23 eSF do CNES são usadas como referência, sem fixar um mínimo atual
+por unidade. Na abordagem sequencial, os encaminhamentos são definidos após a fixação do plano das UBS.
+
+Os cenários comparam percentuais de encaminhamento, classificação dos estabelecimentos, peso da
+distância na acessibilidade e parâmetros da atenção primária. A sensibilidade foi avaliada um parâmetro por
+vez; combinações de parâmetros, variações dos custos unitários e das capacidades especializadas, e
+crescimento populacional diferente entre os territórios podem complementar a análise. Quatro dos 15
+cenários de sensibilidade terminaram no limite de tempo sem prova de custo mínimo, de modo que seus custos
+são limites superiores.
+
+\FloatBarrier
+\chapter{Conclusões}
+
+O estudo apresenta um plano com 22 UBS existentes e 12 novas unidades, 11 rurais e uma urbana, com 43 eSF e
+136 ACS. Toda a população é vinculada, e 99,86\% fica a até 3 km da UBS de destino. Os 138 habitantes além
+do raio indicam a necessidade de alternativas locais de acesso. As três fases da atenção primária tiveram
+ótimo confirmado.
+
+A curva de cobertura e custo mostra que a rede precisa de 33 equipes mesmo sem novas unidades e que os
+últimos pontos percentuais de cobertura são os mais caros: de 98\% para 99,86\%, são necessárias quatro UBS
+a mais e R\$ 211 mil mensais. A escolha dos locais se mantém com crescimento populacional de até 10\%, mas
+depende fortemente do mínimo populacional rural. Assim, a decisão entre abrir as 11 unidades rurais ou
+atender parte das comunidades por outras formas de acesso deve considerar esse custo adicional.
+
+A demanda ambulatorial foi alocada nos seis cenários, mesmo após o desconto da produção de não
+residentes. A oferta de múltiplos níveis no mesmo local reduziu as distâncias médias entre 10,0\% e 12,1\%.
+No hospital, ao considerar a ocupação por urgências e por pacientes de outros municípios, os leitos
+disponíveis para a demanda eletiva dos residentes comportam toda a alta complexidade e cerca de 71\% da
+média complexidade. As 311 internações restantes por ano dependem de referência a outros municípios, como
+já ocorre para parte dos residentes. Os resultados mostram a importância de representar tanto os níveis
+oferecidos em cada estabelecimento quanto a parcela de sua capacidade já ocupada por outras demandas.
+
+A expansão melhora principalmente o acesso rural. Com encargos e o piso dos agentes comunitários, o custo
+anual estimado da APS é de R\$ 29,37 milhões, equivalente a 58,87\% do orçamento inicial da atenção básica
+em 2026. A construção das 12 novas UBS soma um investimento único estimado de R\$ 23,86 milhões. Essas
+referências apoiam o planejamento financeiro e podem ser aprofundadas com custos locais de implantação e dos
+demais serviços.
+
+A abordagem organiza decisões de localização, equipes e encaminhamentos, com prioridades de cobertura,
+custo e distância. A continuidade do estudo pode incluir terrenos, malha viária, transporte rural,
+especialidades e custos locais. A demanda não atendida, os fluxos regionais e a decisão conjunta de
+localização e encaminhamento também podem ampliar a análise.
+
+\begin{thebibliography}{99}
+
+\bibitem[Aday e Andersen(1974)]{aday1974}
+ADAY, L. A.; ANDERSEN, R. A framework for the study of access to medical care. \textit{Health Services Research}, v. 9, n. 3, p. 208--220, 1974. Disponível em: \url{https://pubmed.ncbi.nlm.nih.gov/4436074/}. Acesso em: 10 nov. 2026.
+
+\bibitem[Ahmadi-Javid et al.(2017)]{ahmadi2017}
+AHMADI-JAVID, A.; SEYEDI, P.; SYAM, S. S. A survey of healthcare facility location. \textit{Computers \& Operations Research}, v. 79, p. 223--263, 2017. DOI: \url{https://doi.org/10.1016/j.cor.2016.05.018}.
+
+\bibitem[Brasil(2026a)]{cnes2026}
+BRASIL. Ministério da Saúde. Cadastro Nacional de Estabelecimentos de Saúde --- CNES. Brasília, DF: Ministério da Saúde, 2026a. Base utilizada: competência julho de 2026. Disponível em: \url{https://cnes.datasus.gov.br/}. Acesso em: 10 nov. 2026.
+
+\bibitem[Brasil(2026b)]{datasus2026}
+BRASIL. Ministério da Saúde. DATASUS. Transferência de arquivos dos sistemas SIA SUS e SIH SUS. Brasília, DF: Ministério da Saúde, 2026b. Bases utilizadas: produção processada de 2025. Disponível em: \url{https://datasus.saude.gov.br/transferencia-de-arquivos/}. Acesso em: 10 nov. 2026.
+
+\bibitem[Brasil(2015a)]{brasil2015a}
+BRASIL. Ministério da Saúde. Portaria nº 1.631, de 1º de outubro de 2015. Aprova critérios e parâmetros para o planejamento e programação de ações e serviços de saúde no âmbito do SUS. Brasília, DF, 2015a. Disponível em: \url{https://bvsms.saude.gov.br/bvs/saudelegis/gm/2015/prt1631_01_10_2015.html}. Acesso em: 10 nov. 2026.
+
+\bibitem[Brasil(2015b)]{brasil2015b}
+BRASIL. Ministério da Saúde. Secretaria de Atenção à Saúde. Critérios e parâmetros para o planejamento e programação de ações e serviços de saúde no âmbito do Sistema Único de Saúde. Brasília, DF: Ministério da Saúde, 2015b. Série Parâmetros SUS, v. 1. Quadro 43, p. 84. Disponível em: \url{https://fehosp.com.br/files/manuais/5ffa8d1e03f7edb01e1eed7b07178cfb.pdf}. Acesso em: 10 nov. 2026.
+
+\bibitem[Guagliardo(2004)]{guagliardo2004}
+GUAGLIARDO, M. F. Spatial accessibility of primary care: concepts, methods and challenges. \textit{International Journal of Health Geographics}, v. 3, artigo 3, 2004. DOI: \url{https://doi.org/10.1186/1476-072X-3-3}.
+
+\bibitem[Huangfu e Hall(2018)]{huangfu2018}
+HUANGFU, Qi; HALL, J. A. Julian. Parallelizing the dual revised simplex method. Mathematical Programming Computation, v. 10, n. 1, p. 119--142, 2018. DOI: \url{https://doi.org/10.1007/s12532-017-0130-5}.
+
+\bibitem[IBGE(2022)]{ibge2022}
+IBGE. Instituto Brasileiro de Geografia e Estatística. Censo Demográfico 2022: agregados por setores censitários e resultados de população. Rio de Janeiro: IBGE, 2022. Ano de referência dos dados; divulgações posteriores consultadas. Disponível em: \url{https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html}. Acesso em: 10 nov. 2026.
+
+\bibitem[Rodriguez Santana et al.(2023)]{santana2023}
+RODRIGUEZ SANTANA, I.; MASON, A.; GUTACKER, N.; KASTERIDIS, P.; SANTOS, R.; RICE, N. Need, demand, supply in health care: working definitions, and their implications for defining access. \textit{Health Economics, Policy and Law}, v. 18, n. 1, p. 1--13, 2023. DOI: \url{https://doi.org/10.1017/S1744133121000293}.
+
+\bibitem[\c{S}ahin e Süral(2007)]{sahin2007}
+\c{S}AH\.{I}N, Güvenç; SÜRAL, Haldun. A review of hierarchical facility location models. Computers \& Operations Research, v. 34, n. 8, p. 2310--2331, 2007. DOI: \url{https://doi.org/10.1016/j.cor.2005.09.005}.
+
+\bibitem[Shengelia et al.(2005)]{shengelia2005}
+SHENGELIA, B.; TANDON, A.; ADAMS, O. B.; MURRAY, C. J. L. Access, utilization, quality, and effective coverage: an integrated conceptual framework and measurement strategy. \textit{Social Science \& Medicine}, v. 61, n. 1, p. 97--109, 2005. DOI: \url{https://doi.org/10.1016/j.socscimed.2004.11.055}.
+
+\bibitem[Brasil(2022)]{brasil2022}
+BRASIL. Emenda Constitucional nº 120, de 5 de maio de 2022. Acrescenta §§ 7º, 8º, 9º, 10 e 11 ao art. 198 da Constituição Federal, para dispor sobre a responsabilidade financeira da União, corresponsável pelo SUS, na política remuneratória e na valorização dos profissionais que exercem atividades de agente comunitário de saúde e de agente de combate às endemias. Brasília, DF, 2022. Disponível em: \url{https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc120.htm}. Acesso em: 15 nov. 2026.
+
+\bibitem[Brasil(2025a)]{brasil2025sm}
+BRASIL. Decreto nº 12.797, de 2025. Regulamenta a Lei nº 14.663, de 28 de agosto de 2023, que dispõe sobre o valor do salário mínimo e a sua política de valorização de longo prazo. Diário Oficial da União, Brasília, DF, 24 dez. 2025. Salário mínimo de R\$ 1.621,00 a partir de 1º de janeiro de 2026.
+
+\bibitem[Brasil(2025b)]{novopac2025}
+BRASIL. Ministério da Saúde. Manual de formalização de propostas: Novo PAC Saúde. Brasília, DF: Ministério da Saúde, 2025. p. 10--11. Disponível em: \url{https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/guias-e-manuais/2025/manual-de-formalizacao-de-propostas-novo-pac-saude.pdf}. Acesso em: 11 nov. 2026.
+
+\bibitem[Brasil(2026c)]{aps2026}
+BRASIL. Ministério da Saúde. Relatórios Públicos da APS: cobertura potencial estimada da Atenção Primária à Saúde. Brasília, DF, 2026c. Município: Itaúna, código 313380; competência julho de 2026. Disponível em: \url{https://relatorioaps.saude.gov.br/cobertura/aps}. Acesso em: 10 nov. 2026.
+
+\bibitem[Itaúna(2025)]{itauna2025}
+ITAÚNA. Lei nº 6.273, de 30 de dezembro de 2025. Estima a receita e fixa a despesa do Município de Itaúna para o exercício de 2026 e dá outras providências. Jornal Oficial do Município de Itaúna, n. 2.623, 30 dez. 2025. Anexos, p. 7 e 11. Disponível em: \url{https://sapl.itauna.mg.leg.br/media/sapl/public/normajuridica/2025/11182/lei_6273-2026_-_loa_2026.pdf}. Acesso em: 11 nov. 2026.
+
+\bibitem[Tesouro Nacional(2026)]{tesouro2026}
+TESOURO NACIONAL. Sistema de Informações Contábeis e Fiscais do Setor Público Brasileiro --- Siconfi. Relatório Resumido da Execução Orçamentária: Anexo 02, quarto bimestre de 2026. Ente: Prefeitura Municipal de Itaúna, código IBGE 3133808. Disponível em: \url{https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2026&nr_periodo=4&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+02&id_ente=3133808}. Acesso em: 11 nov. 2026.
+
+\end{thebibliography}
+
+\end{document}

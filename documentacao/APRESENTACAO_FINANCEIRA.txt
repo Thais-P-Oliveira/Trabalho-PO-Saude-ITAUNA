@@ -1,0 +1,13 @@
+APRESENTACAO FINANCEIRA PREPARADA PARA A PROXIMA EXECUCAO
+1. Funcionamento mensal UBS existentes: fixo + eSF + ACS.
+2. Funcionamento mensal UBS novas: fixo + eSF + ACS.
+3. Funcionamento mensal total e anual total (12 meses).
+4. Construcao das novas UBS por porte: investimento unico.
+5. Cenario do ano de implantacao: 12 meses de operacao total + 100% da construcao.
+6. Comparar operacao anual e implantacao com dotacoes inicial e atualizada da Atencao Basica; Saude total apenas como contexto.
+Atencao Basica e a subfuncao orcamentaria usada para a comparacao da APS; nao somar as duas expressoes como orcamentos distintos.
+Hipotese de todo investimento pago no ano, sem assumir parcelas iguais ou disponibilidade livre de verba. Orçamento inclui despesas nao detalhadas no modelo.
+Cinco anos pertencem ao objetivo economico do modelo, nao a comparacao anual.
+Saidas novas em resultados/atual/orcamento: funcionamento_existentes_e_novas.csv, resumo_financeiro.csv, comparacao_orcamentaria.csv, calculos.json e relatorio.txt.
+Graficos futuros: funcionamento_mensal.png; orcamento.png (operacao, construcao, soma e dotacao); construcao.png.
+Sintaxe conferida. Nao foram executados modelos, graficos ou atualizacao dos resultados salvos.

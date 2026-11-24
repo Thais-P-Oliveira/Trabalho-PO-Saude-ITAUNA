@@ -1,0 +1,53 @@
+<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Resultados — PO Saúde Itaúna</title>
+<style>body{font:17px/1.6 system-ui;background:#f3f5fa;color:#202944;margin:0}main{max-width:1150px;margin:auto;padding:28px}section,header{background:white;padding:25px;margin-bottom:22px;border-radius:14px}.resumo{font-size:23px;color:#254db3;font-weight:700}img{max-width:100%;height:auto}a{color:#214da6}nav{display:flex;flex-wrap:wrap;gap:10px}nav a{background:#eaf0ff;padding:7px 12px;border-radius:7px}small{color:#536078}</style>
+<main><header><h1>Planejamento da rede de saúde de Itaúna</h1><p class="resumo">9 novas UBS · 39 eSF · 143 ACS · 97,71% de cobertura</p>
+<p>População: 104.002 habitantes. Raio principal: 3 km. Mínimo rural: 500 habitantes.</p>
+<p>Operação: R$ 27,70 milhões/ano. Construção: R$ 22,85 milhões, investimento único. Operação anual + construção: R$ 50,54 milhões (hipótese de desembolso integral no ano).</p><p>Ótimo confirmado nas fases da APS, dentro da tolerância configurada.</p>
+<p>Todas as imagens, tabelas e o comparador utilizam a mesma execução.</p><nav><a href="#comparador">Comparador interativo</a><a href="#fig1">1. Visão geral das UBS</a><a href="#fig2">2. Mapa do município</a><a href="#fig3">3. Detalhe urbano</a><a href="#fig4">4. Cobertura</a><a href="#fig5">5. Acessibilidade</a><a href="#fig6">6. Encaminhamentos: distâncias</a><a href="#fig7">7. Percursos</a><a href="#fig8">8. Capacidade ambulatorial</a><a href="#fig9">9. Funcionamento mensal</a><a href="#fig10">10. Custo e orçamento</a><a href="#fig11">11. Construção</a><a href="#fig12">12. Sensibilidade: cobertura e custo</a><a href="#extra">Análise extra dos raios</a></nav><h2>Relatórios e arquivos</h2><ul><li><a href="resultados/atual/plano/aps/relatorio_itauna.txt">Relatório da APS</a></li><li><a href="resultados/atual/plano/aps/resultado_itauna.xlsx">Planilha das UBS e alocações</a></li><li><a href="resultados/atual/plano/aps/mapa_interativo.html">Mapa interativo</a></li><li><a href="resultados/atual/plano/comparacao_completa.csv">Seis cenários de encaminhamento</a></li><li><a href="resultados/atual/plano/aps/diagnostico/relatorio.txt">Cobertura e acessibilidade</a></li><li><a href="resultados/atual/orcamento/relatorio.txt">Orçamento</a></li><li><a href="resultados/atual/investimento/construcao_por_ubs.csv">Construção por UBS e porte</a></li><li><a href="resultados/atual/sensibilidade/resumo.csv">Sensibilidade</a></li><li><a href="ULTIMA_EXECUCAO.log">Registro da execução</a></li></ul>
+<small>O mapa-base interativo pode precisar de internet. As figuras do artigo são renovadas; o texto deve ser revisado quando os resultados mudarem.</small></header><section id="comparador">
+  <h2>Explore os encaminhamentos ambulatoriais</h2>
+  <p>Compare os resultados já calculados, mantendo o plano de UBS fixo.</p>
+  <label for="via">Demanda terciária que passa pela secundária:</label>
+  <select id="via" style="font:inherit;padding:8px;border-radius:8px;margin:12px">
+    <option value="25">25%</option><option value="50" selected>50%</option><option value="75">75%</option>
+  </select>
+  <div id="comparacao" aria-live="polite"></div>
+  <p id="ganho" class="resumo"></p>
+  <details><summary>O que representam os percursos?</summary>
+    <p><strong>Termina na secundária:</strong> recebe atendimento secundário e encerra esse percurso.
+    <strong>Direto à terciária:</strong> segue da UBS para o nível terciário.
+    <strong>Via secundária:</strong> recebe atendimento nos dois níveis.</p>
+    <p>São volumes anuais de procedimentos e percursos estimados, não pessoas diferentes.
+    Os percentuais são cenários de encaminhamento, não probabilidades observadas por paciente.</p>
+  </details>
+  <p><small>Distâncias em linha reta. “Múltiplos níveis” permite atender os dois níveis no mesmo estabelecimento.
+  Essa seleção não resolve novamente o modelo e não altera as UBS escolhidas.</small></p>
+  <noscript>Ative JavaScript para usar o seletor. Os gráficos estáticos abaixo continuam disponíveis.</noscript>
+</section>
+<script>
+(() => {
+  const dados = [{"cenario": "unico", "via_percentual": 25, "distancia_media_por_percurso": 4.019677018076788, "termina2": 188239.26946316505, "direto3": 11897.509760632114, "via23": 3965.8365868773462}, {"cenario": "unico", "via_percentual": 50, "distancia_media_por_percurso": 4.057743097768504, "termina2": 184273.4328762876, "direto3": 7931.673173754757, "via23": 7931.673173754773}, {"cenario": "unico", "via_percentual": 75, "distancia_media_por_percurso": 4.084966202181963, "termina2": 180307.59628941052, "direto3": 3965.836586877348, "via23": 11897.509760632094}, {"cenario": "multiplo", "via_percentual": 25, "distancia_media_por_percurso": 3.6912008397953535, "termina2": 188239.26946316508, "direto3": 11897.50976063209, "via23": 3965.836586877365}, {"cenario": "multiplo", "via_percentual": 50, "distancia_media_por_percurso": 3.685179813380376, "termina2": 184273.43287628805, "direto3": 7931.67317375474, "via23": 7931.673173754799}, {"cenario": "multiplo", "via_percentual": 75, "distancia_media_por_percurso": 3.679243108935156, "termina2": 180307.5962894108, "direto3": 3965.836586877306, "via23": 11897.509760632054}];
+  const numero = (v,n=2) => v.toLocaleString('pt-BR',{minimumFractionDigits:n,maximumFractionDigits:n});
+  const seletor = document.getElementById('via');
+  function atualizar() {
+    const pct=Number(seletor.value);
+    const unico=dados.find(r=>r.cenario==='unico' && r.via_percentual===pct);
+    const multi=dados.find(r=>r.cenario==='multiplo' && r.via_percentual===pct);
+    const maximo=Math.max(...dados.map(r=>r.distancia_media_por_percurso))*1.12;
+    const barra=(nome,r,cor)=>`<div style="margin:20px 0"><strong>${nome}</strong>
+      <div style="display:flex;align-items:center;gap:14px">
+      <div style="height:32px;background:${cor};width:${r.distancia_media_por_percurso/maximo*80}%;border-radius:5px"></div>
+      <strong style="white-space:nowrap">${numero(r.distancia_media_por_percurso)} km</strong></div></div>`;
+    document.getElementById('comparacao').innerHTML = barra('Um nível por estabelecimento',unico,'#52627a') + barra('Múltiplos níveis por estabelecimento',multi,'#3864be') +
+      `<table style="width:100%;text-align:left;border-collapse:collapse"><caption style="text-align:left;margin:18px 0"><strong>Percursos alocados no cenário de múltiplos níveis</strong></caption>
+       <tr><th>Termina na secundária</th><td>${numero(multi.termina2,0)}</td></tr>
+       <tr><th>Direto à terciária</th><td>${numero(multi.direto3,0)}</td></tr>
+       <tr><th>Passa pelos dois níveis</th><td>${numero(multi.via23,0)}</td></tr></table>`;
+    const reducao=100*(1-multi.distancia_media_por_percurso/unico.distancia_media_por_percurso);
+    document.getElementById('ganho').textContent = `${numero(reducao,1)}% de redução na distância média com múltiplos níveis, no cenário de ${pct}%.`;
+  }
+  seletor.addEventListener('change',atualizar);
+  atualizar();
+})();
+</script>
+<section id="fig1"><h2>1. Visão geral das UBS</h2><a href="imagens/painel_resultados.png"><img loading="lazy" src="imagens/painel_resultados.png" alt="Visão geral das UBS"></a></section><section id="fig2"><h2>2. Mapa do município</h2><a href="imagens/mapa_itauna_ubs.png"><img loading="lazy" src="imagens/mapa_itauna_ubs.png" alt="Mapa do município"></a></section><section id="fig3"><h2>3. Detalhe urbano</h2><a href="imagens/mapa_itauna_zoom_urbano.png"><img loading="lazy" src="imagens/mapa_itauna_zoom_urbano.png" alt="Detalhe urbano"></a></section><section id="fig4"><h2>4. Cobertura</h2><a href="imagens/cobertura.png"><img loading="lazy" src="imagens/cobertura.png" alt="Cobertura"></a></section><section id="fig5"><h2>5. Acessibilidade</h2><a href="imagens/acessibilidade.png"><img loading="lazy" src="imagens/acessibilidade.png" alt="Acessibilidade"></a></section><section id="fig6"><h2>6. Encaminhamentos: distâncias</h2><a href="imagens/distancias.png"><img loading="lazy" src="imagens/distancias.png" alt="Encaminhamentos: distâncias"></a></section><section id="fig7"><h2>7. Percursos</h2><a href="imagens/percursos.png"><img loading="lazy" src="imagens/percursos.png" alt="Percursos"></a></section><section id="fig8"><h2>8. Capacidade ambulatorial</h2><a href="imagens/capacidades.png"><img loading="lazy" src="imagens/capacidades.png" alt="Capacidade ambulatorial"></a></section><section id="fig9"><h2>9. Funcionamento mensal</h2><a href="imagens/funcionamento_mensal.png"><img loading="lazy" src="imagens/funcionamento_mensal.png" alt="Funcionamento mensal"></a></section><section id="fig10"><h2>10. Custo e orçamento</h2><a href="imagens/orcamento.png"><img loading="lazy" src="imagens/orcamento.png" alt="Custo e orçamento"></a></section><section id="fig11"><h2>11. Construção</h2><a href="imagens/construcao.png"><img loading="lazy" src="imagens/construcao.png" alt="Construção"></a></section><section id="fig12"><h2>12. Sensibilidade: cobertura e custo</h2><a href="imagens/curva_cobertura_custo.png"><img loading="lazy" src="imagens/curva_cobertura_custo.png" alt="Sensibilidade: cobertura e custo"></a></section><section id="extra"><h2>Análise extra: raios 3–3, 3–5 e 5–5 km</h2><p>Mínimo rural de 500 habitantes nos três cenários. A análise principal permanece separada.</p><h3>Custo operacional</h3><a href="imagens/extra_raios_01_custo.png"><img loading="lazy" src="imagens/extra_raios_01_custo.png" alt="Custo operacional"></a><h3>Cobertura total, urbana e rural</h3><a href="imagens/extra_raios_02_cobertura.png"><img loading="lazy" src="imagens/extra_raios_02_cobertura.png" alt="Cobertura total, urbana e rural"></a><h3>Distância média</h3><a href="imagens/extra_raios_03_distancia.png"><img loading="lazy" src="imagens/extra_raios_03_distancia.png" alt="Distância média"></a></section></main></html>

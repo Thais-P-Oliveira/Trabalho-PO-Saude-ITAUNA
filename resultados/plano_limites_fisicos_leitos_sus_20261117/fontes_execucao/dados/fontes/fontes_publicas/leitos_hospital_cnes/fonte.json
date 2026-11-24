@@ -1,0 +1,10 @@
+{
+  "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802105780&VComp=202607",
+  "competencia": "202607",
+  "cnes": "2105780",
+  "consulta_utc": "2026-11-17T23:08:00.081768+00:00",
+  "sha256_html": "2e7943f331c1824ec10194f76b303b96b2424ef4d6f66710062664413752739c",
+  "total_existentes": 150,
+  "total_sus": 98,
+  "observacao": "Leitos de internacao e complementares. Exclui observacao, repouso e camas de instalacoes ambulatoriais."
+}

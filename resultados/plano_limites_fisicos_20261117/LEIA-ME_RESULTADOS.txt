@@ -1,0 +1,38 @@
+PLANO COM LIMITES DE EQUIPES POR SALAS - 17/11/2026
+
+22 UBS existentes: preservadas as 23 eSF cadastradas.
+20 novas UBS: 12 rurais e 8 urbanas, com uma eSF cada.
+Total: 42 UBS, 43 eSF e 135 ACS.
+ACS nas existentes: 92; ACS nas novas: 43.
+Cobertura dentro de 3 km: 99,8582% (a tolerancia numerica permite 0,5 habitante abaixo do maximo da fase 1).
+Operacao: R$ 2.562.634,44/mes. Construcao permanece fora da otimizacao.
+
+Regra: uma sala de clinicas basicas e uma de enfermagem por equipe.
+Equipes atuais nunca sao removidas por ausencia de registro de salas.
+Central e Zona Rural mantem uma eSF; Parque Jardim mantem duas; demais existentes uma.
+Novas UBS possuem uma sala clinica e uma sala de enfermagem planejadas: maximo uma eSF.
+ACS continuam limitados a 750 habitantes por agente, sem teto fixo de quatro por UBS.
+
+CERTIFICADOS
+Cobertura maxima: otimo confirmado.
+Custo: solucao viavel, sem prova de otimo apos 600 segundos.
+Distancia: otimo confirmado para o teto definido pela solucao de custo encontrada.
+A folga de 2% usa essa solucao encontrada, nao um custo minimo comprovado.
+Nao afirmar que 20 e o numero minimo necessario de novas UBS.
+Seis cenarios especializados resolvidos e auditoria de integracao aprovada.
+
+ARQUIVOS
+aps/ubs_completas.csv: equipes, ACS e populacao por UBS.
+aps/resultado_itauna.xlsx: tabelas e parametros.
+aps/mapa_interativo.html: mapa da nova solucao.
+aps/painel_resultados.png: painel da nova solucao.
+comparacao_com_plano_anterior.csv: alteracoes de dimensionamento e custo.
+comparacao_completa.csv: encaminhamentos dos seis cenarios.
+fontes_execucao/: copia dos arquivos utilizados na resolucao.
+
+O plano anterior foi preservado em resultados/plano_referencia_2pct.
+Os graficos principais e o artigo anteriores nao foram substituidos por esta execucao.
+
+REPETIR A EXECUCAO
+Na pasta principal: python executar.py --time-limit 600 --quiet --saida resultados/nova_execucao_com_salas
+Para reproduzir a regra anterior, acrescente --sem-limites-fisicos e use outra pasta de saida.

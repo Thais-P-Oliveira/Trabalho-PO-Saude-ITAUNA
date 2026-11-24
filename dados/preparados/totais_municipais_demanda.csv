@@ -1,0 +1,5 @@
+﻿tipo;nivel;quantidade_anual;ano;populacao_referencia;distribuicao;origem
+AMB;2;190856;2025;97669.0;proporcional a populacao, sem idade;SIA eletivo: soma da coluna Total dos procedimentos selecionados
+AMB;3;15752;2025;97669.0;proporcional a populacao, sem idade;SIA eletivo: soma da coluna Total dos procedimentos selecionados
+HOSP;2;1065;2025;97669.0;proporcional a populacao, sem idade;SIH eletivo: total municipal por complexidade ja levantado
+HOSP;3;350;2025;97669.0;proporcional a populacao, sem idade;SIH eletivo: total municipal por complexidade ja levantado

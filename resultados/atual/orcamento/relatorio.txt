@@ -1,0 +1,69 @@
+COMPARACAO ORCAMENTARIA - ITAUNA
+
+DETALHAMENTO DO FUNCIONAMENTO - TODA A REDE
+UBS existentes (22): R$ 1.425.714,67/mes; R$ 17.108.576,00/ano.
+UBS novas (9): R$ 882.271,78/mes; R$ 10.587.261,33/ano.
+Total mensal da rede: R$ 2.307.986,44.
+Total anual de funcionamento: R$ 27.695.837,33.
+Construcao das novas UBS, uma unica vez: R$ 22.848.000,00.
+ANO DE IMPLANTACAO: operacao anual + construcao = R$ 50.543.837,33.
+Hipotese: obras integralmente pagas no exercicio e 12 meses de funcionamento da rede implantada.
+Nao representa cronograma de entrada em funcionamento. Se a obra atravessar anos, distribuir o investimento pelo cronograma.
+Os cinco anos pertencem a otimizacao; nao sao comparados ao orcamento de um unico ano.
+
+Plano: C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\plano; folga operacional de 2%.
+Custo operacional planejado da APS: R$ 2.307.986,44/mes; R$ 27.695.837,33/ano.
+Inclui todas as UBS do plano, existentes e novas, equipes e ACS.
+Nao somar esse custo ao gasto atual da prefeitura: ha despesas sobrepostas.
+Proxy de deslocamento excluido da comparacao principal. Objetivo anual com proxy: R$ 27.757.183,89.
+
+ORCAMENTO E EXECUCAO OFICIAIS - 2026
+Fonte: Tesouro Nacional/Siconfi, RREO Anexo 02, 4o bimestre.
+Soma das despesas exceto intraorcamentarias e intraorcamentarias, apresentadas separadamente no RREO.
+Dotacao inicial: orcamento de abertura do ano. Atualizada: autorizacao anual ate agosto.
+Empenhadas e liquidadas: valores acumulados ate agosto; nao sao totais de um ano completo.
+
+SAÚDE
+DOTAÇÃO INICIAL: R$ 173.696.487,13
+DOTAÇÃO ATUALIZADA (a): R$ 199.805.384,26
+DESPESAS EMPENHADAS ATÉ O BIMESTRE (b): R$ 142.934.642,39
+DESPESAS LIQUIDADAS ATÉ O BIMESTRE (d): R$ 109.619.446,52
+
+ATENÇÃO BÁSICA
+DOTAÇÃO INICIAL: R$ 49.885.322,78
+DOTAÇÃO ATUALIZADA (a): R$ 50.894.556,87
+DESPESAS EMPENHADAS ATÉ O BIMESTRE (b): R$ 27.388.729,48
+DESPESAS LIQUIDADAS ATÉ O BIMESTRE (d): R$ 22.992.934,46
+
+ASSISTÊNCIA HOSPITALAR E AMBULATORIAL
+DOTAÇÃO INICIAL: R$ 102.027.944,35
+DOTAÇÃO ATUALIZADA (a): R$ 119.998.744,78
+DESPESAS EMPENHADAS ATÉ O BIMESTRE (b): R$ 97.653.860,48
+DESPESAS LIQUIDADAS ATÉ O BIMESTRE (d): R$ 71.385.341,73
+
+PROPORCAO DO CUSTO ANUAL APS DO MODELO EM RELACAO AO ORCAMENTO
+A proporcao em relacao a saude total e apenas contexto, pois os escopos sao diferentes.
+Saúde / DOTAÇÃO INICIAL: operacao 15.94%; operacao + construcao 29.10%.
+Saúde / DOTAÇÃO ATUALIZADA (a): operacao 13.86%; operacao + construcao 25.30%.
+Atenção Básica / DOTAÇÃO INICIAL: operacao 55.52%; operacao + construcao 101.32%.
+Atenção Básica / DOTAÇÃO ATUALIZADA (a): operacao 54.42%; operacao + construcao 99.31%.
+
+LOA APROVADA
+Lei 6.273, de 30/12/2025: funcao 10 - Saude = R$ 173.696.487,13 (pagina 7).
+Pagina 11: atencao basica R$ 29.559.322,78 e hospitalar/ambulatorial R$ 48.719.944,27
+integram o quadro de aplicacao com RECURSOS PROPRIOS. Nao sao o orcamento total dessas subfuncoes.
+O total de recursos proprios desse quadro e R$ 94.711.487,05, nao toda a saude.
+Nao usar o projeto de lei como substituto da LOA aprovada; houve emendas/veto.
+
+COMO INTERPRETAR
+Operacao e investimento da APS separados; valores estimados, nao despesas executadas.
+Custos unitarios do modelo sao premissas, sem atualizacao monetaria para 2026.
+Construcao incluida no cenario de implantacao; terrenos, equipamentos e outros servicos da atencao basica nao estao integralmente orcados.
+Nao inclui custo operacional da secundaria e terciaria.
+Dotacao atualizada nao e saldo livre nem garantia de disponibilidade financeira.
+Diferenca nao demonstra economia ou viabilidade financeira da implantacao.
+A comparacao e descritiva; nao foi criada restricao de orcamento no modelo.
+
+FONTES
+https://sapl.itauna.mg.leg.br/media/sapl/public/normajuridica/2025/11182/lei_6273-2026_-_loa_2026.pdf
+https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2026&nr_periodo=4&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+02&id_ente=3133808

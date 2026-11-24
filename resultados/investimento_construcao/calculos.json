@@ -1,0 +1,17 @@
+{
+  "plano": "resultados/plano_referencia_2pct",
+  "novas_ubs": 12,
+  "investimento_construcao": "23856000",
+  "custo_operacional_anual_rede_implantada": "29367808.0000000020",
+  "otimizacao_alterada": false,
+  "fonte": "Novo PAC Saude 2025, Sudeste, paginas 10-11",
+  "fonte_url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/guias-e-manuais/2025/manual-de-formalizacao-de-propostas-novo-pac-saude.pdf",
+  "cronograma_ilustrativo": [],
+  "hipoteses": [
+    "Porte associado ao numero de eSF da nova UBS.",
+    "Valores nominais de 2025, sem juros ou reajuste.",
+    "Nao inclui terrenos, equipamentos ou mobiliario.",
+    "Nao presume aprovacao ou repasse federal para as unidades propostas.",
+    "Operacao anual refere-se a rede completa implantada; nao e gasto durante a obra."
+  ]
+}

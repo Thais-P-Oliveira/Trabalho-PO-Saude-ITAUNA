@@ -1,0 +1,55 @@
+{
+  "populacao": 104001.99999999999,
+  "pontos": 91,
+  "ubs": 22,
+  "esf_total": 23.0,
+  "acs_total": 140.0,
+  "raio_km": 3.0,
+  "raio_rural_km": 3.0,
+  "fator_rota": 1.0,
+  "hab_esf": 3000.0,
+  "hab_acs": 750.0,
+  "capacidade_esf_total": 69000.0,
+  "capacidade_acs_total": 105000.0,
+  "capacidade_efetiva_total": 68250.0,
+  "pop_com_acesso_geografico": 97140.16166849255,
+  "pop_sem_cobertura_geografica": 6861.838331507432,
+  "cobertura_geografica_pct": 93.40220540806193,
+  "pop_atendida_efetiva": 68250.0,
+  "cobertura_efetiva_pct": 65.62373800503838,
+  "pop_coberta_sem_capacidade": 28890.161668492554,
+  "perda_por_capacidade_pp": 27.77846740302356,
+  "razao_capacidade_populacao_pct": 65.62373800503838,
+  "ubs_limitadas_por_acs": 1,
+  "zonas": {
+    "total": {
+      "populacao": 104001.99999999999,
+      "cobertura_geografica_pct": 93.40220540806193,
+      "cobertura_efetiva_pct": 65.62373800503838
+    },
+    "urbana": {
+      "populacao": 99187.85178511094,
+      "cobertura_geografica_pct": 97.93554343625198,
+      "cobertura_efetiva_pct": 68.808829681948
+    },
+    "rural": {
+      "populacao": 4814.148214889064,
+      "cobertura_geografica_pct": 0.0,
+      "cobertura_efetiva_pct": 0.0
+    }
+  },
+  "metodo_distancia": "haversine",
+  "equipes_moveis": {
+    "equipes": 5,
+    "bases": 5,
+    "populacao_sem_cobertura": 6861.838331507438,
+    "atendida": 6861.838259604099,
+    "nao_atendida": 7.190333872131305e-05,
+    "hab_movel": 2000.0,
+    "raio_rota_km": 15.0,
+    "max_paradas_por_equipe": 5,
+    "max_equipes": null,
+    "acs_necessarios": 12
+  },
+  "cobertura_efetiva_com_moveis_pct": 72.22153252783997
+}

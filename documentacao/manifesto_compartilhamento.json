@@ -1,0 +1,897 @@
+{
+  "status": "versao_enxuta_validada",
+  "data": "2026-11-15",
+  "arquivos": 178,
+  "arquivos_compactados": 280,
+  "fontes_execucao_abertas": 19,
+  "tamanho_total_bytes": 26278282,
+  "nota": "Nao e preciso extrair arquivo_compactado/fontes_brutas_e_coleta.zip para executar.",
+  "manifesto": [
+    {
+      "arquivo": "ABRIR_RESULTADOS.html",
+      "bytes": 11593,
+      "sha256": "cda423ad8f1f26be69fde57f3b4ab4be0d655642fd9e420fcea1a00d8bfc71ec"
+    },
+    {
+      "arquivo": "apresentar.py",
+      "bytes": 2126,
+      "sha256": "2c96192845d8a0cba93b81595feb9eeae6b146067cdb3bf5461f2d33442b4706"
+    },
+    {
+      "arquivo": "arquivo_compactado/fontes_brutas_e_coleta.zip",
+      "bytes": 12809562,
+      "sha256": "10ebb7a2f38a4ee01ba2b8bd21033e202b08cdf55c3d0e6b01bbdc9839bb01be"
+    },
+    {
+      "arquivo": "arquivo_compactado/LEIA-ME.txt",
+      "bytes": 600,
+      "sha256": "2f690095ea1ecb25966f69173fc23713e58fc3b10f7c80ad20817007e1a8dae0"
+    },
+    {
+      "arquivo": "codigos/auditar_plano_completo.py",
+      "bytes": 4333,
+      "sha256": "f2b00f91debca381740badebd34f2f558e13c4ced0e7d8589e2d0dc46a26dd43"
+    },
+    {
+      "arquivo": "codigos/calcular_investimento.py",
+      "bytes": 5321,
+      "sha256": "d1af772eea04c3b28e96c579f5c77e1c2e44eff5d2a8a024ab3306a96698296f"
+    },
+    {
+      "arquivo": "codigos/caminhos.py",
+      "bytes": 829,
+      "sha256": "01387a83a217bf392a86fba23bf1180c77fdd578cbce8ccb74c69645a279d5dc"
+    },
+    {
+      "arquivo": "codigos/comparador.html",
+      "bytes": 3261,
+      "sha256": "cbc760dca220a4f407e3e5cb0e536b29c4ec0157abffdf4786b3b830d919718c"
+    },
+    {
+      "arquivo": "codigos/comparar_orcamento.py",
+      "bytes": 7213,
+      "sha256": "abb9caaef6c5a6f0ce035c240f9eb82ba7bd3fa2ca1196cd78b7c8d3d454d946"
+    },
+    {
+      "arquivo": "codigos/diagnosticar.py",
+      "bytes": 18101,
+      "sha256": "a97b38f6e0abed4416a6dc8cddd23d01c116b2d393928f93231484946c83eb3a"
+    },
+    {
+      "arquivo": "codigos/encaminhamentos.py",
+      "bytes": 6817,
+      "sha256": "d3a42c031b608847e3ed7a5c1dca236f402e4709a6809e7328353f0e0f0b7a2b"
+    },
+    {
+      "arquivo": "codigos/figuras_artigo.py",
+      "bytes": 7104,
+      "sha256": "a87c822cd5699f34246730f0a797308b27829436bb83e0226c2790df9b9f847a"
+    },
+    {
+      "arquivo": "codigos/grafico_sensibilidade.py",
+      "bytes": 3073,
+      "sha256": "cdd38afc95b454d3fc86945f799d66ea66f18662fff53e25e8843f0f1a25f2f0"
+    },
+    {
+      "arquivo": "codigos/organizar_resultados.py",
+      "bytes": 10174,
+      "sha256": "198bf0d4c59c84bd3dbd6e140417c3c635e7bff5f2283ed4459d30b3a86580d1"
+    },
+    {
+      "arquivo": "codigos/planejar.py",
+      "bytes": 14732,
+      "sha256": "afc8d7986cf653d907668740ae028ce9d1fee30b439da8700da24fe4b60b51ae"
+    },
+    {
+      "arquivo": "codigos/preparar.py",
+      "bytes": 9856,
+      "sha256": "047e624970ba6159f96a1d66e4216fc58fa3d861aec733b9c2229db30b5c039a"
+    },
+    {
+      "arquivo": "codigos/rodar_sensibilidade.py",
+      "bytes": 5844,
+      "sha256": "25d66c79965951d8135283218fcf3916a97bf2de4d5b0b9f6a5b60d6f2849048"
+    },
+    {
+      "arquivo": "dados/fontes/cenarios_niveis/classificacao_cenarios.csv",
+      "bytes": 6140,
+      "sha256": "b40b1d14231b033d6b2141387160d7394b5d15e81517f04eea8c9b31499ad813"
+    },
+    {
+      "arquivo": "dados/fontes/cenarios_niveis/demanda_integrada/parametros_sus_2015/carga_hospitalar_observada_2025.csv",
+      "bytes": 819,
+      "sha256": "398a31123b9c3f58989ab65113aabd5aae5aee5391586a68142c7e9f3959e76e"
+    },
+    {
+      "arquivo": "dados/fontes/cenarios_niveis/demanda_integrada/parametros_sus_2015/configuracao.json",
+      "bytes": 654,
+      "sha256": "f11c18b3d0742d5e6ed74181b9b95b5fdd8c56ba1535644970ff6016559d782b"
+    },
+    {
+      "arquivo": "dados/fontes/custos_construcao_ubs_2025.csv",
+      "bytes": 178,
+      "sha256": "a6456db1c0451c2b7f77f8e687c46b3f5a98f366ae989143b23ea88006951b97"
+    },
+    {
+      "arquivo": "dados/fontes/custos_construcao_ubs_2025_fonte.txt",
+      "bytes": 645,
+      "sha256": "fd31483a1ea61ee38fcb51b2df50fe5a43216c07a64cee208142e65691a1ffbd"
+    },
+    {
+      "arquivo": "dados/fontes/demanda_especializada/demanda_ambulatorial_clinica_residentes_2025.csv",
+      "bytes": 175414,
+      "sha256": "9d7d69ddf3d270da5a28482b7c8a8a0d4756d42dd716b44bca105b432d4a5868"
+    },
+    {
+      "arquivo": "dados/fontes/demanda_especializada/idades/CENARIO_perfil_etario_91_pontos.csv",
+      "bytes": 157014,
+      "sha256": "7f0d3c552dd277b092ea28518d5f086013955f816febf4a04807f378ebd0d366"
+    },
+    {
+      "arquivo": "dados/fontes/demanda_especializada/picos_historicos/evidencia_complexidades_por_local_2025.csv",
+      "bytes": 6253,
+      "sha256": "c59cee94bfde29f710175540f9cc50430f10a2f016c7b98198042a3215ec5061"
+    },
+    {
+      "arquivo": "dados/fontes/demanda_especializada/picos_historicos/picos_rede_2025.csv",
+      "bytes": 18885,
+      "sha256": "4a887368389db1f8127f7e424044ce5671689ab3a0f42c7125de69d3c110f59b"
+    },
+    {
+      "arquivo": "dados/fontes/demanda_especializada/residencia_prestador/producao_por_residencia_2025.csv",
+      "bytes": 1151,
+      "sha256": "f91b5e0bb4f1d5dc9cbf0a3bc4801fec9f8e37e60684282c566edaf759ddb1a5"
+    },
+    {
+      "arquivo": "dados/fontes/demanda_especializada/sia_residentes_eletivo_procedimento_idade_2025.csv",
+      "bytes": 105917,
+      "sha256": "5ddb9e971fab31e29e43ebea7822c762396d4d580cfa2f8c11fc1a263d7a65b1"
+    },
+    {
+      "arquivo": "dados/fontes/demanda_especializada/sih_residentes_eletivo_morbidade_idade_2025.csv",
+      "bytes": 11079,
+      "sha256": "ead64e9a9858203006de26f1c7deedb4b9d6063c6379423bd1a051ad8d00658a"
+    },
+    {
+      "arquivo": "dados/fontes/fontes_publicas/equipes_ubs_cnes_202607.csv",
+      "bytes": 4419,
+      "sha256": "f568268f6a92d9b8dc28ee1fe385b27857bf8e0bf4db7da0217a8d94f76c9259"
+    },
+    {
+      "arquivo": "dados/fontes/fontes_publicas/orcamento/loa_2026_aprovada.pdf",
+      "bytes": 5237033,
+      "sha256": "f87a60adbb1904a091409dfd883e1c0d26266aa754863c12b6eed65dee0dcdd4"
+    },
+    {
+      "arquivo": "dados/fontes/fontes_publicas/orcamento/siconfi_rreo_2026_b4_anexo02.json",
+      "bytes": 409111,
+      "sha256": "9282a0b4b028b3947235d6691c3f6fdf57c47806cd237937ea5a014854ffd376"
+    },
+    {
+      "arquivo": "dados/fontes/fontes_publicas/orcamento/siconfi_rreo_2026_b4_anexo02_url.txt",
+      "bytes": 152,
+      "sha256": "8169fdd8b3d1272119b8020308a6f809760f28f27a840a839aaaed1644691371"
+    },
+    {
+      "arquivo": "dados/fontes/fontes_publicas/ubs_recursos_cnes_202607.csv",
+      "bytes": 1932,
+      "sha256": "73f8163e0fc40610d2821d5c5f3ecafc0585656e37a58aebb7fe77fb7ed6d7ac"
+    },
+    {
+      "arquivo": "dados/fontes/pontos_demanda_itauna.csv",
+      "bytes": 8734,
+      "sha256": "deeeecf06aa26cc7573305ebc3e77f489c2e74f1d69bfca6ffd560b2982ae2ce"
+    },
+    {
+      "arquivo": "dados/fontes/unidades_existentes_itauna.csv",
+      "bytes": 5964,
+      "sha256": "3732a81a9d787400b6736d45de921eb00b9d381b0964dfa6971254cfeea55755"
+    },
+    {
+      "arquivo": "dados/preparados/cobertura_oficial/fonte.json",
+      "bytes": 732,
+      "sha256": "6b904ff3f44db84332f3417d13027dafddee3a9323efd335620312fa29f2c2ae"
+    },
+    {
+      "arquivo": "dados/preparados/cobertura_oficial/resposta_original.json",
+      "bytes": 11173,
+      "sha256": "3106c4d17c375c8a9e5c15c65e600513b5f90941441dd7271f0e25abb67668c6"
+    },
+    {
+      "arquivo": "dados/preparados/configuracao.json",
+      "bytes": 856,
+      "sha256": "a7ea34a8c62d6ca75e68b8632d95cbf0a8ebc2827bbc40ad8653c509187c4416"
+    },
+    {
+      "arquivo": "dados/preparados/demanda_por_ponto.csv",
+      "bytes": 29824,
+      "sha256": "89c4cd5b1b29f938c121177c7e32247f712f1577d5fe78d3667a05c7f53b96c2"
+    },
+    {
+      "arquivo": "dados/preparados/estabelecimentos_revisados.csv",
+      "bytes": 12334,
+      "sha256": "e84f1bdaeb731c9a8d003e83589a5286c765e1d1f4edc548decdf6cfc0d30c29"
+    },
+    {
+      "arquivo": "dados/preparados/perfis_etarios_usados.csv",
+      "bytes": 157014,
+      "sha256": "7f0d3c552dd277b092ea28518d5f086013955f816febf4a04807f378ebd0d366"
+    },
+    {
+      "arquivo": "dados/preparados/taxas_etarias.csv",
+      "bytes": 899365,
+      "sha256": "5de47fc60b599ed211ae61b8364dd0e31b8ec0ccce34a043adff2434274673b9"
+    },
+    {
+      "arquivo": "dados/preparados/validacoes_etarias.csv",
+      "bytes": 171,
+      "sha256": "cfceeed76113f252a761b16b01372655dc60a3107596098af75dc539095decf3"
+    },
+    {
+      "arquivo": "documentacao/artigo/artigo.tex",
+      "bytes": 89394,
+      "sha256": "8ccf4b92255bcae49d14e869be57492718ddbdbeb3fb147bacc7f5b7b7bdcd4a"
+    },
+    {
+      "arquivo": "documentacao/artigo/figuras/capacidades.pdf",
+      "bytes": 17596,
+      "sha256": "3560ce42433bac07a1a0ef31cd0cf4cf308220848994201ce3c99a300978a229"
+    },
+    {
+      "arquivo": "documentacao/artigo/figuras/curva_cobertura_custo.pdf",
+      "bytes": 20955,
+      "sha256": "ecd49c5ef493df9c19ef5b4ddc0dd8996ef772374ca0d0508cef84534aa561f9"
+    },
+    {
+      "arquivo": "documentacao/artigo/figuras/distancias.pdf",
+      "bytes": 16801,
+      "sha256": "1a31c8ae07824365263a676c0e1bab265f0e46c81f6ccb15babe920267efd39c"
+    },
+    {
+      "arquivo": "documentacao/artigo/figuras/fluxo_metodo.pdf",
+      "bytes": 13941,
+      "sha256": "91f4c75ac1f103d510271e739221f1ac910f912ec6ba0b05929c510e504677bf"
+    },
+    {
+      "arquivo": "documentacao/artigo/figuras/internacoes.pdf",
+      "bytes": 18433,
+      "sha256": "aedf6165aa061be6830ed9da114100e429aac731d20599915f47a9856468f5cf"
+    },
+    {
+      "arquivo": "documentacao/artigo/figuras/mapa.pdf",
+      "bytes": 32704,
+      "sha256": "3e4c330cb3e720a73c6d4c3b5fea0f0230916deb949e29078ff8c43f5ebefab8"
+    },
+    {
+      "arquivo": "documentacao/artigo/figuras/percursos.pdf",
+      "bytes": 15403,
+      "sha256": "6a587d4181dc8ad51e9227069fbcefc4b02e4273d1ae0937ce432253a0a18746"
+    },
+    {
+      "arquivo": "documentacao/artigo/LEIA-ME.txt",
+      "bytes": 667,
+      "sha256": "598f249c31fdbe00d44d424f36861878058aa35345c2054edb7215bab695e2a8"
+    },
+    {
+      "arquivo": "documentacao/criterios_organizacao.json",
+      "bytes": 1780,
+      "sha256": "75b8bc7aad852658bf79aea5383ebd3d37bb8421674a22cc75006e0b2be55d00"
+    },
+    {
+      "arquivo": "documentacao/CUSTO_DE_CONSTRUCAO.md",
+      "bytes": 6171,
+      "sha256": "05f8ca6c9c7e099161f7919dbe79eb14aa3b74d8b49ddeddc3372efeb58ca75c"
+    },
+    {
+      "arquivo": "documentacao/GUIA_DOS_ARQUIVOS.txt",
+      "bytes": 591,
+      "sha256": "d0f266d3a5e2e9567b151a80da14b32f2adf3c030e59ebece10c8b2fc045928c"
+    },
+    {
+      "arquivo": "documentacao/originais_sha256.json",
+      "bytes": 463,
+      "sha256": "0687e49f7eb8332f1c6f2901eb6979cede7eb9be4b1e9143a88ed55b251a74ef"
+    },
+    {
+      "arquivo": "documentacao/VALIDACAO.txt",
+      "bytes": 951,
+      "sha256": "38b292381727a8a2558df7a15ef9638cc9c2a6bf7567fdf5533790ee31270623"
+    },
+    {
+      "arquivo": "documentacao/versao_original/glpk/hc.dat",
+      "bytes": 3600,
+      "sha256": "0bf61f37da7b7483e14e0f42a33331a9bfaa15803a9924d030e1dded3e341311"
+    },
+    {
+      "arquivo": "documentacao/versao_original/glpk/hc.mod",
+      "bytes": 13924,
+      "sha256": "b0f016cc2a1ce138547a1b1f612ed61440bef38558307ae414a18d9a3e3e5301"
+    },
+    {
+      "arquivo": "documentacao/versao_original/model.py",
+      "bytes": 36512,
+      "sha256": "e4caf08f25b66a5671675b677c9606b3311aaa647bfcb7d4cfca79124dbf4756"
+    },
+    {
+      "arquivo": "executar.py",
+      "bytes": 2188,
+      "sha256": "93c169f1208ec202ef4b1b3a38aee986c31e997169cb3ef8c5e29a8ff6a6fdad"
+    },
+    {
+      "arquivo": "imagens/acessibilidade.png",
+      "bytes": 73173,
+      "sha256": "353b204dfab9793e11cded739287f04fb3323f3f4cf569edbaaa8794de3e4a71"
+    },
+    {
+      "arquivo": "imagens/capacidades.png",
+      "bytes": 46460,
+      "sha256": "1ea89e66cfde4bb4a5ddb2f91af7b36b5156fac41fdb8efc177fd4278e9ee742"
+    },
+    {
+      "arquivo": "imagens/cobertura.png",
+      "bytes": 46575,
+      "sha256": "c933f8d3b7be97c8c677e5edafde38be8e9f5206a5ba0c3292af0b2edb71f452"
+    },
+    {
+      "arquivo": "imagens/construcao.png",
+      "bytes": 54104,
+      "sha256": "c5b81bc2f49e20e4d1f7c6f217711242a9c2d92665cb5bb51db781034cb1b770"
+    },
+    {
+      "arquivo": "imagens/distancias.png",
+      "bytes": 49084,
+      "sha256": "9b6c95d053638a0ab7f0e882461d8de86f4512d40dd358819277dfb618476e9f"
+    },
+    {
+      "arquivo": "imagens/INDICE.csv",
+      "bytes": 1333,
+      "sha256": "8d3f3c3c1a65c66c3b820e607250ef1c94417bb05305379818d417ab32b0d7ca"
+    },
+    {
+      "arquivo": "imagens/internacoes.png",
+      "bytes": 74048,
+      "sha256": "52baa9d211e4e97597ce217a3e06f766ffc81bd099ac767631d07316d9c2f7a7"
+    },
+    {
+      "arquivo": "imagens/mapa.png",
+      "bytes": 82966,
+      "sha256": "fbc41e7ed508826e283ce0985392c99b634262370d2c3934745d74cea4d01bc7"
+    },
+    {
+      "arquivo": "imagens/orcamento.png",
+      "bytes": 46051,
+      "sha256": "70459fd3e6c18113e684156d5c6af7daedef76b6d2ff4da65d2d5a51e80306a5"
+    },
+    {
+      "arquivo": "imagens/percursos.png",
+      "bytes": 53219,
+      "sha256": "b0be83bad67181ba8bf2017c859a444ae5d9599e4007cabeae99f5c534910b63"
+    },
+    {
+      "arquivo": "LEIA-ME.txt",
+      "bytes": 4659,
+      "sha256": "2bdb0fd6f983a5a83ddf2870afc7c1ae7a2f8c50c06ced9eeb0c66d07ee1dca6"
+    },
+    {
+      "arquivo": "modelos/aps_base.py",
+      "bytes": 40022,
+      "sha256": "e8ce27e87fb44f48ddd4ca9c73137ff14dbb0571813babd6d50bd5362cd027fb"
+    },
+    {
+      "arquivo": "modelos/rede_completa.mod",
+      "bytes": 4538,
+      "sha256": "26dd87b9d062a7f9b35ede678a6c6bf8ab4aa8dc08022a2cf6e58dda11caa15f"
+    },
+    {
+      "arquivo": "requirements.txt",
+      "bytes": 97,
+      "sha256": "8b042e5336273cbe80afdd43a365500915106c87c9d51051deb7525f5b77cb24"
+    },
+    {
+      "arquivo": "resultados/diagnostico/acessibilidade_por_ponto.csv",
+      "bytes": 42576,
+      "sha256": "34e76d427ab07b9b1418dfa3246741e2044cb455c76b31406e797478a8a95bc9"
+    },
+    {
+      "arquivo": "resultados/diagnostico/acessibilidade_por_zona.csv",
+      "bytes": 1351,
+      "sha256": "37a8faa4a98c5c99617ebdcbbe30343553bd9a7992ec457542347b1a64eaca40"
+    },
+    {
+      "arquivo": "resultados/diagnostico/cobertura_com_capacidade_atual.csv",
+      "bytes": 399,
+      "sha256": "f385936eef0b46a9006e45c05d5db11422a1e304b7158435e580bb05c6f1ad6f"
+    },
+    {
+      "arquivo": "resultados/diagnostico/cobertura_oficial_serie.csv",
+      "bytes": 3630,
+      "sha256": "e2c2a91470a2ba9843c5b253891ad4a4585b4ff727aa9cd5d4044f09017581c0"
+    },
+    {
+      "arquivo": "resultados/diagnostico/cobertura_por_zona.csv",
+      "bytes": 997,
+      "sha256": "cbc6400a68ffada4609e1b0072fc2bc89c9b1be7d23633023fff697259ad0263"
+    },
+    {
+      "arquivo": "resultados/diagnostico/comparacao_indicadores.csv",
+      "bytes": 619,
+      "sha256": "08d5db62ce3579d7dfa96b2ed908778a48133a437eb59887cb0781969e1d5f79"
+    },
+    {
+      "arquivo": "resultados/diagnostico/distancias_por_ponto.csv",
+      "bytes": 17475,
+      "sha256": "e44e0c35e956fc4f2c4ff6c2f9f7d505b5be6a90befcb3f09f1d9a25e5826e29"
+    },
+    {
+      "arquivo": "resultados/diagnostico/oferta_e_concorrencia.csv",
+      "bytes": 8649,
+      "sha256": "23060c6555c46478e95b329214339e4d87a55cfd84a42314dee0693f2336914e"
+    },
+    {
+      "arquivo": "resultados/diagnostico/relatorio.txt",
+      "bytes": 3704,
+      "sha256": "34b5e9eb78404b5936cce3afdb4b1cfcbedf94c62524947de2108e8198cbbb79"
+    },
+    {
+      "arquivo": "resultados/diagnostico/resumo.json",
+      "bytes": 8222,
+      "sha256": "86a82baeb8fbd39899f8fb420942dc2d43b84585e1bce8c0cec06fbc860980ee"
+    },
+    {
+      "arquivo": "resultados/investimento_construcao/calculos.json",
+      "bytes": 823,
+      "sha256": "9d0ad0826bd36918cb89ace0fc05b094e889eee8aa09ea710e7c919e2349cc7c"
+    },
+    {
+      "arquivo": "resultados/investimento_construcao/construcao_por_ubs.csv",
+      "bytes": 788,
+      "sha256": "58167da000a1337303a9e6dee90b4b09e8b4d811ee4c4299cd7e92ff4ff0974f"
+    },
+    {
+      "arquivo": "resultados/investimento_construcao/relatorio.txt",
+      "bytes": 715,
+      "sha256": "d0fb300e6de8111cd8e0bcbe989684c60870bcfd35e1684e3707f500e326b9db"
+    },
+    {
+      "arquivo": "resultados/investimento_construcao_2anos/calculos.json",
+      "bytes": 1274,
+      "sha256": "4e810535d7067e372b782ca86a820a31f9b1a0fa456ebbf47f2fa2810e99d473"
+    },
+    {
+      "arquivo": "resultados/investimento_construcao_2anos/construcao_por_ubs.csv",
+      "bytes": 788,
+      "sha256": "58167da000a1337303a9e6dee90b4b09e8b4d811ee4c4299cd7e92ff4ff0974f"
+    },
+    {
+      "arquivo": "resultados/investimento_construcao_2anos/cronograma_ilustrativo.csv",
+      "bytes": 275,
+      "sha256": "ce795029934f155cf4f9a750939b75944a4545f2a116de1505a0333a6417c3fa"
+    },
+    {
+      "arquivo": "resultados/investimento_construcao_2anos/relatorio.txt",
+      "bytes": 928,
+      "sha256": "ff81d552a7ea8f52a081b2b2769a8d914fff4618b8306ef3a00e2d4bfe5b6e32"
+    },
+    {
+      "arquivo": "resultados/orcamento/calculos.json",
+      "bytes": 5295,
+      "sha256": "fe9cb498abc6072820480d31d07b520078d4cca41c98e893dd52d6c442216971"
+    },
+    {
+      "arquivo": "resultados/orcamento/relatorio.txt",
+      "bytes": 3097,
+      "sha256": "15bbd0021e94c9633157f7cd17e34c956d52d671710820a2f4d79c2882fd17a0"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/aps/alocacao_completa.csv",
+      "bytes": 8066,
+      "sha256": "cacf2f1ad97792646b9469ae7ae8cf471d7165356cb24a3cd1fa4ba38c15f941"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/aps/demanda_cenario.csv",
+      "bytes": 11509,
+      "sha256": "cb123a911e577eb4d2774d17573ee9ef5865adc288244980cfb83a199b6ff5b4"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/aps/mapa_interativo.html",
+      "bytes": 125257,
+      "sha256": "a4e2042bd9209b0ac3a305de9bc39cc293eaa0f6cd97578927aeb59a5454450e"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/aps/mapa_itauna_ubs.png",
+      "bytes": 655756,
+      "sha256": "63f41e0c18d670ada6cd14717dec5c4de1f7b87e865463373d483260d4f2149a"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/aps/mapa_itauna_zoom_urbano.png",
+      "bytes": 911803,
+      "sha256": "9edb525eba23ed200fc4e8119b6a41fdf5824c39a321eb3723657aba62760987"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/aps/painel_resultados.png",
+      "bytes": 396872,
+      "sha256": "68bfddd093ee93a98ffe2cfc3a80043d9325872fb16f64a7b56f90f2d8861c2f"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/aps/relatorio_itauna.txt",
+      "bytes": 8595,
+      "sha256": "f2033c3672bb5a68812676e75151d6d3915594d0d75a681a3c0e509da5fc8607"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/aps/resultado_itauna.xlsx",
+      "bytes": 22162,
+      "sha256": "d3256cd449a1753db66c6accb3c140d6dd6b8d972058f689de574cab4cd7530f"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/aps/ubs_completas.csv",
+      "bytes": 3840,
+      "sha256": "94c0aaac971d859c5417b252502f3dc91575981b268dd28b0b76aa2ff27dd40f"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/auditoria_aps.csv",
+      "bytes": 242,
+      "sha256": "0734f164658da89fc337feb970247dc3c94fcf8daf92f643595efcb4de61ce54"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/auditoria_integracao.csv",
+      "bytes": 294,
+      "sha256": "85cfd00429f384726393905bd66a68752de6e0d91a83b6cae89bd07834c169a5"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/comparacao_completa.csv",
+      "bytes": 3477,
+      "sha256": "f0d859a34307f9c266065612e373c7a8206e4cdc309e05c68c4c79e68e4521dd"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/demanda_especializada_cenario.csv",
+      "bytes": 42223,
+      "sha256": "f284e1509ef5cd89ced031d8f828a5f14ce58aa83c05816a3a81c25d0ddbec84"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_25/capacidades.csv",
+      "bytes": 1163,
+      "sha256": "de1f4ffe0fd65edc851811c7fdaea4eebeae91a9e99e3706d5cc947e15329900"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_25/demanda_e_percursos.csv",
+      "bytes": 694,
+      "sha256": "e8a48340a94babbf0babbd38098ba9f96ad6ddd13e1fcb93208b9811551f6712"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_25/fase1.dat",
+      "bytes": 176879,
+      "sha256": "cb6fe623f450a00bad57d65713aa63847ca2ede57b08d365d499db7f044ffdb9"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_25/fase1.log",
+      "bytes": 2213,
+      "sha256": "bb0d5e9dc0644a694488feb530cf864636dfb97f79161ee17e46ed1b8c7755e9"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_25/fase1_display.csv",
+      "bytes": 36272,
+      "sha256": "6295e454af468dafb97c3975554acfbaa59883946ef2054e8102f097247b5fa9"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_25/fase3.dat",
+      "bytes": 176886,
+      "sha256": "2423f197494607d9a81b508e8fcd55bb562be036b4e8a6910add84fc706c4662"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_25/fase3.log",
+      "bytes": 2213,
+      "sha256": "59fb52ca839aa2c608c5ff7cc5ff806c49086e5205c3e8a8d2e2242e17abf992"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_25/fase3_display.csv",
+      "bytes": 36157,
+      "sha256": "8e4fd335f02448ea6b0e135ba295c7cfdc0812af06a0d2ac13fabff4a42bbab1"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_25/fluxos.csv",
+      "bytes": 50492,
+      "sha256": "314f992ff588d5c36dc08281750066c0a8661ab9ee32fb80cb2fe759d21bc9d2"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_25/ubs.csv",
+      "bytes": 2405,
+      "sha256": "01d16a258032afa6db906882ec2b80384349a56e6bb63a975f4bf2c8e1c235b3"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_50/capacidades.csv",
+      "bytes": 1165,
+      "sha256": "3764df3f5a9b74c8a9b963210ac651adb9338d4e82208cb6afbf8aee26d2a90f"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_50/demanda_e_percursos.csv",
+      "bytes": 696,
+      "sha256": "2fa1aa022ea9470b7022009d2c75b8a71b57888638a2244056629d20dde4fb74"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_50/fase1.dat",
+      "bytes": 176878,
+      "sha256": "55e3d468bc25bca2ab0fe4d69f0ef6a7bb16d5eaaaad02963c93542a3aff2a1c"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_50/fase1.log",
+      "bytes": 2213,
+      "sha256": "fe40440c0cd43e95dd8c200be33d77e36d7b48c56150217b22d0e24f144b1f1b"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_50/fase1_display.csv",
+      "bytes": 36271,
+      "sha256": "1efbafeea77111e0b55fd4b44e7ff5fc28e7895cfc5433ec025a60badf9bb1e8"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_50/fase3.dat",
+      "bytes": 176885,
+      "sha256": "082825ecfbbd396411dcf8f633af08cedeb237f54b8aa2375e7744c8bb976229"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_50/fase3.log",
+      "bytes": 2215,
+      "sha256": "850e834c4a2c992e6d4054cee1407f72f4f253109582c53fb75398be8da19d78"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_50/fase3_display.csv",
+      "bytes": 36116,
+      "sha256": "24986f3b6e2e3fc0dd9064fe5d968090eb3a49f4c9186400d0976a649300c3a1"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_50/fluxos.csv",
+      "bytes": 50185,
+      "sha256": "70085907a0ba84ad62c30f4a1d2c9b8adada0c26942b461a4bb207643fc85f32"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_50/ubs.csv",
+      "bytes": 2405,
+      "sha256": "01d16a258032afa6db906882ec2b80384349a56e6bb63a975f4bf2c8e1c235b3"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_75/capacidades.csv",
+      "bytes": 1168,
+      "sha256": "fd2ea621884ef482a48633ec0855460b1a4ad2aa73b4f4d656f5521dbb5237b4"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_75/demanda_e_percursos.csv",
+      "bytes": 681,
+      "sha256": "50ac94f81ff957130d0b68a3aad1e93441f353babd5fef8eedd8c373d66f0d99"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_75/fase1.dat",
+      "bytes": 176879,
+      "sha256": "232bc4e9c35a7cb6ef01168a737ff3f49e3e9e52b6600cfdb6f90980c6b61700"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_75/fase1.log",
+      "bytes": 2213,
+      "sha256": "17ac4fb1189c0821c875bebc2219c89ee9c40bfb922b1c174e9b560d73b4ae0e"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_75/fase1_display.csv",
+      "bytes": 36238,
+      "sha256": "ca17cb9ff80639aa39c89df9342cc7e49b1a462456c67c0174613ffc2c319bf8"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_75/fase3.dat",
+      "bytes": 176886,
+      "sha256": "0f6cac48e240c637a6726ca671df8987e60a1d5418308e338db72e6991329113"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_75/fase3.log",
+      "bytes": 2215,
+      "sha256": "ca595aca62f1cb7e7e376d1dfdd2c7a6ddb0e1676ac3ad4c2b04fa3f203f202c"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_75/fase3_display.csv",
+      "bytes": 36079,
+      "sha256": "e3370c8f3ffbb9a1c6559a789ab04174f2b2cc5f5b9945025213ec94ba505e1e"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_75/fluxos.csv",
+      "bytes": 49843,
+      "sha256": "52c0cfa55d7de44ec048e75a9028ad1673f99ffb23126d168d4a2f78e571c4b6"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/multiplo_via_75/ubs.csv",
+      "bytes": 2405,
+      "sha256": "01d16a258032afa6db906882ec2b80384349a56e6bb63a975f4bf2c8e1c235b3"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/plano_aps.json",
+      "bytes": 1754,
+      "sha256": "b0d84fb5dfdf2d3c799c0d96dbd8107dc270638bf22e9c8262637ba6208837e5"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/status.json",
+      "bytes": 1802,
+      "sha256": "31f4c4e73bc59180c774ce51d779fb00035e099df76aebb82dec28b5fae2cf54"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/ubs_ativas_da_aps.csv",
+      "bytes": 3664,
+      "sha256": "9182b141e0c475ad3fedc9617a8da36ff1e9967625fb9db5327ede31f1d7439d"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_25/capacidades.csv",
+      "bytes": 1139,
+      "sha256": "c1e7e596a041ffe73103a0b5b547039f6b58ca4a23be5466be79ffdcd428a394"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_25/demanda_e_percursos.csv",
+      "bytes": 592,
+      "sha256": "b0e887ba9130cbfccabe7dca333a0168178159c71220e3e3b11c70353a644937"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_25/fase1.dat",
+      "bytes": 174006,
+      "sha256": "5899764943b4e123e9dd84f3a790e7209664ac6e755afc0fb493d783c78f1659"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_25/fase1.log",
+      "bytes": 2201,
+      "sha256": "85d1f4faad00ffeb5c005bdd64b8b34c8b08b6a9c5c9fd362578f89dc148affa"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_25/fase1_display.csv",
+      "bytes": 31251,
+      "sha256": "9efb1cfb96abb3379e5b657b5d8fecc80815a3a577dece2fcd5785e61bcc6b7e"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_25/fase3.dat",
+      "bytes": 174005,
+      "sha256": "e5d6963cdb970356778d23da0524406f838057c1343a7c7645c727435b39f299"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_25/fase3.log",
+      "bytes": 2098,
+      "sha256": "813083d52f0c10a6feda0a2cc323570b74bcf07571b2e94d784c88527ede7ae7"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_25/fase3_display.csv",
+      "bytes": 31238,
+      "sha256": "56950c0615ffcefb7f0724f9b97c8135216bd742e92a25a842718594be37cdf2"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_25/fluxos.csv",
+      "bytes": 36394,
+      "sha256": "b5de04fc908764833dd02673da46d284dad912284028e014f28b1f9183fee1a3"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_25/ubs.csv",
+      "bytes": 2405,
+      "sha256": "01d16a258032afa6db906882ec2b80384349a56e6bb63a975f4bf2c8e1c235b3"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_50/capacidades.csv",
+      "bytes": 1135,
+      "sha256": "42cdf9fd27e7d93b904d060a9051ab0134bb9de853c3c85b083c46e39dde0a85"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_50/demanda_e_percursos.csv",
+      "bytes": 608,
+      "sha256": "e0fd63ac86c804ccc5bc9788a409ffef8ad4266515de3c01f3c8bd78afcbfedf"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_50/fase1.dat",
+      "bytes": 174005,
+      "sha256": "e17da20894d4878e968b9f98749f031889df687f1efa7302a0406bd398eaf2f7"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_50/fase1.log",
+      "bytes": 2201,
+      "sha256": "49dae18d904e5f23d8b531b069a0a26f7239dc7b02b72e9bc15156ac92906bcc"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_50/fase1_display.csv",
+      "bytes": 31266,
+      "sha256": "a51f8dcc350c722bf55c06aaa49e895cc345c0f2e0995a31f895687f3e698f62"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_50/fase3.dat",
+      "bytes": 174004,
+      "sha256": "2bbcbae4f1db73e0280eb910c16317f23ba931608340387cd6105d05e3ad0dcb"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_50/fase3.log",
+      "bytes": 2098,
+      "sha256": "a6f9b312bcdf95a8392ed69722aed1007552a1bd74c9122b659028044320c3fd"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_50/fase3_display.csv",
+      "bytes": 31261,
+      "sha256": "a1c6caa5941450808ae1cae3ab3b2f2a1f60f57f14b78f906dfb832292009720"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_50/fluxos.csv",
+      "bytes": 36426,
+      "sha256": "12a5b60904a9085544a3b2955f6a279c0c3dd70fe0dec5acab64ead845dd5972"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_50/ubs.csv",
+      "bytes": 2405,
+      "sha256": "01d16a258032afa6db906882ec2b80384349a56e6bb63a975f4bf2c8e1c235b3"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_75/capacidades.csv",
+      "bytes": 1138,
+      "sha256": "56cbd5f2c839b14adf674352010bcf3bfb907e4aeabd702a33df98ec56068ca7"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_75/demanda_e_percursos.csv",
+      "bytes": 605,
+      "sha256": "f41ae2b069052c7cdc0bfe04295054c2a167b02a3c4baca8fb9329ff6dcaf2fd"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_75/fase1.dat",
+      "bytes": 174006,
+      "sha256": "174445173c6659c48d11de6a527c16e3061150f38125b2a92df1505f3e7da610"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_75/fase1.log",
+      "bytes": 2201,
+      "sha256": "1f7110118502b0d9b0b7616b4507cf3682f444ce52eb975b27561001d0c23174"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_75/fase1_display.csv",
+      "bytes": 31250,
+      "sha256": "9b0e32f96a8894dc8861f87d437127042a83aae6532d20c1e437c9e2832a8752"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_75/fase3.dat",
+      "bytes": 174005,
+      "sha256": "d287e7601a64d91e12b8e15abef69809445086bc559d1fec9517ae62e29e5db6"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_75/fase3.log",
+      "bytes": 2098,
+      "sha256": "34bf058b8d9948f6528ed22291ddc51cfb9dc044229de124ebba06eb48838ca8"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_75/fase3_display.csv",
+      "bytes": 31243,
+      "sha256": "3958829ce47159435db37d49598602e1268276413eda9c22aae426bb0965a935"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_75/fluxos.csv",
+      "bytes": 36440,
+      "sha256": "4c426c453ef6b53cadb14e019ef0d9f63a66739367752210143ad1af3618b643"
+    },
+    {
+      "arquivo": "resultados/plano_referencia_2pct/unico_via_75/ubs.csv",
+      "bytes": 2405,
+      "sha256": "01d16a258032afa6db906882ec2b80384349a56e6bb63a975f4bf2c8e1c235b3"
+    },
+    {
+      "arquivo": "resultados/sensibilidade/curva_cobertura_custo.png",
+      "bytes": 86613,
+      "sha256": "dd7ca3e8ea4e71f6203bc2f1eba25d2617a8aaa4b4a2a5f3afee1bb5721d5648"
+    },
+    {
+      "arquivo": "resultados/sensibilidade/relatorio.txt",
+      "bytes": 4048,
+      "sha256": "c1ef4c1ca29e8df8e7aec4ca32ad53ce7342f340755a816259b8e679d4c7c6af"
+    },
+    {
+      "arquivo": "resultados/sensibilidade/resumo.csv",
+      "bytes": 6678,
+      "sha256": "66451d9d30215213f5422bb5ad2715411f4862a1b1ff44a48576e01bb85ddd39"
+    },
+    {
+      "arquivo": "rodar_plano.ps1",
+      "bytes": 255,
+      "sha256": "b801bb248e1e50faf519f66f423bfe5eea80b5dea9a94d240fcdcb8a3e404eed"
+    },
+    {
+      "arquivo": "testes/testar_aps_completa.py",
+      "bytes": 7344,
+      "sha256": "202c286dd0a7b8030cecca826afdbfdc5457e5aa87e905807e420dab7e60b105"
+    },
+    {
+      "arquivo": "testes/testar_diagnostico.py",
+      "bytes": 1379,
+      "sha256": "730f06d21c6ce42bfb3df8e32a59202b1e4d9007244665cac1c6694d02e6287d"
+    }
+  ],
+  "pagina_resultados": "11 graficos e comparador interativo ambulatorial; internacoes fora da pagina"
+}

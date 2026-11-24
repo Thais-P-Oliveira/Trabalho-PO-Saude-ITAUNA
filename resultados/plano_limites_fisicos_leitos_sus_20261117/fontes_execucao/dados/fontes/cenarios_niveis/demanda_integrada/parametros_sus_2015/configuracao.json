@@ -1,0 +1,13 @@
+{
+  "fonte": "https://fehosp.com.br/files/manuais/5ffa8d1e03f7edb01e1eed7b07178cfb.pdf",
+  "tmp_dias": {
+    "hospitalar_media": 5.131730948388299,
+    "hospitalar_alta": 3.3263736263736265
+  },
+  "tmp_fonte": "SIH residentes processamento2025: dias/internacoes por complexidade; aproximacao do consumo de leito geral, nao diaria UTI",
+  "ano_dias": 365,
+  "competencia_leitos": 202607,
+  "cenario": "exploratorio_parcial_capacidade_hospitalar",
+  "ambulatorial": "PENDENTE: nao ha coeficiente universal para os procedimentos agregados",
+  "formula": "leitos_gerais_SUS * 365 * ocupacao; consumo compartilhado media*TMP_media+alta*TMP_alta"
+}

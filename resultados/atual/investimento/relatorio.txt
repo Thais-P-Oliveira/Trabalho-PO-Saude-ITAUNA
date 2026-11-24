@@ -1,0 +1,14 @@
+INVESTIMENTO EM CONSTRUCAO - CALCULO SEPARADO DO MODELO
+
+Plano mantido: C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\plano
+Novas UBS: 9; eSF: 16.
+Investimento total em construcao: R$ 22.848.000,00.
+Operacao anual da rede completa implantada (separada): R$ 27.695.837,33.
+Construcao incluida no objetivo de cinco anos; folga somente operacional.
+Nao foi definido prazo contratual de pagamento nem atribuido o total a um ano especifico.
+
+Porte associado ao numero de eSF da nova UBS.
+Valores nominais de 2025, sem juros ou reajuste.
+Nao inclui terrenos, equipamentos ou mobiliario.
+Nao presume aprovacao ou repasse federal para as unidades propostas.
+Operacao anual refere-se a rede completa implantada; nao e gasto durante a obra.

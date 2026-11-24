@@ -1,0 +1,271 @@
+{
+  "raio_km": 3.0,
+  "raio_rural_km": 3.0,
+  "fator_rota": 1.0,
+  "hab_esf": 3000,
+  "betas": [
+    1,
+    2
+  ],
+  "distancia_minima_km": 0.1,
+  "equipes_cnes": 23.0,
+  "acessibilidade_por_zona": [
+    {
+      "rede": "atual_cnes_202607",
+      "beta": 1,
+      "zona": "total",
+      "populacao": 104002.0,
+      "acessibilidade_media_ponderada": 0.6634487798311571,
+      "acessibilidade_relativa_media": 1.0,
+      "minimo": 0.09654029832701297,
+      "maximo": 1.2065977456538637
+    },
+    {
+      "rede": "atual_cnes_202607",
+      "beta": 1,
+      "zona": "urbana",
+      "populacao": 99187.85178511094,
+      "acessibilidade_media_ponderada": 0.6893993263967082,
+      "acessibilidade_relativa_media": 1.039114619476963,
+      "minimo": 0.09654029832701297,
+      "maximo": 1.2065977456538637
+    },
+    {
+      "rede": "atual_cnes_202607",
+      "beta": 1,
+      "zona": "rural",
+      "populacao": 4814.148214889065,
+      "acessibilidade_media_ponderada": 0.12877912455844218,
+      "acessibilidade_relativa_media": 0.19410560162792903,
+      "minimo": 0.09706637321128125,
+      "maximo": 0.17321629682820724
+    },
+    {
+      "rede": "atual_cnes_202607",
+      "beta": 2,
+      "zona": "total",
+      "populacao": 104002.0,
+      "acessibilidade_media_ponderada": 0.6634487798311571,
+      "acessibilidade_relativa_media": 1.0,
+      "minimo": 0.006608424918740056,
+      "maximo": 4.176112557001433
+    },
+    {
+      "rede": "atual_cnes_202607",
+      "beta": 2,
+      "zona": "urbana",
+      "populacao": 99187.85178511094,
+      "acessibilidade_media_ponderada": 0.6950354173478622,
+      "acessibilidade_relativa_media": 1.0476097605074255,
+      "minimo": 0.006608424918740056,
+      "maximo": 4.176112557001433
+    },
+    {
+      "rede": "atual_cnes_202607",
+      "beta": 2,
+      "zona": "rural",
+      "populacao": 4814.148214889065,
+      "acessibilidade_media_ponderada": 0.012656452601330883,
+      "acessibilidade_relativa_media": 0.019076759180342236,
+      "minimo": 0.006703487371415739,
+      "maximo": 0.022032350044037606
+    },
+    {
+      "rede": "plano_salvo",
+      "beta": 1,
+      "zona": "total",
+      "populacao": 104002.0,
+      "acessibilidade_media_ponderada": 1.1249783658006576,
+      "acessibilidade_relativa_media": 1.0,
+      "minimo": 0.27185488921431417,
+      "maximo": 3.79850466410243
+    },
+    {
+      "rede": "plano_salvo",
+      "beta": 1,
+      "zona": "urbana",
+      "populacao": 99187.85178511094,
+      "acessibilidade_media_ponderada": 1.1192708633551127,
+      "acessibilidade_relativa_media": 0.9949265669287046,
+      "minimo": 0.36809966744407574,
+      "maximo": 3.79850466410243
+    },
+    {
+      "rede": "plano_salvo",
+      "beta": 1,
+      "zona": "rural",
+      "populacao": 4814.148214889065,
+      "acessibilidade_media_ponderada": 1.2425723577930523,
+      "acessibilidade_relativa_media": 1.104530003035838,
+      "minimo": 0.27185488921431417,
+      "maximo": 3.058548821401571
+    },
+    {
+      "rede": "plano_salvo",
+      "beta": 2,
+      "zona": "total",
+      "populacao": 104002.0,
+      "acessibilidade_media_ponderada": 1.1249783658006576,
+      "acessibilidade_relativa_media": 1.0,
+      "minimo": 0.014121180587393855,
+      "maximo": 26.163893497570594
+    },
+    {
+      "rede": "plano_salvo",
+      "beta": 2,
+      "zona": "urbana",
+      "populacao": 99187.85178511094,
+      "acessibilidade_media_ponderada": 1.0056546741915944,
+      "acessibilidade_relativa_media": 0.8939324566262753,
+      "minimo": 0.03006096070801914,
+      "maximo": 26.163893497570594
+    },
+    {
+      "rede": "plano_salvo",
+      "beta": 2,
+      "zona": "rural",
+      "populacao": 4814.148214889065,
+      "acessibilidade_media_ponderada": 3.583452868344568,
+      "acessibilidade_relativa_media": 3.1853526941330923,
+      "minimo": 0.014121180587393855,
+      "maximo": 16.119822319059455
+    }
+  ],
+  "ubs_atual": 22,
+  "populacao": 104002.0,
+  "cobertura": [
+    {
+      "rede": "atual_cnes_202607",
+      "zona": "total",
+      "raio_km": 3.0,
+      "raio_urbano_km": 3.0,
+      "raio_rural_km": 3.0,
+      "pontos": 91,
+      "populacao": 104002.0,
+      "populacao_no_raio": 97140.16166849257,
+      "populacao_fora_raio": 6861.838331507432,
+      "cobertura_populacao_pct": 93.40220540806193,
+      "pontos_no_raio": 67,
+      "cobertura_pontos_pct": 73.62637362637362,
+      "distancia_media_km": 0.8475663765545546,
+      "distancia_p90_km": 0.959646177705563,
+      "distancia_maxima_km": 10.415366793956569
+    },
+    {
+      "rede": "atual_cnes_202607",
+      "zona": "urbana",
+      "raio_km": 3.0,
+      "raio_urbano_km": 3.0,
+      "raio_rural_km": 3.0,
+      "pontos": 78,
+      "populacao": 99187.85178511094,
+      "populacao_no_raio": 97140.16166849257,
+      "populacao_fora_raio": 2047.690116618367,
+      "cobertura_populacao_pct": 97.935543436252,
+      "pontos_no_raio": 67,
+      "cobertura_pontos_pct": 85.8974358974359,
+      "distancia_media_km": 0.5383470399352704,
+      "distancia_p90_km": 0.7639969043835585,
+      "distancia_maxima_km": 10.415366793956569
+    },
+    {
+      "rede": "atual_cnes_202607",
+      "zona": "rural",
+      "raio_km": 3.0,
+      "raio_urbano_km": 3.0,
+      "raio_rural_km": 3.0,
+      "pontos": 13,
+      "populacao": 4814.148214889065,
+      "populacao_no_raio": 0,
+      "populacao_fora_raio": 4814.148214889065,
+      "cobertura_populacao_pct": 0.0,
+      "pontos_no_raio": 0,
+      "cobertura_pontos_pct": 0.0,
+      "distancia_media_km": 7.218538012788371,
+      "distancia_p90_km": 10.065772513006042,
+      "distancia_maxima_km": 10.143958706839426
+    },
+    {
+      "rede": "plano_salvo",
+      "zona": "total",
+      "raio_km": 3.0,
+      "raio_urbano_km": 3.0,
+      "raio_rural_km": 3.0,
+      "pontos": 91,
+      "populacao": 104002.0,
+      "populacao_no_raio": 101616.75514236861,
+      "populacao_fora_raio": 2385.244857631391,
+      "cobertura_populacao_pct": 97.70653943421145,
+      "pontos_no_raio": 84,
+      "cobertura_pontos_pct": 92.3076923076923,
+      "distancia_media_km": 0.5301774528408966,
+      "distancia_p90_km": 0.7881478083559503,
+      "distancia_maxima_km": 6.807702532301907
+    },
+    {
+      "rede": "plano_salvo",
+      "zona": "urbana",
+      "raio_km": 3.0,
+      "raio_urbano_km": 3.0,
+      "raio_rural_km": 3.0,
+      "pontos": 78,
+      "populacao": 99187.85178511094,
+      "populacao_no_raio": 99040.90366441758,
+      "populacao_fora_raio": 146.94812069335603,
+      "cobertura_populacao_pct": 99.85184867093228,
+      "pontos_no_raio": 76,
+      "cobertura_pontos_pct": 97.43589743589743,
+      "distancia_media_km": 0.4311968531291691,
+      "distancia_p90_km": 0.7414564618802577,
+      "distancia_maxima_km": 3.732786262257245
+    },
+    {
+      "rede": "plano_salvo",
+      "zona": "rural",
+      "raio_km": 3.0,
+      "raio_urbano_km": 3.0,
+      "raio_rural_km": 3.0,
+      "pontos": 13,
+      "populacao": 4814.148214889065,
+      "populacao_no_raio": 2575.8514779510388,
+      "populacao_fora_raio": 2238.296736938026,
+      "cobertura_populacao_pct": 53.50586153505861,
+      "pontos_no_raio": 8,
+      "cobertura_pontos_pct": 61.53846153846154,
+      "distancia_media_km": 2.569514967096148,
+      "distancia_p90_km": 6.216669492306221,
+      "distancia_maxima_km": 6.807702532301907
+    }
+  ],
+  "limites_capacitados": [
+    {
+      "rede": "atual_cnes_202607",
+      "criterio": "esf",
+      "capacidade_total": 69000.0,
+      "populacao_maxima_no_raio": 69000.0,
+      "cobertura_maxima_pct": 66.34487798311571,
+      "nota": "Equipes atuais fixas; capacidade convencional, nao cobertura oficial nem atendimento observado"
+    },
+    {
+      "rede": "atual_cnes_202607",
+      "criterio": "esf_e_acs",
+      "capacidade_total": 68250.0,
+      "populacao_maxima_no_raio": 68250.00000000001,
+      "cobertura_maxima_pct": 65.62373800503838,
+      "nota": "Equipes atuais fixas; capacidade convencional, nao cobertura oficial nem atendimento observado"
+    }
+  ],
+  "cobertura_oficial_mais_recente_na_consulta": {
+    "competencia": "07/2026",
+    "cobertura_oficial_aps_pct": 80.49,
+    "populacao_oficial": 103272,
+    "ano_populacao": "2025",
+    "esf": 23,
+    "eap_20h": 0,
+    "eap_30h": 1,
+    "capacidade_administrativa_oficial": 83125,
+    "fonte": "https://relatorioaps-prd.saude.gov.br/cobertura/aps?unidadeGeografica=MUNICIPIO&coUf=31&coMunicipio=313380&nuCompInicio=202501&nuCompFim=202607"
+  },
+  "folga_custo_plano": 0.02,
+  "nota": "Ai e indice potencial, nao porcentagem de cobertura. Atual usa somente eSF da base de 22 UBS; oficial usa universo e parametros proprios. Plano salvo pode ser de execucao anterior."
+}

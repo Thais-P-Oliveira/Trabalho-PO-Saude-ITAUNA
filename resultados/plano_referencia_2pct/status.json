@@ -1,0 +1,58 @@
+{
+  "status": "plano_completo_validado",
+  "originais_preservados": true,
+  "cenarios": 6,
+  "etapas": [
+    "APS: cobertura, custo e distancia conforme original",
+    "hierarquia: menor falta e deslocamento no plano APS fixado"
+  ],
+  "otimizacao_conjunta": false,
+  "plano_aps_fixo": true,
+  "otimalidade_aps_confirmada": true,
+  "origem_plano": "resultados/plano_referencia_2pct",
+  "certificados_solver_aps": [
+    {
+      "status": "Optimal",
+      "sol_status": "Optimal Solution Found"
+    },
+    {
+      "status": "Optimal",
+      "sol_status": "Optimal Solution Found"
+    },
+    {
+      "status": "Optimal",
+      "sol_status": "Optimal Solution Found"
+    }
+  ],
+  "parametros_aps": {
+    "demanda": "dados/fontes/pontos_demanda_itauna.csv",
+    "ubs": "dados/fontes/unidades_existentes_itauna.csv",
+    "raio": 3.0,
+    "fator_rota": 1.0,
+    "hab_esf": 3000,
+    "hab_min_esf": 2000,
+    "esf_max": 4,
+    "max_novas": null,
+    "hab_min_nova": 2000,
+    "hab_min_nova_rural": 0,
+    "dist_min_cand": 1.0,
+    "custo_km": 0.05,
+    "cobertura_min": null,
+    "growth": null,
+    "growth_file": null,
+    "solver": "auto",
+    "time_limit": 300.0,
+    "gap": 0.0001,
+    "pareto": false,
+    "saida": "resultados/plano_referencia_2pct/aps",
+    "quiet": true,
+    "folga_custo": 0.02
+  },
+  "sha256": {
+    "modelos\\aps_base.py": "e8ce27e87fb44f48ddd4ca9c73137ff14dbb0571813babd6d50bd5362cd027fb",
+    "codigos\\planejar.py": "afc8d7986cf653d907668740ae028ce9d1fee30b439da8700da24fe4b60b51ae",
+    "modelos\\rede_completa.mod": "26dd87b9d062a7f9b35ede678a6c6bf8ab4aa8dc08022a2cf6e58dda11caa15f",
+    "codigos\\preparar.py": "047e624970ba6159f96a1d66e4216fc58fa3d861aec733b9c2229db30b5c039a"
+  },
+  "auditoria_integracao": "PASSOU"
+}

@@ -1,0 +1,64 @@
+ESTRUTURA CADASTRADA DAS 22 UBS DE ITAUNA
+
+Fonte: CNES/DATASUS, ficha publica, competencia selecionada 202607.
+Consulta realizada em 17/11/2026. A competencia foi conferida no seletor de
+cada uma das 22 paginas. URL e identificacao de cada HTML constam em fontes.json.
+
+ARQUIVOS
+estrutura_22_ubs.csv: resumo dos ambientes ambulatoriais e eSF do arquivo local
+de equipes de julho/2026. Campos vazios de ambientes significam que a categoria
+nao consta na tabela consultada; nao comprovam inexistencia fisica da sala.
+instalacoes_detalhadas.csv: categorias e quantidades completas, distinguindo
+ambulatorio e urgencia/emergencia. Nao somar essas categorias indiscriminadamente.
+fichas/: copias das fichas oficiais usadas na extracao.
+fontes.json: data, URLs, competencia e SHA256 das fichas.
+
+INTERPRETACAO
+19 unidades listam um consultorio de clinicas basicas; Gracas e Parque Jardim
+listam dois; Central lista quatro. Sao ambientes declarados no cadastro.
+O porte formal I/II/III/IV/V e o maximo fisico de eSF nao foram identificados
+nessas fichas. Esses campos foram deixados vazios de forma intencional.
+Salas de enfermagem, odontologia e outros consultorios devem ser interpretados
+separadamente. A UBS Central tambem possui registros de urgencia/emergencia,
+que nao foram somados ao resumo ambulatorial.
+
+REGRA ATUAL - NOVAS UBS COM UMA A QUATRO EQUIPES
+limites_equipes_novas_ate4.csv e a tabela padrao do planejamento completo.
+Mantem os mesmos limites das 22 UBS existentes e permite ao modelo escolher
+de uma a quatro eSF em cada nova UBS. O porte I/II/III/IV acompanha esse numero.
+As salas das novas unidades sao dimensionadas conforme o porte escolhido:
+uma sala clinica e uma de enfermagem por equipe, como regra do projeto.
+Construcao por porte e calculada depois; nao participa da escolha na otimizacao.
+Resultado atual: resultados/plano_novas_portes_I_IV_20261117/.
+
+CENARIO ANTERIOR - NOVAS UBS COM UMA EQUIPE
+limites_equipes_modelo.csv documenta o minimo de equipes atuais e o maximo
+permitido por CNES. A regra de planejamento exige uma sala de clinicas basicas
+e uma de enfermagem por equipe adicional, preservando todas as eSF atuais.
+Central e Zona Rural mantem uma equipe cada, sem exigir sala ausente no cadastro.
+Parque Jardim mantem duas; as outras 19 unidades mantem uma cada.
+Novas UBS possuem estrutura planejada de um consultorio basico e uma sala de
+enfermagem: maximo de uma eSF por nova unidade, como hipotese do projeto.
+Esses limites sao uma regra de planejamento, nao um laudo de capacidade fisica.
+ACS continuam com capacidade de 750 habitantes por agente, sem teto fixo por UBS.
+O plano anterior em resultados/plano_referencia_2pct foi preservado.
+
+PARA DEFINIR LIMITES
+Quantidade de consultorios nao equivale automaticamente ao maximo de equipes:
+ha compartilhamento de ambientes, turnos e atividades de outros profissionais.
+Uma restricao baseada nas salas deve ser identificada como hipotese estimada.
+Uma alternativa conservadora e testar um cenario que mantenha o numero atual
+de eSF nas unidades existentes, sem chamar esse numero de capacidade fisica.
+UBS Zona Rural tem atendimento itinerante em comunidades segundo a Carta de
+Servicos municipal; a ficha de um CNES nao representa todos os pontos rurais.
+
+Referencias de interpretacao:
+https://bvsms.saude.gov.br/bvs/publicacoes/manual_estrutura_unidades_basicas_saude_2ed.pdf
+https://bvsms.saude.gov.br/bvs/saudelegis/gm/2024/prt6185_23_12_2024.html
+https://www.itauna.mg.gov.br/portal/carta-servicos/83/
+
+Os portes do programa federal de construcao estabelecem estruturas de referencia
+para um numero MINIMO de equipes; nao sao certificados de capacidade maxima
+para cada predio existente em Itauna.
+
+Coleta reproduzivel: codigos/coletar_estrutura_cnes.py (consulta publica on-line).

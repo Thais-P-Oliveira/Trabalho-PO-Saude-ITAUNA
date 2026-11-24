@@ -1,0 +1,140 @@
+{
+  "consulta_utc": "2026-11-17T22:09:34.369074+00:00",
+  "competencia_solicitada": "202607",
+  "quantidade_unidades": 22,
+  "observacao": "Competencia exibida deve ser conferida; nao inferir porte ou maximo de equipes apenas das salas.",
+  "fontes": [
+    {
+      "cnes": "2202093",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802202093&VComp=202607",
+      "sha256_html": "47950ae0740d38e60418b5b24de034fa2b82b089fc4aa278d23fef0d8feb265b",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2161028",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802161028&VComp=202607",
+      "sha256_html": "2f988e25163db91a63e2b42e82b938e8b441e2a01d7fd9a243ade8fa8f7583a2",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2144409",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802144409&VComp=202607",
+      "sha256_html": "b474a4f1271ad48d0857ee43f9920f2e1a803cce4be0fb97121931409fd48e04",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2161095",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802161095&VComp=202607",
+      "sha256_html": "7b437f2d2cc4cd56f40c70c866fe422e54c130cfecdb50bdc0e3b3a0e4c25945",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2202085",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802202085&VComp=202607",
+      "sha256_html": "4b3223229edb96b2daf4d0f0346541654b17dd7bab8c4443e76569e1c23016c8",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2144387",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802144387&VComp=202607",
+      "sha256_html": "178860cbbdec29e3fb5a98e66bc600470bc7893c911fe0e39b5aa70ba6e57ecb",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2160986",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802160986&VComp=202607",
+      "sha256_html": "90a30fd84b03ad6bca898c662a9f351a33c14f585926b5e569f24bfc28bb69f9",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2202077",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802202077&VComp=202607",
+      "sha256_html": "4312eabd59b1d0b3bcb4b6d7d20eb0d452a19b8d5c553c70c219b01a84ea14ef",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2144379",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802144379&VComp=202607",
+      "sha256_html": "5d5faa6249574243987e0fcfa43a337dbcea3567c39f713a9cea7e22ca727326",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2144425",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802144425&VComp=202607",
+      "sha256_html": "4bde753265b943af4a1dbc1f504369c9ba1b48cbb21ea361e78e85178ddf184f",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "5375053",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133805375053&VComp=202607",
+      "sha256_html": "f497278c048ee8e2e84aea0f1b0c9aff0a52befc4c53c5724eae49be6bd788d2",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "7783310",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133807783310&VComp=202607",
+      "sha256_html": "026ef2601d653a91926d055ebe0cfe309052b7b16fbab4983f61344e281a5aed",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2161036",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802161036&VComp=202607",
+      "sha256_html": "2a60c4ff5cc5538c42a9079576aa91e596e45ce7ba5a092f85720f7e15c8fa24",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2160994",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802160994&VComp=202607",
+      "sha256_html": "1ea9c22975c3d7bc2f26e2894dd1e0c23da3c7f72163ba4d52f2377a26a77c89",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2144417",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802144417&VComp=202607",
+      "sha256_html": "d3cf2baf6fc28f7e93436e63b25abaef0f65202ea7266eba77bddd3ad1d9b04e",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2144441",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802144441&VComp=202607",
+      "sha256_html": "aa84fcc55b5f98ef0f1ec10cd2988e696ad9516e3f4d6696f4049d9ca5d961a7",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2105616",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802105616&VComp=202607",
+      "sha256_html": "19725511d0808efd20e05539c4d78847fc5b402d53707d62e9be1d362a8eb0d0",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2161044",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802161044&VComp=202607",
+      "sha256_html": "bc4f7ca4f8cd08646a3d919427ec906e64f5ff52ce72230e77eaf2f23a25e728",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "7768869",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133807768869&VComp=202607",
+      "sha256_html": "e53b87dc9058531a4e404233d185976485fa05402a7946e5d802f3af12181cff",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2144395",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802144395&VComp=202607",
+      "sha256_html": "6d9d4619f425159d26be1a0ba7d277a73e7a341fcd6ca8026d550c6d9d8d75d6",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "7616759",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133807616759&VComp=202607",
+      "sha256_html": "b3f2f003afebfba757d84cd27ae05a91cf7a054202d66bdee44875b75f40af88",
+      "competencia_exibida": "202607"
+    },
+    {
+      "cnes": "2144433",
+      "url": "https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802144433&VComp=202607",
+      "sha256_html": "4dbb2d8a10811a076c737eec833feef9cc8365553ac608ed497d917a7574de43",
+      "competencia_exibida": "202607"
+    }
+  ]
+}

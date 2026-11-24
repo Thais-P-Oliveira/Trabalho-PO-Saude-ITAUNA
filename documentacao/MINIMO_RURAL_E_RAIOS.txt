@@ -1,0 +1,87 @@
+MINIMO DE ABERTURA RURAL E COMPARACAO DOS RAIOS - AJUSTES NAO EXECUTADOS
+
+JUSTIFICATIVA DO MINIMO DE 500 HABITANTES
+O valor e uma hipotese de planejamento para evitar a abertura de unidades fixas
+com contingentes muito pequenos, mantendo tratamento diferente do minimo urbano
+de 2.000 habitantes. Nao e capacidade maxima da equipe nem cobertura obrigatoria.
+Representa 16,7% da capacidade convencional de uma eSF de 3.000 habitantes.
+No modelo o minimo e a populacao alocada dentro do raio, somada entre pontos;
+nao exige que um unico setor ou comunidade tenha sozinho 500 habitantes.
+A regra identifica a zona da candidata a UBS, como nas versoes anteriores.
+
+REFERENCIAS E ALCANCE
+Brasil. Ministerio da Saude. Normas e padroes de construcoes e instalacoes de
+servicos de saude. 2. ed. Brasilia, 1983, secao Dimensionamento das necessidades,
+Atendimento elementar. A publicacao menciona 500 habitantes como minimo do
+agrupamento para um posto de saude em populacao dispersa. E referencia historica,
+anterior ao SUS e a eSF; nao comprova um requisito atual de 500 para UBS moderna.
+https://bvsms.saude.gov.br/bvs/publicacoes/normas_padroes_construcoes_instalacoes_servicos_saude.pdf
+A PNAB 2017 admite arranjos populacionais conforme especificidades territoriais,
+sem fixar esse minimo de 500 para novas UBS rurais.
+https://bvsms.saude.gov.br/bvs/saudelegis/gm/2017/prt2436_22_09_2017.html
+
+NAO JUSTIFICAR O PARAMETRO SOMENTE PELA REDUCAO DE CUSTO
+Aumentar o minimo pode impedir aberturas e reduzir a cobertura maxima alcancavel.
+Com a mesma meta de cobertura e prova de otimo, acrescentar uma restricao nao
+pode diminuir o custo minimo da fase 2. Comparar populacao descoberta e custos.
+A comparacao reduzida mantem 500 nos tres cenarios de distancia. O cenario sem
+minimo adicional permanece como referencia historica e na sensibilidade ampla.
+
+TRES CENARIOS EXTRAS DE DISTANCIA
+Minimo rural fixo de 500 habitantes nos tres casos:
+1. Urbano 3 km; rural 3 km.
+2. Urbano 3 km; rural 5 km.
+3. Urbano 5 km; rural 5 km.
+Base do codigo: minimo rural 500, raio 3 em ambas as zonas.
+Folga de custo mantida em 2%.
+O raio misto e um cenario alternativo, sem mudar o limite urbano para 5.
+Os 3 e 5 km sao hipoteses espaciais do estudo, nao limites oficiais aqui comprovados.
+
+COMO O RAIO MISTO FUNCIONA
+A zona considerada e a do ponto de origem dos moradores, nao a da UBS de destino.
+Um morador urbano continua sujeito a 3 km mesmo se vinculado a uma UBS rural.
+Um morador rural pode contar como coberto ate 5 km no cenario misto.
+A capacidade das eSF e dos ACS continua sendo respeitada.
+As distancias continuam geograficas (Haversine), nao percursos viarios.
+
+INDICADORES
+Cobertura total, urbana e rural; habitantes fora do raio; novas UBS e novas rurais;
+equipes; ACS; custos operacionais; distancias medias total e por zona;
+construcao calculada separadamente conforme o porte; certificados de cada fase.
+Tambem mede em todas as solucoes a cobertura com cortes comuns de 3 e 5 km.
+Isso evita interpretar um limite mais permissivo como reducao automatica da distancia.
+
+SITUACAO E PROXIMA EXECUCAO
+Somente o codigo, testes e esta documentacao foram ajustados. Nada foi executado.
+Os resultados existentes e a sensibilidade antiga foram preservados.
+Nova saida da analise: resultados/sensibilidade_rural_500_raios/.
+O script usa a APS mais recente com portes I-IV, nao a referencia antiga de 12 UBS.
+Recalcula os locais/equipes/ACS em cada cenario; nao recalcula encaminhamentos.
+Somente tres graficos extras serao apresentados:
+extra_raios_01_custo: custo operacional mensal, com numero de novas UBS nas barras.
+extra_raios_02_cobertura: cobertura total, urbana e rural conforme cada cenario.
+extra_raios_03_distancia: distancia media ponderada pela populacao, por zona.
+Essas figuras ficam separadas; nao se repetem mapas e demais graficos principais.
+No relatorio, a comparacao entra como uma analise complementar reduzida.
+Comando futuro, na pasta principal:
+python codigos/rodar_sensibilidade.py --somente-rural-raios --processos 3 --time-limit 600
+Para rodar o plano completo misto no futuro:
+python executar.py --raio 3 --raio-rural 5 --hab-min-nova-rural 500 --saida resultados/nova_execucao_mista
+
+TEXTO PREPARADO PARA O RELATORIO, JUNTO DA ATUALIZACAO DOS RESULTADOS
+Para a abertura de novas UBS rurais, adotou-se um minimo de 500 habitantes
+alocados dentro do limite de cobertura. Esse parametro estabelece uma escala
+minima para unidades fixas, com exigencia inferior ao minimo urbano de 2.000
+habitantes, considerando a dispersao da populacao rural. A escolha constitui
+uma hipotese de planejamento. Como antecedente historico, o Ministerio da Saude
+(1983) indicava 500 habitantes para agrupamentos atendidos por postos de saude
+em areas de populacao dispersa. Essa referencia nao equivale a um requisito
+atual de dimensionamento de UBS com equipes de Saude da Familia.
+
+A analise principal utiliza limite de cobertura de 3 km nas zonas urbana e
+rural, com folga de custo de 2%. Uma analise complementar compara os limites
+urbano/rural de 3/3, 3/5 e 5/5 km, mantendo o minimo rural de 500 habitantes e
+os demais parametros. A comparacao e apresentada em tres figuras: custo
+operacional, cobertura total e por zona e distancia media de deslocamento.
+O exame conjunto desses indicadores permite distinguir o aumento da cobertura
+associado a um limite de distancia mais amplo de uma reducao dos deslocamentos.
