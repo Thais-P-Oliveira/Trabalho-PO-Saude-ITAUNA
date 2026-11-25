@@ -12,7 +12,7 @@ class RaiosPorZona(unittest.TestCase):
         dem=pd.DataFrame(dict(i=[1,2],pessoas=[500,500],NM_BAIRRO=['Centro','Comunidade (rural)']))
         sites=pd.DataFrame([dict(id='UBS1',nome='UBS A',lat=0,lon=0,existente=True,fixo=12000)])
         D=np.array([[4.],[4.]])
-        args=Namespace(raio=3,raio_rural=5,hab_esf=3000,esf_max=4,
+        args=Namespace(preservar_acs_atuais=False,raio=3,raio_rural=5,hab_esf=3000,esf_max=4,
                        hab_min_nova=2000,hab_min_nova_rural=500,max_novas=None,
                        custo_km=.05,folga_custo=.02)
         solver,_=aps_base.escolher_solver('auto',20,.0001,False)

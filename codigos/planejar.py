@@ -1,8 +1,4 @@
-"""Entrada principal completa: planejamento original das UBS + rede especializada.
-
-Uso: python planejar.py [opcoes do model.py] [--pareto]
-Os arquivos originais sao somente lidos. Resultados ficam em resultados/nova_execucao/.
-"""
+"""Planeja as UBS e resolve os encaminhamentos secundarios e terciarios."""
 import argparse
 import csv
 import hashlib
@@ -63,9 +59,11 @@ def auditar_aps(ctx,saida):
     if abs(cobertura-res['cobertura'])>tol:raise ValueError('Cobertura inconsistente')
     if args.cobertura_min is not None and cobertura+tol<args.cobertura_min*res['total']:raise ValueError('Meta de cobertura nao atingida')
     custo=sum(CUSTO['ubs_nova'] if u['status']=='NOVA' else CUSTO['ubs_existente'] for u in ubs)
-    custo+=sum(CUSTO_ESF*u['n_esf']+CUSTO['acs']*u['acs'] for u in ubs)
+    from pessoal_cnes import por_site
+    pessoal=por_site(sites,args,CUSTO,CUSTO_ESF,limites)
+    custo+=sum(pessoal[int(u['idx'])]+CUSTO_ESF*(u['n_esf']-limites[int(u['idx'])][0])+CUSTO['acs']*u['acs'] for u in ubs)
     custo+=args.custo_km*sum(a['dist_km']*a['pessoas'] for a in arcos)
-    if abs(custo-res['custos']['objetivo'])>tol:raise ValueError('Custos nao conferem')
+    if abs(custo-res['custos']['objetivo'])>tol:raise ValueError(f"Custos nao conferem: calculado={custo:.8f}; registrado={res['custos']['objetivo']:.8f}")
     custos=res['custos']
     if 'investimento_construcao' in custos:
         from aps_base import precos_construcao
@@ -92,14 +90,11 @@ def conectar(ctx,pontos,unidades,demanda,config,saida,limite):
         por_id[uid]=cnes
         primarias.append(dict(cnes=cnes,id_aps=uid,nome=r['nome'],nivel_principal='1',novo_2=0,novo_3=0,lat=r['lat'],lon=r['lon'],esf=int(r['n_esf']),max_esf=limites[int(r['idx'])][1],cap_amb_anual=0,cap_leito_dias=0,status_aps=r['status'],acs=int(r['acs'])))
     novas_unidades=[u for u in unidades if u['nivel_principal']!='1']+primarias
-    vinculos={}
     pop={str(int(r.i)):float(r.pessoas) for r in dem.itertuples()}
     if set(pop)!={p['i'] for p in pontos}:raise ValueError('A integracao requer os mesmos IDs de demanda preparados')
-    for r in res['arcos'].to_dict('records'):
-        i=str(int(r['i']));u=por_id[r['id_ubs']]
-        vinculos[i,u]=vinculos.get((i,u),0)+float(r['pessoas'])/pop[i]
-    for i in pop:
-        if not math.isclose(sum(v for (a,u),v in vinculos.items() if a==i),1,abs_tol=1e-6):raise ValueError('Alocacao APS incompleta '+i)
+    from vinculos_moveis import construir
+    vinculos,carga_movel=construir(dem,res['ubs'],res['arcos'],args,saida,por_id,usar_salvo=(saida/'vinculos_moveis/populacao_por_ubs.csv').exists())
+    config=dict(config,carga_movel_ubs=carga_movel)
     # Crescimento mantem a demanda por habitante de referencia, sem ajuste por idade.
     # A oferta historica especializada nao cresce automaticamente com a populacao.
     base_pop={p['i']:float(p['pessoas']) for p in pontos}
@@ -126,13 +121,14 @@ def conectar(ctx,pontos,unidades,demanda,config,saida,limite):
                     txt=txt[:inicio]+tabela(matriz,linhas)+txt[fim:]
                 dist={k:v*args.fator_rota for k,v in dist.items()}
             txt+=f'param HAB := {args.hab_esf};\n'
+            txt+=tabela('MOVEL', [('u'+u['cnes'],carga_movel.get(u['cnes'],0)) for u in U])
             txt+=tabela('VINC',[('p'+p['i'],'u'+u['cnes'],vinculos.get((p['i'],u['cnes']),0)) for p in pontos for u in U])
             _,a=resolver(txt,pasta,1,limite)
             rows,b=resolver(txt,pasta,3,limite,a['falta']+1e-9)
-            resumo=validar(rows,pontos,projetada,config,U,F,dist,r,pasta)
+            resumo=validar(rows,pontos,projetada,dict(config,multiplo=multi),U,F,dist,r,pasta)
             # O quadro de equipes vem da APS, nao de uma nova contratacao na hierarquia.
-            salvar(pasta/'ubs.csv',[dict(id_local=u['cnes'],cnes_real=u['cnes'] if not u['cnes'].startswith('NOVA_') else '',nome=u['nome'],status=u['status_aps'],esf_planejadas_na_aps=u['esf'],acs_planejados_na_aps=u['acs'],capacidade=args.hab_esf*u['esf'],populacao_alocada=sum(pop[i]*z for (i,c),z in vinculos.items() if c==u['cnes'])) for u in U])
-            for rr in resumo:comparacao.append(dict(cenario=nome,via_percentual=int(r*100),novas_ubs=sum(u['status_aps']=='NOVA' for u in U),esf_planejadas=sum(u['esf'] for u in U),acs_planejados=sum(u['acs'] for u in U),cobertura_aps=res['cobertura']/res['total'],custo_mensal_aps=res['custos']['objetivo'],**rr))
+            salvar(pasta/'ubs.csv',[dict(id_local=u['cnes'],cnes_real=u['cnes'] if not u['cnes'].startswith('NOVA_') else '',nome=u['nome'],status=u['status_aps'],esf_planejadas_na_aps=u['esf'],acs_planejados_na_aps=u['acs'],capacidade=args.hab_esf*u['esf'],populacao_fixa_alocada=sum(pop[i]*z for (i,c),z in vinculos.items() if c==u['cnes'])-carga_movel.get(u['cnes'],0),populacao_movel_vinculada=carga_movel.get(u['cnes'],0),populacao_alocada=sum(pop[i]*z for (i,c),z in vinculos.items() if c==u['cnes'])) for u in U])
+            for rr in resumo:comparacao.append(dict(cenario=nome,via_percentual=int(r*100),novas_ubs=sum(u['status_aps']=='NOVA' for u in U),esf_planejadas=sum(u['esf'] for u in U),acs_planejados=sum(u['acs'] for u in U),cobertura_aps=res['cobertura']/res['total'],custo_mensal_aps=res['custos']['operacional'],custo_operacional_ubs_mensal=res['custos']['operacional'],proxy_deslocamento_aps_mensal=res['custos']['deslocamento_proxy'],escopo='operacao fixa; total com moveis em integracao.json',**rr))
             print('Plano completo:',nome,int(r*100),'validado.',flush=True)
     salvar(saida/'comparacao_completa.csv',comparacao)
     return comparacao
@@ -228,7 +224,7 @@ def main():
     salvar_plano(ctx,saida)
     resultados=conectar(ctx,pontos,unidades,demanda,config,saida,a.limite_hierarquia)
     if hashes()!=json.loads((DOCUMENTACAO/'originais_sha256.json').read_text()):raise ValueError('Original alterado')
-    arquivos=[MODELOS/'aps_base.py',CODIGOS/'planejar.py',MODELOS/'rede_completa.mod',CODIGOS/'preparar.py',CODIGOS/'projecao_populacional.py',FONTE_POPULACAO]
+    arquivos=[CODIGOS/'pessoal_cnes.py',CODIGOS/'vinculos_moveis.py',CODIGOS/'integracao_resultados.py',BASE/'fontes_publicas/ubs_recursos_cnes_202607.csv',MODELOS/'aps_base.py',CODIGOS/'planejar.py',MODELOS/'rede_completa.mod',CODIGOS/'preparar.py',CODIGOS/'projecao_populacional.py',FONTE_POPULACAO]
     # Registra tambem o calculo hospitalar e suas fontes nesta execucao.
     arquivos += [CODIGOS/'capacidade_hospitalar.py',CODIGOS/'encaminhamentos.py',
                  BASE/'fontes_publicas/leitos_hospital_cnes/leitos_sus_202607.csv',

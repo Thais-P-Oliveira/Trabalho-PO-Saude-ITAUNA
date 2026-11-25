@@ -23,6 +23,8 @@ def verificar():
         print(modulo+':', 'OK' if ok else 'instalar com requirements.txt')
         if not ok:faltam.append(modulo)
     solver=shutil.which('glpsol')
+    if solver is None and (RAIZ/'ferramentas/glpk/glpsol.exe').is_file():
+        solver=str(RAIZ/'ferramentas/glpk/glpsol.exe')
     print('GLPK/glpsol:',solver or 'instalar GLPK e adicionar glpsol ao PATH')
     if not solver:faltam.append('glpsol')
     from preparar import hashes
@@ -36,7 +38,7 @@ if __name__=='__main__':
     if '--verificar' in sys.argv:
         sys.exit(verificar())
     acoes={'--investimento':'calcular_investimento','--diagnostico':'diagnosticar','--orcamento':'comparar_orcamento',
-           '--auditar':'auditar_plano_completo','--preparar':'preparar'}
+           '--auditar':'auditar_plano_completo','--preparar':'preparar','--custo-equipes':'custo_equipes'}
     selecionadas=[a for a in acoes if a in sys.argv]
     if len(selecionadas)>1:
         raise SystemExit('Escolha uma acao por comando.')

@@ -41,11 +41,8 @@ def main():
                 for a in comparacao.itertuples()]
         def salvar_extra(fig,ax,nome,titulo):
             ax.set_xticks(x,labels)
-            ax.set_title(titulo)
             ax.grid(axis='y',color=GRADE,alpha=.6);ax.set_axisbelow(True)
             for lado in ['top','right']:ax.spines[lado].set_visible(False)
-            fig.text(.5,.015,'Análise extra: mínimo rural 500 habitantes; folga de custo 2%.',
-                     ha='center',fontsize=8,color=CINZA)
             fig.tight_layout(rect=(0,.05,1,1))
             fig.savefig(SAIDA/f'{nome}.png',dpi=200,facecolor=FUNDO)
             fig.savefig(SAIDA/f'{nome}.pdf',facecolor=FUNDO)
@@ -59,9 +56,6 @@ def main():
                         (i,valor),xytext=(0,5),textcoords='offset points',ha='center',fontsize=9)
         ax.set_ylim(0,comparacao.custo_operacional_mensal.max()/1e6*1.25)
         ax.set_ylabel('Custo operacional da rede (R$ milhões/mês)')
-        if not comparacao.custo_otimo_comprovado.all():
-            ax.text(.01,.98,'* Custo ótimo não comprovado no tempo disponível.',transform=ax.transAxes,
-                    va='top',fontsize=8,color=CINZA)
         salvar_extra(fig,ax,'extra_raios_01_custo','Custo operacional nos três cenários de distância')
         fig,ax=plt.subplots(figsize=(7.6,4.7),facecolor=FUNDO)
         for deslocamento,coluna,nome,cor in [(-.25,'cobertura','Total',CINZA),
@@ -105,6 +99,8 @@ Esta comparação da APS não repete os cenários de encaminhamento especializad
     referencia=Path(config['referencia'])
     ref = json.loads(referencia.read_text(encoding='utf-8'))
     ref_cob, ref_custo = ref['cobertura'] / ref['total'], ref['custos']['operacional']
+    from integracao_resultados import integrar
+    ref_custo=integrar(referencia.parent)['operacional_integrado_mensal']
 
     fig, ax = plt.subplots(figsize=(7.2, 4.2), facecolor=FUNDO)
     ax.set_facecolor(FUNDO)
@@ -114,13 +110,11 @@ Esta comparação da APS não repete os cenários de encaminhamento especializad
     for c in curva.itertuples():
         ax.annotate(f'{int(c.novas_ubs)} novas', (c.cobertura * 100, c.custo_operacional_mensal / 1e6),
                     xytext=(-6, 8), textcoords='offset points', ha='right', fontsize=8, color=CINZA)
-    ax.scatter([ref_cob * 100], [ref_custo / 1e6], s=60, marker='D', color=LARANJA, edgecolor=FUNDO,
+    ax.scatter([ref_cob * 100], [ref_custo / 1e6], s=60, marker='D', color=LARANJA, edgecolor=FUNDO,label='Plano principal',
                linewidth=2, zorder=4)
+    ax.legend(frameon=False,fontsize=9)
     n_ref = int((pd.read_csv(referencia.parent/'aps/ubs_completas.csv')['status'] == 'NOVA').sum())
     minimo=ref['parametros'].get('hab_min_nova_rural',0)
-    ax.annotate(f'Plano salvo anterior\n({n_ref} novas, mínimo rural {minimo:g})', (ref_cob * 100, ref_custo / 1e6), xytext=(-12, 14),
-                textcoords='offset points', ha='right', fontsize=8.5, color=TINTA,
-                arrowprops=dict(arrowstyle='-', color=CINZA, lw=0.8))
     ax.set_xlabel('População a até 3 km da UBS de destino (%)', color=TINTA, fontsize=9.5)
     ax.set_ylabel('Custo operacional (R$ milhões por mês)', color=TINTA, fontsize=9.5)
     ax.grid(axis='y', color=GRADE, lw=0.8)

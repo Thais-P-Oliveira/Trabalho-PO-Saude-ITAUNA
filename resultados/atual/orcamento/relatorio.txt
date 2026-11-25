@@ -1,21 +1,22 @@
 COMPARACAO ORCAMENTARIA - ITAUNA
 
 DETALHAMENTO DO FUNCIONAMENTO - TODA A REDE
-UBS existentes (22): R$ 1.425.714,67/mes; R$ 17.108.576,00/ano.
+UBS existentes (22): R$ 2.010.004,00/mes; R$ 24.120.048,00/ano.
 UBS novas (9): R$ 882.271,78/mes; R$ 10.587.261,33/ano.
-Total mensal da rede: R$ 2.307.986,44.
-Total anual de funcionamento: R$ 27.695.837,33.
+Equipes moveis adicionais (2): R$ 82.287,11/mes; R$ 987.445,33/ano.
+Total mensal da rede: R$ 2.974.562,89.
+Total anual de funcionamento: R$ 35.694.754,67.
 Construcao das novas UBS, uma unica vez: R$ 22.848.000,00.
-ANO DE IMPLANTACAO: operacao anual + construcao = R$ 50.543.837,33.
+ANO DE IMPLANTACAO: operacao anual + construcao = R$ 58.542.754,67.
 Hipotese: obras integralmente pagas no exercicio e 12 meses de funcionamento da rede implantada.
 Nao representa cronograma de entrada em funcionamento. Se a obra atravessar anos, distribuir o investimento pelo cronograma.
 Os cinco anos pertencem a otimizacao; nao sao comparados ao orcamento de um unico ano.
 
-Plano: C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\plano; folga operacional de 2%.
-Custo operacional planejado da APS: R$ 2.307.986,44/mes; R$ 27.695.837,33/ano.
-Inclui todas as UBS do plano, existentes e novas, equipes e ACS.
+Plano: C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho_PO_Saude_integrado\resultados\.execucao_20261124_224141_11ce95\plano; folga operacional de 2%.
+Custo operacional planejado da APS: R$ 2.974.562,89/mes; R$ 35.694.754,67/ano.
+Inclui todas as UBS do plano, existentes e novas, equipes, ACS e pessoal das equipes moveis adicionais.
 Nao somar esse custo ao gasto atual da prefeitura: ha despesas sobrepostas.
-Proxy de deslocamento excluido da comparacao principal. Objetivo anual com proxy: R$ 27.757.183,89.
+Proxy de deslocamento excluido da comparacao principal. Objetivo anual com proxy: R$ 34.768.656,26.
 
 ORCAMENTO E EXECUCAO OFICIAIS - 2026
 Fonte: Tesouro Nacional/Siconfi, RREO Anexo 02, 4o bimestre.
@@ -43,10 +44,10 @@ DESPESAS LIQUIDADAS ATÉ O BIMESTRE (d): R$ 71.385.341,73
 
 PROPORCAO DO CUSTO ANUAL APS DO MODELO EM RELACAO AO ORCAMENTO
 A proporcao em relacao a saude total e apenas contexto, pois os escopos sao diferentes.
-Saúde / DOTAÇÃO INICIAL: operacao 15.94%; operacao + construcao 29.10%.
-Saúde / DOTAÇÃO ATUALIZADA (a): operacao 13.86%; operacao + construcao 25.30%.
-Atenção Básica / DOTAÇÃO INICIAL: operacao 55.52%; operacao + construcao 101.32%.
-Atenção Básica / DOTAÇÃO ATUALIZADA (a): operacao 54.42%; operacao + construcao 99.31%.
+Saúde / DOTAÇÃO INICIAL: operacao 20.55%; operacao + construcao 33.70%.
+Saúde / DOTAÇÃO ATUALIZADA (a): operacao 17.86%; operacao + construcao 29.30%.
+Atenção Básica / DOTAÇÃO INICIAL: operacao 71.55%; operacao + construcao 117.35%.
+Atenção Básica / DOTAÇÃO ATUALIZADA (a): operacao 70.13%; operacao + construcao 115.03%.
 
 LOA APROVADA
 Lei 6.273, de 30/12/2025: funcao 10 - Saude = R$ 173.696.487,13 (pagina 7).
@@ -62,7 +63,8 @@ Construcao incluida no cenario de implantacao; terrenos, equipamentos e outros s
 Nao inclui custo operacional da secundaria e terciaria.
 Dotacao atualizada nao e saldo livre nem garantia de disponibilidade financeira.
 Diferenca nao demonstra economia ou viabilidade financeira da implantacao.
-A comparacao e descritiva; nao foi criada restricao de orcamento no modelo.
+O modelo possui teto operacional; total com moveis e conferido antes da publicacao. Isso nao comprova saldo financeiro livre.
+Equipes moveis: inclui pessoal e encargos estimados; veiculo, combustivel e equipamentos nao precificados.
 
 FONTES
 https://sapl.itauna.mg.leg.br/media/sapl/public/normajuridica/2025/11182/lei_6273-2026_-_loa_2026.pdf

@@ -16,8 +16,8 @@ class APSCompleta(unittest.TestCase):
         from contextlib import nullcontext
         import pandas as pd
         import numpy as np
-        temporarios=(PASTA.parent/'tmp').resolve()
-        assert temporarios.is_relative_to(PASTA.parent.resolve())
+        temporarios=(PASTA/'.cache/testes').resolve()
+        assert temporarios.is_relative_to(PASTA.resolve())
         temporarios.mkdir(exist_ok=True)
         pasta_teste=temporarios/'teste_limites_equipes'
         pasta_teste.mkdir(exist_ok=True)
@@ -31,7 +31,7 @@ class APSCompleta(unittest.TestCase):
                                     lat=0,lon=j,existente=j==0,fixo=12000 if j==0 else 15000)
                                 for j in range(3)])
             D=np.full((3,3),100.);np.fill_diagonal(D,0.)
-            args=Namespace(raio=3,hab_esf=3000,esf_max=4,hab_min_nova=2000,
+            args=Namespace(preservar_acs_atuais=False,raio=3,hab_esf=3000,esf_max=4,hab_min_nova=2000,
                            max_novas=None,custo_km=.05,folga_custo=.02,
                            limites_equipes=str(limites),ubs=str(cadastro))
             solver,_=aps_base.escolher_solver('auto',20,.0001,False)
@@ -57,7 +57,7 @@ class APSCompleta(unittest.TestCase):
         from argparse import Namespace
         import pandas as pd
         from caminhos import BASE
-        args=Namespace(demanda=str(BASE/'pontos_demanda_itauna.csv'),
+        args=Namespace(preservar_acs_atuais=False,demanda=str(BASE/'pontos_demanda_itauna.csv'),
                        ubs=str(BASE/'unidades_existentes_itauna.csv'),growth=None,growth_file=None,
                        fator_rota=1,dist_min_cand=1,esf_max=4,
                        limites_equipes=str(BASE/'fontes_publicas/estrutura_ubs_cnes/limites_equipes_modelo.csv'))
@@ -91,9 +91,13 @@ class APSCompleta(unittest.TestCase):
         bloco=bloco.replace('    # Sem teto por padrao; o limite so vale quando informado explicitamente.\n    if args.max_novas is not None:\n        prob += pl.lpSum(y.values()) <= args.max_novas, \"max_novas\"', '    prob += pl.lpSum(y.values()) <= args.max_novas, \"max_novas\"')
         bloco=bloco.replace('minimo_nova(sites.iloc[j], dem, args) * y[j]', 'args.hab_min_nova * y[j]')
         bloco=bloco.replace('limites[j][1] * y[j]', 'args.esf_max * y[j]')
+        # O custo do pessoal atual considera as horas cadastradas no CNES.
+        a=bloco.index('    from pessoal_cnes import por_site')
+        b=bloco.index('    custo_desl =',a)
+        bloco=bloco[:a]+'    custo_eq = pl.lpSum(CUSTO_ESF * ne[j] + CUSTO["acs"] * ac[j] for j in range(n_))\n'+bloco[b:]
         self.assertEqual(original[original.index(inicio):original.index(fim)].rstrip(),bloco.rstrip())
         def opcoes(txt):
-            return [ast.dump(n) for n in ast.walk(funcao(txt,'main')) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='add_argument' and n.args[0].value not in ['--hab-min-nova-rural','--limites-equipes','--raio-rural','--horizonte-anos','--folga-custo']]
+            return [ast.dump(n) for n in ast.walk(funcao(txt,'main')) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='add_argument' and n.args[0].value not in ['--hab-min-nova-rural','--limites-equipes','--raio-rural','--horizonte-anos','--folga-custo','--orcamento-ap-anual','--reserva-moveis-anual','--comprometimento-adicional-anual','--liberar-acs-atuais']]
         # A unica opcao alterada e max-novas: agora opcional, sem teto padrao.
         normalizada=copia.replace('ap.add_argument("--max-novas", type=int, default=None, help="teto opcional de novas UBS; omitido = sem teto adicional")', 'ap.add_argument("--max-novas", type=int, default=5, help="max. de novas UBS")')
         normalizada=normalizada.replace('help="pop. minima dentro do raio para abrir nova UBS urbana"', 'help="pop. minima dentro do raio para abrir nova UBS"')
@@ -106,7 +110,7 @@ class APSCompleta(unittest.TestCase):
         dem=pd.DataFrame(dict(i=range(7),pessoas=[3000]*7))
         sites=pd.DataFrame([dict(id=str(j),nome=str(j),lat=0,lon=j,existente=j==0,fixo=12000 if j==0 else 15000) for j in range(7)])
         D=np.full((7,7),100.);np.fill_diagonal(D,0.)
-        args=Namespace(raio=3,hab_esf=3000,esf_max=4,hab_min_nova=2000,max_novas=None,custo_km=.05,folga_custo=.02)
+        args=Namespace(preservar_acs_atuais=False,raio=3,hab_esf=3000,esf_max=4,hab_min_nova=2000,max_novas=None,custo_km=.05,folga_custo=.02)
         solver,_=aps_base.escolher_solver('auto',20,.0001,False)
         livre=aps_base.otimizar(dem,sites,D,args,solver,log=lambda *_:None)
         self.assertEqual(sum(livre['ubs'].status=='NOVA'),6)
@@ -123,7 +127,7 @@ class APSCompleta(unittest.TestCase):
         dem=pd.DataFrame(dict(i=[0,1,2],pessoas=[3000,400,400],NM_BAIRRO=['Centro','Setor A (rural)','Setor B (urbana)']))
         sites=pd.DataFrame([dict(id=str(j),nome=str(j),lat=0,lon=j,existente=j==0,fixo=12000 if j==0 else 15000,ponto=None if j==0 else j) for j in range(3)])
         D=np.full((3,3),100.);np.fill_diagonal(D,0.)
-        args=Namespace(raio=3,hab_esf=3000,esf_max=4,hab_min_nova=2000,hab_min_nova_rural=0,max_novas=None,custo_km=.05,folga_custo=.02)
+        args=Namespace(preservar_acs_atuais=False,raio=3,hab_esf=3000,esf_max=4,hab_min_nova=2000,hab_min_nova_rural=0,max_novas=None,custo_km=.05,folga_custo=.02)
         solver,_=aps_base.escolher_solver('auto',20,.0001,False)
         res=aps_base.otimizar(dem,sites,D,args,solver,log=lambda *_:None)
         self.assertEqual(set(res['ubs'].id_ubs),{'0','1'})
@@ -142,7 +146,7 @@ class APSCompleta(unittest.TestCase):
         ubs.write_text('j,nivel_sugerido,cnes,nome_fantasia,lon,lat\n1,PHC,0000001,UBS A,0,0\n',encoding='utf-8')
         antes=sys.argv[:]
         try:
-            sys.argv=['aps_base.py','--demanda',str(demanda),'--ubs',str(ubs),'--saida',str(pasta/'saida'),'--growth','10','--max-novas','1','--pareto','--quiet','--time-limit','20']
+            sys.argv=['aps_base.py','--demanda',str(demanda),'--ubs',str(ubs),'--saida',str(pasta/'saida'),'--growth','10','--max-novas','1','--pareto','--liberar-acs-atuais','--quiet','--time-limit','20']
             ctx=aps_base.main()
         finally:sys.argv=antes
         auditar_aps(ctx,pasta)

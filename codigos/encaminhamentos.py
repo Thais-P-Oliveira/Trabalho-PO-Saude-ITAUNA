@@ -19,6 +19,8 @@ def dados(pontos,unidades,demanda,config,multiplo,r):
     for nome,chave in [('ESF','esf'),('MAXE','max_esf')]:txt+=tabela(nome,[('u'+u['cnes'],u[chave]) for u in U])
     for nome,n in [('D2',2),('D3',3)]:txt+=tabela(nome,[('p'+p['i'],k,demanda[p['i'],k,n]) for p in pontos for k in ['AMB','HOSP']])
     for nome,chave in [('AMB','cap_amb_anual'),('LEITO','cap_leito_dias')]:txt+=tabela(nome,[('f'+c,u[chave]) for c,u in F.items()])
+    for nome,chave,n in [('AMB2','cap_amb_2',2),('AMB3','cap_amb_3',3)]:
+        txt+=tabela(nome,[('f'+c,u.get(chave,u['cap_amb_anual'])) for c,u in F.items()])
     txt+=tabela('HOSPITAL',[('f'+c,int(u['cap_leito_dias']>0)) for c,u in F.items()])
     dist={}
     for nome,origens,destinos,prefixo in [('DU',pontos,U,'p'),('US',U,S,'u'),('UT',U,T,'u'),('ST',S,T,'f')]:
@@ -74,13 +76,16 @@ def validar(rows,pontos,demanda,config,U,F,dist,r,pasta):
             a,b,c,na,nb,nc=origem[i,k]
             for obt,esp in [(a+na,demanda[i,k,2]-r*demanda[i,k,3]),(b+nb,(1-r)*demanda[i,k,3]),(c+nc,r*demanda[i,k,3])]:
                 if not math.isclose(obt,esp,abs_tol=tol):raise ValueError('Caminho nao conserva demanda '+i+' '+k)
-    if any(aloc_pop[u['cnes']]>cap_ubs[u['cnes']]+tol for u in U):raise ValueError('Capacidade primaria excedida')
+    if any(aloc_pop[u['cnes']]-config.get('carga_movel_ubs',{}).get(u['cnes'],0)>cap_ubs[u['cnes']]+tol for u in U):raise ValueError('Capacidade primaria excedida')
     auditoria=[]
     for c,u in F.items():
         amb=cargas[c]['AMB2']+cargas[c]['AMB3']
         leito=config['tmp2']*cargas[c]['HOSP2']+config['tmp3']*cargas[c]['HOSP3']
+        if 'cap_amb_2' in u and 'cap_amb_3' in u:
+            if any(cargas[c]['AMB'+str(n)]>u['cap_amb_'+str(n)]+tol for n in [2,3]):
+                raise ValueError('Capacidade por complexidade excedida '+c)
         if amb>u['cap_amb_anual']+tol or leito>u['cap_leito_dias']+tol:raise ValueError('Capacidade duplicada ou excedida '+c)
-        auditoria.append(dict(cnes=c,nome=u['nome'],ambulatorial_media=cargas[c]['AMB2'],ambulatorial_alta=cargas[c]['AMB3'],ambulatorial_total=amb,limite_pico_anualizado=u['cap_amb_anual'],amb_capacidade_total=u.get('amb_capacidade_total',u['cap_amb_anual']),amb_carga_externa=u.get('amb_carga_externa',0),dias_leito_usados=leito,dias_leito_limite=u['cap_leito_dias'],dias_leito_carga_externa=u.get('dias_leito_carga_externa',0),dias_leito_capacidade_observada=u.get('dias_leito_capacidade_observada',0),dias_leito_capacidade_bruta=u.get('dias_leito_capacidade_bruta',0),leitos_sus_internacao=u.get('leitos_sus_internacao',0),leitos_sus_uti=u.get('leitos_sus_uti',0),passou=True))
+        auditoria.append(dict(cnes=c,nome=u['nome'],ambulatorial_media=cargas[c]['AMB2'],ambulatorial_alta=cargas[c]['AMB3'],ambulatorial_total=amb,limite_pico_anualizado=u['cap_amb_anual'],limite_media=u.get('cap_amb_2',u['cap_amb_anual']),limite_alta=u.get('cap_amb_3',u['cap_amb_anual']),amb_capacidade_total=u.get('amb_capacidade_total',u['cap_amb_anual']),amb_carga_externa=u.get('amb_carga_externa',0),dias_leito_usados=leito,dias_leito_limite=u['cap_leito_dias'],dias_leito_carga_externa=u.get('dias_leito_carga_externa',0),dias_leito_capacidade_observada=u.get('dias_leito_capacidade_observada',0),dias_leito_capacidade_bruta=u.get('dias_leito_capacidade_bruta',0),leitos_sus_internacao=u.get('leitos_sus_internacao',0),leitos_sus_uti=u.get('leitos_sus_uti',0),passou=True))
     resumo=[]
     for k in ['AMB','HOSP']:
         v=[sum(a[j] for (i,g),a in origem.items() if g==k) for j in range(6)]

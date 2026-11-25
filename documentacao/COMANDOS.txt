@@ -1,0 +1,24 @@
+COMANDOS DO PROJETO
+Execute no terminal, dentro da pasta principal.
+
+Instalacao:
+python -m pip install -r requirements.txt
+
+Modelo (APS, complemento movel e encaminhamentos):
+python executar.py --time-limit 600 --quiet --saida resultados/atual/plano
+
+Atualizacao das imagens a partir do plano salvo:
+python codigos/graficos_itauna.py --plano resultados/atual/plano --saida resultados/atual/plano/aps
+python codigos/grafico_sensibilidade.py --saida resultados/atual/sensibilidade
+python codigos/figuras_artigo.py
+python codigos/graficos_demanda.py
+python codigos/graficos_comparacao.py
+python codigos/organizar_resultados.py
+
+Se o modelo mudar, atualize tambem os custos e as analises antes de gerar a pagina:
+python executar.py --custo-equipes --saida resultados/atual/financeiro
+python executar.py --investimento --plano resultados/atual/plano --saida resultados/atual/investimento
+python executar.py --orcamento --plano resultados/atual/plano --saida resultados/atual/orcamento
+python codigos/rodar_sensibilidade.py --referencia resultados/atual/plano/plano_aps.json --saida resultados/atual/sensibilidade --processos 2 --time-limit 300
+
+O artigo revisado e seus graficos TikZ sao mantidos manualmente. Confira os valores antes de recompilar.

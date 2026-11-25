@@ -1,0 +1,8 @@
+{
+  "codigos_demanda": 753,
+  "escopos_pico": [
+    "mesmos753codigos; aprovados; municipio_atendimento; inclui nao residentes"
+  ],
+  "verificacao": "Metadados confirmam mesmo conjunto de 753 codigos; microdados mensais nao incluidos para reextracao nesta pasta",
+  "interpretacao": "pico mensal de processamento anualizado; hipotese de capacidade maxima observada"
+}

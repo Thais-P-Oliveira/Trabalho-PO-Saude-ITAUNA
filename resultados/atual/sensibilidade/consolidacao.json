@@ -1,0 +1,7 @@
+{
+  "cenarios": 18,
+  "configuracao_conferida": true,
+  "otimos": 15,
+  "nota": "Resumo consolidado das 18 resolucoes desta execucao. Mudancas posteriores nas funcoes de saida e importacao nao alteraram a formulacao APS. O cenario 96% foi confirmado sem presolve; caches originais preservados.",
+  "formulacao": "Mesmas capacidades, custos, metas, horizonte e tolerancias; nenhuma restricao relaxada na conferencia."
+}

@@ -15,11 +15,8 @@ DIAGNOSTICO COM CAPACIDADE ATUAL FIXA (hipotese de capacidade)
 esf: maximo de 66.34% conforme 3 km urbano / 3 km rural.
 esf_e_acs: maximo de 65.62% conforme 3 km urbano / 3 km rural.
 
-INDICADOR OFICIAL
-APS: 80.49% em 07/2026; populacao oficial 103272; capacidade administrativa 83125.
-Fonte: https://relatorioaps-prd.saude.gov.br/cobertura/aps?unidadeGeografica=MUNICIPIO&coUf=31&coMunicipio=313380&nuCompInicio=202501&nuCompFim=202607
-A oferta administrativa publicada e diferente de eSF * 3000: o MS utiliza parametros proprios e inclui outras modalidades de equipe.
-A cobertura oficial nao usa o raio de 3 km e nao e diretamente equivalente ao nosso indicador.
+COBERTURA EFETIVA = acesso a 3 km combinado com capacidade (fluxo maximo, sem dupla contagem)
+Capacidade por UBS = min(3000 x eSF; 750 x ACS). Valores no bloco acima (esf_e_acs) e em resultados/cobertura_efetiva/.
 ACESSIBILIDADE ESPACIAL (Aula 8, paginas PDF 29 a 31)
 V_j = soma_k P_k / max(d_kj, d_min)^beta
 A_i = soma_j S_j / (max(d_ij, d_min)^beta * V_j)

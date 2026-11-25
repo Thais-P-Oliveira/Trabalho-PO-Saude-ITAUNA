@@ -1,10 +1,4 @@
-"""Gera as figuras do artigo a partir do plano de referencia salvo.
-
-Uso: python codigos/figuras_artigo.py
-Saida: documentacao/artigo/figuras/{mapa,distancias,internacoes,percursos,capacidades}.pdf
-(e a versao PNG de cada em imagens/).
-A figura do fluxo do metodo e a curva de cobertura x custo sao geradas por outros meios.
-"""
+"""Gera figuras a partir dos resultados salvos, sem alterar o texto do artigo."""
 import csv
 import argparse
 import os
@@ -12,7 +6,7 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 PLANO = RAIZ / 'resultados' / 'atual' / 'plano'
-FIG = RAIZ / 'documentacao' / 'artigo' / 'figuras'
+FIG = RAIZ / 'resultados' / 'atual' / 'figuras_artigo'
 PNG = RAIZ / 'imagens'
 from caminhos import CACHE
 os.environ.setdefault('MPLCONFIGDIR', str(CACHE / 'matplotlib'))
@@ -42,30 +36,34 @@ def ler(p):
 
 
 def mapa():
-    dem = pd.read_csv(PLANO / 'aps/demanda_cenario.csv')
-    ubs = pd.read_csv(PLANO / 'aps/ubs_completas.csv')
-    ex, nv = ubs[ubs.status == 'EXISTENTE'], ubs[ubs.status == 'NOVA']
-    fig, ax = plt.subplots(figsize=(5.3, 5.6))
-    ax.scatter(dem.lon, dem.lat, s=dem.pessoas / dem.pessoas.max() * 220 + 15, color=CINZA, edgecolor='white',
-               linewidth=0.5, label='Pontos de demanda', zorder=1)
-    ax.scatter(ex.lon, ex.lat, s=55, color=AZUL, edgecolor='white', linewidth=0.6, label=f'{len(ex)} UBS existentes', zorder=2)
-    ax.scatter(nv.lon, nv.lat, s=70, marker='^', color=LARANJA, edgecolor='white', linewidth=0.6,
-               label=f'{len(nv)} novas UBS', zorder=3)
-    for r in nv.itertuples():
-        ax.annotate('N' + r.id_ubs.split('_')[1], (r.lon, r.lat), xytext=(5, 5), textcoords='offset points', fontsize=8)
-    ax.set_xlabel('Longitude')
-    ax.set_ylabel('Latitude')
-    ax.xaxis.set_major_locator(matplotlib.ticker.MaxNLocator(5))
-    ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f'{v:.2f}'))
-    ax.legend(frameon=False, loc='upper right', fontsize=9)
-    salvar(fig, 'mapa')
+    import json
+    import shutil
+    from graficos_itauna import mapa as desenhar, codificar_novas
+    from integracao_resultados import integrar
+    integrar(PLANO)
+    pasta=PLANO/'aps/cobertura_efetiva'
+    dem=pd.read_csv(PLANO/'aps/demanda_cenario.csv')
+    unidades=pd.read_csv(PLANO/'aps/ubs_completas.csv')
+    ubs=ler(pasta/'plano_por_ubs.csv')
+    ubs['pop_atendida']=ubs['id'].map(unidades.set_index('id_ubs')['pop_atendida'])
+    ubs=codificar_novas(ubs)
+    pp=ler(pasta/'plano_por_ponto.csv')
+    bases=ler(pasta/'plano_moveis_bases.csv') if (pasta/'plano_moveis_bases.csv').stat().st_size>3 else pd.DataFrame()
+    visitas=ler(pasta/'plano_moveis_visitas.csv') if len(bases) else pd.DataFrame()
+    params=json.loads((PLANO/'plano_aps.json').read_text(encoding='utf-8'))['parametros']
+    PNG.mkdir(parents=True,exist_ok=True)
+    shutil.copy2(PLANO/'aps/mapa_itauna_rede_atual.png',PNG/'mapa_itauna_rede_atual.png')
+    for destino in [FIG/'mapa.pdf', PNG/'mapa.png']:
+        destino.parent.mkdir(parents=True,exist_ok=True)
+        desenhar(dem,pp,ubs,bases,visitas,destino,'Plano proposto — UBS e complemento móvel',
+                 raio=params['raio'],raio_rural=params.get('raio_rural'),para_artigo=True)
 
 
 def distancias(comp):
     amb = comp[comp.tipo == 'AMB']
     fig, ax = plt.subplots(figsize=(7.5, 3.4))
     vias = [25, 50, 75]
-    for k, (cen, cor, rot) in enumerate([('unico', AZUL, 'Um nível'), ('multiplo', LARANJA, 'Múltiplos níveis')]):
+    for k, (cen, cor, rot) in enumerate([('unico', AZUL, 'Principal: um nível'), ('multiplo', LARANJA, 'Complementar: múltiplos')]):
         v = [amb[(amb.cenario == cen) & (amb.via_percentual == p)].distancia_media_por_percurso.iloc[0] for p in vias]
         x = [i + (k - 0.5) * 0.34 for i in range(3)]
         ax.bar(x, v, width=0.34, color=cor, label=rot)
@@ -93,9 +91,9 @@ def internacoes(comp):
             ax.bar(i, fa, bottom=at, color=CINZA, width=0.8)
             ax.text(i, at + (at + fa) * 0.015, br(at), ha='center', va='bottom', fontsize=8)
         ax.set_xticks(range(len(linhas)), [l[0] for l in linhas])
-        ax.set_title(titulo, fontsize=10)
         ax.set_ylim(0, ax.get_ylim()[1] * 1.12)
         ax.set_ylabel('Internações estimadas por ano')
+        ax.set_xlabel('Média complexidade' if nivel=='2' else 'Alta complexidade',fontsize=9)
         ax.grid(axis='x', visible=False)
     from matplotlib.patches import Patch
     fig.legend(handles=[Patch(color=AZUL, label='Atendidas único'), Patch(color=LARANJA, label='Atendidas múltiplo'),
@@ -106,7 +104,7 @@ def internacoes(comp):
 
 
 def percursos(comp):
-    r = comp[(comp.tipo == 'AMB') & (comp.cenario == 'multiplo') & (comp.via_percentual == 50)].iloc[0]
+    r = comp[(comp.tipo == 'AMB') & (comp.cenario == 'unico') & (comp.via_percentual == 50)].iloc[0]
     fig, ax = plt.subplots(figsize=(7.5, 3.4))
     ax.axis('off')
     ax.set_xlim(0, 10)
@@ -114,7 +112,7 @@ def percursos(comp):
     ax.text(1, 3, 'UBS\nplano fixo', ha='center', va='center', fontsize=11)
     alvos = [(5, 'Termina na secundária\n' + br(r.termina2, 0) + ' eventos'),
              (3, 'Direto à terciária\n' + br(r.direto3, 0) + ' eventos'),
-             (1, 'Secundária e terciária\n' + br(r.via23, 0) + ' percursos\n' + br(2 * r.via23, 0) + ' atendimentos')]
+             (1, 'Secundária e terciária\n' + br(r.via23, 0) + ' percursos alocados\n' + br(2 * r.via23, 0) + ' procedimentos alocados')]
     for y, txt in alvos:
         ax.annotate('', xy=(5.4, y + 0.1), xytext=(2, 3), arrowprops=dict(arrowstyle='->', color=AZUL, lw=2))
         ax.text(5.8, y + 0.1, txt, va='center', fontsize=11)
@@ -122,23 +120,36 @@ def percursos(comp):
 
 
 def capacidades():
-    c = ler(PLANO / 'multiplo_via_50/capacidades.csv')
+    c = ler(PLANO / 'unico_via_50/capacidades.csv')
     c = c[c.limite_pico_anualizado > 0].copy()
     # Ordem importa: o CEO II tambem comeca com "CENTRO DE ESPEC".
     nomes = [('CENTRO DE ESPECIALIDADES ODONTOLOGICAS', 'CEO II'), ('CENTRO DE ESPEC', 'Centro de especialidades'),
              ('APAE', 'APAE'), ('CAPS 2', 'CAPS 2'), ('CAPS AD', 'CAPS AD'), ('HOSPITAL', 'Hospital')]
     c['rotulo'] = [next(v for k, v in nomes if n.upper().startswith(k)) for n in c.nome]
     c['uso'] = c.ambulatorial_total / c.limite_pico_anualizado * 100
+    c[['cnes','nome','ambulatorial_total','limite_pico_anualizado','uso']].to_csv(FIG/'conferencia_capacidades.csv',sep=';',index=False,encoding='utf-8-sig')
     c = c.sort_values('rotulo', ascending=False)
-    fig, ax = plt.subplots(figsize=(7.5, 3.6))
+    fig, ax = plt.subplots(figsize=(6.4, 4.2))
+    fig.subplots_adjust(left=.30,right=.96,bottom=.17,top=.98)
     cores = [LARANJA if u >= 99.95 else AZUL for u in c.uso]
     y = list(range(len(c)))
     ax.barh(y, c.uso, color=cores)
     ax.set_yticks(y, c.rotulo)
     for yi, u in zip(y, c.uso):
-        ax.text(u + 1, yi, br(u) + '%', va='center', fontsize=8.5)
+        ax.text(u + 1, yi, br(u) + '%', va='center', fontsize=9.5)
+    hospital=c[c.cnes.astype(str)=='2105780']
+    if len(hospital):
+        h=hospital.iloc[0]
+        if 'limite_alta' not in c:raise ValueError('Audite o plano para exportar limite_alta antes de gerar a figura.')
+        if h.limite_alta>0:
+            yy=len(c)
+            uso=100*h.ambulatorial_alta/h.limite_alta
+            ax.barh(yy,uso,color=LARANJA)
+            ax.text(uso+1,yy,br(uso)+'%',va='center',fontsize=9.5)
+            ax.set_yticks(list(y)+[yy],list(c.rotulo)+['Hospital: limite de alta'])
     ax.set_xlim(0, 114)
-    ax.set_xlabel('Utilização do limite ambulatorial disponível para residentes (%)')
+    ax.tick_params(labelsize=9.5)
+    ax.set_xlabel('Uso do limite ambulatorial (%)',fontsize=10)
     ax.grid(axis='y', visible=False)
     salvar(fig, 'capacidades')
 
@@ -159,17 +170,15 @@ def main():
     percursos(comp)
     capacidades()
     # Fluxo do metodo tambem e renovado, sem reaproveitar a figura antiga.
-    fig,ax=plt.subplots(figsize=(9,3.4));ax.axis('off')
+    fig,ax=plt.subplots(figsize=(6.4,4.5));ax.axis('off')
     etapas=['Dados de população\ne demanda municipal','APS: cobertura,\ncusto e distância',
             'População e demanda\nvinculadas às UBS','Encaminhamentos\nsecundários e terciários']
     for i,rotulo in enumerate(etapas):
-        xx=.12+i*.25
-        ax.text(xx,.55,rotulo,ha='center',va='center',transform=ax.transAxes,fontsize=9,
-                bbox=dict(boxstyle='round,pad=.7',facecolor='#eaf0f6',edgecolor=AZUL))
-        if i<3:ax.annotate('',xy=(xx+.17,.55),xytext=(xx+.09,.55),xycoords='axes fraction',
-                           arrowprops=dict(arrowstyle='->',color=AZUL,lw=1.7))
-    ax.text(.5,.12,'A rede de UBS é fixada antes da otimização dos encaminhamentos.',
-            ha='center',transform=ax.transAxes,fontsize=9)
+        xx,yy=([.25,.75,.75,.25][i]),(.78 if i<2 else .30)
+        ax.text(xx,yy,rotulo,ha='center',va='center',transform=ax.transAxes,fontsize=12,
+                bbox=dict(boxstyle='round,pad=.8',facecolor='#eaf0f6',edgecolor=AZUL))
+    for origem,destino in [((.43,.78),(.57,.78)),((.75,.62),(.75,.47)),((.57,.30),(.43,.30))]:
+        ax.annotate('',xy=destino,xytext=origem,xycoords='axes fraction',arrowprops=dict(arrowstyle='->',color=AZUL,lw=2))
     salvar(fig,'fluxo_metodo')
     print('Figuras salvas em', FIG)
 

@@ -1,0 +1,102 @@
+\appendix
+\chapter{Fontes, rastreabilidade e reprodução}\label{ap:reproducao}
+
+\section{Origem e transformação dos dados}
+A análise combina cadastro de oferta, utilização registrada e população, bases que respondem a perguntas
+diferentes. O CNES informa recursos cadastrados; o SIA e o SIH informam eventos registrados no SUS; o
+IBGE fornece população e referência territorial. Os arquivos intermediários conservam os códigos de
+pontos e de estabelecimentos, o que permite acompanhar o cálculo da fonte até a alocação
+(Tabela~\ref{tab:rastreabilidade}). A soma populacional dos pontos confere com o total municipal, mas
+não substitui uma auditoria cartográfica da sobreposição entre bairros e setores. O limite municipal
+contextualiza os mapas, sem transformar os pontos em terrenos disponíveis nem substituir a malha viária.
+
+\begin{longtable}{p{.20\linewidth}p{.30\linewidth}p{.39\linewidth}}
+\caption{Origem e transformação dos dados empregados}\label{tab:rastreabilidade}\\
+\toprule Base & Recorte utilizado & Uso e transformação\\\midrule\endfirsthead
+\toprule Base & Recorte utilizado & Uso e transformação\\\midrule\endhead
+IBGE/Censo 2022 & População de referência territorial & 51 bairros e 40 setores, somando 97.669 habitantes; coordenadas representam pontos, sem endereços individuais.\\
+IBGE/estimativas & Referências municipais de 2025 e 2026 & 103.272 e 104.002 habitantes; participações dos pontos constantes.\\
+CNES/202607 & 22 UBS; equipes, vínculos e horas & Equipes e ACS definem a capacidade; horas por categoria estimam o custo atual.\\
+CNES/instalações & Salas de clínica básica e enfermagem & Menor quantidade de salas aproxima o teto de expansão.\\
+CNES/leitos & Hospital Manoel Gonçalves, código 2105780 & 79 leitos SUS gerais e 19 de UTI, separados; leitos de observação não entram.\\
+SIA/2025 & Eletivos de residentes; 753 procedimentos & Soma por complexidade gera a demanda ambulatorial, rateada pela população.\\
+SIA por prestador & Mesma seleção; eletivos & Pico mensal por estabelecimento, anualizado e descontados os não residentes.\\
+SIH/2025 & Internações eletivas de residentes, por complexidade & Demanda hospitalar; permanência média = dias / internações.\\
+SIOPS/2025 & Subfunção 301, Atenção Básica & Pessoal e encargos de toda a subfunção, para comparação.\\
+LOA/RREO 2026 & Saúde e subfunções; 4º bimestre & Orçamento inicial, atualizado e execução acumulada separados.\\
+Novo PAC/2025 & Construção de UBS, região Sudeste & Valores de referência por porte.\\
+\bottomrule
+\end{longtable}
+\fonte{\citet{ibge2022}, \citet{cnes2026}, \citet{datasus2026}, \citet{siops}, \citet{tesouro2026} e \citet{novopac2025}.}
+
+\section{Trilha de reprodução}
+A execução inicia em \texttt{RODAR\_TUDO.cmd}, que chama o programa coordenador. A preparação confere
+totais e recursos; a etapa da APS resolve cobertura, custo e distância; as equipes móveis são
+dimensionadas; a etapa hierárquica recebe os vínculos; por fim, são gerados custos, sensibilidade, mapas
+e tabelas. Os resultados são gerados em pasta temporária e só substituem as saídas ativas após as
+conferências automáticas, e resumos criptográficos registram a versão de cada arquivo.
+
+Os 29 testes automatizados verificam as regras implementadas, incluindo horas parciais de pessoal,
+conservação das parcelas móveis, bases válidas e limites comparáveis entre cenários. Os certificados de
+otimalidade referem-se ao modelo, aos parâmetros e à tolerância do solver; não validam as hipóteses
+empíricas, como a disponibilidade de terrenos, a adequação clínica ou a suficiência real das agendas.
+A Tabela~\ref{tab:arquivos} lista os arquivos para conferência.
+
+\begin{longtable}{p{.50\linewidth}p{.40\linewidth}}
+\caption{Entradas e resultados rastreáveis}\label{tab:arquivos}\\\toprule Arquivo & Função\\\midrule\endfirsthead
+\toprule Arquivo & Função\\\midrule\endhead
+\path{pontos_demanda_itauna.csv} & População, coordenadas e tipo de ponto.\\
+\path{unidades_existentes_itauna.csv} & Identificação e coordenadas da oferta.\\
+\path{ubs_recursos_cnes_202607.csv} & Equipes, vínculos e horas profissionais.\\
+\path{limites_equipes_novas_ate4.csv} & Salas e limite de equipes.\\
+\path{demanda_ambulatorial_clinica_residentes_2025.csv} & Códigos e complexidade dos procedimentos.\\
+\path{picos_rede_2025.csv} & Meses selecionados e anualização.\\
+\path{producao_por_residencia_2025.csv} & Produção de residentes e não residentes.\\
+\path{leitos_sus_202607.csv} & Contagens por tipo de leito.\\
+\path{plano_aps.json} & Parâmetros, custos e certificados.\\
+\path{vinculos_moveis/populacao_por_ubs.csv} & Vínculos especializados fixos e móveis.\\
+\path{comparacao_completa.csv} & Volumes, faltas e percursos nos seis cenários.\\
+\path{integracao.json} & Cobertura e custos integrados.\\
+\path{pessoal_horas_por_ubs.csv} & Custo por categoria e horas equivalentes.\\
+\path{resultados_artigo.tex} & Tabelas de resultados.\\\bottomrule\end{longtable}
+\fonte{Elaboração própria.}
+
+\section{Endereços das fontes}
+\subsection{População}
+Estimativa 2025: \url{https://ftp.ibge.gov.br/Estimativas_de_Populacao/Estimativas_2025/POP2025_20251031.pdf}, p. 59. Consulta: 17 nov. 2026.\par
+Estimativa 2026: \url{https://ftp.ibge.gov.br/Estimativas_de_Populacao/Estimativas_2026/POP2026_20261029.pdf}, p. 56. Consulta: 17 nov. 2026.\par
+
+\subsection{Fichas CNES das 22 UBS}
+Competência julho de 2026.
+\begin{description}[style=nextline,leftmargin=0cm]
+\item[CNES 2202093] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802202093&VComp=202607}
+\item[CNES 2161028] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802161028&VComp=202607}
+\item[CNES 2144409] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802144409&VComp=202607}
+\item[CNES 2161095] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802161095&VComp=202607}
+\item[CNES 2202085] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802202085&VComp=202607}
+\item[CNES 2144387] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802144387&VComp=202607}
+\item[CNES 2160986] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802160986&VComp=202607}
+\item[CNES 2202077] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802202077&VComp=202607}
+\item[CNES 2144379] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802144379&VComp=202607}
+\item[CNES 2144425] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802144425&VComp=202607}
+\item[CNES 5375053] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133805375053&VComp=202607}
+\item[CNES 7783310] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133807783310&VComp=202607}
+\item[CNES 2161036] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802161036&VComp=202607}
+\item[CNES 2160994] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802160994&VComp=202607}
+\item[CNES 2144417] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802144417&VComp=202607}
+\item[CNES 2144441] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802144441&VComp=202607}
+\item[CNES 2105616] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802105616&VComp=202607}
+\item[CNES 2161044] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802161044&VComp=202607}
+\item[CNES 7768869] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133807768869&VComp=202607}
+\item[CNES 2144395] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802144395&VComp=202607}
+\item[CNES 7616759] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133807616759&VComp=202607}
+\item[CNES 2144433] \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802144433&VComp=202607}
+\end{description}
+
+\subsection{Hospital, produção e orçamento}
+Hospital Manoel Gonçalves: \url{https://cnes2.datasus.gov.br/Cabecalho_Reduzido_Competencia.asp?VCod_Unidade=3133802105780&VComp=202607}.\par
+TABNET: \url{https://datasus.saude.gov.br/informacoes-de-saude-tabnet/}.\par
+Arquivos assistenciais: \url{https://datasus.saude.gov.br/transferencia-de-arquivos/}.\par
+SIGTAP: \url{http://sigtap.datasus.gov.br/tabela-unificada/app/sec/inicio.jsp}.\par
+SIOPS: \url{https://www.gov.br/saude/pt-br/acesso-a-informacao/siops}.\par
+Os endereços completos do RREO e da lei orçamentária estão nas Referências.

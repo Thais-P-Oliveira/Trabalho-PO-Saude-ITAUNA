@@ -1,0 +1,41 @@
+GUIA DOS CODIGOS
+
+ENTRADAS PRINCIPAIS
+executar.py: executa o planejamento ou uma conferencia especifica.
+
+FORMULACOES
+modelos/aps_base.py: localizacao e dimensionamento das UBS; fases de cobertura, custo e distancia.
+modelos/rede_completa.mod: fluxos entre UBS, secundaria e terciaria, com capacidade e demanda nao alocada.
+As formulacoes foram preservadas nesta organizacao.
+
+DADOS E INTEGRACAO
+preparar.py: le as fontes e confere totais municipais e oferta.
+projecao_populacional.py: atualiza populacao e volumes com os anos de referencia corretos.
+pessoal_cnes.py: estima o custo por horas cadastradas, com jornada de referencia.
+planejar.py: chama a APS, fixa o plano e resolve os seis cenarios especializados.
+vinculos_moveis.py: transfere a demanda especializada atendida por equipes moveis para suas UBS-base.
+encaminhamentos.py: gera entradas MathProg, le fluxos e audita capacidades.
+cobertura_efetiva.py: cobertura por distancia/capacidade e dimensionamento movel.
+integracao_resultados.py: soma os custos moveis e consolida os indicadores.
+
+ANALISES E SAIDAS
+rodar_sensibilidade.py: varia raios, folga, minimo rural e crescimento.
+cenario_leitos_otimista.py: resolve separadamente o limite hospitalar mais favoravel.
+diagnosticar.py: diagnostico territorial e indice de acessibilidade.
+comparar_orcamento.py, calcular_investimento.py, custo_equipes.py: comparacoes financeiras e construcao.
+graficos_itauna.py: mapas e paineis gerais.
+figuras_artigo.py: figuras vetoriais dos resultados salvos.
+graficos_demanda.py: pressao por proximidade, curva de acesso e mapas comparaveis.
+graficos_comparacao.py: colunas das UBS existentes e novas unidades por porte.
+grafico_sensibilidade.py: graficos dos cenarios de sensibilidade.
+organizar_resultados.py: pagina e imagens publicadas.
+resultados_artigo.py: proposta de tabelas, sem sobrescrever o artigo manual.
+auditar_plano_completo.py: audita o plano e os encaminhamentos salvos.
+coletar_estrutura_cnes.py: coleta das instalacoes fisicas; nao precisa ser executado para usar as entradas incluidas.
+geografia.py e caminhos.py: funcoes geograficas e localizacao dos arquivos.
+
+GRAFICOS COMPARATIVOS
+Ocupacao alocada pelo modelo e pressao pela UBS mais proxima sao medidas diferentes. A pressao divide a populacao potencial pela capacidade convencional; nao equivale a consultas registradas. As legendas do artigo devem informar o criterio.
+
+REPRODUCAO DAS FIGURAS EM TIKZ
+O artigo utiliza duas figuras desenhadas em LaTeX. Seus numeros foram preenchidos manualmente, e nao sao atualizados pelos scripts Python. Os demais mapas e curvas sao gerados pelos codigos listados acima.

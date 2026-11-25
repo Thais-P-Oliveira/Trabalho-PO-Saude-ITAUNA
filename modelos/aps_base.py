@@ -191,7 +191,9 @@ def escolher_solver(nome, time_limit, gap, msg):
     for c in ordem:
         try:
             s = pl.getSolver("HiGHS" if c == "HIGHS" else c, msg=msg,
-                             timeLimit=time_limit, gapRel=gap)
+                             timeLimit=time_limit, gapRel=gap,
+                             **({'mip_feasibility_tolerance':1e-9,'primal_feasibility_tolerance':1e-9}
+                                if c=='HIGHS' else {}))
             if s.available():
                 return s, ("HiGHS" if c == "HIGHS" else c)
         except Exception:
@@ -261,7 +263,11 @@ def otimizar(dem, sites, D, args, solver, cob_min=None, log=print):
 
     custo_fixo = (sum(sites.at[j, "fixo"] for j in existentes)
                   + pl.lpSum(sites.at[j, "fixo"] * y[j] for j in cands))
-    custo_eq = pl.lpSum(CUSTO_ESF * ne[j] + CUSTO["acs"] * ac[j] for j in range(n_))
+    from pessoal_cnes import por_site
+    pessoal_atual = por_site(sites,args,CUSTO,CUSTO_ESF,limites)
+    # Preserva o pessoal cadastrado; cobra equipe padrao apenas nas adicoes.
+    custo_eq = pl.lpSum(pessoal_atual[j] + CUSTO_ESF*(ne[j]-limites[j][0])
+                       + CUSTO["acs"]*ac[j] for j in range(n_))
     custo_desl = args.custo_km * pl.lpSum(D[i, j] * x[i, j] for i in range(m_) for j in range(n_))
     custo_total = custo_fixo + custo_eq + custo_desl
     operacional=custo_fixo+custo_eq
@@ -276,7 +282,7 @@ def otimizar(dem, sites, D, args, solver, cob_min=None, log=print):
     #   12 * [ sum_{j nova} fixo_j y_j + c_eSF sum_j (esf_j - esf_atual_j) + c_ACS sum_j (acs_j - acs_atual_j) ] <= B_disp
     esf_atual = {j: limites[j][0] for j in range(n_)}
     comprometido_anual = 12*(sum(sites.at[j, "fixo"] for j in existentes)
-                             + CUSTO_ESF*sum(esf_atual[j] for j in existentes)
+                             + sum(pessoal_atual[j] for j in existentes)
                              + CUSTO["acs"]*sum(acs0.get(j, 0) for j in existentes))
     incremento_mensal = (pl.lpSum(sites.at[j, "fixo"]*y[j] for j in cands)
                          + CUSTO_ESF*pl.lpSum(ne[j]-esf_atual[j] for j in range(n_))
@@ -299,7 +305,7 @@ def otimizar(dem, sites, D, args, solver, cob_min=None, log=print):
             raise RuntimeError(f"Etapa 1 sem solucao otima: {pl.LpStatus[prob.status]}")
         c_star = pl.value(cov_expr)
         log(f"    cobertura maxima: {br(c_star)} hab ({c_star / total:.2%})")
-        alvo = c_star - max(0.5, 1e-6 * total)
+        alvo = c_star - 1e-7
     else:
         alvo = cob_min * total
     prob += cov_expr >= alvo, "cobertura"
@@ -322,6 +328,12 @@ def otimizar(dem, sites, D, args, solver, cob_min=None, log=print):
         prob.setObjective(custo_desl)
         prob.sense = pl.LpMinimize
         prob.solve(solver)
+        # Se o presolve declarar inviavel uma fase que preserva uma solucao ja viavel,
+        # confere a mesma formulacao sem presolve antes de aceitar esse diagnostico.
+        if pl.LpStatus[prob.status] == 'Infeasible' and solver.name == 'HiGHS':
+            conferencia=pl.HiGHS(msg=False,timeLimit=args.time_limit,gapRel=args.gap,
+                presolve='off',mip_feasibility_tolerance=1e-9,primal_feasibility_tolerance=1e-9)
+            prob.solve(conferencia)
         certificados.append(dict(status=pl.LpStatus[prob.status], sol_status=pl.LpSolution.get(prob.sol_status, str(prob.sol_status))))
         status = pl.LpStatus[prob.status]
     if status != "Optimal":
@@ -342,6 +354,7 @@ def otimizar(dem, sites, D, args, solver, cob_min=None, log=print):
             n_esf=int(round(val(ne[j]))), acs=int(round(val(ac[j]))), idx=j,
             esf_atuais=limites[j][0] if sites.at[j, 'existente'] else 0,
             esf_max=limites[j][1],
+            custo_pessoal_sem_acs_mensal=pessoal_atual[j]+CUSTO_ESF*(int(round(val(ne[j])))-limites[j][0]),
             minimo_pop_abertura=0 if sites.at[j, "existente"] else minimo_nova(sites.iloc[j], dem, args)))
     ubs = pd.DataFrame(linhas)
     arcos = []
@@ -356,7 +369,7 @@ def otimizar(dem, sites, D, args, solver, cob_min=None, log=print):
     custos = dict(
         fixo_existentes=float(sum(sites.at[j, "fixo"] for j in existentes)),
         fixo_novas=float(sum(sites.at[j, "fixo"] for j in abertas)),
-        esf=float(CUSTO_ESF * ubs["n_esf"].sum()),
+        esf=float(ubs["custo_pessoal_sem_acs_mensal"].sum()),
         acs=float(CUSTO["acs"] * ubs["acs"].sum()),
         deslocamento_proxy=float(pl.value(custo_desl)),
         objetivo=float(pl.value(custo_total)))
@@ -410,7 +423,7 @@ def montar_tabelas(res, dem, D, sites, args):
         return "Adequada"
     ubs["situacao"] = ubs.apply(situacao, axis=1)
     ubs["medicos"] = ubs["enfermeiros"] = ubs["tecnicos"] = ubs["n_esf"]
-    ubs["custo_equipes"] = ubs["n_esf"] * CUSTO_ESF + ubs["acs"] * CUSTO["acs"]
+    ubs["custo_equipes"] = ubs["custo_pessoal_sem_acs_mensal"] + ubs["acs"] * CUSTO["acs"]
     ubs["custo_fixo"] = np.where(ubs["status"] == "NOVA", CUSTO["ubs_nova"], CUSTO["ubs_existente"])
     ubs["custo_mensal"] = ubs["custo_equipes"] + ubs["custo_fixo"]
     ubs = ubs.sort_values(["status", "pop_atendida"], ascending=[False, False]).reset_index(drop=True)
@@ -497,7 +510,7 @@ def montar_relatorio(res, ubs, arcos, desc, m_base, m_plano, dem, args, solver_n
     add("-" * 98)
     add(f" - Custo fixo UBS existentes:       {br(c['fixo_existentes']):>14}")
     add(f" - Custo fixo UBS novas:            {br(c['fixo_novas']):>14}")
-    add(f" - Equipes eSF ({n_esf}):                {br(c['esf']):>14}   (medico + enfermeiro + tecnico = R$ {br(CUSTO_ESF)}/eSF)")
+    add(f" - Equipes eSF ({n_esf}):                {br(c['esf']):>14}   (horas CNES atuais + equipes adicionais; referencia R$ {br(CUSTO_ESF)}/nova eSF)")
     add(f" - Agentes comunitarios ({n_acs}):      {br(c['acs']):>14}")
     add(f" - TOTAL OPERACIONAL:               {br(c['operacional']):>14}")
     add(f" (o termo de deslocamento R$ {args.custo_km:g}/hab.km e um proxy usado so na otimizacao: "
@@ -753,6 +766,23 @@ def mapa_html(dem, ubs, arcos, args, caminho):
                           dash_array='6 4' if raio != args.raio else None,
                           weight=1, fill=True, fill_opacity=(0.07 if nova else 0.03)/len(raios_mapa(args))).add_to(g2)
     g2.add_to(m)
+    from geografia import limite_municipal
+    _, limite = limite_municipal()
+    folium.GeoJson(limite.__geo_interface__, name='Limite municipal de Itauna (IBGE)',
+                   style_function=lambda _: dict(color='black', weight=2, fillOpacity=0)).add_to(m)
+    pasta = Path(args.saida)/'cobertura_efetiva'
+    if (pasta/'plano_moveis_bases.csv').exists():
+        bases = pd.read_csv(pasta/'plano_moveis_bases.csv', sep=';')
+        visitas = pd.read_csv(pasta/'plano_moveis_visitas.csv', sep=';')
+        grupo = folium.FeatureGroup('Equipes moveis adicionais (simulacao)')
+        for b in bases.itertuples():
+            folium.Marker([b.lat,b.lon], tooltip=f'{b.equipe_movel}: {b.equipes} equipe(s)',
+                          icon=folium.Icon(color='purple')).add_to(grupo)
+        for v in visitas.itertuples():
+            b = bases[bases.equipe_movel==v.equipe_movel].iloc[0]
+            folium.PolyLine([[b.lat,b.lon],[v.lat,v.lon]],color='purple',dash_array='5,5',
+                            tooltip='Ligacao esquematica base-ponto; nao e rota viaria').add_to(grupo)
+        grupo.add_to(m)
     folium.LayerControl().add_to(m)
     m.save(caminho)
 
@@ -824,6 +854,13 @@ def main():
     out = lambda f: os.path.join(args.saida, f)
     print("Carregando dados ...")
     dem, ex, sites, D = carregar_dados(args)
+    # Reserva das equipes moveis da rede atual, antes de abrir novas UBS.
+    if args.orcamento_ap_anual is not None and args.reserva_moveis_anual == 0:
+        from integracao_resultados import calcular_rede, custo_movel
+        from cobertura_efetiva import carregar_rede_atual
+        atual = calcular_rede(dem, carregar_rede_atual(), vars(args))[0]
+        args.reserva_moveis_anual = custo_movel(atual, CUSTO_ESF, CUSTO['acs'])['total_anual']
+        print(f'Reserva anual para equipes moveis: R$ {args.reserva_moveis_anual:,.2f}')
     limites = limites_equipes(sites, args)
     pd.DataFrame([dict(id_ubs=s['id'], nome=s['nome'], existente=bool(s['existente']),
                        esf_atuais=limites[j][0], esf_max=limites[j][1])

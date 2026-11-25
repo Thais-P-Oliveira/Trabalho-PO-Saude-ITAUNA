@@ -1,6 +1,6 @@
 <section id="comparador">
   <h2>Explore os encaminhamentos ambulatoriais</h2>
-  <p>Compare os resultados já calculados, mantendo o plano de UBS fixo.</p>
+  <p>Resultado principal: um nível por estabelecimento. A classificação múltipla é uma análise complementar agregada; não verifica especialidades clínicas. O plano de UBS permanece fixo.</p>
   <label for="via">Demanda terciária que passa pela secundária:</label>
   <select id="via" style="font:inherit;padding:8px;border-radius:8px;margin:12px">
     <option value="25">25%</option><option value="50" selected>50%</option><option value="75">75%</option>
@@ -14,7 +14,7 @@
     <p>São volumes anuais de procedimentos e percursos estimados, não pessoas diferentes.
     Os percentuais são cenários de encaminhamento, não probabilidades observadas por paciente.</p>
   </details>
-  <p><small>Distâncias em linha reta. “Múltiplos níveis” permite atender os dois níveis no mesmo estabelecimento.
+  <p><small>Distâncias em linha reta dos fluxos alocados. Os volumes atendidos podem diferir entre os cenários; a diferença de distância não compara necessariamente os mesmos atendimentos. “Múltiplos níveis” permite atender os dois níveis no mesmo estabelecimento.
   Essa seleção não resolve novamente o modelo e não altera as UBS escolhidas.</small></p>
   <noscript>Ative JavaScript para usar o seletor. Os gráficos estáticos abaixo continuam disponíveis.</noscript>
 </section>
@@ -32,13 +32,13 @@
       <div style="display:flex;align-items:center;gap:14px">
       <div style="height:32px;background:${cor};width:${r.distancia_media_por_percurso/maximo*80}%;border-radius:5px"></div>
       <strong style="white-space:nowrap">${numero(r.distancia_media_por_percurso)} km</strong></div></div>`;
-    document.getElementById('comparacao').innerHTML = barra('Um nível por estabelecimento',unico,'#52627a') + barra('Múltiplos níveis por estabelecimento',multi,'#3864be') +
-      `<table style="width:100%;text-align:left;border-collapse:collapse"><caption style="text-align:left;margin:18px 0"><strong>Percursos alocados no cenário de múltiplos níveis</strong></caption>
-       <tr><th>Termina na secundária</th><td>${numero(multi.termina2,0)}</td></tr>
-       <tr><th>Direto à terciária</th><td>${numero(multi.direto3,0)}</td></tr>
-       <tr><th>Passa pelos dois níveis</th><td>${numero(multi.via23,0)}</td></tr></table>`;
+    document.getElementById('comparacao').innerHTML = barra('Principal: um nível por estabelecimento',unico,'#52627a') + barra('Complementar: múltiplos níveis',multi,'#3864be') +
+      `<table style="width:100%;text-align:left;border-collapse:collapse"><caption style="text-align:left;margin:18px 0"><strong>Percursos alocados no cenário principal de nível único</strong></caption>
+       <tr><th>Termina na secundária</th><td>${numero(unico.termina2,0)}</td></tr>
+       <tr><th>Direto à terciária</th><td>${numero(unico.direto3,0)}</td></tr>
+       <tr><th>Passa pelos dois níveis</th><td>${numero(unico.via23,0)}</td></tr></table>`;
     const reducao=100*(1-multi.distancia_media_por_percurso/unico.distancia_media_por_percurso);
-    document.getElementById('ganho').textContent = `${numero(reducao,1)}% de redução na distância média com múltiplos níveis, no cenário de ${pct}%.`;
+    document.getElementById('ganho').textContent = `${numero(Math.abs(reducao),1)}% de ${reducao>=0 ? "redução" : "aumento"} na distância média na análise complementar (${pct}% via secundária).`;
   }
   seletor.addEventListener('change',atualizar);
   atualizar();

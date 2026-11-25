@@ -21,10 +21,13 @@ class CapacidadeHospitalar(unittest.TestCase):
     def test_calculo_real_e_fonte_ativa(self):
         cap=preparar_capacidade()['2105780']
         self.assertEqual(cap['leitos_sus_total'],98)
-        self.assertEqual(cap['dias_capacidade_bruta'],35770)
+        self.assertEqual(cap['dias_capacidade_bruta'],79*365)
+        self.assertEqual(cap['dias_uti_brutos'],19*365)
+        self.assertIsNone(cap['dias_uti_disponiveis'])
         self.assertAlmostEqual(cap['dias_carga_outros'],29633.649682319272,places=6)
-        self.assertAlmostEqual(cap['dias_disponiveis_modelo'],6136.350317680728,places=6)
-        self.assertGreater(cap['dias_disponiveis_modelo'],cap['dias_disponiveis_metodo_anterior'])
+        self.assertEqual(cap['dias_disponiveis_modelo'],0)
+        self.assertAlmostEqual(cap['dias_gerais_disponiveis_superior'],6136.350317680728,places=6)
+        self.assertFalse(cap['ocupacao_por_tipo_identificada'])
         from preparar import preparar
         _,unidades,_,config=preparar()
         hospital=next(u for u in unidades if u['cnes']=='2105780')

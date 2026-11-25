@@ -12,8 +12,10 @@ param ESF{U}, >=0;
 param MAXE{U}, >=0;
 param HAB, >0, default 3000;
 param VINC{I,U}, >=0;
+param MOVEL{U}, >=0, default 0; # Populacao adicional atendida pelo pessoal movel.
 param D2{I,K}, >=0; param D3{I,K}, >=0;
 param R, >=0, <=1; # Fracao da demanda terciaria que passa pela secundaria.
+param AMB2{F}, >=0, default 1e12; param AMB3{F}, >=0, default 1e12;
 param AMB{F}, >=0; param LEITO{F}, >=0;
 param HOSPITAL{F}, binary; param TMP2, >0; param TMP3, >0;
 param DU{I,U}, >=0; param US{U,S}, >=0;
@@ -52,7 +54,7 @@ s.t. preserva_equipes: sum{u in U}novas[u]<=equipes_max;
 s.t. fixa_plano_aps{i in I,u in U}: x[i,u]=VINC[i,u];
 s.t. sem_redimensionar_aps{u in U}: novas[u]=0;
 s.t. vinculo{i in I}:sum{u in U}x[i,u]=1;
-s.t. capacidade_ubs{u in U}:sum{i in I}POP[i]*x[i,u]<=HAB*(ESF[u]+novas[u]);
+s.t. capacidade_ubs{u in U}:sum{i in I}POP[i]*x[i,u]-MOVEL[u]<=HAB*(ESF[u]+novas[u]);
 s.t. teto_equipes{u in U}:ESF[u]+novas[u]<=MAXE[u];
 s.t. minimo_equipes:sum{u in U}novas[u]>=ceil(sum{i in I}POP[i]/HAB)-sum{u in U}ESF[u];
 
@@ -69,6 +71,11 @@ s.t. capacidade_amb{a in F}:
  sum{i in I,u in U,s in S:s=a}f[i,u,'AMB',s]
  +sum{i in I,u in U,t in T:t=a}d[i,u,'AMB',t]
  +sum{i in I,u in U,s in S,t in T}((if s=a then 1 else 0)+(if t=a then 1 else 0))*v[i,u,'AMB',s,t]<=AMB[a];
+# No cenario multiplo, a pequena oferta de alta complexidade nao absorve todo o teto.
+s.t. amb_media{a in S}:
+ sum{i in I,u in U}f[i,u,'AMB',a]+sum{i in I,u in U,t in T}v[i,u,'AMB',a,t]<=AMB2[a];
+s.t. amb_alta{a in T}:
+ sum{i in I,u in U}d[i,u,'AMB',a]+sum{i in I,u in U,s in S}v[i,u,'AMB',s,a]<=AMB3[a];
 # Se a cadeia ocorre no mesmo local, os dois atendimentos consomem capacidade.
 s.t. capacidade_leitos{a in F}:
  TMP2*(sum{i in I,u in U,s in S:s=a}f[i,u,'HOSP',s]

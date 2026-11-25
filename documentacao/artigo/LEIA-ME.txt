@@ -1,13 +1,8 @@
-ARTIGO EM LATEX
-
-Arquivo principal: artigo.tex (UTF-8). As figuras utilizadas estao em figuras/.
-Texto e figuras correspondem ao plano com custos revisados em 15/11/2026.
-A construcao e apresentada como investimento separado da otimizacao.
-
-Para usar no Overleaf, carregue artigo.tex e a pasta figuras/ no mesmo projeto.
-Selecione artigo.tex como documento principal e use pdfLaTeX.
-Localmente: pdflatex -interaction=nonstopmode artigo.tex (duas vezes).
-As referencias bibliograficas estao no proprio arquivo TeX.
-
-O PDF antigo foi guardado no backup externo para evitar apresenta-lo como
-versao atual. Compile o texto atualizado para gerar um novo PDF.
+ARTIGO
+artigo.pdf: versao de leitura.
+artigo.tex: documento principal; os demais .tex sao incluidos por ele.
+figuras/: imagens usadas no artigo revisado.
+graficos_tikz.tex: gera duas figuras em LaTeX. Os valores da utilizacao foram digitados manualmente a partir do plano.
+Compilacao recomendada: XeLaTeX, repetindo ate estabilizar referencias cruzadas.
+O texto e os graficos de autoria manual nao sao sobrescritos pelo processamento do modelo.
+Quando os resultados mudarem, confira a discussao, resumo, conclusoes e os valores do TikZ antes de gerar um novo PDF.

@@ -1,0 +1,110 @@
+{
+  "parametros": {
+    "raio": 3.0,
+    "raio_rural": null,
+    "hab_esf": 3000,
+    "folga_custo": 0.02,
+    "growth": 6.484145429972665,
+    "hab_min_nova_rural": 500
+  },
+  "total": 104001.99999999999,
+  "custos": 2892275.777777778,
+  "encaminhamentos": [
+    {
+      "cenario": "unico",
+      "via_percentual": 25,
+      "tipo": "AMB",
+      "atendido2": 192205.10586,
+      "atendido3": 11829.0,
+      "distancia_media_por_percurso": 3.89264
+    },
+    {
+      "cenario": "unico",
+      "via_percentual": 25,
+      "tipo": "HOSP",
+      "atendido2": 0.0,
+      "atendido3": 0.0,
+      "distancia_media_por_percurso": 0.0
+    },
+    {
+      "cenario": "unico",
+      "via_percentual": 50,
+      "tipo": "AMB",
+      "atendido2": 192205.10586,
+      "atendido3": 11829.0,
+      "distancia_media_por_percurso": 3.95428
+    },
+    {
+      "cenario": "unico",
+      "via_percentual": 50,
+      "tipo": "HOSP",
+      "atendido2": 0.0,
+      "atendido3": 0.0,
+      "distancia_media_por_percurso": 0.0
+    },
+    {
+      "cenario": "unico",
+      "via_percentual": 75,
+      "tipo": "AMB",
+      "atendido2": 192136.5961,
+      "atendido3": 11829.0,
+      "distancia_media_por_percurso": 4.01201
+    },
+    {
+      "cenario": "unico",
+      "via_percentual": 75,
+      "tipo": "HOSP",
+      "atendido2": 0.0,
+      "atendido3": 0.0,
+      "distancia_media_por_percurso": 0.0
+    },
+    {
+      "cenario": "multiplo",
+      "via_percentual": 25,
+      "tipo": "AMB",
+      "atendido2": 192205.10586,
+      "atendido3": 12746.0,
+      "distancia_media_por_percurso": 3.69614
+    },
+    {
+      "cenario": "multiplo",
+      "via_percentual": 25,
+      "tipo": "HOSP",
+      "atendido2": 0.0,
+      "atendido3": 0.0,
+      "distancia_media_por_percurso": 0.0
+    },
+    {
+      "cenario": "multiplo",
+      "via_percentual": 50,
+      "tipo": "AMB",
+      "atendido2": 192205.10586,
+      "atendido3": 12746.0,
+      "distancia_media_por_percurso": 3.74593
+    },
+    {
+      "cenario": "multiplo",
+      "via_percentual": 50,
+      "tipo": "HOSP",
+      "atendido2": 0.0,
+      "atendido3": 0.0,
+      "distancia_media_por_percurso": 0.0
+    },
+    {
+      "cenario": "multiplo",
+      "via_percentual": 75,
+      "tipo": "AMB",
+      "atendido2": 192205.10586,
+      "atendido3": 12746.0,
+      "distancia_media_por_percurso": 3.80578
+    },
+    {
+      "cenario": "multiplo",
+      "via_percentual": 75,
+      "tipo": "HOSP",
+      "atendido2": 0.0,
+      "atendido3": 0.0,
+      "distancia_media_por_percurso": 0.0
+    }
+  ]
+}

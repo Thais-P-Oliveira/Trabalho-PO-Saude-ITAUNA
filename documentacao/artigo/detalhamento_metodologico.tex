@@ -1,0 +1,76 @@
+\section{Hipóteses de planejamento}
+A Tabela~\ref{tab:hipoteses} resume os parâmetros adotados. Alguns vêm de normas, como os da PNAB
+\citep{pnab2017}, outros de valores de referência de custo, como os do Novo PAC Saúde
+\citep{novopac2025}, e os demais são hipóteses do estudo, testadas na análise de sensibilidade. Os
+parâmetros da PNAB são aplicados de modo uniforme, sem diferenciar a vulnerabilidade social ou as
+condições locais de cada território.
+
+\begin{longtable}{p{.26\linewidth}p{.19\linewidth}p{.44\linewidth}}
+\caption{Parâmetros de planejamento e sua origem}\label{tab:hipoteses}\\
+\toprule Parâmetro & Valor principal & Origem e observação\\\midrule\endfirsthead
+\toprule Parâmetro & Valor principal & Origem e observação\\\midrule\endhead
+Capacidade por eSF & 3.000 habitantes & Dentro da faixa de 2.000 a 3.500 pessoas da PNAB\\
+Habitantes por ACS & 750 & Máximo da PNAB\\
+Raio de cobertura & 3 km & Hipótese do estudo, com sensibilidade de 2 e 5 km\\
+Distância & Linha reta & Fórmula de Haversine, sem malha viária\\
+Distância mínima entre candidata e UBS existente & 1 km & Evita locais muito próximos\\
+Mínimo para abrir UBS urbana & 2.000 habitantes & Limite inferior da faixa da PNAB\\
+Mínimo para abrir UBS rural & 500 habitantes & Hipótese do estudo, com sensibilidade de 0 e 1.000\\
+Equipes por nova UBS & De 1 a 4 & PNAB e portes I a IV do Novo PAC Saúde\\
+Folga operacional & 2\% & Permite reduzir a distância na terceira fase\\
+Horizonte de custo & 5 anos & Preços constantes, sem desconto\\
+Parcela da alta complexidade via secundária & 25, 50 e 75\% & Cenários do estudo\\
+Capacidade da equipe móvel & 2.000 habitantes & Hipótese operacional\\
+Alcance da equipe móvel & 15 km e 5 pontos & Hipótese operacional\\
+Peso da distância no índice & $\beta=1$ e $2$ & Sensibilidade, pois exige calibração empírica \citep{guagliardo2004}\\
+\bottomrule
+\end{longtable}
+\fonte{Elaboração própria, com base em \citet{pnab2017} e \citet{novopac2025}.}
+
+\section{Índice de acessibilidade}
+Além da cobertura, calcula-se um índice de acessibilidade que combina a oferta das equipes, a distância
+e a população que disputa cada UBS. O índice segue a fórmula gravitacional de \citet{hansen1959}, com o
+ajuste pela população concorrente de \citet{joseph1982}. Distâncias menores que 0,1 km são arredondadas
+para esse valor, o que evita divisão por zero ($\widetilde d_{ij}$).
+\begin{align}
+V_j&=\sum_k\frac{P_k}{\widetilde d_{kj}^{\,\beta}}, &
+A_i&=\sum_j\frac{S_j}{\widetilde d_{ij}^{\,\beta}V_j}, &S_j&=3000\,n_j.
+\end{align}
+O termo $V_j$ mede a população que disputa a UBS $j$, ponderada pela distância, e $A_i$ é a capacidade de
+eSF potencialmente disponível por habitante do ponto $i$. O parâmetro $\beta$ controla o peso da
+distância. O índice relativo divide $A_i$ pela média municipal, de modo que o valor 1 representa a média
+da cidade. Ao contrário da cobertura, o índice considera todas as UBS, sem o corte de 3 km.
+
+\section{Custos, orçamento e implementação}
+O custo de construção das novas UBS segue os valores do Novo PAC Saúde para a região Sudeste, sem
+terreno, equipamentos ou mobiliário (Tabela~\ref{tab:portes}). O custo fixo de R\$ 15.000 por mês é o
+mesmo para qualquer porte, o que pode subestimar a diferença de despesas entre unidades grandes e
+pequenas. Como o número de equipes define o porte, as UBS com uma equipe são de porte I, e as de três ou
+quatro equipes, de porte III ou IV.
+
+\begin{table}[htbp]\centering
+\caption{Custo de construção por porte de UBS}\label{tab:portes}
+\begin{tabular}{lrr}\toprule Porte & Equipes & Construção (R\$)\\\midrule
+I & 1 & 1.988.000\\II & 2 & 2.542.000\\III & 3 & 3.307.000\\IV & 4 & 4.306.000\\\bottomrule
+\end{tabular}
+\fonte{Manual Novo PAC Saúde, região Sudeste \citep{novopac2025}.}
+\end{table}
+
+Para a comparação com o orçamento, estima-se também o custo da rede atual nas mesmas categorias. O
+pessoal clínico e de enfermagem custa cerca de R\$ 1,09 milhão por mês, e os 140 ACS, R\$ 0,66 milhão.
+Com o custo fixo das 22 UBS, a rede atual custa R\$ 24,1 milhões por ano. A referência é a dotação
+atualizada da Atenção Básica de 2026, isto é, o valor autorizado no orçamento municipal, de
+R\$ 50,9 milhões, prevista na Lei Orçamentária Anual (LOA) e informada no Relatório Resumido da Execução
+Orçamentária (RREO) \citep{itauna2025,tesouro2026}.
+
+A dotação não é saldo livre, pois financia também odontologia, medicamentos e administração, que não
+entram no modelo. Por isso, a comparação indica o peso relativo do plano, e não a sua viabilidade
+financeira. Como referência, o Sistema de Informações sobre Orçamentos Públicos em Saúde (SIOPS) registra
+R\$ 32,5 milhões gastos com pessoal na Atenção Básica em 2025, valor que inclui categorias além das eSF e
+dos ACS \citep{siops}.
+
+O modelo da atenção primária foi implementado em Python, com a biblioteca PuLP e o solver HiGHS, usando
+tolerância de otimalidade de 0,01\% e limite de 600 segundos por fase \citep{mitchell2011,huangfu2018}. O
+modelo de encaminhamento foi escrito na linguagem MathProg e resolvido pelo GLPK \citep{glpk}. Testes
+automatizados verificam a conservação da população e dos volumes, os limites de capacidade e a
+consistência dos custos. A trilha de reprodução está no Apêndice~\ref{ap:reproducao}.

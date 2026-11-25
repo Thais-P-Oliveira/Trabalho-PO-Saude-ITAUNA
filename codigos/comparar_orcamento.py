@@ -49,7 +49,10 @@ def comparar(plano_pasta=None,saida_pasta=None):
                 partes.append(Decimal(str(registros[0]['valor'])))
             linhas.append(dict(conta=conta, coluna=coluna, exceto_intra=partes[0],
                 intra=partes[1], total= sum(partes)))
-    mensal = Decimal(str(plano['custos']['operacional']))
+    from integracao_resultados import integrar
+    integrado = integrar(plano_path.parent)
+    mensal_ubs = Decimal(str(plano['custos']['operacional']))
+    mensal = Decimal(str(integrado['operacional_integrado_mensal']))
     anual = mensal*12
     objetivo_anual = Decimal(str(plano['custos']['objetivo']))*12
     # Decompoe o funcionamento da rede inteira; as existentes nao sao acrescimo ao gasto atual.
@@ -64,12 +67,19 @@ def comparar(plano_pasta=None,saida_pasta=None):
     for status,rotulo,chave in [('EXISTENTE','UBS existentes','fixo_existentes'),('NOVA','UBS novas','fixo_novas')]:
         grupo=[u for u in unidades if u['status']==status]
         fixo=Decimal(str(custos[chave]))
-        esf=sum((Decimal(u['n_esf'])*unit_esf for u in grupo),Decimal(0))
+        esf=sum((Decimal(u['custo_pessoal_sem_acs_mensal']) for u in grupo),Decimal(0))
         acs=sum((Decimal(u['acs'])*unit_acs for u in grupo),Decimal(0))
         operacao_grupos.append(dict(grupo=rotulo,unidades=len(grupo),fixo_mensal=fixo,
             equipes_mensal=esf,acs_mensal=acs,total_mensal=fixo+esf+acs,total_anual=12*(fixo+esf+acs)))
-    if abs(sum(g['total_mensal'] for g in operacao_grupos)-mensal)>Decimal('.01'):
+    if abs(sum(g['total_mensal'] for g in operacao_grupos)-mensal_ubs)>Decimal('.01'):
         raise ValueError('Decomposicao da operacao nao confere')
+    mov = integrado['custos_moveis']['plano']
+    operacao_grupos.append(dict(grupo='Equipes moveis adicionais', unidades=mov['equipes'],
+        fixo_mensal=Decimal(0), equipes_mensal=Decimal(str(mov['equipes_mensal'])),
+        acs_mensal=Decimal(str(mov['acs_mensal'])), total_mensal=Decimal(str(mov['total_mensal'])),
+        total_anual=Decimal(str(mov['total_anual']))))
+    if abs(sum(g['total_mensal'] for g in operacao_grupos)-mensal)>Decimal('.01'):
+        raise ValueError('Total integrado nao confere')
     precos_path=BASE/'custos_construcao_ubs_2025.csv'
     with precos_path.open(encoding='utf-8-sig',newline='') as f:
         precos={int(x['esf']):Decimal(x['valor_construcao']) for x in csv.DictReader(f)}
@@ -91,6 +101,7 @@ def comparar(plano_pasta=None,saida_pasta=None):
     arquivos = [fonte_path, FONTES/'loa_2026_aprovada.pdf', plano_path,precos_path,plano_path.parent/'aps/ubs_completas.csv']
     meta = dict(plano=str(plano_path), folga_custo=.02,
         custo_aps_mensal=mensal, custo_aps_anual=anual,
+        custo_ubs_sem_moveis_mensal=mensal_ubs, equipes_moveis=mov,
         operacao_por_grupo=operacao_grupos,investimento_construcao=construcao,
         total_ano_implantacao=total_ano_implantacao,
         hipotese_ano_implantacao='100% das obras e 12 meses de operacao da rede inteira no mesmo exercicio; cenario de comparacao, nao cronograma contratual',
@@ -106,14 +117,15 @@ def comparar(plano_pasta=None,saida_pasta=None):
             'Nao inclui custo operacional da secundaria e terciaria.',
             'Dotacao atualizada nao e saldo livre nem garantia de disponibilidade financeira.',
             'Diferenca nao demonstra economia ou viabilidade financeira da implantacao.',
-            'A comparacao e descritiva; nao foi criada restricao de orcamento no modelo.'])
+            'O modelo possui teto operacional; total com moveis e conferido antes da publicacao. Isso nao comprova saldo financeiro livre.',
+            'Equipes moveis: inclui pessoal e encargos estimados; veiculo, combustivel e equipamentos nao precificados.'])
     saida = Path(saida_pasta) if saida_pasta else RESULTADOS/'orcamento'
     saida.mkdir(exist_ok=True)
     (saida/'calculos.json').write_text(json.dumps(meta,ensure_ascii=False,indent=2,default=str),encoding='utf-8')
     texto = ['COMPARACAO ORCAMENTARIA - ITAUNA', '',
         'Plano: '+str(plano_path.parent)+'; folga operacional de 2%.',
         'Custo operacional planejado da APS: '+reais(mensal)+'/mes; '+reais(anual)+'/ano.',
-        'Inclui todas as UBS do plano, existentes e novas, equipes e ACS.',
+        'Inclui todas as UBS do plano, existentes e novas, equipes, ACS e pessoal das equipes moveis adicionais.',
         'Nao somar esse custo ao gasto atual da prefeitura: ha despesas sobrepostas.',
         'Proxy de deslocamento excluido da comparacao principal. Objetivo anual com proxy: '+reais(objetivo_anual)+'.', '',
         'ORCAMENTO E EXECUCAO OFICIAIS - 2026',

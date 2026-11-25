@@ -9,7 +9,7 @@ Fontes (todas locais, rastreaveis):
 Duas medidas, sempre separadas e nunca somadas:
   (A) TETO OBSERVADO (SIOPS 2025): Pessoal e Encargos Sociais da Atencao Basica. Inclui todo o pessoal da
       AB (equipes, odontologia, apoio, administrativo); o SIOPS nao separa equipes. E um limite superior.
-  (B) ESTIMATIVA ASCENDENTE (modelo): eSF e ACS cadastrados no CNES x custo unitario do modelo x 12.
+  (B) ESTIMATIVA ASCENDENTE (modelo): Horas dos profissionais CNES / 40 x remuneracao de referencia; ACS separados.
       Nao inclui eSB, eAP, NASF/eMulti, vigilancia, medicamentos e transferencias de incentivo (sem dado).
 Percentual = custo das equipes / orcamento da Atencao Primaria (dotacao atualizada), por fase da despesa.
 """
@@ -82,12 +82,14 @@ def rreo_ab():
 def estimativa_ascendente():
     rec = pd.read_csv(BASE/'fontes_publicas/ubs_recursos_cnes_202607.csv', sep=';', encoding='utf-8-sig')
     esf, acs = float(rec['esf'].sum()), float(rec['acs_vinculos'].sum())
+    from pessoal_cnes import total_atual
+    pessoal = total_atual(CUSTO)
     fixo = len(rec)*CUSTO['ubs_existente']
     return dict(ubs=int(len(rec)), esf=esf, acs=acs, esb=float(rec['esb'].sum()), eap=float(rec['eap'].sum()),
                 custo_esf_unit_mensal=CUSTO_ESF, custo_acs_unit_mensal=CUSTO['acs'], custo_fixo_ubs_unit_mensal=CUSTO['ubs_existente'],
-                esf_anual=12*esf*CUSTO_ESF, acs_anual=12*acs*CUSTO['acs'], fixo_ubs_anual=12*fixo,
-                equipes_anual=12*(esf*CUSTO_ESF+acs*CUSTO['acs']),
-                equipes_mais_fixo_anual=12*(esf*CUSTO_ESF+acs*CUSTO['acs']+fixo))
+                esf_anual=12*pessoal, acs_anual=12*acs*CUSTO['acs'], fixo_ubs_anual=12*fixo,
+                equipes_anual=12*(pessoal+acs*CUSTO['acs']),
+                equipes_mais_fixo_anual=12*(pessoal+acs*CUSTO['acs']+fixo))
 
 
 def calcular(saida=None):
@@ -98,6 +100,17 @@ def calcular(saida=None):
     fonte = tabela_por_fonte(d)
     pessoal = tabela_pessoal(d)
     asc = estimativa_ascendente()
+    from pessoal_cnes import cadastro,CATEGORIAS
+    detalhe=[]
+    for _,r in cadastro().iterrows():
+        for categoria,prefixo in CATEGORIAS.items():
+            horas=float(r[prefixo+'_horas_cadastradas'])
+            detalhe.append(dict(cnes=r['cnes'],nome=r['nome'],categoria=categoria,
+                vinculos=r[prefixo+'_vinculos'],horas_semanais=horas,equivalentes_40h=horas/40,
+                custo_unitario_40h=CUSTO['tecnico' if categoria=='auxiliar' else categoria],
+                custo_mensal=horas/40*CUSTO['tecnico' if categoria=='auxiliar' else categoria],
+                natureza='Estimativa; salarios e encargos de referencia, nao folha paga'))
+    pd.DataFrame(detalhe).to_csv(saida/'pessoal_horas_por_ubs.csv',sep=';',index=False,encoding='utf-8-sig')
     rreo = rreo_ab()
     orc25 = grupos.loc['TOTAL (correntes + capital)', 'Dotação Atualizada']
     linhas = []
@@ -111,7 +124,7 @@ def calcular(saida=None):
                            orcamento_referencia=f'{fase} total da AB 2025 (SIOPS)', orcamento=den, percentual=100*num/den))
     # (B) estimativa ascendente com custos unitarios do modelo (precos 2026) contra o RREO 2026
     dot26 = rreo['DOTAÇÃO ATUALIZADA (a)']
-    for nome, valor in [('eSF + ACS', asc['equipes_anual']), ('eSF + ACS + custo fixo das 22 UBS', asc['equipes_mais_fixo_anual'])]:
+    for nome, valor in [('Pessoal CNES + ACS', asc['equipes_anual']), ('Pessoal CNES + ACS + custo fixo das 22 UBS', asc['equipes_mais_fixo_anual'])]:
         linhas.append(dict(medida=f'B. Estimativa ascendente (modelo, CNES 07/2026): {nome}', fase_numerador='Custo anualizado (12 meses)', custo=valor,
                            orcamento_referencia='Dotação atualizada AB 2026 (RREO b4)', orcamento=dot26, percentual=100*valor/dot26))
         linhas.append(dict(medida=f'B. Estimativa ascendente (modelo, CNES 07/2026): {nome}', fase_numerador='Custo anualizado (12 meses)', custo=valor,
@@ -152,19 +165,23 @@ def calcular(saida=None):
     for r in res.itertuples():
         t.append(f'  [{r.medida}] {r.fase_numerador} {reais(r.custo)} / {r.orcamento_referencia} {reais(r.orcamento)} = {r.percentual:.2f}%')
     t += ['', 'ESTIMATIVA ASCENDENTE (CNES 07/2026 x custos unitarios do modelo)',
-          f'  {asc["esf"]:.0f} eSF x {reais(CUSTO_ESF)}/mes x 12 = {reais(asc["esf_anual"])}',
+          f'  Medicos, enfermagem, tecnicos e auxiliares: horas CNES / 40 x salarios de referencia x 12 = {reais(asc["esf_anual"])}',
           f'  {asc["acs"]:.0f} ACS (vinculos CNES) x {reais(CUSTO["acs"])}/mes x 12 = {reais(asc["acs_anual"])}',
-          f'  Custo anual das equipes (eSF + ACS) = {reais(asc["equipes_anual"])}',
+          f'  Custo anual das equipes (Pessoal CNES + ACS) = {reais(asc["equipes_anual"])}',
           f'  Custo fixo das {asc["ubs"]} UBS ({reais(asc["custo_fixo_ubs_unit_mensal"])}/mes cada) = {reais(asc["fixo_ubs_anual"])}',
-          f'  Nao incluidos (sem dado de custo): {asc["esb"]:.0f} eSB, {asc["eap"]:.0f} eAP, NASF/eMulti, incentivos do FNS.', '',
+          f'  Outras categorias (odontologia, apoio e administracao) nao precificadas. Os vinculos das categorias consideradas podem pertencer a diferentes equipes; nao se soma custo de equipe novamente.', '',
           'COMPROMISSO PARA O MODELO (item 7)',
           f'  Orcamento AP anual (RREO 2026, dotacao atualizada): {reais(dot26)}',
-          f'  Custo anual comprometido (eSF + ACS + custo fixo das UBS existentes): {reais(comprometido)}',
-          f'  Disponivel para expansao: {reais(dot26-comprometido)}', '', 'LIMITACOES'] + ['  - '+l for l in meta['limitacoes']]
+          f'  Custo anual comprometido (Pessoal CNES + ACS + custo fixo das UBS existentes): {reais(comprometido)}',
+           f'  Diferenca contabil antes das demais despesas da APS: {reais(dot26-comprometido)}',
+           '  Essa diferenca nao e saldo livre: demais servicos e insumos da APS tambem consomem o orcamento.', '', 'LIMITACOES'] + ['  - '+l for l in meta['limitacoes']]
     (saida/'relatorio_custo_equipes.txt').write_text('\n'.join(t)+'\n', encoding='utf-8')
     print('\n'.join(t))
     return meta, res
 
 
 if __name__ == '__main__':
-    calcular()
+    import argparse
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('--saida', type=Path, default=RESULTADOS/'atual/financeiro')
+    calcular(ap.parse_args().saida)

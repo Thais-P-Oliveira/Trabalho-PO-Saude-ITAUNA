@@ -1,16 +1,35 @@
 {
   "status": "concluida",
-  "data": "2026-11-17T22:58:40.786410-03:00",
-  "configuracao": {
-    "tempo_modelo_segundos": 600,
-    "tempo_sensibilidade_segundos": 300,
-    "processos_sensibilidade": 2,
-    "rodar_testes": true,
-    "instalar_dependencias_ausentes": true,
-    "abrir_resultados_ao_concluir": true,
-    "remover_imagens_antigas": true
-  },
-  "plano": "plano",
-  "pagina": "../../ABRIR_RESULTADOS.html",
-  "nota": "Resultados publicados juntos. A otimalidade de cada fase consta nos certificados."
+  "data": "2026-11-24T22:57:40.174371-03:00",
+  "testes": 26,
+  "cenarios": 6,
+  "nota": "Revisao critica concluida; sensibilidade consolidada com conferencia sem presolve do cenario 96%.",
+  "fontes_sha256": {
+    "codigos\\auditar_plano_completo.py": "6cdaffb80e9a41957a72ad29f1a0fc0e814b31ec4d738628f6be5b5907d53535",
+    "codigos\\calcular_investimento.py": "8bb191683f86f17fb0368e39c07ae12fb274b3db0918705314070d165dd6c91b",
+    "codigos\\caminhos.py": "b11dbd2c04fd567bd0d4be8dfcec4b3b5ef6a42bf275ba69d03a2a5721d49b24",
+    "codigos\\capacidade_hospitalar.py": "b85f568d32a09e0fcceec00603ecd0e8606b91f7f16f9fdf36237d275e81fbed",
+    "codigos\\cobertura_efetiva.py": "5baec3d10242638926651882eca21075f981938988aabce123f9601ed6158d9c",
+    "codigos\\coletar_estrutura_cnes.py": "e620dc2f43a3c92121de44e220cc981abdbd19d33f9761e3ce7260771995fa6d",
+    "codigos\\comparar_orcamento.py": "ae957c0fad3e91b27f47c987ac660c4fb360a7ebd820c4b99466a7f48243944f",
+    "codigos\\custo_equipes.py": "3fa761ad24b9277fd812df04c71c90eedc163275887da355acb8879ac0d29c8e",
+    "codigos\\diagnosticar.py": "923396dc81aedab9b71a9e3b7e43b982cd0697d88aba548558a82dacb0b1094f",
+    "codigos\\encaminhamentos.py": "d58545c589bd0740561303ff0c5fd73ce2b5bf7001feac3625cffea17fa67b3f",
+    "codigos\\figuras_artigo.py": "7a0ea4ae1f19db2371654a7b1509d8992deb2e40352c5ce9be4b190e72aa3bd6",
+    "codigos\\geografia.py": "f3a2353bcc6ba3a96fa01109b50d0e4fb28b5ae1505f5f03e1900e116257f28c",
+    "codigos\\graficos_itauna.py": "e7269358f49a89118251d46f4b03256ade32a3f097264c1b72edf88fb9759a94",
+    "codigos\\grafico_sensibilidade.py": "89da7258dc4a63e6ab45792ab9e77a47ada4d5e921bba06603f60e0ae1e03d28",
+    "codigos\\integracao_resultados.py": "313fe76a847056757e4a4e485a543f7f77bb663f01bee09efb43bb8f194ab52a",
+    "codigos\\organizar_resultados.py": "a0ae09cb0cba9209617784a0bd98ceb88dc82b1404fe362d4e46109efb9abf46",
+    "codigos\\pessoal_cnes.py": "ddcec8ff1cf4db8ca20d95d30181978d8e251e61f8f63e6f5868f6b7be03de2c",
+    "codigos\\planejar.py": "e442ea4e9ee2ffdd51918d024de3ebd879f8b84f3cb8f46888cfe33160d7c4e2",
+    "codigos\\preparar.py": "586eb16faa0996394612ce92f4a3ec65c9959587f6e0f4793c600b713d435ff6",
+    "codigos\\projecao_populacional.py": "9dc80bb55c19ab9e938797eabc8eacb62bff115a772a9b6ea5ae990f168f26b9",
+    "codigos\\resultados_artigo.py": "efd79bb34bad4931907f6eb0c4034484d274b475385a3d65f22619e9cb971f19",
+    "codigos\\rodar_sensibilidade.py": "e22dfdb23c8e8d193bccf6ec2d13e921c9ad60670a62569d716fe4bedd5de969",
+    "codigos\\vinculos_moveis.py": "996484b87b729b18b9ac24fabcd04b08c6df519a271ca471854c8f8370c30c2d",
+    "modelos\\aps_base.py": "987ab121dd11b8f56239d4e8a2f369f3e2ea1f4a6d2e3f9b5383d297bd77bf11",
+    "modelos\\rede_completa.mod": "6743dc94f9cd2a78282189087a7ab5c34e4f437fab34fd7e0a9e8ba6d97b6596",
+    "rodar_tudo.py": "6c6ec32f8dc22fa14d63ef50d52b0799f75487c7efbe53f95902105c6a6910ac"
+  }
 }

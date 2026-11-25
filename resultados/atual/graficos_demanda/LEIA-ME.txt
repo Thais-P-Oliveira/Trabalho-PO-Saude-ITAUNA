@@ -1,0 +1,13 @@
+GRAFICOS SEPARADOS — ARTIGO PRESERVADO
+
+Demanda potencial: todos os 91 pontos da populacao projetada para 2026 sao atribuídos integralmente a UBS mais proxima por Haversine, sem raio ou limite de capacidade. Empate exato usa a primeira UBS da tabela.
+Capacidade efetiva = min(3000 x eSF; 750 x ACS) da respectiva rede; utilizacao = demanda potencial / capacidade x 100. Equipes moveis nao entram. Nao e carga alocada pelo otimizador nem volume de consultas.
+UBS acima de 100%: atual 14/22; plano 13/31 (13 existentes).
+Media ponderada pela capacidade: atual 152,38%; plano 96,97%.
+Formula dessa media: soma da demanda potencial / soma das capacidades x 100. Nao e a media simples das porcentagens.
+Alternativa ponderada pela populacao atribuida: atual 203,31%; plano 181,18%.
+As medias e os excessos medem pressao potencial se cada morador procurar a UBS mais proxima. O plano otimizado pode dividir a populacao e desloca-la para outra UBS.
+Novas unidades nao possuem valores na rede atual (campos vazios no CSV, sem barra atual). A ausencia de barra nao significa utilizacao zero de unidade existente.
+A curva e os mapas usam proximidade, sem capacidade. Linha de 3 km e referencia de cobertura geografica. O par mapa_rede_atual / mapa_plano_par tem identica escala e legenda, sem equipes moveis.
+PDF vetorial e PNG 300 dpi, largura fisica 16 cm, fonte minima 9 pt, sem titulo interno. N1 a N9 seguem os codigos exigidos; identificacao completa em identificacao_N1_N9.csv.
+Para o artigo, sugerir legendas: Pressao potencial de demanda por UBS antes e depois do plano; Curva acumulada de acesso geografico a UBS mais proxima; Rede atual de UBS e cobertura geografica no raio de 3 km. Fonte: elaboracao propria, dados IBGE/CNES e resultados do projeto.

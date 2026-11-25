@@ -1,0 +1,8 @@
+COMPARAÇÃO DAS UBS
+RECOMENDADO PARA APRESENTAR: mudancas_ubs_existentes_colunas + novas_ubs_por_porte. A versao curta mostra as seis unidades com mudanca; a completa permanece como apoio.
+1. ubs_existentes_comparacao: pontos e linhas destacam a diferença atual -> proposta. Pontos cinza sem linha indicam valores iguais. Há 6 UBS com mudança de pressão. A unidade com duas equipes está identificada; as demais existentes têm uma equipe. Isso não comprova porte físico oficial do prédio.
+2. novas_ubs_por_porte: N1 a N9 separados por porte planejado e equipes. Porte I: seis unidades; III: duas; IV: uma; II: nenhuma selecionada.
+3. resumo_pressao_rede: quadro curto para abertura da apresentação.
+Mesmos cálculos do CSV original: população da UBS mais próxima / min(3000*eSF;750*ACS). As novas não possuem comparação com a rede atual porque não existiam.
+A baixa pressão por proximidade de uma nova UBS não é baixa ocupação no plano otimizado: o modelo transfere moradores de outras áreas para unidades com capacidade. Não confundir com população vinculada pelo modelo.
+Arquivos separados do artigo: PDF vetorial e PNG 300 dpi. Use 16 cm de largura para preservar fontes.

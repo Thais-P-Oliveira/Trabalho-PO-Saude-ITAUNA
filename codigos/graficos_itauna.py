@@ -17,7 +17,9 @@ from matplotlib.ticker import FuncFormatter
 import numpy as np
 import pandas as pd
 
-from caminhos import RESULTADOS
+from caminhos import RESULTADOS,MODELOS
+import sys
+sys.path.insert(0,str(MODELOS))
 from geografia import limite_municipal, projetar, circulo
 import cobertura_efetiva as ce
 
@@ -51,9 +53,9 @@ def nome_amigavel(nome):
     return m.group(1) if m else t
 
 
-def mapa(pontos, por_ponto, ubs, bases, visitas, caminho, titulo, raio=3.0, zoom=False):
+def mapa(pontos, por_ponto, ubs, bases, visitas, caminho, titulo, raio=3.0, zoom=False, raio_rural=None, para_artigo=False):
     lim_m, _ = limite_municipal()
-    fig, ax = plt.subplots(figsize=(15, 10.5), dpi=150)
+    fig, ax = plt.subplots(figsize=(6.4, 4.8) if para_artigo else (15, 10.5), dpi=180)
     ax.set_aspect('equal')
     _poly(ax, lim_m, fc='#f4f6f6', ec='#212f3d', lw=2.0, zorder=0)
     ux, uy = projetar(ubs['lon'], ubs['lat'])
@@ -66,6 +68,9 @@ def mapa(pontos, por_ponto, ubs, bases, visitas, caminho, titulo, raio=3.0, zoom
     for r in ubs.itertuples():
         cor = VERMELHO if r.status == 'NOVA' else VERDE
         ax.add_patch(plt.Circle((r.x, r.y), raio, fc='none', ec=cor, lw=0.8, alpha=0.55, zorder=2))
+        if raio_rural is not None and raio_rural != raio:
+            ax.add_patch(plt.Circle((r.x,r.y), raio_rural, fc='none', ec=cor,
+                                   ls='--', lw=0.8, alpha=0.55, zorder=2))
     cob = pp[pp['cobertura_geografica'] == 1]
     desc = pp[pp['cobertura_geografica'] == 0]
     ax.scatter(cob['x'], cob['y'], s=np.sqrt(cob['pessoas'])*1.8+8, c=AZUL, alpha=0.75, edgecolors='white', linewidths=0.4, zorder=3)
@@ -79,13 +84,13 @@ def mapa(pontos, por_ponto, ubs, bases, visitas, caminho, titulo, raio=3.0, zoom
             b = bases[bases['equipe_movel'] == v.equipe_movel].iloc[0]
             vx, vy = projetar([v.lon], [v.lat])
             ax.plot([b.x, vx[0]/1000.0], [b.y, vy[0]/1000.0], ls='--', color=ROXO, lw=1.0, alpha=0.8, zorder=4)
-        ax.scatter(bases['x'], bases['y'], s=230, c=ROXO, marker='D', edgecolors='black', linewidths=1.0, zorder=7)
+        ax.scatter(bases['x'], bases['y'], s=80 if para_artigo else 230, c=ROXO, marker='D', edgecolors='black', linewidths=1.0, zorder=7)
         for b in bases.itertuples():
             ax.annotate(b.equipe_movel, (b.x, b.y), xytext=(8, 8), textcoords='offset points', fontsize=8, fontweight='bold', color=ROXO, zorder=8)
     ex = ubs[ubs['status'] == 'EXISTENTE']
-    ax.scatter(ex['x'], ex['y'], s=70+30*ex['esf'], c=VERDE, marker='s', edgecolors='black', linewidths=0.9, zorder=5)
+    ax.scatter(ex['x'], ex['y'], s=(25+10*ex['esf']) if para_artigo else (70+30*ex['esf']), c=VERDE, marker='s', edgecolors='black', linewidths=0.9, zorder=5)
     nv = ubs[ubs['status'] == 'NOVA']
-    ax.scatter(nv['x'], nv['y'], s=520, c=VERMELHO, marker='*', edgecolors='black', linewidths=1.2, zorder=6)
+    ax.scatter(nv['x'], nv['y'], s=150 if para_artigo else 520, c=VERMELHO, marker='*', edgecolors='black', linewidths=1.2, zorder=6)
     for r in nv.itertuples():
         ax.annotate(r.codigo, (r.x, r.y), xytext=(10, 10), textcoords='offset points', fontsize=10, fontweight='bold', color='#78281f', zorder=8,
                     bbox=dict(boxstyle='round,pad=0.2', fc='#fcf3cf', ec=VERMELHO, lw=1))
@@ -105,31 +110,39 @@ def mapa(pontos, por_ponto, ubs, bases, visitas, caminho, titulo, raio=3.0, zoom
     handles = [Patch(fc='#f4f6f6', ec='#212f3d', lw=2, label='Limite municipal de Itaúna (IBGE)'),
                Line2D([], [], marker='s', ls='', mfc=VERDE, mec='black', ms=9, label=f'UBS existentes ({len(ex)})'),
                Line2D([], [], marker='*', ls='', mfc=VERMELHO, mec='black', ms=16, label=f'NOVAS UBS propostas ({len(nv)}), códigos N1…N{len(nv)}'),
-               Line2D([], [], marker='D', ls='', mfc=ROXO, mec='black', ms=9, label=f'Equipes móveis — base ({int(bases["equipes"].sum()) if len(bases) else 0} equipe(s))'),
-               Line2D([], [], ls='--', color=ROXO, label='Rota da equipe móvel até os pontos visitados'),
+               Line2D([], [], marker='D', ls='', mfc=ROXO, mec='black', ms=9, label=f'Equipes móveis — base em UBS ({int(bases["equipes"].sum()) if len(bases) else 0} equipe(s))'),
+               Line2D([], [], ls='--', color=ROXO, label='Ligação base–ponto móvel (não é rota viária)'),
                Patch(fc=VERDE, ec=VERDE, alpha=0.25, label=f'Área a ≤ {raio:g} km de UBS existente'),
                Patch(fc=VERMELHO, ec=VERMELHO, alpha=0.25, label=f'Área a ≤ {raio:g} km de NOVA UBS'),
                Line2D([], [], marker='o', ls='', mfc=AZUL, mec='white', ms=8, label=f'Demanda com cobertura geográfica ({_br(cob["pessoas"].sum())} hab)'),
                Line2D([], [], marker='o', ls='', mfc='none', mec=LARANJA, mew=1.8, ms=9, label=f'Demanda SEM cobertura geográfica ({_br(n_sem)} hab)')]
-    ax.legend(handles=handles, loc='upper left', bbox_to_anchor=(1.01, 1.0), fontsize=8, frameon=True, title='Legenda', title_fontsize=9.5)
-    if len(nv):
+    if para_artigo:
+        rotulos=['Limite municipal (IBGE)',f'UBS existentes ({len(ex)})',f'Novas UBS: N1 a N{len(nv)}',
+                 f'Base móvel ({int(bases["equipes"].sum()) if len(bases) else 0} equipes)',
+                 'Ligação móvel (linha reta)',f'Raio {raio:g} km: existentes',f'Raio {raio:g} km: novas',
+                 f'No raio: {_br(cob["pessoas"].sum())} hab',f'Fora: {_br(n_sem)} hab']
+        for h,rotulo in zip(handles,rotulos):h.set_label(rotulo)
+    ax.legend(handles=handles, loc='upper left', bbox_to_anchor=(1.01, 1.0), fontsize=9 if para_artigo else 8, frameon=True, title='Legenda', title_fontsize=9.5)
+    if len(nv) and not para_artigo:
         txt = 'Novas UBS propostas\n' + '\n'.join(f'{r.codigo}: {nome_amigavel(r.nome)[:44]} — {int(r.esf)} eSF'
                                                   for r in nv.sort_values('codigo', key=lambda s: s.str[1:].astype(int)).itertuples())
-        fig.text(0.655, 0.36, txt, fontsize=7.8, va='top', family='monospace',
-                 bbox=dict(boxstyle='round', fc='#fcf3cf', ec=VERMELHO))
-    ax.set_title(titulo, fontsize=13, fontweight='bold')
-    fig.subplots_adjust(left=0.06, right=0.64, top=0.94, bottom=0.08)
+    if para_artigo:
+        ax.set_xlabel('Leste–Oeste (km)',fontsize=9)
+        ax.set_ylabel('Norte–Sul (km)',fontsize=9)
+        ax.tick_params(labelsize=9)
+    fig.subplots_adjust(left=0.11 if para_artigo else 0.06, right=0.61 if para_artigo else 0.64, top=0.91 if para_artigo else 0.94, bottom=0.12 if para_artigo else 0.08)
     fig.savefig(caminho)
     plt.close(fig)
 
 
-def painel(resumos, ubs, arcos_plano, custos, caminho, hab_esf=3000):
+def painel(resumos, ubs, arcos_plano, custos, caminho, hab_esf=3000, populacao=None, criterio='3 km'):
     """Quatro graficos com eixos e unidades explicitos."""
     fig = plt.figure(figsize=(17, 12), dpi=150)
     gs = fig.add_gridspec(2, 2, width_ratios=[1.25, 1], hspace=0.32, wspace=0.28)
     # A) Carga por UBS
     ax = fig.add_subplot(gs[:, 0])
-    u = ubs.sort_values('carga_atendida').reset_index(drop=True)
+    u = ubs.sort_values('pop_atendida').reset_index(drop=True).copy()
+    u['carga_atendida'] = u['pop_atendida']  # vinculacao da APS usada na hierarquia
     rot = [f"{r.codigo} (NOVA)" if r.status == 'NOVA' else str(r.nome).title()[:26] for r in u.itertuples()]
     cap = u['capacidade_efetiva'].values
     ax.barh(range(len(u)), cap, color='none', edgecolor='#7f8c8d', hatch='///', lw=0.6, label='Capacidade efetiva = mín(3.000 × eSF; 750 × ACS)')
@@ -141,18 +154,17 @@ def painel(resumos, ubs, arcos_plano, custos, caminho, hab_esf=3000):
     ax.set_yticklabels(rot, fontsize=8)
     ax.set_xlim(0, cap.max()*1.45)
     ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: _br(v)))
-    ax.set_xlabel('População atendida (habitantes)')
+    ax.set_xlabel('População vinculada (habitantes, inclusive fora do raio)')
     ax.set_ylabel('Unidade Básica de Saúde')
-    ax.set_title('Carga atendida × capacidade efetiva por UBS', fontsize=11, fontweight='bold')
-    ax.legend(handles=[Patch(fc=VERDE, label='População atendida — UBS existente'), Patch(fc=VERMELHO, label='População atendida — NOVA UBS'),
+    ax.legend(handles=[Patch(fc=VERDE, label='População vinculada — UBS existente'), Patch(fc=VERMELHO, label='População vinculada — NOVA UBS'),
                        Patch(fc='none', ec='#7f8c8d', hatch='///', label='Capacidade efetiva (tracejado)')], loc='lower right', fontsize=8)
     ax.grid(axis='x', ls=':', alpha=0.5)
     # B) Cobertura
     ax = fig.add_subplot(gs[0, 1])
     nomes = [r['rotulo'] for r in resumos]
     y = np.arange(len(resumos))
-    ax.barh(y+0.2, [r['geo'] for r in resumos], height=0.36, color='#85c1e9', label='Cobertura geográfica (≤ 3 km)')
-    ax.barh(y-0.2, [r['efetiva'] for r in resumos], height=0.36, color=AZUL, label='Cobertura efetiva (≤ 3 km e dentro da capacidade eSF/ACS)')
+    ax.barh(y+0.2, [r['geo'] for r in resumos], height=0.36, color='#85c1e9', label=f'Cobertura geográfica ({criterio})')
+    ax.barh(y-0.2, [r['efetiva'] for r in resumos], height=0.36, color=AZUL, label=f'Cobertura efetiva ({criterio} + capacidade eSF/ACS)')
     for k, r in enumerate(resumos):
         ax.text(r['geo']+0.8, k+0.2, f"{r['geo']:.1f}%", va='center', fontsize=8.5)
         ax.text(r['efetiva']+0.8, k-0.2, f"{r['efetiva']:.1f}%", va='center', fontsize=8.5, fontweight='bold')
@@ -161,14 +173,14 @@ def painel(resumos, ubs, arcos_plano, custos, caminho, hab_esf=3000):
     ax.set_yticks(y)
     ax.set_yticklabels(nomes, fontsize=9)
     ax.set_xlim(0, 122)
-    ax.set_xlabel('% da população total do cenário (104.002 hab)')
-    ax.set_title('Cobertura geográfica × cobertura efetiva', fontsize=11, fontweight='bold')
+    ax.set_xticks([0,20,40,60,80,100])  # margem a direita reservada para a anotacao das moveis
+    ax.set_xlabel(f'% da população total do cenário ({_br(populacao)} hab)')
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.16), fontsize=8, frameon=False)
     ax.grid(axis='x', ls=':', alpha=0.5)
     # C) Custo mensal
     ax = fig.add_subplot(gs[1, 1])
     itens = [('UBS existentes (custo fixo)', custos['fixo_existentes'], '#85929e'), ('UBS novas (custo fixo)', custos['fixo_novas'], VERMELHO),
-             ('Equipes eSF', custos['esf'], AZUL), ('ACS', custos['acs'], '#f39c12')]
+             ('Pessoal clínico e de enfermagem', custos['esf'], AZUL), ('ACS', custos['acs'], '#f39c12')]
     if custos.get('moveis', 0) > 0:
         itens.append(('Equipes móveis (eSF + ACS)', custos['moveis'], ROXO))
     tot = sum(v for _, v, _ in itens)
@@ -181,9 +193,7 @@ def painel(resumos, ubs, arcos_plano, custos, caminho, hab_esf=3000):
     ax.set_yticks([])
     ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: _br(v)))
     ax.set_xlabel('Custo operacional mensal (R$ mil)')
-    ax.set_title(f'Custo operacional mensal da rede: R$ {_br(tot)}', fontsize=11, fontweight='bold')
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.25), ncol=1, fontsize=8, frameon=False)
-    fig.suptitle('Itaúna/MG — Atenção Primária: cobertura efetiva, capacidade e custo', fontsize=14, fontweight='bold', y=0.97)
     fig.savefig(caminho, bbox_inches='tight')
     plt.close(fig)
 
@@ -194,12 +204,10 @@ def curva_acesso(por_ponto_atual, por_ponto_plano, caminho, raio=3.0):
         d = pp.sort_values('dist_ubs_mais_proxima_km')
         ax.step(d['dist_ubs_mais_proxima_km'], 100*d['pessoas'].cumsum()/d['pessoas'].sum(), where='post', lw=2.2, color=cor, label=nome)
     ax.axvline(raio, color=VERMELHO, ls='--')
-    ax.text(raio+0.15, 6, f'critério de cobertura: {raio:g} km', color=VERMELHO, fontsize=9)
     ax.set_xlim(0, 15)
     ax.set_ylim(0, 102)
     ax.set_xlabel('Distância em linha reta (haversine) até a UBS mais próxima (km)')
     ax.set_ylabel('% acumulado da população do cenário')
-    ax.set_title('Acesso geográfico: população acumulada × distância à UBS mais próxima', fontweight='bold', fontsize=11)
     ax.legend(loc='lower right')
     ax.grid(True, ls=':', alpha=0.5)
     fig.tight_layout()
@@ -227,7 +235,9 @@ def gerar_de_dados(pontos, plano_ubs, custos, saida, dir_csv=None, hab_movel=ce.
     for rotulo, rede in [('atual', ce.carregar_rede_atual()), ('plano', rede_plano)]:
         # os parametros do modelo (raio, hab/eSF, fator de rota) valem para as duas redes
         resumo, por_ponto, por_ubs, arcos = ce.cobertura_efetiva(pontos, rede, raio, raio_rural, hab_esf, ce.HAB_ACS, fator_rota)
-        mov, bases, visitas, desc = ce.equipes_moveis(pontos, por_ponto, hab_movel=hab_movel)
+        from vinculos_moveis import ler_complemento
+        salvo=ler_complemento(dir_csv.parent.parent/'vinculos_moveis',por_ponto) if rotulo=='plano' else None
+        mov, bases, visitas, desc = salvo if salvo is not None else ce.equipes_moveis(pontos, por_ponto, rede, hab_movel=hab_movel)
         resumo['equipes_moveis'] = mov
         resumo['cobertura_efetiva_com_moveis_pct'] = 100*(resumo['pop_atendida_efetiva']+mov['atendida'])/resumo['populacao']
         dir_csv.mkdir(parents=True, exist_ok=True)
@@ -238,13 +248,15 @@ def gerar_de_dados(pontos, plano_ubs, custos, saida, dir_csv=None, hab_movel=ce.
         out[rotulo] = dict(resumo=resumo, por_ponto=por_ponto, por_ubs=por_ubs, bases=bases, visitas=visitas, mov=mov, rede=rede)
     po = out['plano']['por_ubs'].merge(plano_ubs[['id_ubs', 'pop_atendida']].rename(columns={'id_ubs': 'id'}), on='id', how='left')
     po = codificar_novas(po.assign(pop_atendida=po['pop_atendida'].fillna(0)))
+    po.loc[po.status=='NOVA',['codigo','id','nome','esf','acs']].to_csv(
+        saida/'novas_ubs_codigos.csv',sep=';',index=False,encoding='utf-8-sig')
     out['plano']['por_ubs'] = po
     a_atual = codificar_novas(out['atual']['rede'].assign(pop_atendida=0))
-    mapa(pontos, out['atual']['por_ponto'], a_atual, out['atual']['bases'], out['atual']['visitas'], saida/nomes['atual'], raio=raio,
-         titulo='Rede atual de UBS de Itaúna — cobertura de 3 km e equipes móveis para a população descoberta')
-    mapa(pontos, out['plano']['por_ponto'], po, out['plano']['bases'], out['plano']['visitas'], saida/nomes['plano'], raio=raio,
+    mapa(pontos, out['atual']['por_ponto'], a_atual, out['atual']['bases'], out['atual']['visitas'], saida/nomes['atual'], raio=raio, raio_rural=raio_rural,
+         titulo='Rede atual de UBS de Itaúna — equipes móveis propostas para a população descoberta')
+    mapa(pontos, out['plano']['por_ponto'], po, out['plano']['bases'], out['plano']['visitas'], saida/nomes['plano'], raio=raio, raio_rural=raio_rural,
          titulo='Plano proposto — UBS existentes, NOVAS UBS (N1…) e equipes móveis, com limite municipal')
-    mapa(pontos, out['plano']['por_ponto'], po, out['plano']['bases'], out['plano']['visitas'], saida/nomes['zoom'], raio=raio,
+    mapa(pontos, out['plano']['por_ponto'], po, out['plano']['bases'], out['plano']['visitas'], saida/nomes['zoom'], raio=raio, raio_rural=raio_rural,
          titulo='Plano proposto — zoom na área urbana', zoom=True)
     ra, rp = out['atual']['resumo'], out['plano']['resumo']
     resumos = [dict(rotulo='Rede atual\n(22 UBS, 23 eSF)', geo=ra['cobertura_geografica_pct'], efetiva=ra['cobertura_efetiva_pct'],
@@ -252,10 +264,12 @@ def gerar_de_dados(pontos, plano_ubs, custos, saida, dir_csv=None, hab_movel=ce.
                dict(rotulo='Plano proposto\n(com novas UBS)', geo=rp['cobertura_geografica_pct'], efetiva=rp['cobertura_efetiva_pct'],
                     moveis=rp['equipes_moveis']['atendida']/rp['populacao']*100)]
     cj = dict(custos)
-    unit = (cj['esf']/plano_ubs['n_esf'].sum(), cj['acs']/max(1, plano_ubs['acs'].sum()))
+    from aps_base import CUSTO_ESF, CUSTO
+    unit = (CUSTO_ESF, CUSTO['acs'])
     mv = out['plano']['mov']
     cj['moveis'] = mv['equipes']*unit[0]+mv['acs_necessarios']*unit[1]
-    painel(resumos, po, None, cj, saida/nomes['painel'])
+    criterio=f'{raio:g} km' if raio_rural is None or raio_rural==raio else f'{raio:g} km urbano / {raio_rural:g} km rural'
+    painel(resumos, po, None, cj, saida/nomes['painel'], hab_esf, rp['populacao'], criterio)
     curva_acesso(out['atual']['por_ponto'], out['plano']['por_ponto'], saida/nomes['curva'], raio)
     return out
 
@@ -266,7 +280,23 @@ def gerar(plano, saida, hab_movel=ce.HAB_MOVEL):
     pontos = pd.read_csv(plano/'aps/demanda_cenario.csv', encoding='utf-8-sig')
     ubs = pd.read_csv(plano/'aps/ubs_completas.csv', encoding='utf-8-sig')
     custos = json.loads((plano/'plano_aps.json').read_text(encoding='utf-8'))['custos']
-    return gerar_de_dados(pontos, ubs, custos, saida, RESULTADOS/'cobertura_efetiva', hab_movel)
+    parametros=json.loads((plano/'plano_aps.json').read_text(encoding='utf-8'))['parametros']
+    resultado=gerar_de_dados(pontos, ubs, custos, saida, plano/'aps/cobertura_efetiva', hab_movel,
+                         raio=parametros['raio'],raio_rural=parametros.get('raio_rural'),
+                         hab_esf=parametros['hab_esf'],fator_rota=parametros['fator_rota'],
+                         nomes=dict(atual='mapa_itauna_rede_atual.png',plano='mapa_itauna_ubs.png',
+                                    zoom='mapa_itauna_zoom_urbano.png',painel='painel_resultados.png',
+                                    curva='curva_acesso_geografico.png'))
+    from types import SimpleNamespace
+    import sys
+    from caminhos import MODELOS
+    sys.path.insert(0,str(MODELOS))
+    from aps_base import mapa_html
+    ubs['ocupacao']=ubs.pop_atendida/(parametros['hab_esf']*ubs.n_esf)
+    ubs['situacao']='Vinculacao do plano APS'
+    args=SimpleNamespace(**dict(parametros,saida=str(plano/'aps')))
+    mapa_html(pontos,ubs,pd.read_csv(plano/'aps/alocacao_completa.csv'),args,plano/'aps/mapa_interativo.html')
+    return resultado
 
 
 if __name__ == '__main__':

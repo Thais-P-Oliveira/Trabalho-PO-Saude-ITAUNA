@@ -1,16 +1,4 @@
-"""Curva cobertura x custo e analises de sensibilidade da APS.
-
-Usa os custos/limites da ultima APS com portes livres. A base usa minimo rural
-500 e raio 3 km; a analise extra compara tres regras de raio com minimo rural fixo.
-Nao altera planos anteriores nem resolve a etapa especializada.
-
-Uso (na pasta principal):
-    python codigos/rodar_sensibilidade.py [--processos 3] [--time-limit 300]
-
-Cada execucao fica em resultados/sensibilidade_rural_500_raios/execucoes/<nome>.json.
-So reaproveita resultados com os mesmos parametros, entradas e codigo.
---somente-rural-raios seleciona somente os tres cenarios extras de distancia.
-"""
+"""Compara cenarios de raio, crescimento, minimo rural e folga de custo."""
 import argparse
 import csv
 import hashlib
@@ -18,14 +6,15 @@ import json
 import os
 import sys
 import time
+import pandas as pd
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 from types import SimpleNamespace
 
 RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / 'modelos'))
-SAIDA = RAIZ / 'resultados' / 'sensibilidade_rural_500_raios'
-REFERENCIA = RAIZ / 'resultados' / 'plano_novas_portes_I_IV_20261117' / 'plano_aps.json'
+SAIDA = RAIZ / 'resultados' / 'atual' / 'sensibilidade'
+REFERENCIA = RAIZ / 'resultados' / 'atual' / 'plano' / 'plano_aps.json'
 
 # (nome, grupo, alteracoes nos parametros, cobertura minima ou None = lexicografico)
 # A curva usa folga 0 para que o custo reportado seja o da fase de custo.
@@ -73,6 +62,7 @@ def chave_cache(alteracoes,cob_min,time_limit,referencia):
             RAIZ/'dados/fontes/custos_construcao_ubs_2025.csv',
             RAIZ/'codigos/rodar_sensibilidade.py',RAIZ/'codigos/projecao_populacional.py',
             RAIZ/'dados/fontes/fontes_publicas/populacao_ibge/projecao.json']
+    fontes += [RAIZ/'codigos/pessoal_cnes.py',RAIZ/'dados/fontes/fontes_publicas/ubs_recursos_cnes_202607.csv',RAIZ/'codigos/integracao_resultados.py',RAIZ/'codigos/cobertura_efetiva.py']
     if p.get('limites_equipes'):fontes.append(Path(p['limites_equipes']))
     material=dict(parametros=p,arquivos={str(f):hashlib.sha256(f.read_bytes()).hexdigest() for f in fontes})
     return hashlib.sha256(json.dumps(material,sort_keys=True).encode()).hexdigest()
@@ -97,6 +87,11 @@ def executar(nome, grupo, alteracoes, cob_min, time_limit, referencia=REFERENCIA
                  status=res['status'], segundos=round(time.time() - inicio, 1))
     if res['status'] == 'Optimal':
         ubs, arcos, c = res['ubs'], res['arcos'], res['custos']
+        from integracao_resultados import calcular_rede, custo_movel
+        rede=pd.DataFrame(dict(id=ubs.id_ubs,nome=ubs.nome,lat=ubs.lat,lon=ubs.lon,
+                               esf=ubs.n_esf,acs=ubs.acs,status=ubs.status))
+        cobertura_integrada=calcular_rede(dem,rede,vars(args))[0]
+        mov=custo_movel(cobertura_integrada,aps_base.CUSTO_ESF,aps_base.CUSTO['acs'])
         novas = ubs[ubs['status'] == 'NOVA']
         custo_novas = (c['fixo_novas'] + aps_base.CUSTO_ESF * novas['n_esf'].sum()
                        + aps_base.CUSTO['acs'] * novas['acs'].sum())
@@ -114,7 +109,11 @@ def executar(nome, grupo, alteracoes, cob_min, time_limit, referencia=REFERENCIA
             novas_ubs=int(len(novas)),
             novas_rurais=int(novas['nome'].astype(str).str.contains('(rural)', case=False, regex=False).sum()),
             esf=int(ubs['n_esf'].sum()), acs=int(ubs['acs'].sum()),
-            custo_operacional_mensal=c['operacional'], custo_objetivo_mensal=c['objetivo'],
+            custo_operacional_ubs_mensal=c['operacional'], custo_moveis_mensal=mov['total_mensal'],
+            equipes_moveis=mov['equipes'], acs_moveis=mov['acs'],
+            cobertura_efetiva=cobertura_integrada['cobertura_efetiva_pct']/100,
+            cobertura_com_moveis=cobertura_integrada['cobertura_efetiva_com_moveis_pct']/100,
+            custo_operacional_mensal=c['operacional']+mov['total_mensal'], custo_objetivo_mensal=c['objetivo'],
             custo_mensal_novas=float(custo_novas), populacao_novas=pop_novas,
             custo_novas_por_hab_mes=float(custo_novas / pop_novas) if pop_novas else 0.0,
             construcao_estimativa_por_porte=sum(precos[int(n)] for n in novas['n_esf']),
@@ -132,6 +131,7 @@ def executar(nome, grupo, alteracoes, cob_min, time_limit, referencia=REFERENCIA
             linha['cobertura_'+zona]=float(fluxos.loc[fluxos.coberto,'pessoas'].sum()/populacao) if populacao else None
             linha['distancia_media_'+zona+'_km']=float((fluxos.pessoas*fluxos.dist_km).sum()/populacao) if populacao else None
     destino = saida / 'execucoes' / f'{nome}.json'
+    destino.parent.mkdir(parents=True,exist_ok=True)
     destino.write_text(json.dumps(linha, ensure_ascii=False, indent=2), encoding='utf-8')
     return linha
 

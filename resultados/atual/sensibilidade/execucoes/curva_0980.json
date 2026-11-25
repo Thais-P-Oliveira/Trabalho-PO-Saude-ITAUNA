@@ -3,7 +3,7 @@
   "grupo": "curva",
   "alteracoes": "{\"folga_custo\": 0.0}",
   "cobertura_min": 0.98,
-  "cache_id": "42e45039b9c748c109ff7dc02bfb8b9536847d62e87a8abd6c2560c7c211139f",
+  "cache_id": "87791c9c5a71bc388481bb87a14b8e384ea172bb09de8b145fe15e7b437b0b3e",
   "raio_urbano_km": 3.0,
   "raio_rural_km": 3.0,
   "minimo_abertura_rural": 500.0,

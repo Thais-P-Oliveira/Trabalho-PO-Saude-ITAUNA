@@ -13,7 +13,7 @@ def reais(valor):
 
 
 def calcular(plano=None, saida=None, percentuais=None):
-    plano=Path(plano) if plano else RESULTADOS/'plano_referencia_2pct'
+    plano=Path(plano) if plano else RESULTADOS/'atual/plano'
     saida=Path(saida) if saida else RESULTADOS/'investimento_construcao'
     meta=json.loads((plano/'plano_aps.json').read_text(encoding='utf-8'))
     if meta['status']!='plano_aps_validado':
@@ -33,7 +33,9 @@ def calcular(plano=None, saida=None, percentuais=None):
         linhas.append(dict(id_ubs=r['id_ubs'],nome=r['nome'],esf=esf,
                            porte=custos[esf]['porte'],valor_construcao=Decimal(custos[esf]['valor_construcao'])))
     investimento=sum((r['valor_construcao'] for r in linhas),Decimal(0))
-    operacao=Decimal(str(meta['custos']['operacional']))*12
+    from integracao_resultados import integrar
+    integrado=integrar(plano)
+    operacao=Decimal(str(integrado['operacional_integrado_anual']))
     cronograma=[]
     if percentuais is not None:
         parcelas=[Decimal(str(p)) for p in percentuais]

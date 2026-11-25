@@ -3,10 +3,10 @@
   "grupo": "curva",
   "alteracoes": "{\"folga_custo\": 0.0}",
   "cobertura_min": 0.995,
-  "cache_id": "9a3caf08565bb9f94eaa6dc643f5879b88f855adc6aef95b1a88d6c7917b9c5f",
+  "cache_id": "072bd34e8527a9ea6dca671d4349b8fa1a5dea327da076dbaf422c1a71ddc2a2",
   "raio_urbano_km": 3.0,
   "raio_rural_km": 3.0,
   "minimo_abertura_rural": 500.0,
   "status": "Infeasible",
-  "segundos": 0.6
+  "segundos": 0.4
 }

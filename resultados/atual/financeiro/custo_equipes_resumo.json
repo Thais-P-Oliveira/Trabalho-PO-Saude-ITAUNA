@@ -1,0 +1,51 @@
+{
+  "orcamento_ap_2025_siops_dotacao_atualizada": 43524305.24,
+  "orcamento_ap_2026_rreo": {
+    "DOTAÇÃO INICIAL": 49885322.78,
+    "DOTAÇÃO ATUALIZADA (a)": 50894556.87,
+    "DESPESAS EMPENHADAS ATÉ O BIMESTRE (b)": 27388729.48,
+    "DESPESAS LIQUIDADAS ATÉ O BIMESTRE (d)": 22992934.46
+  },
+  "ascendente": {
+    "ubs": 22,
+    "esf": 23.0,
+    "acs": 140.0,
+    "esb": 6.0,
+    "eap": 1.0,
+    "custo_esf_unit_mensal": 31777.77777777778,
+    "custo_acs_unit_mensal": 4682.88888888889,
+    "custo_fixo_ubs_unit_mensal": 12000.0,
+    "esf_anual": 13028600.000000004,
+    "acs_anual": 7867253.333333335,
+    "fixo_ubs_anual": 3168000.0,
+    "equipes_anual": 20895853.333333336,
+    "equipes_mais_fixo_anual": 24063853.333333336
+  },
+  "despesa_total_ab_2025_empenhada_liquidada_paga": {
+    "Despesas Empenhadas": 38333975.52,
+    "Despesas Liquidadas": 38030634.779999994,
+    "Despesas Pagas": 37726256.56999999
+  },
+  "pessoal_ab_2025": {
+    "Dotação Inicial": 39997000.0,
+    "Dotação Atualizada": 35022648.779999994,
+    "Despesas Empenhadas": 32546981.790000003,
+    "Despesas Liquidadas": 32546981.790000003,
+    "Despesas Pagas": 32341760.290000003
+  },
+  "parametros_modelo_orcamento": {
+    "orcamento_ap_anual": 50894556.87,
+    "custo_comprometido_anual": 24063853.333333336,
+    "disponivel_para_expansao_anual": 26830703.53666666,
+    "comprometimento_adicional_conservador_anual": 17019240.886666663,
+    "nota_conservador": "cenário conservador: toda a despesa empenhada da AB em jan-ago/2026, anualizada (x12/8), é compromisso; o que excede eSF+ACS+fixo das UBS entra como comprometimento adicional (não só equipes)"
+  },
+  "limitacoes": [
+    "O SIOPS informa despesa por subfunção/natureza, não por equipe: não há como isolar eSF, ACS, eSB ou apoio. A medida A é um teto, não o custo das equipes.",
+    "A medida B usa salários e encargos HIPOTÉTICOS do modelo (preços 2026); não são folha de pagamento do município. Não inclui eSB, eAP, NASF/eMulti, vigilância, vacinas, medicamentos.",
+    "Incentivos e transferências do FNS (Previne Brasil/ custeio de equipes) não estão no arquivo SIOPS fornecido; os recursos federais entram apenas como fonte de financiamento das despesas, sem separar o incentivo por equipe.",
+    "Não há dado de remuneração efetiva (Portal da Transparência de Itaúna) neste projeto: custo de pessoal por categoria não foi levantado e não foi inventado.",
+    "Despesas empenhadas, liquidadas e pagas foram mantidas separadas. RREO 2026 cobre apenas jan–ago (4º bimestre): não comparar execução parcial com orçamento anual.",
+    "Pessoal temporário (3.1.90.04) e \"A classificar\" (3.1.90.99) estão dentro do total de pessoal; parte pode não ser de equipes."
+  ]
+}

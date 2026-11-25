@@ -1,15 +1,15 @@
 {
   "status": "plano_aps_validado",
   "parametros": {
-    "demanda": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\pontos_demanda_itauna.csv",
-    "ubs": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\unidades_existentes_itauna.csv",
+    "demanda": "dados/fontes/pontos_demanda_itauna.csv",
+    "ubs": "dados/fontes/unidades_existentes_itauna.csv",
     "raio": 3.0,
     "raio_rural": null,
     "fator_rota": 1.0,
     "hab_esf": 3000,
     "hab_min_esf": 2000,
     "esf_max": 4,
-    "limites_equipes": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\fontes_publicas\\estrutura_ubs_cnes\\limites_equipes_novas_ate4.csv",
+    "limites_equipes": "dados/fontes/fontes_publicas/estrutura_ubs_cnes/limites_equipes_novas_ate4.csv",
     "max_novas": null,
     "hab_min_nova": 2000,
     "hab_min_nova_rural": 500,
@@ -22,28 +22,41 @@
     "time_limit": 600.0,
     "gap": 0.0001,
     "pareto": false,
-    "saida": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\resultados\\atual\\plano\\aps",
+    "saida": "resultados/atual/plano/aps",
     "quiet": true,
     "horizonte_anos": 5,
+    "orcamento_ap_anual": 50894556.87,
+    "reserva_moveis_anual": 2637197.3333333335,
+    "comprometimento_adicional_anual": 0.0,
+    "preservar_acs_atuais": true,
     "folga_custo": 0.02
   },
   "total": 104001.99999999999,
-  "cobertura": 101616.25514236865,
+  "cobertura": 101616.75514236867,
   "custos": {
     "fixo_existentes": 264000.0,
     "fixo_novas": 135000.0,
-    "esf": 1239333.3333333335,
-    "acs": 669653.1111111112,
-    "deslocamento_proxy": 5112.213013544543,
-    "objetivo": 2313098.6574579887,
-    "operacional": 2307986.444444445,
+    "esf": 1594161.1111111112,
+    "acs": 899114.6666666667,
+    "deslocamento_proxy": 5112.243684390195,
+    "objetivo": 2897388.0214621695,
+    "operacional": 2892275.777777778,
+    "orcamento": {
+      "orcamento_ap_anual": 50894556.87,
+      "comprometido_estrutura_atual_anual": 24063853.333333336,
+      "reserva_equipes_moveis_anual": 2637197.3333333335,
+      "comprometimento_adicional_anual": 0.0,
+      "disponivel_para_expansao_anual": 24193506.20333333,
+      "incremento_operacional_anual": 10643455.999999989,
+      "folga_anual": 13550050.20333334
+    },
     "investimento_construcao": 22848000.0,
     "horizonte_anos": 5.0,
-    "custo_horizonte": 161327186.66666672,
+    "custo_horizonte": 196384546.6666667,
     "fase2": {
-      "operacional_mensal": 2289254.8888888415,
-      "investimento": 22848000.0,
-      "custo_horizonte": 160203293.33333054
+      "operacional_mensal": 2873544.222207186,
+      "investimento": 22847999.99936096,
+      "custo_horizonte": 195260653.33179218
     }
   },
   "certificados": [
@@ -63,8 +76,8 @@
   "otimalidade_confirmada": true,
   "nota": "Validacao de viabilidade nao significa prova de otimo; consultar certificados de cada fase.",
   "arquivos": {
-    "alocacao_completa.csv": "a7efdb89b6c3637f8786742f9fb1d62cd5311c368ee1a84460c32ed7fee2edd8",
-    "ubs_completas.csv": "a5629929e0ab4e8c34000001241167fb722696f5900b20fb12cf9250360122b9",
+    "alocacao_completa.csv": "174ff0881a2c1032709bbb8dc5f13bd877d85a71be89aacf10ce8184b6f18c1d",
+    "ubs_completas.csv": "fd5dcd5f31329e5d878331fca1c385d3e22e81e92438b32ff4e060456b8c035c",
     "demanda_cenario.csv": "e592828c2ed5e2c8ae6ac1be5135508e6ffd1e25a3757d718d6276546cf48b38",
     "limites_equipes_aplicados.csv": "5093920e554e6f009a04b00913de3ba84241e24502eb5d389ea0738e3cc40532"
   }

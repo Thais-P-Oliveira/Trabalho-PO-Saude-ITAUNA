@@ -19,12 +19,17 @@ def br(v,n=2):
 
 def barras(destino,nome,titulo,rotulos,valores,unidade,nota):
     fig,ax=plt.subplots(figsize=(10,5))
-    ax.barh(range(len(valores)),valores,color=['#52627a','#3864be','#c32562'][:len(valores)])
-    ax.set_yticks(range(len(valores)),rotulos);ax.invert_yaxis();ax.set_xlabel(unidade);ax.set_title(titulo)
+    ax.barh(range(len(valores)),valores,color=['#52627a','#3864be','#c32562','#6c3483'][:len(valores)])
+    ax.set_yticks(range(len(valores)),rotulos)
+    ax.invert_yaxis()
+    ax.set_xlabel(unidade)
     ax.set_xlim(0,max(valores)*1.22 if max(valores)>0 else 1)
+    if '%' in unidade:
+        ax.set_xlim(0,108)
+        ax.set_xticks([0,20,40,60,80,100])
     for i,v in enumerate(valores):ax.text(v+max(valores)*.015,i,br(v),va='center')
     for lado in ['top','right']:ax.spines[lado].set_visible(False)
-    fig.text(.02,.02,nota,fontsize=9);fig.tight_layout(rect=[0,.08,1,1])
+    fig.tight_layout()
     fig.savefig(destino/nome,dpi=160);plt.close(fig)
 
 
@@ -40,7 +45,10 @@ def main():
         raise ValueError('O plano completo deve estar concluido e auditado.')
     meta=json.loads((plano/'plano_aps.json').read_text(encoding='utf-8'))
     ubs=pd.read_csv(plano/'aps/ubs_completas.csv');novas=ubs[ubs.status=='NOVA']
-    cobertura=meta['cobertura']/meta['total']*100;anual=meta['custos']['operacional']*12
+    from integracao_resultados import integrar
+    integrado=integrar(plano)
+    cobertura=integrado['redes']['plano']['cobertura_efetiva_pct']
+    anual=integrado['operacional_integrado_anual']
     inv=json.loads((resultado/'investimento/calculos.json').read_text(encoding='utf-8'))
     if inv['novas_ubs']!=len(novas) or Path(inv['plano']).resolve()!=plano:raise ValueError('Investimento de outro plano.')
     obra=float(inv['investimento_construcao'])
@@ -49,18 +57,21 @@ def main():
     inicial=next(float(x['total']) for x in orc['dados_oficiais'] if x['conta']=='Atenção Básica' and x['coluna']=='DOTAÇÃO INICIAL')
     diagnostico=plano/'aps/diagnostico'
     diag=pd.read_csv(diagnostico/'cobertura_por_zona.csv',sep=';')
-    atual=float(diag[(diag.rede=='atual_cnes_202607')&(diag.zona=='total')].cobertura_populacao_pct.iloc[0])
+    atual=integrado['redes']['atual']['cobertura_efetiva_pct']
     p=meta['parametros'];raio=p['raio'];rural=p.get('raio_rural') or raio
     raios=f'{raio:g} km' if raio==rural else f'{raio:g} km urbano / {rural:g} km rural'
     barras(imagens,'cobertura.png',f'Cobertura: rede atual e plano ({raios})',
-           ['Atual: proximidade','Proposta: distância e capacidade'],[atual,cobertura],'População (%)',
-           'Atual sem limitar capacidade; proposta com limites de equipes e ACS.')
+           ['Atual: UBS existentes','Atual + móveis (simulação)','Proposta: UBS','Proposta: UBS + móveis'],
+           [atual,integrado['redes']['atual']['cobertura_efetiva_com_moveis_pct'],
+            cobertura,integrado['redes']['plano']['cobertura_efetiva_com_moveis_pct']],
+           'População com cobertura efetiva (%)',
+           'Mesmo cálculo: raio + mín(3.000 × eSF; 750 × ACS). Móveis são recursos adicionais propostos.')
     if abs(float(orc['investimento_construcao'])-obra)>.01:raise ValueError('Construcao orcamentaria desatualizada')
     grupos=orc['operacao_por_grupo'];total_implantacao=float(orc['total_ano_implantacao'])
     barras(imagens,'funcionamento_mensal.png','Funcionamento mensal: existentes, novas e rede completa',
            [g['grupo'] for g in grupos]+['Rede completa'],
            [float(g['total_mensal'])/1e6 for g in grupos]+[anual/12e6],
-           'R$ milhões/mês','Inclui parcelas fixas, equipes e ACS. Construção e proxy de deslocamento separados.')
+           'R$ milhões/mês','Inclui UBS, eSF, ACS e pessoal móvel adicional. Construção e veículos separados.')
     barras(imagens,'orcamento.png','Operação e implantação: comparação com Atenção Básica',
            ['Operação anual','Construção integral','Operação anual + construção','Orçamento inicial Atenção Básica'],
            [anual/1e6,obra/1e6,total_implantacao/1e6,inicial/1e6],'R$ milhões',
@@ -75,15 +86,22 @@ def main():
             vals=[float(acess[(acess.rede==rede)&(acess.beta==beta)&(acess.zona==z)].acessibilidade_media_ponderada.iloc[0]) for z in ['urbana','rural']]
             xs=[i+(k-.5)*.34 for i in range(2)];ax.bar(xs,vals,width=.34,color=cor,label=rotulo)
             for x,v in zip(xs,vals):ax.text(x,v+max(vals)*.025,br(v,3),ha='center',fontsize=9)
-        ax.set_xticks([0,1],['Urbana','Rural']);ax.set_title(f'Peso da distância β = {beta}');ax.margins(y=.18);ax.legend()
-    fig.suptitle('Acessibilidade: capacidade, distância e concorrência')
-    fig.text(.03,.02,'Índice, não percentual; mesma fórmula nas duas redes.',fontsize=9)
+        ax.set_xticks([0,1],['Urbana','Rural'])
+        ax.set_ylabel(f'Índice de acessibilidade (β = {beta})')
+        ax.margins(y=.18)
+        ax.legend()
     fig.tight_layout(rect=[0,.06,1,.93]);fig.savefig(imagens/'acessibilidade.png',dpi=160);plt.close(fig)
     itens=[('Visão geral das UBS','painel_resultados.png'),('Mapa do município','mapa_itauna_ubs.png'),
+           ('Rede atual e simulação do complemento móvel','mapa_itauna_rede_atual.png'),
            ('Detalhe urbano','mapa_itauna_zoom_urbano.png'),('Cobertura','cobertura.png'),
            ('Acessibilidade','acessibilidade.png'),('Encaminhamentos: distâncias','distancias.png'),
            ('Percursos','percursos.png'),('Capacidade ambulatorial','capacidades.png'),
            ('Funcionamento mensal','funcionamento_mensal.png'),('Custo e orçamento','orcamento.png'),('Construção','construcao.png')]
+    itens += [('Comparação das UBS existentes', 'comparacao/mudancas_ubs_existentes_colunas.png'),
+              ('Novas UBS por porte', 'comparacao/novas_ubs_por_porte.png'),
+              ('Curva de acesso geográfico', 'acesso_e_mapas/curva_acesso_geografico.png'),
+              ('Rede atual: cobertura geográfica', 'acesso_e_mapas/mapa_rede_atual.png'),
+              ('Rede proposta: cobertura geográfica', 'acesso_e_mapas/mapa_plano_par.png')]
     if (imagens/'curva_cobertura_custo.png').exists():itens.append(('Sensibilidade: cobertura e custo','curva_cobertura_custo.png'))
     extras=[('Custo operacional','extra_raios_01_custo.png'),('Cobertura total, urbana e rural','extra_raios_02_cobertura.png'),('Distância média','extra_raios_03_distancia.png')]
     for _,arquivo in itens+extras:
@@ -92,11 +110,15 @@ def main():
     cards+='<section id="extra"><h2>Análise extra: raios 3–3, 3–5 e 5–5 km</h2><p>Mínimo rural de 500 habitantes nos três cenários. A análise principal permanece separada.</p>'
     cards+=''.join(f'<h3>{html.escape(t)}</h3><a href="imagens/{arq}"><img loading="lazy" src="imagens/{arq}" alt="{html.escape(t)}"></a>' for t,arq in extras)+'</section>'
     base='resultados/atual'
-    links=[('Relatório da APS',f'{base}/plano/aps/relatorio_itauna.txt'),('Planilha das UBS e alocações',f'{base}/plano/aps/resultado_itauna.xlsx'),
-           ('Mapa interativo',f'{base}/plano/aps/mapa_interativo.html'),('Seis cenários de encaminhamento',f'{base}/plano/comparacao_completa.csv'),
+    links=[('Detalhamento das UBS fixas (sem móveis)',f'{base}/plano/aps/relatorio_itauna.txt'),('Planilha das UBS e alocações',f'{base}/plano/aps/resultado_itauna.xlsx'),
+           ('Mapa interativo',f'{base}/plano/aps/mapa_interativo.html'),('Principal: nível único; complementar: múltiplos níveis',f'{base}/plano/comparacao_completa.csv'),
            ('Cobertura e acessibilidade',f'{base}/plano/aps/diagnostico/relatorio.txt'),('Orçamento',f'{base}/orcamento/relatorio.txt'),
            ('Construção por UBS e porte',f'{base}/investimento/construcao_por_ubs.csv'),('Sensibilidade',f'{base}/sensibilidade/resumo.csv'),
-           ('Registro da execução','ULTIMA_EXECUCAO.log')]
+           ('Artigo revisado','documentacao/artigo/artigo.pdf')]
+    links += [('Cobertura efetiva comparável',f'{base}/plano/aps/cobertura_efetiva/comparacao_cobertura.csv'),
+              ('Relatório integrado: UBS e equipes móveis',f'{base}/plano/relatorio_integrado.txt'),
+              ('Custos integrados com equipes móveis',f'{base}/orcamento/funcionamento_existentes_e_novas.csv'),
+              ('Pessoal observado e estimativa das equipes',f'{base}/financeiro/relatorio_custo_equipes.txt')]
     docs=''.join(f'<li><a href="{path}">{html.escape(t)}</a></li>' for t,path in links)
     comp=pd.read_csv(plano/'comparacao_completa.csv',sep=';')
     campos=['cenario','via_percentual','distancia_media_por_percurso','termina2','direto3','via23']
@@ -109,7 +131,9 @@ def main():
 <main><header><h1>Planejamento da rede de saúde de Itaúna</h1><p class="resumo">{len(novas)} novas UBS · {int(ubs.n_esf.sum())} eSF · {int(ubs.acs.sum())} ACS · {br(cobertura)}% de cobertura</p>
 <p>População: {br(meta['total'],0)} habitantes. Raio principal: {raios}. Mínimo rural: {br(p.get('hab_min_nova_rural',0),0)} habitantes.</p>
 <p>Operação: R$ {br(anual/1e6)} milhões/ano. Construção: R$ {br(obra/1e6)} milhões, investimento único. Operação anual + construção: R$ {br(total_implantacao/1e6)} milhões (hipótese de desembolso integral no ano).</p><p>{certificado}</p>
-<p>Todas as imagens, tabelas e o comparador utilizam a mesma execução.</p><nav>{menu}</nav><h2>Relatórios e arquivos</h2><ul>{docs}</ul>
+<p>Cobertura efetiva com equipes móveis propostas: {br(integrado['redes']['plano']['cobertura_efetiva_com_moveis_pct'])}%. Equipes móveis adicionais: {integrado['custos_moveis']['plano']['equipes']} equipes e {integrado['custos_moveis']['plano']['acs']} ACS.</p>
+<p>Inclui pessoal móvel adicional. Veículos, combustível e equipamentos ainda não foram precificados. A demanda especializada dos atendidos por equipes móveis parte da UBS-base. Resultado principal: nível único; múltiplos níveis são análise complementar.</p>
+<p>Resultado hospitalar exploratório: leitos gerais e UTI separados. A carga de outros atendimentos não está discriminada por tipo de leito; o limite residual conservador não mede a disponibilidade real nem uma fila hospitalar.</p><p>Todas as imagens, tabelas e o comparador utilizam a mesma execução.</p><nav>{menu}</nav><h2>Relatórios e arquivos</h2><ul>{docs}</ul>
 <small>O mapa-base interativo pode precisar de internet. As figuras do artigo são renovadas; o texto deve ser revisado quando os resultados mudarem.</small></header>{interativo}{cards}</main></html>'''
     a.html.parent.mkdir(parents=True,exist_ok=True);a.html.write_text(pagina,encoding='utf-8')
     with (imagens/'INDICE.csv').open('w',encoding='utf-8-sig',newline='') as f:

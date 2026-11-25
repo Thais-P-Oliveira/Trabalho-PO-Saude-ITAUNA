@@ -1,0 +1,154 @@
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+test_abertura_rural_pequena_preserva_minimo_urbano (testar_aps_completa.APSCompleta.test_abertura_rural_pequena_preserva_minimo_urbano) ... ok
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+test_equipes_atuais_preservadas_e_novas_limitadas (testar_aps_completa.APSCompleta.test_equipes_atuais_preservadas_e_novas_limitadas) ... ok
+Carregando dados ...
+  2 pontos de demanda (6.600 hab) | 1 UBS existentes | 1 candidatas
+  solver: HiGHS
+Otimizando ...
+  etapa 1/2: maximizando a populacao coberta ...
+    cobertura maxima: 6.600 hab (100.00%)
+  etapa 2/2: minimizando o custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+Curva cobertura x custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+
+==================================================================================================
+PLANO MUNICIPAL DE SAUDE DE ITAUNA - MG: LOCALIZACAO-ALOCACAO DA ATENCAO PRIMARIA
+==================================================================================================
+Solver: HiGHS | raio de cobertura: 3 km | 3.000 hab/eSF | max. 4 eSF/UBS | limite de novas UBS: 1
+Populacao base: 6.000 hab | cenario: 6.600 hab (+10.0% de crescimento)
+Fase 1: otimo confirmado.
+Fase 2: otimo confirmado.
+Fase 3: otimo confirmado.
+
+1. RESUMO EXECUTIVO
+--------------------------------------------------------------------------------------------------
+ - UBS existentes mantidas: 1 | novas UBS recomendadas: 1
+ - Populacao coberta pelo criterio 3 km: 6.600 hab (100.0%)  [base, so UBS existentes: 50.0%]
+ - Equipes de Saude da Familia (eSF): 4 | ACS: 10
+ - Custo operacional mensal estimado: R$ 200.940  (R$ 30,45 por habitante/mes)
+   Das novas UBS, o impacto: +50.0 p.p. de cobertura
+
+2. ACESSO GEOGRAFICO (distancia em linha reta ponderada pela populacao)
+--------------------------------------------------------------------------------------------------
+Indicador                           Base (so existentes)        Plano proposto
+Distancia media (km)                                5,56                  0,00
+Distancia p90 (km)                                 11,12                  0,00
+Distancia maxima (km)                              11,12                  0,00
+% pop. a ate 1 km                                 50.0%                100.0%
+% pop. a ate 2 km                                 50.0%                100.0%
+% pop. no raio da zona                            50.0%                100.0%
+
+3. CUSTOS MENSAIS ESTIMADOS (R$)
+Horizonte: 5 anos; construcao: R$ 2.542.000,00; construcao + operacao: R$ 14.598.400,00.
+Obra paga uma vez; operacao constante; sem desconto ou reajuste. Folga configurada somente na operacao, com teto de investimento da fase 2.
+--------------------------------------------------------------------------------------------------
+ - Custo fixo UBS existentes:               12.000
+ - Custo fixo UBS novas:                    15.000
+ - Equipes eSF (4):                       127.111   (horas CNES atuais + equipes adicionais; referencia R$ 31.778/nova eSF)
+ - Agentes comunitarios (10):              46.829
+ - TOTAL OPERACIONAL:                      200.940
+ (o termo de deslocamento R$ 0.05/hab.km e um proxy usado so na otimizacao: R$ 0)
+
+4. NOVAS UBS RECOMENDADAS
+--------------------------------------------------------------------------------------------------
+Local                                           Pop.  Pop.<=R  eSF  ACS  Coordenadas
+NOVA UBS (B)                                   3.300    3.300    2    5  (0.0000, 0.1000)
+
+5. REDE DE UBS (carga e dimensionamento)
+--------------------------------------------------------------------------------------------------
+ID       UBS                             Status        Pop. eSF  Ocup.  hab/eSF  Situacao
+NOVA_2   Nova (B)                        NOVA         3.300   2    55%    1.650  Subutilizada
+UBS1     A                               EXISTENTE    3.300   2    55%    1.650  Subutilizada
+ Alertas: 2 UBS subutilizadas (< 2.000 hab/eSF) e 0 lotadas (>= 95% da capacidade).
+
+6. TERRITORIOS FORA DO RAIO DE COBERTURA
+--------------------------------------------------------------------------------------------------
+ Toda a populacao atende ao criterio 3 km de uma UBS.
+
+7. TROCA ENTRE COBERTURA E CUSTO (meta de cobertura -> plano)
+--------------------------------------------------------------------------------------------------
+    Meta  Cobertura  Novas UBS  eSF   Custo (R$/mes)
+   50.0%      50.0%          0    3          149.479
+   62.5%      95.5%          1    3          164.479
+   75.0%      95.5%          1    3          164.479
+   87.5%      95.5%          1    3          164.479
+  100.0%     100.0%          1    4          200.940
+
+NOTAS METODOLOGICAS
+--------------------------------------------------------------------------------------------------
+ * Distancias: Haversine x fator de rota 1. Cobertura conforme zona dos moradores: 3 km.
+ * Capacidade: 3.000 hab por eSF; ACS: 1 por 750 hab, sem teto fixo por UBS.
+ * Limite uniforme de 4 eSF por UBS (cenario sem tabela de limites fisicos).
+ * Minimo por nova UBS: urbana 2.000 hab; rural 500 hab dentro do raio. Rural identificado por (rural) no nome do ponto. Existentes permanecem abertas (>= 1 eSF).
+ * Otimizacao lexicografica: (1) max. cobertura; (2) min. construcao + operacao no horizonte; (3) min. distancia (folga so na operacao; obra limitada pela fase 2).
+ * Alocacao fracionada permitida (um bairro pode dividir populacao entre UBS vizinhas).
+==================================================================================================
+
+Gerando mapas e graficos ...
+test_fluxo_original_com_crescimento_e_pareto (testar_aps_completa.APSCompleta.test_fluxo_original_com_crescimento_e_pareto) ... C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho_PO_Saude_Entrega_Professor\codigos\cobertura_efetiva.py:128: RuntimeWarning: invalid value encountered in scalar divide
+  zonas[z] = dict(populacao=float(pop[k].sum()), cobertura_geografica_pct=float(100*pop[k & tem_acesso].sum()/pop[k].sum()),
+C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho_PO_Saude_Entrega_Professor\codigos\cobertura_efetiva.py:129: RuntimeWarning: invalid value encountered in scalar divide
+  cobertura_efetiva_pct=float(100*atendida[k].sum()/pop[k].sum()))
+C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho_PO_Saude_Entrega_Professor\codigos\cobertura_efetiva.py:128: RuntimeWarning: invalid value encountered in scalar divide
+  zonas[z] = dict(populacao=float(pop[k].sum()), cobertura_geografica_pct=float(100*pop[k & tem_acesso].sum()/pop[k].sum()),
+C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho_PO_Saude_Entrega_Professor\codigos\cobertura_efetiva.py:129: RuntimeWarning: invalid value encountered in scalar divide
+  cobertura_efetiva_pct=float(100*atendida[k].sum()/pop[k].sum()))
+Arquivos salvos em 'C:\Users\luana.ottoni_chammas\AppData\Local\Packages\openai.codex_2p2nqsd0c76g0\AC\#!sandbox.{20fab278-e88c-4986-a270-956f324cd759}\Temp\projeto_pos_cache\testes_sinteticos\aps_completa\saida/'.
+ok
+test_limites_reais_22_ubs_e_excecoes (testar_aps_completa.APSCompleta.test_limites_reais_22_ubs_e_excecoes) ... ok
+test_regras_e_opcoes_originais_preservadas (testar_aps_completa.APSCompleta.test_regras_e_opcoes_originais_preservadas) ... ok
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+test_sem_teto_permite_mais_de_cinco_novas (testar_aps_completa.APSCompleta.test_sem_teto_permite_mais_de_cinco_novas) ... ok
+test_calculo_real_e_fonte_ativa (testar_capacidade_hospitalar.CapacidadeHospitalar.test_calculo_real_e_fonte_ativa) ... ok
+test_contagem_oficial_por_categoria (testar_capacidade_hospitalar.CapacidadeHospitalar.test_contagem_oficial_por_categoria) ... ok
+test_leitos_dias_e_reserva (testar_capacidade_hospitalar.CapacidadeHospitalar.test_leitos_dias_e_reserva) ... ok
+test_entradas_invalidas (testar_demanda_populacional.DemandaPopulacional.test_entradas_invalidas) ... ok
+test_preparacao_sem_ler_idades (testar_demanda_populacional.DemandaPopulacional.test_preparacao_sem_ler_idades) ... ok
+test_rateio_calculavel_a_mao (testar_demanda_populacional.DemandaPopulacional.test_rateio_calculavel_a_mao) ... ok
+test_exemplo_calculavel_a_mao (testar_diagnostico.DiagnosticoTeste.test_exemplo_calculavel_a_mao) ... ok
+test_fora_do_raio (testar_diagnostico.DiagnosticoTeste.test_fora_do_raio) ... ok
+test_limite_da_capacidade (testar_diagnostico.DiagnosticoTeste.test_limite_da_capacidade) ... ok
+test_parametros_invalidos (testar_diagnostico.DiagnosticoTeste.test_parametros_invalidos) ... ok
+test_pontos_coincidentes_e_conservacao_da_oferta (testar_diagnostico.DiagnosticoTeste.test_pontos_coincidentes_e_conservacao_da_oferta) ... ok
+test_realocacao_entre_unidades (testar_diagnostico.DiagnosticoTeste.test_realocacao_entre_unidades) ... ok
+test_nome_nao_corta_parentese_interno (testar_geracao_artigo.GeracaoArtigo.test_nome_nao_corta_parentese_interno) ... ok
+test_proibe_sobrescrever_artigo_manual (testar_geracao_artigo.GeracaoArtigo.test_proibe_sobrescrever_artigo_manual) ... ok
+test_rotulos_numeros_e_grupos_da_proposta (testar_geracao_artigo.GeracaoArtigo.test_rotulos_numeros_e_grupos_da_proposta) ... ok
+test_cada_ponto_inteiro_vai_ao_mais_proximo (testar_graficos_pedido.GraficosPedido.test_cada_ponto_inteiro_vai_ao_mais_proximo) ... ok
+test_demanda_potencial_nao_e_limitada_por_raio (testar_graficos_pedido.GraficosPedido.test_demanda_potencial_nao_e_limitada_por_raio) ... ok
+test_capacidade_e_distancia_sem_contar_duas_vezes (testar_integracao_moveis.IntegracaoMoveis.test_capacidade_e_distancia_sem_contar_duas_vezes) ... ok
+test_ponto_distante_nao_pode_ser_sua_propria_base (testar_integracao_moveis.IntegracaoMoveis.test_ponto_distante_nao_pode_ser_sua_propria_base) ... C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho_PO_Saude_Entrega_Professor\codigos\cobertura_efetiva.py:128: RuntimeWarning: invalid value encountered in scalar divide
+  zonas[z] = dict(populacao=float(pop[k].sum()), cobertura_geografica_pct=float(100*pop[k & tem_acesso].sum()/pop[k].sum()),
+C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho_PO_Saude_Entrega_Professor\codigos\cobertura_efetiva.py:129: RuntimeWarning: invalid value encountered in scalar divide
+  cobertura_efetiva_pct=float(100*atendida[k].sum()/pop[k].sum()))
+ok
+test_sem_area_descoberta (testar_integracao_moveis.IntegracaoMoveis.test_sem_area_descoberta) ... ok
+test_mesmo_teto_por_complexidade_nos_dois_cenarios (testar_pessoal_e_vinculos.LimitesComparaveis.test_mesmo_teto_por_complexidade_nos_dois_cenarios) ... ok
+test_demanda_movel_muda_de_ubs_sem_duplicar_pessoas (testar_pessoal_e_vinculos.PessoalVinculos.test_demanda_movel_muda_de_ubs_sem_duplicar_pessoas) ... C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho_PO_Saude_Entrega_Professor\codigos\cobertura_efetiva.py:128: RuntimeWarning: invalid value encountered in scalar divide
+  zonas[z] = dict(populacao=float(pop[k].sum()), cobertura_geografica_pct=float(100*pop[k & tem_acesso].sum()/pop[k].sum()),
+C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho_PO_Saude_Entrega_Professor\codigos\cobertura_efetiva.py:129: RuntimeWarning: invalid value encountered in scalar divide
+  cobertura_efetiva_pct=float(100*atendida[k].sum()/pop[k].sum()))
+C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho_PO_Saude_Entrega_Professor\codigos\cobertura_efetiva.py:128: RuntimeWarning: invalid value encountered in scalar divide
+  zonas[z] = dict(populacao=float(pop[k].sum()), cobertura_geografica_pct=float(100*pop[k & tem_acesso].sum()/pop[k].sum()),
+C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho_PO_Saude_Entrega_Professor\codigos\cobertura_efetiva.py:129: RuntimeWarning: invalid value encountered in scalar divide
+  cobertura_efetiva_pct=float(100*atendida[k].sum()/pop[k].sum()))
+ok
+test_horas_parciais_e_auxiliar_sem_duplicar_equipe (testar_pessoal_e_vinculos.PessoalVinculos.test_horas_parciais_e_auxiliar_sem_duplicar_equipe) ... ok
+test_raio_invalido (testar_raios_por_zona.RaiosPorZona.test_raio_invalido) ... ok
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+  etapa 3: minimizando a distancia mantendo cobertura e custo ...
+test_raio_misto_preserva_limite_urbano (testar_raios_por_zona.RaiosPorZona.test_raio_misto_preserva_limite_urbano) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 5.098s
+
+OK

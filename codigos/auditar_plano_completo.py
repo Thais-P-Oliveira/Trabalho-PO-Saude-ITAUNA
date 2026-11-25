@@ -27,6 +27,7 @@ def auditar(saida):
     ctx=dict(args=args,dem=dem,sites=sites,res=dict(ubs=ubs,arcos=arcos,total=float(dem['pessoas'].sum()),cobertura=float(base['cobertura_aps'])*float(dem['pessoas'].sum()),custos=dict(objetivo=float(base['custo_mensal_aps']))))
     plano_financeiro=json.loads((saida/'plano_aps.json').read_text(encoding='utf-8'))
     ctx['res']['custos']=plano_financeiro['custos']
+    ctx['res']['cobertura']=plano_financeiro['cobertura']
     auditar_aps(ctx,saida)
     pontos,unidades,demanda,config=preparar()
     pop={str(int(r.i)):float(r.pessoas) for r in dem.itertuples()}
@@ -38,10 +39,10 @@ def auditar(saida):
         for k in ['esf','max_esf','novo_2','novo_3','acs']:u[k]=int(u[k])
         for k in ['lat','lon','cap_amb_anual','cap_leito_dias']:u[k]=float(u[k])
     unidades=[u for u in unidades if u['nivel_principal']!='1']+U
-    ids={u['id_aps']:u['cnes'] for u in U};vinc={}
-    for r in arcos.to_dict('records'):
-        i=str(int(r['i']));c=ids[r['id_ubs']];vinc[i,c]=vinc.get((i,c),0)+float(r['pessoas'])/pop[i]
-    config=dict(config,hab_por_esf=args.hab_esf)
+    ids={u['id_aps']:u['cnes'] for u in U}
+    from vinculos_moveis import construir
+    vinc,carga_movel=construir(dem,ubs,arcos,args,saida,ids,usar_salvo=True)
+    config=dict(config,hab_por_esf=args.hab_esf,carga_movel_ubs=carga_movel)
     checks=[]
     for multi in [False,True]:
         for r in config['proporcoes_via_secundaria']:
@@ -54,7 +55,7 @@ def auditar(saida):
             for row in rows:
                 if row[0]=='X' and not math.isclose(float(row[3]),vinc.get((row[1][1:],row[2][1:]),0),abs_tol=1e-7):raise ValueError('Vinculo APS alterado na hierarquia')
             antes_ubs=ler(pasta/'ubs.csv')
-            validar(rows,pontos,demanda,config,U,F,dist,r,pasta)
+            validar(rows,pontos,demanda,dict(config,multiplo=multi),U,F,dist,r,pasta)
             salvar(pasta/'ubs.csv',antes_ubs)
             checks.append(dict(cenario=nome,plano_aps_preservado='PASSOU',demanda_e_capacidades='PASSOU',otimos_subproblemas='PASSOU'))
     if hashes()!=json.loads((DOCUMENTACAO/'originais_sha256.json').read_text()):raise ValueError('Original alterado')

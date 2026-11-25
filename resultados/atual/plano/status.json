@@ -25,15 +25,15 @@
     }
   ],
   "parametros_aps": {
-    "demanda": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\pontos_demanda_itauna.csv",
-    "ubs": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\unidades_existentes_itauna.csv",
+    "demanda": "dados/fontes/pontos_demanda_itauna.csv",
+    "ubs": "dados/fontes/unidades_existentes_itauna.csv",
     "raio": 3.0,
     "raio_rural": null,
     "fator_rota": 1.0,
     "hab_esf": 3000,
     "hab_min_esf": 2000,
     "esf_max": 4,
-    "limites_equipes": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\fontes_publicas\\estrutura_ubs_cnes\\limites_equipes_novas_ate4.csv",
+    "limites_equipes": "dados/fontes/fontes_publicas/estrutura_ubs_cnes/limites_equipes_novas_ate4.csv",
     "max_novas": null,
     "hab_min_nova": 2000,
     "hab_min_nova_rural": 500,
@@ -46,20 +46,24 @@
     "time_limit": 600.0,
     "gap": 0.0001,
     "pareto": false,
-    "saida": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\resultados\\atual\\plano\\aps",
+    "saida": "resultados/atual/plano/aps",
     "quiet": true,
     "horizonte_anos": 5,
+    "orcamento_ap_anual": 50894556.87,
+    "reserva_moveis_anual": 2637197.3333333335,
+    "comprometimento_adicional_anual": 0.0,
+    "preservar_acs_atuais": true,
     "folga_custo": 0.02
   },
   "sha256": {
-    "modelos\\aps_base.py": "d126a979a08b084103622f6a6303ff31e8a09f3a1b6828d3d4e56c1e2630d7fe",
-    "codigos\\planejar.py": "ad18dd50618f3c2b26bd968bc128092929c361c64fb7be4de2158725fc9c8824",
-    "modelos\\rede_completa.mod": "26dd87b9d062a7f9b35ede678a6c6bf8ab4aa8dc08022a2cf6e58dda11caa15f",
-    "codigos\\preparar.py": "55d6fd34bd0a7ad915e10db4d869dda8128568b0f1bac175bf2f2da2856d6216",
+    "modelos\\aps_base.py": "a847dbf8dd1e0325a71197186142b388608e302d6bb9b5685d0a3953b37125c4",
+    "codigos\\planejar.py": "e442ea4e9ee2ffdd51918d024de3ebd879f8b84f3cb8f46888cfe33160d7c4e2",
+    "modelos\\rede_completa.mod": "6743dc94f9cd2a78282189087a7ab5c34e4f437fab34fd7e0a9e8ba6d97b6596",
+    "codigos\\preparar.py": "586eb16faa0996394612ce92f4a3ec65c9959587f6e0f4793c600b713d435ff6",
     "codigos\\projecao_populacional.py": "9dc80bb55c19ab9e938797eabc8eacb62bff115a772a9b6ea5ae990f168f26b9",
     "dados\\fontes\\fontes_publicas\\populacao_ibge\\projecao.json": "64be897c9064e199495888bd070f5134946354fcc01a121bf93703e9bd6c85c0",
-    "codigos\\capacidade_hospitalar.py": "3373091b09fac3b8b135f140eec2ee6ee3ad9c094a887f2635e85a27ca0f9d66",
-    "codigos\\encaminhamentos.py": "748afd58dfca37190c7e2f69ac3f568dffcf6faaa950c97a9b63e611c49f17f4",
+    "codigos\\capacidade_hospitalar.py": "b85f568d32a09e0fcceec00603ecd0e8606b91f7f16f9fdf36237d275e81fbed",
+    "codigos\\encaminhamentos.py": "d58545c589bd0740561303ff0c5fd73ce2b5bf7001feac3625cffea17fa67b3f",
     "dados\\fontes\\fontes_publicas\\leitos_hospital_cnes\\leitos_sus_202607.csv": "e2f61a15480f6eee502c53b9943c7ab1f0df204ba7c3d67116d70f506809d64d",
     "dados\\fontes\\fontes_publicas\\leitos_hospital_cnes\\fonte.json": "4630249d4bb0558b880f1dc3ac460256c762c5909dc85efab017ece8a44ae064",
     "dados\\fontes\\cenarios_niveis\\demanda_integrada\\parametros_sus_2015\\carga_hospitalar_observada_2025.csv": "398a31123b9c3f58989ab65113aabd5aae5aee5391586a68142c7e9f3959e76e",
@@ -69,5 +73,6 @@
     "dados\\fontes\\demanda_especializada\\sih_residentes_eletivo_morbidade_idade_2025.csv": "ead64e9a9858203006de26f1c7deedb4b9d6063c6379423bd1a051ad8d00658a",
     "dados\\fontes\\fontes_publicas\\estrutura_ubs_cnes\\limites_equipes_novas_ate4.csv": "9a8e79af563a5d88f2c5975594595d6848e7f08ed6a9fc1066b2af7736d5e68d"
   },
-  "auditoria_integracao": "PASSOU"
+  "auditoria_integracao": "PASSOU",
+  "nota_revisao": "APS preservada; hierarquia reavaliada com mesmos tetos por complexidade nos dois cenarios; mapas reutilizam bases dos encaminhamentos."
 }

@@ -97,16 +97,23 @@ def preparar_capacidade():
     reserva = dias_nao_residentes + dias_residentes_nao_eletivos
     gerais = sum(int(r['sus']) for r in leitos if r['grupo'] == 'internacao')
     uti = sum(int(r['sus']) for r in leitos if r['grupo'] == 'complementar_UTI')
-    bruto, disponivel, deficit = capacidade_disponivel(gerais + uti, 365, reserva)
+    # Recursos separados: UTI nao aumenta o teto de internacao geral.
+    bruto, disponivel, deficit = capacidade_disponivel(gerais, 365, reserva)
+    # A carga dos outros atendimentos nao foi separada por tipo de leito.
+    # Deduzir toda a carga dos gerais e um limite inferior conservador.
+    superior = min(bruto, max(0, bruto + uti*365 - reserva))
     linha = dict(cnes='2105780', competencia_leitos='202607', dias_periodo=365,
                  leitos_sus_internacao=gerais, leitos_sus_uti=uti, leitos_sus_total=gerais + uti,
-                 dias_capacidade_bruta=bruto, dias_nao_residentes=dias_nao_residentes,
+                 dias_capacidade_bruta=bruto, dias_uti_brutos=uti*365,
+                 dias_gerais_disponiveis_inferior=disponivel, dias_gerais_disponiveis_superior=superior,
+                 dias_uti_disponiveis=None, ocupacao_por_tipo_identificada=False,
+                 dias_nao_residentes=dias_nao_residentes,
                  dias_residentes_nao_eletivos=dias_residentes_nao_eletivos,
                  dias_carga_outros=reserva, dias_disponiveis_modelo=disponivel,
                  deficit_carga_outros=deficit,
                  dias_disponiveis_metodo_anterior=float(carga['dias_livres_demanda_modelo']),
-                 metodo='Leitos SUS cadastrados x 365 - carga estimada de outros atendimentos',
-                 hipotese='Disponibilidade durante todo o ano; teto agregado de internacao e UTI, sem compatibilidade por especialidade',
+                 metodo='Gerais SUS x 365 menos toda a carga estimada: limite inferior conservador; UTI separada',
+                 hipotese='Disponibilidade anual; sem reparticao da carga entre gerais e UTI. Intervalo de disponibilidade geral; cenario principal usa extremo conservador, nao ausencia comprovada de leitos livres',
                  reserva='Nao residentes SUS e residentes nao eletivos; eletivos locais estimados pela proporcao municipal por complexidade',
                  fonte_leitos=URL, fonte_carga=str(CARGA.relative_to(BASE)))
     salvar_csv(ENTRADA / 'capacidade_hospitalar_leitos.csv', [linha])

@@ -1,0 +1,8 @@
+RESULTADOS
+atual/plano/: plano APS e seis cenarios de encaminhamento.
+atual/plano/vinculos_moveis/: bases e populacao que origina encaminhamentos pela UBS-base.
+atual/financeiro/, orcamento/ e investimento/: custos, despesas publicas e construcao.
+atual/sensibilidade/: variacoes de parametros.
+atual/leitos_otimista/: analise hospitalar complementar, sem substituir o cenario principal.
+atual/graficos_demanda/: dados da comparacao por UBS mais proxima.
+Os arquivos .dat sao entradas MathProg e os .log registram as solucoes. Sao mantidos para conferir a execucao; nao sao modelos alternativos.

@@ -1,0 +1,5 @@
+DADOS
+fontes/: arquivos usados como entrada, junto das referencias e metadados de consulta.
+preparados/: tabelas calculadas a partir das fontes; podem ser regravadas na preparacao.
+O projeto usa populacao territorial de referencia 2022, utilizacao SUS processada em 2025 e cadastro CNES 202607, com projecao descrita no artigo.
+Os campos e a origem de cada parametro estao documentados no artigo. As fontes sao mantidas para rastreabilidade; dados estimados nao sao apresentados como despesas ou capacidade efetivamente medidas.

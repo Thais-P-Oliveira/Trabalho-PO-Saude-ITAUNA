@@ -1,0 +1,25 @@
+ATUALIZAR O REPOSITORIO
+https://github.com/Thais-P-Oliveira/Trabalho-PO-Saude
+
+RECOMENDADO: GITHUB DESKTOP
+1. Entre na conta com permissao de escrita no repositorio. Se nao tiver permissao, solicite acesso a proprietaria ou use um fork e pull request.
+2. Em File > Clone repository > URL, clone o repositorio em uma pasta nova, diferente desta entrega.
+3. No Explorer, abra a pasta clonada. Confira se e a copia recem-clonada e se nao tem alteracoes locais.
+4. Apague o conteudo da copia clonada, preservando a pasta oculta .git. Nao apague a propria pasta clonada. Essa limpeza e apenas na copia de envio.
+5. Copie para dentro dela o CONTEUDO desta pasta de entrega. Nao coloque a pasta Entrega_Professor inteira como uma subpasta.
+6. No GitHub Desktop, revise os arquivos adicionados, modificados e excluidos. Os arquivos do artigo devem ser os revisados que estao nesta entrega.
+7. Escreva um resumo, por exemplo: Organiza projeto e atualiza graficos. Clique Commit to main e depois Push origin. Se a branch protegida exigir, crie uma branch e um pull request.
+
+Assim as exclusoes tambem sao enviadas e a estrutura remota fica igual a entrega. A pasta original do projeto fica preservada.
+
+UPLOAD PELO SITE
+Add file > Upload files aceita arquivos e pastas, preservando os caminhos. Arraste o conteudo da entrega, nao o ZIP. Arquivos com o MESMO caminho e nome sao atualizados; arquivos renomeados deixam a versao antiga no repositorio. Arquivos que sumiram da entrega nao sao apagados automaticamente. O upload de um ZIP apenas armazena o ZIP, sem extrair nem substituir os arquivos internos.
+
+As exclusoes necessarias para espelhar esta entrega estao em ARQUIVOS_ANTIGOS_GITHUB.txt. Ha muitas saidas historicas; por isso o GitHub Desktop e mais pratico que apagar pelo site.
+
+LIMPEZA PRINCIPAL
+Remover da raiz: RODAR_TUDO.cmd, rodar_tudo.py, config_rodar_tudo.json, .rodar_tudo.lock, ULTIMA_EXECUCAO.log, apresentar.py e rodar_plano.ps1.
+Em resultados/, conservar a pasta atual/ e o LEIA-ME.txt desta entrega. As demais pastas antigas sao substituidas pela versao consolidada em atual/.
+Nos documentos, os caminhos antigos ausentes da entrega estao listados no arquivo de comparacao.
+
+Esta orientacao nao publica nem modifica o repositorio automaticamente.

@@ -1,0 +1,280 @@
+\section{Plano da atenção primária e complemento móvel}
+
+O plano mantém as 22 UBS existentes e seleciona 9 novas, 3 urbanas e 6 rurais, totalizando 39 eSF e
+192 ACS fixos. O complemento móvel utiliza 2 equipes e 4 ACS adicionais, sediados na UBS Alto do Rosário.
+A Tabela~\ref{tab:cobertura} compara as coberturas, e a Figura~\ref{fig:mapa} mostra a localização das
+unidades. As três UBS urbanas novas concentram 10 das 16 eSF adicionais e absorvem a maior parte do
+déficit de capacidade da área urbana; as seis rurais têm uma equipe cada e ampliam a cobertura
+geográfica da zona rural.
+
+\begin{table}[htbp]\centering
+\caption{Cobertura potencial da população projetada para 2026}\label{tab:cobertura}
+\begin{tabular}{lrr}\toprule
+Rede & Geográfica, 3 km (\%) & Com capacidade (\%)\\\midrule
+Atual: 22 UBS & 93,40 & 65,62\\
+Proposta: 31 UBS & 97,71 & 97,71\\
+Proposta: 31 UBS e equipes móveis & -- & 100,00\\
+\bottomrule\end{tabular}
+\fonte{Resultados do modelo, com dados de \citet{ibge2026est} e \citet{cnes2026}.}
+\nota{A cobertura com capacidade limita a carga de cada UBS a 3.000 habitantes por eSF e 750 por ACS.
+A cobertura móvel é potencial e depende das hipóteses de alcance e capacidade da Seção~\ref{sec:movel}.}
+\end{table}
+
+\begin{figure}[p]\centering
+\includegraphics[width=.98\linewidth,height=.55\textheight,keepaspectratio]{figuras/mapa.pdf}
+\caption{Localização das UBS existentes, das novas UBS e da base móvel}\label{fig:mapa}
+\fonte{Resultados do modelo.}
+\end{figure}
+
+A Tabela~\ref{tab:unidades} detalha o dimensionamento por unidade. Todas as UBS existentes operam no
+limite de 3.000 habitantes por eSF, enquanto as seis UBS rurais novas operam entre 17\% e 52\% da
+capacidade de uma equipe. A população alocada inclui vínculos fixos fora do raio, que não são contados
+como cobertura geográfica, e os valores fracionários resultam do rateio e da projeção. Ficam fora do
+raio de 3 km 2.385 habitantes em sete setores, atendidos pelo complemento móvel
+(Tabela~\ref{tab:movel}).
+
+\begingroup\small\begin{longtable}{p{.42\linewidth}rrrrr}
+\caption{Unidades fixas, recursos planejados e ocupação}\label{tab:unidades}\\
+\toprule Unidade & eSF & ACS & População & No raio & Ocupação (\%)\\\midrule\endfirsthead
+\toprule Unidade & eSF & ACS & População & No raio & Ocupação (\%)\\\midrule\endhead
+\multicolumn{6}{l}{\textit{UBS existentes}}\\
+UBS Alto do Rosário & 1 & 6 & 3.000 & 3.000 & 100\\
+UBS Central & 1 & 5 & 3.000 & 3.000 & 100\\
+UBS Cidade Nova & 1 & 9 & 3.000 & 3.000 & 100\\
+UBS Garcias & 1 & 6 & 3.000 & 3.000 & 100\\
+UBS Graças & 1 & 5 & 3.000 & 3.000 & 100\\
+UBS Irmãos Auler & 1 & 6 & 3.000 & 3.000 & 100\\
+UBS Itaunense & 1 & 5 & 3.000 & 3.000 & 100\\
+UBS Jadir Marinho & 1 & 6 & 3.000 & 3.000 & 100\\
+UBS Lourdes & 1 & 5 & 3.000 & 3.000 & 100\\
+UBS Morada Nova & 1 & 4 & 3.000 & 3.000 & 100\\
+UBS Morada Nova II & 1 & 6 & 3.000 & 3.000 & 100\\
+UBS Morro do Engenho & 1 & 6 & 3.000 & 3.000 & 100\\
+UBS Nogueira Machado & 1 & 6 & 3.000 & 3.000 & 100\\
+UBS Padre Eustáquio & 1 & 6 & 3.000 & 3.000 & 100\\
+UBS Parque Jardim Santanense / Residencial Santanense & 2 & 10 & 6.000 & 6.000 & 100\\
+UBS Piedade & 1 & 6 & 3.000 & 3.000 & 100\\
+UBS Pio XII & 1 & 6 & 3.000 & 3.000 & 100\\
+UBS Santanense & 1 & 6 & 3.000 & 3.000 & 100\\
+UBS São Geraldo & 1 & 7 & 3.000 & 3.000 & 100\\
+UBS Várzea da Olaria & 1 & 6 & 3.000 & 3.000 & 100\\
+UBS Vila Tavares & 1 & 6 & 3.000 & 3.000 & 100\\
+UBS Zona Rural & 1 & 13 & 3.000 & 3.000 & 100\\
+\midrule
+\multicolumn{6}{l}{\textit{Novas UBS urbanas}}\\
+Residencial Victor Gonçalves de Souza & 4 & 16 & 12.000 & 12.000 & 100\\
+Setor 313380805000191 & 3 & 12 & 9.000 & 9.000 & 100\\
+Setor 313380805000177 & 3 & 11 & 7.560 & 7.140 & 84\\
+\midrule
+\multicolumn{6}{l}{\textit{Novas UBS rurais}}\\
+Setor 313380805000267 & 1 & 3 & 1.553 & 1.099 & 52\\
+Setor 313380805000115 & 1 & 2 & 1.297 & 836 & 43\\
+Setor 313380805000197 & 1 & 2 & 1.267 & 677 & 42\\
+Setor 313380805000174 & 1 & 2 & 985 & 524 & 33\\
+Setor 313380805000188 & 1 & 2 & 821 & 821 & 27\\
+Setor 313380805000185 & 1 & 1 & 520 & 520 & 17\\
+\midrule
+Total & 39 & 192 & 104.002 & 101.617 & \\
+\bottomrule\end{longtable}\endgroup
+\fonte{Resultados do modelo de localização e dimensionamento.}
+\nota{Ocupação = população alocada / (3.000 $\times$ eSF).}
+
+\begin{table}[htbp]\centering
+\caption{Base do complemento móvel}\label{tab:movel}
+\begin{tabular}{lrrr}\toprule UBS-base & Equipes & ACS & População atendida\\\midrule
+UBS Alto do Rosário & 2 & 4 & 2.385,24\\
+\bottomrule\end{tabular}
+\fonte{Resultados do modelo do complemento móvel.}
+\nota{Soluções com o mesmo número mínimo de equipes podem ter bases alternativas.}
+\end{table}
+
+\section{Funcionamento e investimento}
+
+A Tabela~\ref{tab:custos} resume os custos estimados da rede proposta. As 22 UBS existentes respondem
+por cerca de dois terços do funcionamento mensal, pois o custo do pessoal já cadastrado é mantido; as
+novas UBS acrescentam R\$ 882 mil por mês, e as equipes móveis, R\$ 82 mil. A construção das nove
+unidades soma R\$ 22,8 milhões, sendo R\$ 11,9 milhões nas seis UBS rurais de porte I. A Tabela~\ref{tab:orcamento} compara esses valores
+com a dotação atualizada da Atenção Básica de 2026; a estimativa da rede atual considera as mesmas
+categorias de pessoal e os custos fixos das 22 UBS, o que permite isolar o acréscimo da expansão.
+
+\begin{table}[htbp]\centering
+\caption{Custos estimados da rede proposta}\label{tab:custos}
+\begin{tabular}{lr}\toprule Componente & Valor (R\$)\\\midrule
+UBS existentes (22), por mês & 2.010.004,00\\
+UBS novas (9), por mês & 882.271,78\\
+Pessoal das equipes móveis, por mês & 82.287,11\\
+Funcionamento total, por mês & 2.974.562,89\\
+Funcionamento total, por ano & 35.694.754,67\\
+Construção das novas UBS (uma vez) & 22.848.000,00\\
+Funcionamento anual e construção integral & 58.542.754,67\\
+\bottomrule\end{tabular}
+\fonte{Resultados do modelo, com custos de referência descritos na Seção~\ref{sec:modeloaps} e \citet{novopac2025}.}
+\nota{Veículos e combustível das equipes móveis, terrenos e equipamentos não foram precificados.}
+\end{table}
+
+\begin{table}[htbp]\centering
+\caption{Custos estimados em relação à dotação atualizada da Atenção Básica de 2026}\label{tab:orcamento}
+\begin{tabular}{lrr}\toprule Item & Valor anual (R\$) & \% da dotação\\\midrule
+Dotação atualizada da Atenção Básica & 50.894.556,87 & 100,0\\
+Rede atual: pessoal estimado e custos fixos & 24.063.853,33 & 47,3\\
+Rede proposta: funcionamento & 35.694.754,67 & 70,1\\
+Rede proposta: funcionamento e construção & 58.542.754,67 & 115,0\\
+\bottomrule\end{tabular}
+\fonte{RREO, Anexo 02, 4º bimestre de 2026 \citep{tesouro2026}, e resultados do modelo.}
+\nota{A dotação não é saldo livre: outras despesas da atenção primária não modeladas também a consomem.}
+\end{table}
+
+\section{Encaminhamentos ambulatoriais}
+
+A demanda projetada é de 192.205,1 procedimentos de média complexidade e 15.863,3 de alta complexidade
+por ano. A Tabela~\ref{tab:ambulatorial} apresenta os volumes alocados nos dois cenários de
+classificação, e as Figuras~\ref{fig:distancias} e~\ref{fig:capacidades} mostram as distâncias e o uso
+dos limites. A média complexidade é praticamente toda alocada; a alta complexidade alocada é constante
+em cada classificação e não depende da parcela que passa pela secundária. Na classificação de dois
+níveis, a alta complexidade alocada aumenta e a distância média diminui em todos os valores de $r$.
+
+\begin{table}[htbp]\centering
+\caption{Procedimentos ambulatoriais alocados por cenário (procedimentos/ano)}\label{tab:ambulatorial}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{llrrrr}\toprule
+Classificação & Via sec. (\%) & Nível 2 & Nível 3 & Nível 3 atendido (\%) & Distância (km)\\\midrule
+Única & 25 & 192.205,1 & 11.829,0 & 74,6 & 3,89\\
+Única & 50 & 192.205,1 & 11.829,0 & 74,6 & 3,95\\
+Única & 75 & 192.136,6 & 11.829,0 & 74,6 & 4,01\\
+Dois níveis & 25 & 192.205,1 & 12.746,0 & 80,3 & 3,70\\
+Dois níveis & 50 & 192.205,1 & 12.746,0 & 80,3 & 3,75\\
+Dois níveis & 75 & 192.205,1 & 12.746,0 & 80,3 & 3,81\\
+\bottomrule\end{tabular}
+\fonte{Resultados do modelo de encaminhamento hierárquico.}
+\nota{Distância média por percurso, em linha reta, ponderada pelos volumes atendidos. Como os volumes
+alocados diferem entre cenários, as médias não se referem exatamente aos mesmos atendimentos.}
+\end{table}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=.95\linewidth]{figuras/distancias.pdf}
+\caption{Distância média dos percursos ambulatoriais por cenário de classificação}\label{fig:distancias}
+\fonte{Resultados do modelo de encaminhamento hierárquico.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=.95\linewidth]{figuras/capacidades.pdf}
+\caption{Uso dos limites ambulatoriais na classificação única, com 50\% via secundária}\label{fig:capacidades}
+\fonte{Resultados do modelo de encaminhamento hierárquico.}
+\end{figure}
+
+\section{Internações eletivas}
+
+A demanda projetada é de 1.072,5 internações de média e 352,5 de alta complexidade por ano. No cenário
+hospitalar conservador, nenhuma é alocada (Tabela~\ref{tab:internacoes} e Figura~\ref{fig:internacoes}),
+porque toda a capacidade de leitos gerais foi considerada comprometida com a carga de outros
+atendimentos. O resultado é idêntico nos seis cenários, pois nem a parcela via secundária nem a
+classificação dos estabelecimentos alteram uma capacidade nula. Esse resultado deve ser lido como
+ausência de capacidade residual comprovada, e não como fila de espera.
+
+\begin{table}[htbp]\centering
+\caption{Internações eletivas projetadas e alocadas (internações/ano)}\label{tab:internacoes}
+\begin{tabular}{lrrr}\toprule Complexidade & Demanda & Alocadas & Não alocadas\\\midrule
+Média & 1.072,5 & 0,0 & 1.072,5\\
+Alta & 352,5 & 0,0 & 352,5\\
+\bottomrule\end{tabular}
+\fonte{Resultados do modelo de encaminhamento hierárquico.}
+\nota{Resultado idêntico nos seis cenários. A capacidade nula decorre da hipótese conservadora da
+Seção~\ref{sec:leitos} e não mede fila nem falta real de leitos.}
+\end{table}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=.95\linewidth]{figuras/internacoes.pdf}
+\caption{Internações eletivas alocadas e não alocadas por cenário}\label{fig:internacoes}
+\fonte{Resultados do modelo de encaminhamento hierárquico.}
+\end{figure}
+
+\section{Acessibilidade por zona}
+
+A Tabela~\ref{tab:acessibilidade} apresenta o índice de acessibilidade médio por zona, em valor absoluto
+(capacidade de eSF potencialmente disponível por habitante) e relativo à média municipal de cada rede.
+Na rede atual, a zona rural tem acessibilidade muito inferior à urbana, sobretudo com $\beta=2$, que
+penaliza mais as distâncias longas. Na rede proposta, a relação se inverte: as UBS rurais de baixa
+ocupação elevam o índice rural acima da média municipal.
+
+\begin{table}[htbp]\centering
+\caption{Índice de acessibilidade médio por zona}\label{tab:acessibilidade}
+\begin{tabular}{llrrr}\toprule Rede & Zona & $\beta$ & Índice absoluto & Índice relativo\\\midrule
+Atual & Urbana & 1 & 0,689 & 1,04\\
+Atual & Rural & 1 & 0,129 & 0,19\\
+Atual & Urbana & 2 & 0,695 & 1,05\\
+Atual & Rural & 2 & 0,013 & 0,02\\
+Proposta & Urbana & 1 & 1,119 & 0,99\\
+Proposta & Rural & 1 & 1,243 & 1,10\\
+Proposta & Urbana & 2 & 1,006 & 0,89\\
+Proposta & Rural & 2 & 3,583 & 3,19\\
+\bottomrule\end{tabular}
+\fonte{Resultados do diagnóstico de acessibilidade.}
+\nota{Média municipal do índice absoluto: 0,663 na rede atual e 1,125 na proposta. O índice usa apenas as
+eSF fixas e não é um percentual.}
+\end{table}
+
+\section{Sensibilidade}
+
+A Tabela~\ref{tab:sensibilidade} altera um parâmetro por vez em relação ao cenário principal. Na curva
+de cobertura e custo, a cobertura geográfica mínima é imposta como restrição e a folga operacional é
+nula; por isso, o ponto de cobertura máxima da curva tem custo um pouco menor que o do cenário principal,
+que usa folga de 2\% para reduzir deslocamentos. O custo inclui as equipes móveis necessárias para
+completar a cobertura: com 93,4\%, são cinco equipes, o que explica o custo maior que o do ponto de 95\%.
+Nos cenários de crescimento, a população é 5\% e 10\% maior que a projetada para 2026 (109.202 e 114.402
+habitantes). A folga de 5\% produziu a mesma solução do cenário principal.
+
+\begingroup\small\begin{longtable}{p{.36\linewidth}rrrrr}
+\caption{Sensibilidade do plano da atenção primária}\label{tab:sensibilidade}\\
+\toprule Cenário & \shortstack{Novas\\UBS} & \shortstack{Cob.\\(\%)} & \shortstack{Equipes\\móveis} & \shortstack{Operação\\(mil R\$/mês)} & \shortstack{Construção\\(mi R\$)}\\\midrule\endfirsthead
+\toprule Cenário & \shortstack{Novas\\UBS} & \shortstack{Cob.\\(\%)} & \shortstack{Equipes\\móveis} & \shortstack{Operação\\(mil R\$/mês)} & \shortstack{Construção\\(mi R\$)}\\\midrule\endhead
+Principal (3 km, mínimo rural 500, folga 2\%) & 9 & 97,71 & 2 & 2.974,56 & 22,85\\
+\midrule
+\multicolumn{6}{l}{\textit{Curva de cobertura e custo (folga nula)}}\\
+Cobertura mínima de 93,4\% & 3 & 93,40 & 5 & 2.866,83 & 12,92\\
+Cobertura mínima de 95,0\% & 4 & 95,00 & 4 & 2.836,01 & 13,46\\
+Cobertura mínima de 96,0\% & 5 & 96,00 & 4 & 2.841,64 & 14,90\\
+Cobertura mínima de 97,0\% & 7 & 97,00 & 3 & 2.898,74 & 18,87\\
+Cobertura máxima & 9 & 97,71 & 2 & 2.955,83 & 22,85\\
+\midrule
+\multicolumn{6}{l}{\textit{Raio de cobertura (urbano/rural)}}\\
+2/2 km & 9 & 95,72 & 4 & 2.983,93 & 20,87\\
+3/5 km & 8 & 99,03 & 1 & 2.886,64 & 20,86\\
+5/5 km & 7 & 99,56 & 1 & 2.825,82 & 19,11\\
+\midrule
+\multicolumn{6}{l}{\textit{Mínimo de abertura rural}}\\
+Sem mínimo & 14 & 99,86 & 1 & 3.167,31 & 32,79\\
+1.000 habitantes & 4 & 94,81 & 4 & 2.850,06 & 13,46\\
+\midrule
+\multicolumn{6}{l}{\textit{Outros parâmetros}}\\
+Folga operacional de 5\% & 9 & 97,71 & 2 & 2.974,56 & 22,85\\
+População 5\% maior & 10 & 98,19 & 2 & 3.071,85 & 25,84\\
+População 10\% maior & 13 & 99,07 & 1 & 3.249,65 & 32,12\\
+\bottomrule\end{longtable}\endgroup
+\fonte{Resultados das análises de sensibilidade.}
+\nota{Cobertura geográfica fixa, medida pelo raio de cada cenário; cenários com raios diferentes não são
+diretamente comparáveis. Operação inclui UBS e pessoal das equipes móveis. Metas de 98\%, 99\% e 99,5\%
+são inviáveis apenas com UBS fixas sob o raio de 3 km.}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=.98\linewidth]{figuras/curva_cobertura_custo.pdf}
+\caption{Curva de cobertura geográfica e custo operacional}\label{fig:curva}
+\fonte{Resultados das análises de sensibilidade.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=.9\linewidth]{figuras/extra_raios_01_custo.pdf}
+\caption{Custo operacional nos cenários de raio}\label{fig:raios_custo}
+\fonte{Resultados das análises de sensibilidade.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=.9\linewidth]{figuras/extra_raios_02_cobertura.pdf}
+\caption{Cobertura total, urbana e rural nos cenários de raio}\label{fig:raios_cobertura}
+\fonte{Resultados das análises de sensibilidade.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=.9\linewidth]{figuras/extra_raios_03_distancia.pdf}
+\caption{Distância média até a UBS de vínculo nos cenários de raio}\label{fig:raios_distancia}
+\fonte{Resultados das análises de sensibilidade.}
+\end{figure}

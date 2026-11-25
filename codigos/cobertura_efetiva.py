@@ -154,11 +154,11 @@ def sensibilidade(pontos, ubs, raio=RAIO_KM):
     return pd.DataFrame(linhas).drop_duplicates()
 
 
-def equipes_moveis(pontos, por_ponto, raio_rota=RAIO_ROTA_KM, hab_movel=HAB_MOVEL, max_paradas=MAX_PARADAS,
+def equipes_moveis(pontos, por_ponto, rede, raio_rota=RAIO_ROTA_KM, hab_movel=HAB_MOVEL, max_paradas=MAX_PARADAS,
                    hab_acs=HAB_ACS, max_equipes=None):
     """Dimensiona e posiciona equipes moveis (itinerantes) para a populacao SEM cobertura geografica.
 
-    Uma equipe movel tem base em um dos pontos descobertos e visita os pontos descobertos a ate
+    Uma equipe movel tem base apenas em uma UBS da rede informada e visita os pontos descobertos a ate
     `raio_rota` km da base (rota semanal), com no maximo `max_paradas` pontos por equipe e capacidade
     propria de `hab_movel` habitantes. Etapa 1: maximizar a populacao atendida; etapa 2: minimizar o
     numero de equipes. A populacao excedente permanece registrada como nao atendida.
@@ -166,28 +166,42 @@ def equipes_moveis(pontos, por_ponto, raio_rota=RAIO_ROTA_KM, hab_movel=HAB_MOVE
     """
     desc = por_ponto[por_ponto['cobertura_geografica'] == 0].reset_index(drop=True)
     if desc.empty:
-        return dict(equipes=0, populacao_sem_cobertura=0.0, atendida=0.0, nao_atendida=0.0), pd.DataFrame(), pd.DataFrame()
-    D = distancias_haversine_km(desc['lon'], desc['lat'], desc['lon'], desc['lat'])
+        return dict(equipes=0, bases=0, acs_necessarios=0, populacao_sem_cobertura=0.0,
+                    atendida=0.0, nao_atendida=0.0), pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
+    # A rede contem somente UBS existentes ou novas efetivamente selecionadas.
+    rede = rede.reset_index(drop=True)
+    if rede.empty:
+        raise ValueError('Equipes moveis exigem uma rede de UBS para suas bases.')
+    D = distancias_haversine_km(desc['lon'], desc['lat'], rede['lon'], rede['lat'])
+    n = len(rede)
     pop = desc['pessoas'].values.astype(float)
     m = len(desc)
     teto = max_equipes if max_equipes is not None else int(math.ceil(pop.sum()/hab_movel)) + m
     prob = pl.LpProblem('moveis', pl.LpMaximize)
-    pares = [(i, s) for i in range(m) for s in range(m) if D[i, s] <= raio_rota + 1e-9]
+    pares = [(i, s) for i in range(m) for s in range(n) if D[i, s] <= raio_rota + 1e-9]
+    if not pares:
+        desc['pop_atendida_movel'] = 0.0
+        desc['pop_nao_atendida'] = desc['pessoas']
+        return dict(equipes=0, bases=0, acs_necessarios=0, populacao_sem_cobertura=float(pop.sum()),
+                    atendida=0.0, nao_atendida=float(pop.sum()), hab_movel=hab_movel,
+                    raio_rota_km=raio_rota, max_paradas_por_equipe=max_paradas, max_equipes=max_equipes), pd.DataFrame(), pd.DataFrame(), desc
     w = {p: pl.LpVariable(f'w_{p[0]}_{p[1]}', lowBound=0) for p in pares}
     z = {p: pl.LpVariable(f'z_{p[0]}_{p[1]}', cat='Binary') for p in pares}
-    k = {s: pl.LpVariable(f'k_{s}', lowBound=0, upBound=teto, cat='Integer') for s in range(m)}
+    k = {s: pl.LpVariable(f'k_{s}', lowBound=0, upBound=teto, cat='Integer') for s in range(n)}
     atend = pl.lpSum(w.values())
     for i in range(m):
-        prob += pl.lpSum(w[i, s] for s in range(m) if (i, s) in w) <= float(pop[i])
+        prob += pl.lpSum(w[i, s] for s in range(n) if (i, s) in w) <= float(pop[i])
     for (i, s) in pares:
         prob += w[i, s] <= float(pop[i])*z[i, s]
-    for s in range(m):
+    for s in range(n):
         prob += pl.lpSum(w[i, s] for i in range(m) if (i, s) in w) <= hab_movel*k[s]
         prob += pl.lpSum(z[i, s] for i in range(m) if (i, s) in z) <= max_paradas*k[s]
     if max_equipes is not None:
         prob += pl.lpSum(k.values()) <= max_equipes
     prob.setObjective(atend)
     prob.solve(_solver())
+    if pl.LpStatus[prob.status] != 'Optimal':
+        raise RuntimeError('Cobertura movel sem otimo confirmado')
     alvo = pl.value(atend)
     prob += atend >= alvo - 1e-6
     prob.setObjective(pl.lpSum(k.values()))
@@ -196,13 +210,13 @@ def equipes_moveis(pontos, por_ponto, raio_rota=RAIO_ROTA_KM, hab_movel=HAB_MOVE
     if pl.LpStatus[prob.status] != 'Optimal':
         raise RuntimeError('Dimensionamento de equipes moveis sem otimo')
     bases, atrib = [], []
-    for s in range(m):
+    for s in range(n):
         nk = int(round(k[s].varValue or 0))
         carga = sum((w[i, s].varValue or 0) for i in range(m) if (i, s) in w)
         if nk > 0 and carga > 1e-6:
             rotulo = f'EM{len(bases)+1}'
             visitas = [(i, w[i, s].varValue) for i in range(m) if (i, s) in w and (w[i, s].varValue or 0) > 1e-6]
-            bases.append(dict(equipe_movel=rotulo, ponto_base=desc['NM_BAIRRO'][s], lon=desc['lon'][s], lat=desc['lat'][s],
+            bases.append(dict(equipe_movel=rotulo, ponto_base=rede['nome'][s], id_ubs_base=rede['id'][s], lon=rede['lon'][s], lat=rede['lat'][s],
                               equipes=nk, capacidade_hab=nk*hab_movel, pop_atendida=carga, ocupacao_pct=100*carga/(nk*hab_movel),
                               pontos_visitados=len(visitas), acs_necessarios=int(math.ceil(carga/hab_acs))))
             for i, v in visitas:
@@ -225,7 +239,7 @@ def executar(rede, pontos, saida, rotulo, hab_movel=HAB_MOVEL, max_moveis=None):
     saida = Path(saida)
     saida.mkdir(parents=True, exist_ok=True)
     resumo, por_ponto, por_ubs, arcos = cobertura_efetiva(pontos, rede)
-    mov, paradas, atrib_mov, desc = equipes_moveis(pontos, por_ponto, hab_movel=hab_movel, max_equipes=max_moveis)
+    mov, paradas, atrib_mov, desc = equipes_moveis(pontos, por_ponto, rede, hab_movel=hab_movel, max_equipes=max_moveis)
     resumo['equipes_moveis'] = mov
     resumo['cobertura_efetiva_com_moveis_pct'] = 100*(resumo['pop_atendida_efetiva']+mov['atendida'])/resumo['populacao']
     resumo['cobertura_geografica_com_moveis_pct'] = 100*(resumo['pop_com_acesso_geografico']+mov['atendida'])/resumo['populacao']

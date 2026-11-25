@@ -255,17 +255,6 @@
       "nota": "Equipes atuais fixas; capacidade convencional, nao cobertura oficial nem atendimento observado"
     }
   ],
-  "cobertura_oficial_mais_recente_na_consulta": {
-    "competencia": "07/2026",
-    "cobertura_oficial_aps_pct": 80.49,
-    "populacao_oficial": 103272,
-    "ano_populacao": "2025",
-    "esf": 23,
-    "eap_20h": 0,
-    "eap_30h": 1,
-    "capacidade_administrativa_oficial": 83125,
-    "fonte": "https://relatorioaps-prd.saude.gov.br/cobertura/aps?unidadeGeografica=MUNICIPIO&coUf=31&coMunicipio=313380&nuCompInicio=202501&nuCompFim=202607"
-  },
   "folga_custo_plano": 0.02,
-  "nota": "Ai e indice potencial, nao porcentagem de cobertura. Atual usa somente eSF da base de 22 UBS; oficial usa universo e parametros proprios. Plano salvo pode ser de execucao anterior."
+  "nota": "Ai e indice potencial, nao porcentagem de cobertura. Atual usa somente eSF da base de 22 UBS. Plano salvo pode ser de execucao anterior."
 }

@@ -1,9 +1,9 @@
 INVESTIMENTO EM CONSTRUCAO - CALCULO SEPARADO DO MODELO
 
-Plano mantido: C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho PO Saúde\resultados\.execucao_20261117_223059_80e270\plano
+Plano mantido: C:\Users\luana.ottoni_chammas\Desktop\aula\PO saúde\Trabalho_PO_Saude_integrado\resultados\.execucao_20261124_224141_11ce95\plano
 Novas UBS: 9; eSF: 16.
 Investimento total em construcao: R$ 22.848.000,00.
-Operacao anual da rede completa implantada (separada): R$ 27.695.837,33.
+Operacao anual da rede completa implantada (separada): R$ 35.694.754,67.
 Construcao incluida no objetivo de cinco anos; folga somente operacional.
 Nao foi definido prazo contratual de pagamento nem atribuido o total a um ano especifico.
 

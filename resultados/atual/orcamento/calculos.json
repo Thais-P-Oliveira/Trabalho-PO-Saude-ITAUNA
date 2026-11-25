@@ -1,33 +1,53 @@
 {
-  "plano": "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\resultados\\atual\\plano\\plano_aps.json",
+  "plano": "resultados/atual/plano/plano_aps.json",
   "folga_custo": 0.02,
-  "custo_aps_mensal": "2307986.444444445",
-  "custo_aps_anual": "27695837.333333340",
+  "custo_aps_mensal": "2974562.888888889",
+  "custo_aps_anual": "35694754.666666668",
+  "custo_ubs_sem_moveis_mensal": "2892275.777777778",
+  "equipes_moveis": {
+    "equipes": 2,
+    "acs": 4,
+    "equipes_mensal": 63555.55555555556,
+    "acs_mensal": 18731.55555555556,
+    "fixo_mensal": 0.0,
+    "total_mensal": 82287.11111111112,
+    "total_anual": 987445.3333333335,
+    "escopo": "Pessoal adicional (eSF e ACS); veiculo, combustivel e equipamentos nao precificados"
+  },
   "operacao_por_grupo": [
     {
       "grupo": "UBS existentes",
       "unidades": 22,
       "fixo_mensal": "264000.0",
-      "equipes_mensal": "730888.8888888889871794871798",
-      "acs_mensal": "430825.7777777778349650349657",
-      "total_mensal": "1425714.666666666822144522146",
-      "total_anual": "17108576.00000000186573426575"
+      "equipes_mensal": "1085716.66666666691",
+      "acs_mensal": "660287.3333333333578125",
+      "total_mensal": "2010004.0000000002678125",
+      "total_anual": "24120048.0000000032137500"
     },
     {
       "grupo": "UBS novas",
       "unidades": 9,
       "fixo_mensal": "135000.0",
-      "equipes_mensal": "508444.4444444445128205128205",
-      "acs_mensal": "238827.3333333333650349650351",
-      "total_mensal": "882271.7777777778778554778556",
-      "total_anual": "10587261.33333333453426573427"
+      "equipes_mensal": "508444.44444444448",
+      "acs_mensal": "238827.3333333333421875",
+      "total_mensal": "882271.7777777778221875",
+      "total_anual": "10587261.3333333338662500"
+    },
+    {
+      "grupo": "Equipes moveis adicionais",
+      "unidades": 2,
+      "fixo_mensal": "0",
+      "equipes_mensal": "63555.55555555556",
+      "acs_mensal": "18731.55555555556",
+      "total_mensal": "82287.11111111112",
+      "total_anual": "987445.3333333335"
     }
   ],
   "investimento_construcao": "22848000",
-  "total_ano_implantacao": "50543837.333333340",
+  "total_ano_implantacao": "58542754.666666668",
   "hipotese_ano_implantacao": "100% das obras e 12 meses de operacao da rede inteira no mesmo exercicio; cenario de comparacao, nao cronograma contratual",
   "horizonte_otimizacao_anos": 5,
-  "objetivo_com_proxy_anual": "27757183.8894958644",
+  "objetivo_com_proxy_anual": "34768656.2575460340",
   "referencia_oficial": "RREO 2026, 4o bimestre (janeiro a agosto), Anexo 02",
   "fonte_rreo": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2026&nr_periodo=4&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+02&id_ente=3133808",
   "fonte_loa": "https://sapl.itauna.mg.leg.br/media/sapl/public/normajuridica/2025/11182/lei_6273-2026_-_loa_2026.pdf",
@@ -122,49 +142,49 @@
       "conta": "Saúde",
       "referencia": "DOTAÇÃO INICIAL",
       "orcamento_anual": "173696487.13",
-      "custo_modelo_aps_anual": "27695837.333333340",
-      "proporcao_modelo_pct": "15.94496111634364289057455966",
+      "custo_modelo_aps_anual": "35694754.666666668",
+      "proporcao_modelo_pct": "20.55007286356434674315914589",
       "investimento_construcao": "22848000",
-      "total_ano_implantacao": "50543837.333333340",
-      "proporcao_implantacao_pct": "29.09894043827421646716638466"
+      "total_ano_implantacao": "58542754.666666668",
+      "proporcao_implantacao_pct": "33.70405218549492031975097089"
     },
     {
       "conta": "Saúde",
       "referencia": "DOTAÇÃO ATUALIZADA (a)",
       "orcamento_anual": "199805384.26",
-      "custo_modelo_aps_anual": "27695837.333333340",
-      "proporcao_modelo_pct": "13.86140690647939799417695632",
+      "custo_modelo_aps_anual": "35694754.666666668",
+      "proporcao_modelo_pct": "17.86476115189082642792240838",
       "investimento_construcao": "22848000",
-      "total_ano_implantacao": "50543837.333333340",
-      "proporcao_implantacao_pct": "25.29653418526617436810809194"
+      "total_ano_implantacao": "58542754.666666668",
+      "proporcao_implantacao_pct": "29.29988843067760280185354400"
     },
     {
       "conta": "Atenção Básica",
       "referencia": "DOTAÇÃO INICIAL",
       "orcamento_anual": "49885322.78",
-      "custo_modelo_aps_anual": "27695837.333333340",
-      "proporcao_modelo_pct": "55.51900998110238147285372742",
+      "custo_modelo_aps_anual": "35694754.666666668",
+      "proporcao_modelo_pct": "71.55362073948009442949022851",
       "investimento_construcao": "22848000",
-      "total_ano_implantacao": "50543837.333333340",
-      "proporcao_implantacao_pct": "101.3200567153538622447698633"
+      "total_ano_implantacao": "58542754.666666668",
+      "proporcao_implantacao_pct": "117.3546674737315752014063644"
     },
     {
       "conta": "Atenção Básica",
       "referencia": "DOTAÇÃO ATUALIZADA (a)",
       "orcamento_anual": "50894556.87",
-      "custo_modelo_aps_anual": "27695837.333333340",
-      "proporcao_modelo_pct": "54.41807343774862893309635766",
+      "custo_modelo_aps_anual": "35694754.666666668",
+      "proporcao_modelo_pct": "70.13471943147437801829514190",
       "investimento_construcao": "22848000",
-      "total_ano_implantacao": "50543837.333333340",
-      "proporcao_implantacao_pct": "99.31088989032264659935922142"
+      "total_ano_implantacao": "58542754.666666668",
+      "proporcao_implantacao_pct": "115.0275358840483956845580057"
     }
   ],
   "sha256": {
-    "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\fontes_publicas\\orcamento\\siconfi_rreo_2026_b4_anexo02.json": "9282a0b4b028b3947235d6691c3f6fdf57c47806cd237937ea5a014854ffd376",
-    "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\fontes_publicas\\orcamento\\loa_2026_aprovada.pdf": "f87a60adbb1904a091409dfd883e1c0d26266aa754863c12b6eed65dee0dcdd4",
-    "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\resultados\\atual\\plano\\plano_aps.json": "b00c8e1812e6262ba2558b5ed6c3a1a589728b728672c865371fda0fb0d0fee8",
-    "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\dados\\fontes\\custos_construcao_ubs_2025.csv": "a6456db1c0451c2b7f77f8e687c46b3f5a98f366ae989143b23ea88006951b97",
-    "C:\\Users\\luana.ottoni_chammas\\Desktop\\aula\\PO saúde\\Trabalho PO Saúde\\resultados\\atual\\plano\\aps\\ubs_completas.csv": "a5629929e0ab4e8c34000001241167fb722696f5900b20fb12cf9250360122b9"
+    "dados/fontes/fontes_publicas/orcamento/siconfi_rreo_2026_b4_anexo02.json": "9282a0b4b028b3947235d6691c3f6fdf57c47806cd237937ea5a014854ffd376",
+    "dados/fontes/fontes_publicas/orcamento/loa_2026_aprovada.pdf": "f87a60adbb1904a091409dfd883e1c0d26266aa754863c12b6eed65dee0dcdd4",
+    "resultados/atual/plano/plano_aps.json": "d6e9c4053e0f80d3d55cf23bac67c30f80316f7bcf5a70a839f3cdfc3678ac68",
+    "dados/fontes/custos_construcao_ubs_2025.csv": "a6456db1c0451c2b7f77f8e687c46b3f5a98f366ae989143b23ea88006951b97",
+    "resultados/atual/plano/aps/ubs_completas.csv": "fd5dcd5f31329e5d878331fca1c385d3e22e81e92438b32ff4e060456b8c035c"
   },
   "limites": [
     "Operacao e investimento da APS separados; valores estimados, nao despesas executadas.",
@@ -173,6 +193,7 @@
     "Nao inclui custo operacional da secundaria e terciaria.",
     "Dotacao atualizada nao e saldo livre nem garantia de disponibilidade financeira.",
     "Diferenca nao demonstra economia ou viabilidade financeira da implantacao.",
-    "A comparacao e descritiva; nao foi criada restricao de orcamento no modelo."
+    "O modelo possui teto operacional; total com moveis e conferido antes da publicacao. Isso nao comprova saldo financeiro livre.",
+    "Equipes moveis: inclui pessoal e encargos estimados; veiculo, combustivel e equipamentos nao precificados."
   ]
 }

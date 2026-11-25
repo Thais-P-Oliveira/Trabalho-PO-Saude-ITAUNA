@@ -7,11 +7,14 @@
   "hab_por_esf": 3000,
   "tmp2": 5.131730948388299,
   "tmp3": 3.3263736263736265,
-  "leitos": "CNES 202607: leitos SUS de internacao e UTI x 365 dias menos carga estimada de nao residentes e residentes nao eletivos; disponibilidade anual e agregacao sao hipoteses",
+  "leitos": "CNES 202607: leitos gerais x 365, UTI separada. Carga sem reparticao por tipo; extremo conservador da disponibilidade geral, nao capacidade real medida",
   "metodo_demanda": "taxa_utilizacao_2025_x_populacao_projetada_sem_idade",
   "distribuicao_demanda": "total municipal eletivo x populacao do ponto / populacao total; demanda da UBS acompanha vinculacao populacional",
   "ambulatorio_capacidade": "12 vezes pico mensal conjunto 2025 menos a producao eletiva anual de nao residentes no prestador; processamento, nao data de atendimento",
   "deslocamento": "linha reta; trajetos organizacionais completos a partir do ponto; nao viagens observadas",
+  "carga_movel_ubs": {
+    "2202093": 2385.244856631388
+  },
   "fator_rota": 1.0,
   "projecao_populacional": {
     "municipio": "Itaúna",

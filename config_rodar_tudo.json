@@ -1,9 +1,0 @@
-{
-  "tempo_modelo_segundos": 600,
-  "tempo_sensibilidade_segundos": 300,
-  "processos_sensibilidade": 2,
-  "rodar_testes": true,
-  "instalar_dependencias_ausentes": true,
-  "abrir_resultados_ao_concluir": true,
-  "remover_imagens_antigas": true
-}

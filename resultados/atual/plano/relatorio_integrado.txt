@@ -1,0 +1,10 @@
+RESULTADOS INTEGRADOS - UBS E COMPLEMENTO MOVEL
+Mesma populacao, distancias e capacidades nas duas redes.
+atual: geografica 93.4022%; efetiva UBS 65.6237%; UBS + moveis propostas 72.2215%. Moveis adicionais: 5 equipes e 10 ACS.
+plano: geografica 97.7065%; efetiva UBS 97.7065%; UBS + moveis propostas 100.0000%. Moveis adicionais: 2 equipes e 4 ACS.
+Operacao UBS: R$ 2892275.78/mes.
+Pessoal movel adicional do plano: R$ 82287.11/mes.
+Operacao integrada: R$ 2974562.89/mes; R$ 35694754.67/ano.
+Construcao separada: R$ 22848000.00.
+Rede atual + moveis e contrafactual; nao representa equipes ja existentes. Movel e complemento posterior a APS; demanda especializada vinculada a UBS-base. Orcamento e teto de autorizacao, nao saldo livre. Veiculos e transporte das moveis nao precificados.
+Construcao + operacao integrada em 5 anos: R$ 201321773.33 (sem desconto/reajuste; nao e orcamento de um ano).
